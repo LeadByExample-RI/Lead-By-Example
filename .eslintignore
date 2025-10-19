@@ -1,0 +1,22 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Environment files
+.env
+.env*.local
+
+# Configuration files
+next.config.js
+postcss.config.js
+
+# Cache
+.eslintcache
+
+# Vercel
+.vercel

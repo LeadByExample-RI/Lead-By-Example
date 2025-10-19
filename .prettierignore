@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Environment files
+.env
+.env*.local
+
+# Logs
+*.log
+
+# Cache
+.cache
+.eslintcache
+
+# Misc
+.DS_Store
+*.pem
+
+# Vercel
+.vercel
