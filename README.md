@@ -291,11 +291,15 @@ Made with ❤️ using modern web technologies
 
 - **Issues**: [GitHub Issues](https://github.com/StrayDogSyn/Lead-By-Example/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/StrayDogSyn/Lead-By-Example/discussions)
-- **Email**: <support@leadbyexample.org>
+- **Email**: <eHunter@straydog-secondstory.org>
 
 ---
 
 ### 🌟 Star this repository if you find it helpful
 
-[![GitHub stars](https://img.shields.io/github/stars/StrayDogSyn/Lead-By-Example?style=social)](https://github.com/StrayDogSyn/Lead-By-Example/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/StrayDogSyn/Lead-By-Example?style=social)](https://github.com/StrayDogSyn/Lead-By-Example/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/pulls)
+[![GitHub last commit](https://img.shields.io/github/last-commit/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/commits/main)
+[![GitHub contributors](https://img.shields.io/github/contributors/StrayDogSyn/Lead-By-Example?style=for-the-badge&logo=github)](https://github.com/StrayDogSyn/Lead-By-Example/graphs/contributors)
