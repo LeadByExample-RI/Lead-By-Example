@@ -280,7 +280,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Built by **[StrayDog Syndications LLC](https://www.straydog-syndications-llc.com)**
 
-- **Senior Developer**: [@StrayDogSyn](https://github.com/StrayDogSyn)
+- **Lead Developer**: [@StrayDogSyn](https://github.com/StrayDogSyn)
 - **Junior Developer**: [@miasmith81](https://github.com/miasmith81)
 
 Made with ❤️ using modern web technologies
