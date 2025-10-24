@@ -151,7 +151,7 @@ export function Archive() {
                   {event.title}
                 </Heading>
 
-                <Text variant="small" className="text-white/80 mb-6">
+                <Text size="sm" className="text-white/80 mb-6">
                   {event.description}
                 </Text>
 
@@ -161,7 +161,7 @@ export function Archive() {
                     <div className="text-xl font-bold text-accent-400">
                       {formatCurrency(event.raised)}
                     </div>
-                    <Text variant="small" className="text-white/60">
+                    <Text size="sm" className="text-white/60">
                       Raised
                     </Text>
                   </div>
@@ -170,7 +170,7 @@ export function Archive() {
                     <div className="text-xl font-bold text-primary-400">
                       {formatNumber(event.youthServed)}
                     </div>
-                    <Text variant="small" className="text-white/60">
+                    <Text size="sm" className="text-white/60">
                       Youth Served
                     </Text>
                   </div>
@@ -178,7 +178,7 @@ export function Archive() {
 
                 {/* Impact Statement */}
                 <div className="p-4 bg-gradient-to-r from-white/5 to-white/10 rounded-lg border border-white/10">
-                  <Text variant="small" className="text-white/90 font-medium">
+                  <Text size="sm" className="text-white/90 font-medium">
                     Impact: {event.impact}
                   </Text>
                 </div>
@@ -190,9 +190,9 @@ export function Archive() {
         {/* Call to Action */}
         <motion.div
           className="text-center mt-16"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <GlassCard className="p-8 max-w-2xl mx-auto" variant="strong">

@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <Component {...pageProps} />
-      
+
       {/* Vercel Analytics & Speed Insights */}
       <Analytics />
       <SpeedInsights />
