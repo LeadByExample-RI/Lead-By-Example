@@ -76,7 +76,7 @@ export function Archive() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <GlassCard className="p-6 text-center" variant="strong">
+            <GlassCard className="p-6 text-center" variant="dark">
               <DollarSign className="w-12 h-12 text-accent-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {formatCurrency(totalImpact.totalRaised)}
@@ -92,7 +92,7 @@ export function Archive() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <GlassCard className="p-6 text-center" variant="strong">
+            <GlassCard className="p-6 text-center" variant="dark">
               <Users className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {formatNumber(totalImpact.totalYouthServed)}+
@@ -108,7 +108,7 @@ export function Archive() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <GlassCard className="p-6 text-center" variant="strong">
+            <GlassCard className="p-6 text-center" variant="dark">
               <TrendingUp className="w-12 h-12 text-secondary-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {totalImpact.totalEvents}
@@ -195,7 +195,7 @@ export function Archive() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <GlassCard className="p-8 max-w-2xl mx-auto" variant="strong">
+          <GlassCard className="p-8 max-w-2xl mx-auto" variant="dark">
             <Heading level={3} className="text-white mb-4">
               Be Part of Our Next Success Story
             </Heading>

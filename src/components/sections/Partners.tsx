@@ -4,7 +4,7 @@ import { ExternalLink, Users, Heart, Handshake, Mail, Phone } from 'lucide-react
 import { GlassCard } from '@/components/ui/GlassCard'
 import { GlassButton } from '@/components/ui/GlassButton'
 import { Heading, Text } from '@/components/ui/Typography'
-import { fadeInUp, staggerChildren } from '@/utils/animations'
+
 
 const partners = [
   {
@@ -61,15 +61,15 @@ export function Partners() {
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <Heading level={2} className="text-white mb-6" gradient>
             Our Community Partners
           </Heading>
-          <Text variant="lead" className="text-white/80 max-w-3xl mx-auto">
+          <Text size="lg" className="text-white/80 max-w-3xl mx-auto">
             We collaborate with outstanding organizations that share our commitment to empowering youth and strengthening communities.
           </Text>
         </motion.div>
@@ -77,14 +77,19 @@ export function Partners() {
         {/* Partner Organizations */}
         <motion.div
           className="grid lg:grid-cols-2 gap-8 mb-16"
-          variants={staggerChildren}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, staggerChildren: 0.1 }}
           viewport={{ once: true }}
         >
           {partners.map((partner, index) => (
-            <motion.div key={partner.id} variants={fadeInUp}>
-              <GlassCard className="p-8 h-full" variant="strong">
+            <motion.div 
+              key={partner.id} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <GlassCard className="p-8 h-full" variant="dark">
                 <div className="flex items-start gap-6 mb-6">
                   <img
                     src={partner.logo}
@@ -126,7 +131,7 @@ export function Partners() {
                     {partner.services.map((service, serviceIndex) => (
                       <li key={serviceIndex} className="flex items-center gap-2 text-white/70">
                         <div className="w-2 h-2 bg-primary-400 rounded-full flex-shrink-0" />
-                        <Text variant="small">{service}</Text>
+                        <Text size="sm">{service}</Text>
                       </li>
                     ))}
                   </ul>
@@ -148,19 +153,24 @@ export function Partners() {
         {/* Partnership Benefits */}
         <motion.div
           className="grid md:grid-cols-3 gap-6 mb-16"
-          variants={staggerChildren}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, staggerChildren: 0.1 }}
           viewport={{ once: true }}
         >
           {partnershipBenefits.map((benefit, index) => (
-            <motion.div key={index} variants={fadeInUp}>
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
               <GlassCard className="p-6 text-center h-full" variant="default">
                 <benefit.icon className="w-12 h-12 text-accent-400 mx-auto mb-4" />
                 <Heading level={4} className="text-white mb-3">
                   {benefit.title}
                 </Heading>
-                <Text variant="small" className="text-white/70">
+                <Text size="sm" className="text-white/70">
                   {benefit.description}
                 </Text>
               </GlassCard>
@@ -171,12 +181,12 @@ export function Partners() {
         {/* Partnership CTA */}
         <motion.div
           className="max-w-4xl mx-auto"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <GlassCard className="p-8" variant="strong">
+          <GlassCard className="p-8" variant="dark">
             <div className="text-center mb-8">
               <Heading level={3} className="text-white mb-4">
                 Become a Partner
@@ -195,11 +205,11 @@ export function Partners() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-white/80">
                     <Mail className="w-5 h-5 text-accent-400" />
-                    <Text variant="small">partnerships@leadbyexample.org</Text>
+                    <Text size="sm">partnerships@leadbyexample.org</Text>
                   </div>
                   <div className="flex items-center gap-3 text-white/80">
                     <Phone className="w-5 h-5 text-accent-400" />
-                    <Text variant="small">(401) 555-0123</Text>
+                    <Text size="sm">(401) 555-0123</Text>
                   </div>
                 </div>
               </div>
@@ -218,7 +228,7 @@ export function Partners() {
                   ].map((opportunity, index) => (
                     <li key={index} className="flex items-center gap-2 text-white/70">
                       <div className="w-2 h-2 bg-secondary-400 rounded-full" />
-                      <Text variant="small">{opportunity}</Text>
+                      <Text size="sm">{opportunity}</Text>
                     </li>
                   ))}
                 </ul>

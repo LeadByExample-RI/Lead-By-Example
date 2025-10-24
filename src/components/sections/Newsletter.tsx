@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -7,8 +7,7 @@ import { Mail, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { GlassButton } from '@/components/ui/GlassButton'
 import { Heading, Text } from '@/components/ui/Typography'
-import { fadeInUp } from '@/utils/animations'
-import { cn } from '@/utils/cn'
+import { cn } from '@/utils/helpers'
 
 // Validation schema
 const newsletterSchema = z.object({
@@ -79,12 +78,12 @@ export function Newsletter() {
       <div className="container mx-auto px-6">
         <motion.div
           className="max-w-4xl mx-auto"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <GlassCard className="p-8 md:p-12" variant="strong">
+          <GlassCard className="p-8 md:p-12" variant="dark">
             <div className="text-center mb-8">
               <motion.div
                 className="inline-flex items-center justify-center w-16 h-16 bg-accent-500/20 rounded-full mb-6"
@@ -98,7 +97,7 @@ export function Newsletter() {
                 Stay Connected
               </Heading>
               
-              <Text variant="lead" className="text-white/80 max-w-2xl mx-auto">
+              <Text size="lg" className="text-white/80 max-w-2xl mx-auto">
                 Join our newsletter to receive updates on community events, success stories, and opportunities to make a difference.
               </Text>
             </div>
@@ -156,7 +155,7 @@ export function Newsletter() {
                     placeholder="Enter your first name"
                   />
                   {errors.firstName && (
-                    <Text variant="small" className="text-error-400 mt-1">
+                    <Text size="sm" className="text-error-400 mt-1">
                       {errors.firstName.message}
                     </Text>
                   )}
@@ -182,7 +181,7 @@ export function Newsletter() {
                     placeholder="Enter your email address"
                   />
                   {errors.email && (
-                    <Text variant="small" className="text-error-400 mt-1">
+                    <Text size="sm" className="text-error-400 mt-1">
                       {errors.email.message}
                     </Text>
                   )}
@@ -225,12 +224,12 @@ export function Newsletter() {
                           <CheckCircle className="w-3 h-3 text-white" />
                         )}
                       </div>
-                      <Text variant="small">{option.label}</Text>
+                      <Text size="sm">{option.label}</Text>
                     </motion.label>
                   ))}
                 </div>
                 {errors.interests && (
-                  <Text variant="small" className="text-error-400 mt-2">
+                  <Text size="sm" className="text-error-400 mt-2">
                     {errors.interests.message}
                   </Text>
                 )}
@@ -259,7 +258,7 @@ export function Newsletter() {
 
               {/* Privacy Notice */}
               <div className="text-center pt-4">
-                <Text variant="small" className="text-white/60">
+                <Text size="sm" className="text-white/60">
                   We respect your privacy. Unsubscribe at any time. 
                   <br />
                   By subscribing, you agree to our privacy policy.

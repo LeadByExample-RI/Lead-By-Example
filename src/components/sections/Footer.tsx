@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
-import { fadeInUp, staggerChildren } from '@/utils/animations'
+
 
 const socialLinks = [
   { icon: Facebook, href: '#', label: 'Facebook' },
@@ -36,13 +36,18 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16">
         <motion.div
           className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12"
-          variants={staggerChildren}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, staggerChildren: 0.1 }}
           viewport={{ once: true }}
         >
           {/* Organization Info */}
-          <motion.div variants={fadeInUp} className="lg:col-span-1">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-1"
+          >
             <div className="mb-6">
               <Heading level={3} className="text-white mb-4" gradient>
                 Lead By Example
@@ -56,21 +61,25 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-white/70">
                 <Mail className="w-5 h-5 text-accent-400" />
-                <Text variant="small">info@leadbyexample.org</Text>
+                <Text size="sm">info@leadbyexample.org</Text>
               </div>
               <div className="flex items-center gap-3 text-white/70">
                 <Phone className="w-5 h-5 text-accent-400" />
-                <Text variant="small">(401) 555-0123</Text>
+                <Text size="sm">(401) 555-0123</Text>
               </div>
               <div className="flex items-center gap-3 text-white/70">
                 <MapPin className="w-5 h-5 text-accent-400" />
-                <Text variant="small">Providence, Rhode Island</Text>
+                <Text size="sm">Providence, Rhode Island</Text>
               </div>
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={fadeInUp}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <Heading level={4} className="text-white mb-6">
               Quick Links
             </Heading>
@@ -83,7 +92,7 @@ export function Footer() {
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Text variant="small">{link.label}</Text>
+                    <Text size="sm">{link.label}</Text>
                   </motion.a>
                 </li>
               ))}
@@ -91,7 +100,11 @@ export function Footer() {
           </motion.div>
 
           {/* Programs */}
-          <motion.div variants={fadeInUp}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <Heading level={4} className="text-white mb-6">
               Our Programs
             </Heading>
@@ -104,7 +117,7 @@ export function Footer() {
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Text variant="small">{link.label}</Text>
+                    <Text size="sm">{link.label}</Text>
                   </motion.a>
                 </li>
               ))}
@@ -112,7 +125,11 @@ export function Footer() {
           </motion.div>
 
           {/* Newsletter & Social */}
-          <motion.div variants={fadeInUp}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <Heading level={4} className="text-white mb-6">
               Stay Connected
             </Heading>
@@ -137,7 +154,7 @@ export function Footer() {
             </div>
 
             <GlassCard className="p-4" variant="subtle">
-              <Text variant="small" className="text-white/80 mb-2">
+              <Text size="sm" className="text-white/80 mb-2">
                 Join our newsletter for updates
               </Text>
               <motion.button
@@ -154,27 +171,27 @@ export function Footer() {
         {/* Bottom Section */}
         <motion.div
           className="pt-8 border-t border-white/10"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2 text-white/60">
-              <Text variant="small">
+              <Text size="sm">
                 © {currentYear} Lead By Example. All rights reserved.
               </Text>
             </div>
 
             <div className="flex items-center gap-2 text-white/60">
-              <Text variant="small">Made with</Text>
+              <Text size="sm">Made with</Text>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
                 <Heart className="w-4 h-4 text-accent-400 fill-current" />
               </motion.div>
-              <Text variant="small">for our community</Text>
+              <Text size="sm">for our community</Text>
             </div>
 
             <div className="flex gap-6">
@@ -183,14 +200,14 @@ export function Footer() {
                 className="text-white/60 hover:text-accent-400 transition-colors duration-300"
                 whileHover={{ y: -1 }}
               >
-                <Text variant="small">Privacy Policy</Text>
+                <Text size="sm">Privacy Policy</Text>
               </motion.a>
               <motion.a
                 href="#terms"
                 className="text-white/60 hover:text-accent-400 transition-colors duration-300"
                 whileHover={{ y: -1 }}
               >
-                <Text variant="small">Terms of Service</Text>
+                <Text size="sm">Terms of Service</Text>
               </motion.a>
             </div>
           </div>
