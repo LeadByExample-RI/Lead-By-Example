@@ -13,8 +13,22 @@ import {
   organizationInfo 
 } from '@/data/fundraisers';
 import { formatCurrency, calculateProgress } from '@/utils/helpers';
+import { HeroProps } from '@/types/components';
 
-export const Hero: React.FC = () => {
+export const Hero: React.FC<HeroProps> = ({
+  variant = 'default',
+  title = 'Breaking the School-to-Prison Pipeline',
+  subtitle,
+  description = 'Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we\'re building stronger communities through opportunity and empowerment.',
+  primaryAction,
+  secondaryAction,
+  backgroundImage,
+  backgroundVideo,
+  overlay = false,
+  animations,
+  className,
+  ...props
+}) => {
   const progressPercentage = calculateProgress(currentFundraiser.raised, currentFundraiser.goal);
 
   const containerVariants = {
@@ -93,15 +107,18 @@ export const Hero: React.FC = () => {
             variants={leftColumnVariants}
           >
             <div className="space-y-4">
-              <Heading level={1} className="text-white">
-                Breaking the School-to-Prison Pipeline
-              </Heading>
-              <Text size="lg" className="text-white/90 max-w-lg">
-                Lead By Example provides mentorship, education, and support to at-risk youth, 
-                creating pathways to success instead of incarceration. Together, we're building 
-                stronger communities through opportunity and empowerment.
-              </Text>
-            </div>
+               {subtitle && (
+                 <Text size="sm" className="text-accent-500 font-medium uppercase tracking-wider">
+                   {subtitle}
+                 </Text>
+               )}
+               <Heading level={1} className="text-white">
+                 {title}
+               </Heading>
+               <Text size="lg" className="text-white/90 max-w-lg">
+                 {description}
+               </Text>
+             </div>
 
             {/* Key Statistics */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -248,30 +265,28 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <GlassButton
-                  variant="primary"
-                  size="lg"
-                  className="flex-1"
-                  onClick={() => {
-                    // Handle donation click
-                    console.log('Donate clicked');
-                  }}
-                >
-                  Donate Now
-                </GlassButton>
-                <GlassButton
-                  variant="outline"
-                  size="lg"
-                  className="flex-1"
-                  onClick={() => {
-                    // Handle learn more click
-                    console.log('Learn more clicked');
-                  }}
-                >
-                  Learn More
-                </GlassButton>
-              </div>
+               <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                 {primaryAction && (
+                   <GlassButton
+                     variant="primary"
+                     size="lg"
+                     className="flex-1"
+                     onClick={primaryAction.onClick || (primaryAction.href ? () => window.open(primaryAction.href, '_self') : undefined)}
+                   >
+                     {primaryAction.label}
+                   </GlassButton>
+                 )}
+                 {secondaryAction && (
+                   <GlassButton
+                     variant="outline"
+                     size="lg"
+                     className="flex-1"
+                     onClick={secondaryAction.onClick || (secondaryAction.href ? () => window.open(secondaryAction.href, '_self') : undefined)}
+                   >
+                     {secondaryAction.label}
+                   </GlassButton>
+                 )}
+               </div>
             </GlassCard>
           </motion.div>
         </motion.div>

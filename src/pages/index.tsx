@@ -1,9 +1,9 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
-import Hero from '@/components/sections/Hero';
-import Testimonials from '@/components/sections/Testimonials';
+import { Hero } from '@/components/sections/Hero';
+import { Button } from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
 
-const HomePage: NextPage = () => {
+export default function Home() {
   return (
     <>
       <Head>
@@ -47,12 +47,81 @@ const HomePage: NextPage = () => {
       </Head>
 
       <main>
-        <Hero />
-        <Testimonials />
-        {/* Additional sections will be added here */}
+        <Hero title="Lead By Example" />
+
+        {/* Features Section */}
+        <section id="features" className="py-24 bg-white dark:bg-neutral-900">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+                Windsurf + Cascade Mode Implementation
+              </h2>
+              <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Demonstrating our complete component library and design system
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card interactive className="h-full">
+                <CardHeader>
+                  <CardTitle>🎨 Design System</CardTitle>
+                  <CardDescription>
+                    Comprehensive design tokens with Tailwind CSS integration
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li>• Color scales for all semantic colors</li>
+                    <li>• Typography system with proper hierarchy</li>
+                    <li>• Spacing and layout utilities</li>
+                    <li>• Custom animations and micro-interactions</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card interactive className="h-full">
+                <CardHeader>
+                  <CardTitle>⚡ Performance</CardTitle>
+                  <CardDescription>
+                    Optimized for speed and accessibility
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li>• Next.js 14 with App Router</li>
+                    <li>• TypeScript for type safety</li>
+                    <li>• Framer Motion animations</li>
+                    <li>• WCAG 2.1 AA compliance ready</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card interactive className="h-full">
+                <CardHeader>
+                  <CardTitle>🔧 Developer Experience</CardTitle>
+                  <CardDescription>
+                    Modern tooling and best practices
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li>• Zustand state management</li>
+                    <li>• Component-driven development</li>
+                    <li>• Hot module replacement</li>
+                    <li>• Automated code quality</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-12">
+              <Button variant="primary" size="lg">
+                Explore Components
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
-};
-
-export default HomePage;
+}
