@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import PrevalentFundraiser from '@/components/PrevalentFundraiser';
 import FundraiserArchive from '@/components/FundraiserArchive';
-import CommunityInspiration from '@/components/CommunityInspiration';
+import CommunitySection from '@/components/CommunitySection';
 import FundraiserModal from '@/components/FundraiserModal';
 
 const activeFundraiser = {
@@ -91,7 +91,7 @@ export default function Home() {
             onCardClick={handleFundraiserClick}
           />
           
-          <CommunityInspiration testimonials={testimonials} />
+          <CommunitySection testimonials={testimonials} />
         </main>
 
         <footer className="bg-cape-verde-dark text-off-white py-12">

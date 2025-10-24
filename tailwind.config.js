@@ -9,6 +9,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'cape-verde': {
+          DEFAULT: '#01514C',
+          dark: '#003d39',
+          light: '#027066'
+        },
+        'royal-purple': {
+          DEFAULT: '#4B306A',
+          dark: '#421B5A',
+          light: '#5d3c7f'
+        },
+        'gold': {
+          DEFAULT: '#FFD700',
+          dark: '#E5C100',
+          light: '#ffed4e'
+        },
+        'off-white': '#F6F6F6',
+        'coral-accent': '#FF6F61',
+        'copper-accent': '#B87333',
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -37,8 +55,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+        'heading': ['Montserrat', 'var(--font-heading)', 'system-ui', 'sans-serif'],
+        'body': ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -47,6 +66,7 @@ module.exports = {
         'slide-out': 'slideOut 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
         'bounce-slow': 'bounce 3s infinite',
+        'shimmer': 'shimmer 2s infinite',
       },
       keyframes: {
         fadeIn: {
@@ -68,6 +88,10 @@ module.exports = {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       spacing: {

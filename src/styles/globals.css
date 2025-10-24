@@ -4,7 +4,11 @@
 
 @layer base {
   html {
-    font-family: system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-off-white text-gray-900 font-body;
   }
 }
 
@@ -12,10 +16,48 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+  
+  .btn-primary {
+    @apply bg-gold hover:bg-gold-dark text-black font-bold py-3 px-6 rounded-lg 
+           shadow-lg hover:shadow-xl transform hover:-translate-y-1 
+           transition-all duration-300 focus-visible:ring-4 focus-visible:ring-gold;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-royal-purple text-royal-purple 
+           hover:bg-royal-purple hover:text-white font-bold 
+           py-3 px-6 rounded-lg transition-all duration-300
+           focus-visible:ring-4 focus-visible:ring-royal-purple;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-xl transform hover:-translate-y-2 
+           transition-all duration-300;
+  }
+  
+  .gradient-royal {
+    @apply bg-gradient-to-r from-royal-purple to-royal-purple-dark;
+  }
+  
+  .gradient-cape {
+    @apply bg-gradient-to-r from-cape-verde to-cape-verde-dark;
+  }
+  
+  .gradient-gold {
+    @apply bg-gradient-to-r from-gold to-gold-dark;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .text-shadow-gold {
+    text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+  }
+  
+  .text-shadow-dark {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 }
