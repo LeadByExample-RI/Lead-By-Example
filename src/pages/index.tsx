@@ -48,14 +48,29 @@ const testimonials = [
   }
 ];
 
+type Fundraiser = {
+  id: number;
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+  image: string;
+  raised: number;
+  goal: number;
+  percentage: number;
+  donors: number;
+  daysLeft: number;
+  status: 'active' | 'completed';
+  category: string;
+};
+
 export default function Home() {
-  const [selectedFundraiser, setSelectedFundraiser] = useState<typeof activeFundraiser | null>(null);
+  const [selectedFundraiser, setSelectedFundraiser] = useState<Fundraiser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFundraiserClick = (id: number) => {
     const fundraiser = [activeFundraiser, ...pastFundraisers].find(f => f.id === id);
     if (fundraiser) {
-      setSelectedFundraiser(fundraiser);
+      setSelectedFundraiser(fundraiser as Fundraiser);
       setIsModalOpen(true);
     }
   };
