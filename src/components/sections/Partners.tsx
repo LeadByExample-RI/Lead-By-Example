@@ -93,9 +93,11 @@ export function Partners() {
             >
               <GlassCard className="p-8 h-full" variant="dark">
                 <div className="flex items-start gap-6 mb-6">
-                  <img
+                  <Image
                     src={partner.logo}
                     alt={`${partner.name} logo`}
+                    width={64}
+                    height={64}
                     className="w-16 h-16 rounded-lg object-cover border border-white/20"
                   />
                   <div className="flex-1">
