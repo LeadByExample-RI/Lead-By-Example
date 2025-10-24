@@ -16,7 +16,7 @@ import { formatCurrency, calculateProgress } from '@/utils/helpers';
 import { HeroProps } from '@/types/components';
 
 export const Hero: React.FC<HeroProps> = ({
-  variant = 'default',
+  variant: _variant = 'default',
   title = 'Breaking the School-to-Prison Pipeline',
   subtitle,
   description = 'Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we&apos;re building stronger communities through opportunity and empowerment.',

@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/utils/helpers';
 import * as React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
