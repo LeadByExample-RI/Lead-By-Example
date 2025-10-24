@@ -243,7 +243,7 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Features */}
               <div className="space-y-3">
                 <Text size="sm" className="font-medium text-white/90">
-                  What's Included:
+                  What&apos;s Included:
                 </Text>
                 <ul className="space-y-2">
                   {currentFundraiser.features.map((feature, index) => (

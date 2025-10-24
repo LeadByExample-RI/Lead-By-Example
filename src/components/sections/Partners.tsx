@@ -1,7 +1,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Users, Heart, Handshake, Mail, Phone } from 'lucide-react'
+import Image from 'next/image'
+import { ExternalLink, Users, Calendar, MapPin } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
+import { Heading, Text } from '@/components/ui/Typography'
 import { GlassButton } from '@/components/ui/GlassButton'
 import { Heading, Text } from '@/components/ui/Typography'
 

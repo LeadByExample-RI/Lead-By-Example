@@ -53,11 +53,7 @@ export function Newsletter() {
 
   const watchedInterests = watch('interests')
 
-<<<<<<< HEAD
   const onSubmit = async (_data: NewsletterFormData) => {
-=======
-  const onSubmit = async (data: NewsletterFormData) => {
->>>>>>> f4f2cfead4b0d769c270c57d526b5ad80f4334d3
     setIsSubmitting(true)
     setSubmitStatus('idle')
 

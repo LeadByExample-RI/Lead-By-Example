@@ -13,10 +13,17 @@ importers:
         version: 3.10.0(react-hook-form@7.65.0(react@18.3.1))
       '@vercel/analytics':
         specifier: ^1.5.0
+<<<<<<< HEAD
         version: 1.5.0(next@14.2.33(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@vercel/speed-insights':
         specifier: ^1.2.0
         version: 1.2.0(next@14.2.33(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+=======
+        version: 1.5.0(next@14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@vercel/speed-insights':
+        specifier: ^1.2.0
+        version: 1.2.0(next@14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+>>>>>>> f4f2cfead4b0d769c270c57d526b5ad80f4334d3
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -825,6 +832,7 @@ packages:
       vue-router:
         optional: true
 
+<<<<<<< HEAD
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     deprecated: Use your platform's native atob() and btoa() methods instead
@@ -832,6 +840,8 @@ packages:
   acorn-globals@7.0.1:
     resolution: {integrity: sha512-umOSDSDrfHbTNPuNpC2NSnnA3LUrqpevPb4T9jRx4MagXNS0rs+gwiTcAvqCRmsD6utzsrzNt+ebm00SNWiC3Q==}
 
+=======
+>>>>>>> f4f2cfead4b0d769c270c57d526b5ad80f4334d3
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -4025,6 +4035,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+<<<<<<< HEAD
   '@vercel/analytics@1.5.0(next@14.2.33(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     optionalDependencies:
       next: 14.2.33(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4042,6 +4053,18 @@ snapshots:
       acorn: 8.15.0
       acorn-walk: 8.3.4
 
+=======
+  '@vercel/analytics@1.5.0(next@14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+    optionalDependencies:
+      next: 14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+
+  '@vercel/speed-insights@1.2.0(next@14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+    optionalDependencies:
+      next: 14.2.33(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+
+>>>>>>> f4f2cfead4b0d769c270c57d526b5ad80f4334d3
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
       acorn: 8.15.0
