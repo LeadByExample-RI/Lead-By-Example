@@ -1,103 +1,295 @@
-import { Variants } from 'framer-motion'
+/**
+ * Animation variants for Framer Motion
+ */
+
+type Variants = Record<string, any>;
 
 /**
- * Fade in up animation variant
+ * Fade in animation
  */
-export const fadeInUp: Variants = {
-  initial: {
-    opacity: 0,
-    y: 30,
+export const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { duration: 0.5, ease: 'easeOut' }
   },
-  animate: {
+  exit: { 
+    opacity: 0, 
+    transition: { duration: 0.3 }
+  },
+};
+
+/**
+ * Slide up animation
+ */
+export const slideUp: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { 
+    y: 0, 
+    opacity: 1, 
+    transition: { duration: 0.4, ease: 'easeOut' }
+  },
+  exit: { 
+    y: -20, 
+    opacity: 0, 
+    transition: { duration: 0.3 }
+  },
+};
+
+/**
+ * Slide down animation
+ */
+export const slideDown: Variants = {
+  hidden: { y: -20, opacity: 0 },
+  visible: { 
+    y: 0, 
+    opacity: 1, 
+    transition: { duration: 0.4, ease: 'easeOut' }
+  },
+  exit: { 
+    y: 20, 
+    opacity: 0, 
+    transition: { duration: 0.3 }
+  },
+};
+
+/**
+ * Slide from left
+ */
+export const slideLeft: Variants = {
+  hidden: { x: -20, opacity: 0 },
+  visible: { 
+    x: 0, 
+    opacity: 1, 
+    transition: { duration: 0.4, ease: 'easeOut' }
+  },
+  exit: { 
+    x: -20, 
+    opacity: 0, 
+    transition: { duration: 0.3 }
+  },
+};
+
+/**
+ * Slide from right
+ */
+export const slideRight: Variants = {
+  hidden: { x: 20, opacity: 0 },
+  visible: { 
+    x: 0, 
+    opacity: 1, 
+    transition: { duration: 0.4, ease: 'easeOut' }
+  },
+  exit: { 
+    x: 20, 
+    opacity: 0, 
+    transition: { duration: 0.3 }
+  },
+};
+
+/**
+ * Scale in animation
+ */
+export const scaleIn: Variants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: { 
+    scale: 1, 
+    opacity: 1, 
+    transition: { duration: 0.3, ease: 'easeOut' }
+  },
+  exit: { 
+    scale: 0.9, 
+    opacity: 0, 
+    transition: { duration: 0.2 }
+  },
+};
+
+/**
+ * Pop in animation with bounce
+ */
+export const popIn: Variants = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: { 
+    scale: 1, 
+    opacity: 1, 
+    transition: { 
+      type: 'spring', 
+      stiffness: 400, 
+      damping: 20 
+    }
+  },
+  exit: { 
+    scale: 0, 
+    opacity: 0, 
+    transition: { duration: 0.2 }
+  },
+};
+
+/**
+ * Stagger children animation
+ */
+export const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/**
+ * Stagger item animation
+ */
+export const staggerItem: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.4 },
+  },
+};
+
+/**
+ * Page transition variants
+ */
+export const pageVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut',
+    },
+  },
+  exit: { 
+    opacity: 0, 
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
+};
+
+/**
+ * Modal backdrop animation
+ */
+export const backdropVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { duration: 0.2 }
+  },
+  exit: { 
+    opacity: 0,
+    transition: { duration: 0.2 }
+  },
+};
+
+/**
+ * Modal content animation
+ */
+export const modalVariants: Variants = {
+  hidden: { 
+    scale: 0.95, 
+    opacity: 0,
+    y: 20,
+  },
+  visible: { 
+    scale: 1, 
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: 'easeOut',
+      type: 'spring',
+      duration: 0.3,
     },
   },
-}
-
-/**
- * Stagger children animation variant
- */
-export const staggerChildren: Variants = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-/**
- * Scale in animation variant
- */
-export const scaleIn: Variants = {
-  initial: {
+  exit: { 
+    scale: 0.95, 
     opacity: 0,
-    scale: 0.95,
+    y: 20,
+    transition: { duration: 0.2 }
   },
-  animate: {
+};
+
+/**
+ * Drawer animation (from right)
+ */
+export const drawerVariants: Variants = {
+  hidden: { 
+    x: '100%',
+    opacity: 0,
+  },
+  visible: { 
+    x: 0,
     opacity: 1,
-    scale: 1,
+    transition: {
+      type: 'spring',
+      damping: 30,
+      stiffness: 300,
+    },
+  },
+  exit: { 
+    x: '100%',
+    opacity: 0,
     transition: {
       duration: 0.3,
-      ease: 'easeOut',
     },
   },
-}
+};
 
 /**
- * Slide in from left animation variant
+ * Accordion content animation
  */
-export const slideInLeft: Variants = {
-  initial: {
+export const accordionVariants: Variants = {
+  collapsed: { 
+    height: 0,
     opacity: 0,
-    x: -50,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
     transition: {
-      duration: 0.5,
-      ease: 'easeOut',
+      duration: 0.3,
     },
   },
-}
-
-/**
- * Slide in from right animation variant
- */
-export const slideInRight: Variants = {
-  initial: {
-    opacity: 0,
-    x: 50,
-  },
-  animate: {
+  expanded: { 
+    height: 'auto',
     opacity: 1,
-    x: 0,
     transition: {
-      duration: 0.5,
-      ease: 'easeOut',
+      duration: 0.3,
     },
   },
-}
+};
 
 /**
- * Glass shimmer effect animation
+ * Hover animations for buttons
  */
-export const glassShimmer: Variants = {
-  initial: {
-    backgroundPosition: '-200% 0',
+export const buttonHover = {
+  scale: 1.05,
+  transition: {
+    type: 'spring',
+    stiffness: 400,
+    damping: 10,
   },
-  animate: {
-    backgroundPosition: '200% 0',
+};
+
+export const buttonTap = {
+  scale: 0.95,
+};
+
+/**
+ * Rotation animation
+ */
+export const rotate: Variants = {
+  initial: { rotate: 0 },
+  animate: { 
+    rotate: 360,
     transition: {
-      duration: 2,
+      duration: 0.3,
       ease: 'easeInOut',
-      repeat: Infinity,
     },
   },
-}
+};
