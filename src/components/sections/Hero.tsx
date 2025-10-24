@@ -14,7 +14,7 @@ import {
 } from '@/data/fundraisers';
 import { formatCurrency, calculateProgress } from '@/utils/helpers';
 
-const Hero: React.FC = () => {
+export const Hero: React.FC = () => {
   const progressPercentage = calculateProgress(currentFundraiser.raised, currentFundraiser.goal);
 
   const containerVariants = {

@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { InputProps } from '@/types/components';
-import { cn } from '@/utils';
+import { cn } from '@/utils/helpers';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;

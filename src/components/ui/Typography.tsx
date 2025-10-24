@@ -26,17 +26,50 @@ const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
 
     const combinedClasses = cn(baseClasses, sizeClasses[level]);
 
-    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
-
-    return (
-      <Tag
-        ref={ref}
-        className={combinedClasses}
-        {...props}
-      >
-        {children}
-      </Tag>
-    );
+    switch (level) {
+      case 1:
+        return (
+          <h1 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h1>
+        );
+      case 2:
+        return (
+          <h2 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h2>
+        );
+      case 3:
+        return (
+          <h3 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h3>
+        );
+      case 4:
+        return (
+          <h4 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h4>
+        );
+      case 5:
+        return (
+          <h5 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h5>
+        );
+      case 6:
+        return (
+          <h6 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h6>
+        );
+      default:
+        return (
+          <h1 ref={ref} className={combinedClasses} {...props}>
+            {children}
+          </h1>
+        );
+    }
   }
 );
 

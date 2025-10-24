@@ -2,7 +2,7 @@
  * Animation variants for Framer Motion
  */
 
-type Variants = Record<string, any>;
+type Variants = Record<string, unknown>;
 
 /**
  * Fade in animation

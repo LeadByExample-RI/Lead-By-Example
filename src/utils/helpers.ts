@@ -120,7 +120,7 @@ export function formatDate(
  * @param delay - Delay in milliseconds
  * @returns Debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
@@ -138,7 +138,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param delay - Delay in milliseconds
  * @returns Throttled function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
@@ -174,7 +174,7 @@ export function generateId(length: number = 8): string {
  * @param value - Value to check
  * @returns True if value is empty
  */
-export function isEmpty(value: any): boolean {
+export function isEmpty(value: unknown): boolean {
   if (value == null) return true;
   if (typeof value === 'string') return value.trim().length === 0;
   if (Array.isArray(value)) return value.length === 0;
@@ -378,7 +378,7 @@ export function getUrlParams(url: string = window.location.href): Record<string,
  * @param params - Parameters to add
  * @returns Complete URL with parameters
  */
-export function buildUrl(baseUrl: string, params: Record<string, any>): string {
+export function buildUrl(baseUrl: string, params: Record<string, unknown>): string {
   const url = new URL(baseUrl);
   
   Object.entries(params).forEach(([key, value]) => {
