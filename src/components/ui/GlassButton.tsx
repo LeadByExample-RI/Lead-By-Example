@@ -1,69 +1,105 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/utils/cn'
+import React, { forwardRef } from 'react';
+import { cn } from '@/utils/helpers';
 
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
-  size?: 'sm' | 'md' | 'lg'
-  loading?: boolean
-  animate?: boolean
+export interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
+  children: React.ReactNode;
 }
 
-const variants = {
-  primary: 'bg-primary-500/80 hover:bg-primary-500/90 text-white border-primary-400/50 hover:border-primary-400/70',
-  secondary: 'bg-secondary-500/80 hover:bg-secondary-500/90 text-white border-secondary-400/50 hover:border-secondary-400/70',
-  outline: 'bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50',
-  ghost: 'bg-transparent hover:bg-white/10 text-white border-transparent hover:border-white/20',
-}
+const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+  ({ 
+    className, 
+    variant = 'primary', 
+    size = 'md', 
+    loading = false,
+    icon,
+    iconPosition = 'left',
+    children,
+    disabled,
+    ...props 
+  }, ref) => {
+    const sizeClasses = {
+      sm: 'px-4 py-2 text-sm',
+      md: 'px-6 py-3 text-base',
+      lg: 'px-8 py-4 text-lg',
+    };
 
-const sizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
-}
+    const variantClasses = {
+      primary: 'bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700',
+      secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700',
+      outline: 'border-2 border-white/20 text-white hover:bg-white/10',
+      ghost: 'text-white hover:bg-white/10',
+    };
 
-export function GlassButton({
-  children,
-  className,
-  variant = 'primary',
-  size = 'md',
-  loading = false,
-  animate = true,
-  disabled,
-  ...props
-}: GlassButtonProps) {
-  const baseClasses = cn(
-    'relative rounded-xl font-medium backdrop-blur-md border transition-all duration-300',
-    'focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:ring-offset-2 focus:ring-offset-transparent',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-    variants[variant],
-    sizes[size],
-    className
-  )
+    const baseClasses = cn(
+      'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus-ring',
+      'backdrop-blur-md border border-white/20 shadow-glass',
+      'hover:scale-105 hover:shadow-xl hover-lift',
+      'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
+      sizeClasses[size],
+      variantClasses[variant],
+      loading && 'cursor-wait',
+      className
+    );
 
-  const ButtonComponent = animate ? motion.button : 'button'
-  const motionProps = animate ? {
-    whileHover: { scale: 1.02, y: -1 },
-    whileTap: { scale: 0.98 },
-    transition: { duration: 0.2, ease: 'easeOut' }
-  } : {}
+    const renderIcon = () => {
+      if (!icon) return null;
+      
+      const iconClasses = cn(
+        'transition-transform duration-300',
+        iconPosition === 'right' && 'group-hover:translate-x-1',
+        iconPosition === 'left' && 'group-hover:-translate-x-1'
+      );
 
-  return (
-    <ButtonComponent
-      className={baseClasses}
-      disabled={disabled || loading}
-      {...motionProps}
-      {...props}
-    >
-      {loading && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-        </div>
-      )}
-      <span className={cn('flex items-center justify-center gap-2', loading && 'opacity-0')}>
-        {children}
-      </span>
-    </ButtonComponent>
-  )
-}
+      return <span className={iconClasses}>{icon}</span>;
+    };
+
+    return (
+      <button
+        ref={ref}
+        className={baseClasses}
+        disabled={disabled || loading}
+        {...props}
+      >
+        {loading && (
+          <svg
+            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            />
+          </svg>
+        )}
+        
+        {!loading && iconPosition === 'left' && renderIcon()}
+        
+        <span className={loading ? 'opacity-70' : ''}>
+          {children}
+        </span>
+        
+        {!loading && iconPosition === 'right' && renderIcon()}
+      </button>
+    );
+  }
+);
+
+GlassButton.displayName = 'GlassButton';
+
+export { GlassButton };

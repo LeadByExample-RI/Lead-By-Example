@@ -1,54 +1,48 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/utils/cn'
+import React, { forwardRef } from 'react';
+import { cn } from '@/utils/helpers';
 
-interface GlassCardProps {
-  children: React.ReactNode
-  className?: string
-  variant?: 'default' | 'subtle' | 'strong'
-  hover?: boolean
-  animate?: boolean
+export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'dark' | 'light';
+  blur?: 'sm' | 'md' | 'lg' | 'xl';
+  hover?: boolean;
+  children: React.ReactNode;
 }
 
-const variants = {
-  default: 'bg-white/10 backdrop-blur-md border border-white/20',
-  subtle: 'bg-white/5 backdrop-blur-sm border border-white/10',
-  strong: 'bg-white/20 backdrop-blur-lg border border-white/30',
-}
+const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
+  ({ className, variant = 'default', blur = 'md', hover = true, children, ...props }, ref) => {
+    const blurClasses = {
+      sm: 'backdrop-blur-sm',
+      md: 'backdrop-blur-md',
+      lg: 'backdrop-blur-lg',
+      xl: 'backdrop-blur-xl',
+    };
 
-export function GlassCard({ 
-  children, 
-  className, 
-  variant = 'default',
-  hover = true,
-  animate = true,
-  ...props 
-}: GlassCardProps) {
-  const baseClasses = cn(
-    'rounded-2xl shadow-soft',
-    variants[variant],
-    hover && 'transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:shadow-medium',
-    className
-  )
+    const variantClasses = {
+      default: 'bg-white/10 border-white/20 shadow-glass',
+      dark: 'bg-black/20 border-white/10 shadow-glass-dark',
+      light: 'bg-white/15 border-white/30 shadow-medium',
+    };
 
-  if (animate) {
+    const baseClasses = cn(
+      'rounded-xl border transition-all duration-300',
+      blurClasses[blur],
+      variantClasses[variant],
+      hover && 'hover:scale-105 hover:shadow-xl hover-lift',
+      className
+    );
+
     return (
-      <motion.div
+      <div
+        ref={ref}
         className={baseClasses}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        whileHover={hover ? { scale: 1.02, y: -2 } : undefined}
         {...props}
       >
         {children}
-      </motion.div>
-    )
+      </div>
+    );
   }
+);
 
-  return (
-    <div className={baseClasses} {...props}>
-      {children}
-    </div>
-  )
-}
+GlassCard.displayName = 'GlassCard';
+
+export { GlassCard };

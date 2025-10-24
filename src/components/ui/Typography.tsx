@@ -1,101 +1,96 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/utils/cn'
+import React, { forwardRef } from 'react';
+import { cn } from '@/utils/helpers';
 
-interface HeadingProps {
-  children: React.ReactNode
-  level?: 1 | 2 | 3 | 4 | 5 | 6
-  className?: string
-  animate?: boolean
-  gradient?: boolean
+export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  gradient?: boolean;
+  children: React.ReactNode;
 }
 
-interface TextProps {
-  children: React.ReactNode
-  variant?: 'body' | 'lead' | 'small' | 'muted'
-  className?: string
-  animate?: boolean
-}
+const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({ className, level, gradient = false, children, ...props }, ref) => {
+    const baseClasses = cn(
+      'font-bold text-balance',
+      gradient && 'gradient-text',
+      className
+    );
 
-const headingStyles = {
-  1: 'text-4xl md:text-6xl font-bold tracking-tight',
-  2: 'text-3xl md:text-5xl font-bold tracking-tight',
-  3: 'text-2xl md:text-4xl font-semibold tracking-tight',
-  4: 'text-xl md:text-3xl font-semibold tracking-tight',
-  5: 'text-lg md:text-2xl font-medium tracking-tight',
-  6: 'text-base md:text-xl font-medium tracking-tight',
-}
+    const sizeClasses = {
+      1: 'text-4xl md:text-5xl lg:text-6xl',
+      2: 'text-3xl md:text-4xl lg:text-5xl',
+      3: 'text-2xl md:text-3xl lg:text-4xl',
+      4: 'text-xl md:text-2xl lg:text-3xl',
+      5: 'text-lg md:text-xl lg:text-2xl',
+      6: 'text-base md:text-lg lg:text-xl',
+    };
 
-const textStyles = {
-  body: 'text-base leading-relaxed',
-  lead: 'text-lg md:text-xl leading-relaxed font-medium',
-  small: 'text-sm leading-relaxed',
-  muted: 'text-sm leading-relaxed opacity-70',
-}
+    const combinedClasses = cn(baseClasses, sizeClasses[level]);
 
-export function Heading({ 
-  children, 
-  level = 1, 
-  className, 
-  animate = false,
-  gradient = false,
-  ...props 
-}: HeadingProps) {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements
-  
-  const baseClasses = cn(
-    headingStyles[level],
-    gradient && 'bg-gradient-to-r from-accent-400 via-primary-400 to-secondary-400 bg-clip-text text-transparent',
-    className
-  )
+    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
-  if (animate) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
-        <Tag className={baseClasses} {...props}>
-          {children}
-        </Tag>
-      </motion.div>
-    )
-  }
-
-  return (
-    <Tag className={baseClasses} {...props}>
-      {children}
-    </Tag>
-  )
-}
-
-export function Text({ 
-  children, 
-  variant = 'body', 
-  className, 
-  animate = false,
-  ...props 
-}: TextProps) {
-  const baseClasses = cn(textStyles[variant], className)
-
-  if (animate) {
-    return (
-      <motion.p
-        className={baseClasses}
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+      <Tag
+        ref={ref}
+        className={combinedClasses}
         {...props}
       >
         {children}
-      </motion.p>
-    )
+      </Tag>
+    );
   }
+);
 
-  return (
-    <p className={baseClasses} {...props}>
-      {children}
-    </p>
-  )
+Heading.displayName = 'Heading';
+
+export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
+  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+  gradient?: boolean;
+  children: React.ReactNode;
 }
+
+const Text = forwardRef<HTMLParagraphElement, TextProps>(
+  ({ className, size = 'base', weight = 'normal', gradient = false, children, ...props }, ref) => {
+    const baseClasses = cn(
+      'text-balance',
+      gradient && 'gradient-text',
+      className
+    );
+
+    const sizeClasses = {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      base: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    };
+
+    const weightClasses = {
+      light: 'font-light',
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
+    };
+
+    const combinedClasses = cn(
+      baseClasses,
+      sizeClasses[size],
+      weightClasses[weight]
+    );
+
+    return (
+      <p
+        ref={ref}
+        className={combinedClasses}
+        {...props}
+      >
+        {children}
+      </p>
+    );
+  }
+);
+
+Text.displayName = 'Text';
+
+export { Heading, Text };
