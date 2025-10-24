@@ -62,7 +62,7 @@ export function Newsletter() {
       await new Promise((resolve) => setTimeout(resolve, 2000))
       
       // In a real app, you would send the data to your newsletter service
-      console.log('Newsletter signup:', data)
+      // TODO: Implement newsletter signup API call
       
       setSubmitStatus('success')
       reset()

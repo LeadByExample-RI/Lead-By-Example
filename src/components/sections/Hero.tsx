@@ -19,15 +19,15 @@ export const Hero: React.FC<HeroProps> = ({
   variant = 'default',
   title = 'Breaking the School-to-Prison Pipeline',
   subtitle,
-  description = 'Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we\'re building stronger communities through opportunity and empowerment.',
+  description = 'Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we&apos;re building stronger communities through opportunity and empowerment.',
   primaryAction,
   secondaryAction,
-  backgroundImage,
-  backgroundVideo,
-  overlay = false,
-  animations,
-  className,
-  ...props
+  backgroundImage: _backgroundImage,
+  backgroundVideo: _backgroundVideo,
+  overlay: _overlay = false,
+  animations: _animations,
+  className: _className,
+  ..._props
 }) => {
   const progressPercentage = calculateProgress(currentFundraiser.raised, currentFundraiser.goal);
 

@@ -166,12 +166,12 @@ export const Testimonials: React.FC = () => {
                   
                   <div className="flex-1 flex items-center mb-6">
                     <Text size="lg" className="text-white/90 italic text-center leading-relaxed">
-                      "{currentTestimonial.content}"
+                      &ldquo;{currentTestimonial.content}&rdquo;
                     </Text>
                   </div>
 
                   <div className="flex justify-center">
-                    <div className="text-accent-500 text-4xl">"</div>
+                    <div className="text-accent-500 text-4xl">&rdquo;</div>
                   </div>
                 </GlassCard>
               </motion.div>
@@ -278,7 +278,7 @@ export const Testimonials: React.FC = () => {
             size="lg"
             onClick={() => {
               // Handle get involved click
-              console.log('Get involved clicked');
+              // TODO: Implement share story functionality
             }}
           >
             Share Your Story
