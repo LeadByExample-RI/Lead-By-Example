@@ -3,8 +3,7 @@ import { motion } from 'framer-motion'
 import { Users, DollarSign, Calendar, TrendingUp } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
-import { formatCurrency, formatNumber } from '@/utils/format'
-import { fadeInUp, staggerChildren } from '@/utils/animations'
+import { formatCurrency, formatNumber } from '@/utils/helpers'
 
 const archiveData = [
   {
@@ -51,15 +50,15 @@ export function Archive() {
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <Heading level={2} className="text-white mb-6" gradient>
             Our Impact Archive
           </Heading>
-          <Text variant="lead" className="text-white/80 max-w-3xl mx-auto">
+          <Text size="lg" className="text-white/80 max-w-3xl mx-auto">
             Explore our past initiatives and see the tangible difference we've made in our community through dedicated fundraising and outreach efforts.
           </Text>
         </motion.div>
@@ -67,42 +66,54 @@ export function Archive() {
         {/* Combined Impact Statistics */}
         <motion.div
           className="grid md:grid-cols-3 gap-6 mb-16"
-          variants={staggerChildren}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, staggerChildren: 0.1 }}
           viewport={{ once: true }}
         >
-          <motion.div variants={fadeInUp}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <GlassCard className="p-6 text-center" variant="strong">
               <DollarSign className="w-12 h-12 text-accent-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {formatCurrency(totalImpact.totalRaised)}
               </div>
-              <Text variant="small" className="text-white/70">
+              <Text size="sm" className="text-white/70">
                 Total Funds Raised
               </Text>
             </GlassCard>
           </motion.div>
 
-          <motion.div variants={fadeInUp}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <GlassCard className="p-6 text-center" variant="strong">
               <Users className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {formatNumber(totalImpact.totalYouthServed)}+
               </div>
-              <Text variant="small" className="text-white/70">
+              <Text size="sm" className="text-white/70">
                 Youth Impacted
               </Text>
             </GlassCard>
           </motion.div>
 
-          <motion.div variants={fadeInUp}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <GlassCard className="p-6 text-center" variant="strong">
               <TrendingUp className="w-12 h-12 text-secondary-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">
                 {totalImpact.totalEvents}
               </div>
-              <Text variant="small" className="text-white/70">
+              <Text size="sm" className="text-white/70">
                 Successful Events
               </Text>
             </GlassCard>
@@ -112,17 +123,18 @@ export function Archive() {
         {/* Archive Cards */}
         <motion.div
           className="grid lg:grid-cols-3 gap-8"
-          variants={staggerChildren}
-          initial="initial"
-          whileInView="animate"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, staggerChildren: 0.1 }}
           viewport={{ once: true }}
         >
           {archiveData.map((event, index) => (
             <motion.div
               key={event.id}
-              variants={fadeInUp}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
             >
               <GlassCard className="p-6 h-full" variant="default">
                 {/* Header with gradient */}
@@ -130,7 +142,7 @@ export function Archive() {
                 
                 <div className="flex items-center gap-2 mb-4">
                   <Calendar className="w-5 h-5 text-accent-400" />
-                  <Text variant="small" className="text-white/70">
+                  <Text size="sm" className="text-white/70">
                     {event.date}
                   </Text>
                 </div>

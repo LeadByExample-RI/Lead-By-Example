@@ -34,6 +34,15 @@ export function formatCurrency(
 }
 
 /**
+ * Format number with commas for thousands
+ * @param num - Number to format
+ * @returns Formatted number string
+ */
+export function formatNumber(num: number): string {
+  return new Intl.NumberFormat('en-US').format(num);
+}
+
+/**
  * Calculate percentage progress from current and goal amounts
  * @param current - Current amount raised
  * @param goal - Goal amount

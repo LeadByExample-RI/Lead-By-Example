@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-const Testimonials: React.FC = () => {
+export const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 

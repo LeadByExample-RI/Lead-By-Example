@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -32,7 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <Component {...pageProps} />
+      
+      {/* Vercel Analytics & Speed Insights */}
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
