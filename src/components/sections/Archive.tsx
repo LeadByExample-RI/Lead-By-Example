@@ -59,7 +59,11 @@ export function Archive() {
             Our Impact Archive
           </Heading>
           <Text size="lg" className="text-white/80 max-w-3xl mx-auto">
+<<<<<<< HEAD
             Explore our past initiatives and see the tangible difference we&apos;ve made in our community through dedicated fundraising and outreach efforts.
+=======
+            Explore our past initiatives and see the tangible difference we've made in our community through dedicated fundraising and outreach efforts.
+>>>>>>> f4f2cfead4b0d769c270c57d526b5ad80f4334d3
           </Text>
         </motion.div>
 
