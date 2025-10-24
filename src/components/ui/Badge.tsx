@@ -9,17 +9,12 @@ export interface BadgeProps {
 
 /**
  * Badge component for status indicators and labels
- * 
+ *
  * @example
  * <Badge variant="success">Active</Badge>
  * <Badge variant="error" size="sm">Error</Badge>
  */
-export function Badge({
-  children,
-  variant = 'default',
-  size = 'md',
-  className,
-}: BadgeProps) {
+export function Badge({ children, variant = 'default', size = 'md', className }: BadgeProps) {
   const variants = {
     default: 'bg-slate-500/20 text-slate-300 border-slate-400/30',
     success: 'bg-success-500/20 text-success-300 border-success-400/30',
@@ -37,7 +32,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center font-medium rounded-full border',
+        'inline-flex items-center rounded-full border font-medium',
         'backdrop-blur-sm',
         variants[variant],
         sizes[size],

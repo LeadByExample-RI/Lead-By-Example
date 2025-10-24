@@ -64,11 +64,7 @@ export function isStrongPassword(password: string): boolean {
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   return (
-    password.length >= minLength &&
-    hasUpperCase &&
-    hasLowerCase &&
-    hasNumbers &&
-    hasSpecialChar
+    password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar
   );
 }
 
@@ -107,7 +103,7 @@ export function isEmpty(value: unknown): boolean {
  */
 export function isValidCreditCard(cardNumber: string): boolean {
   const cleaned = cardNumber.replace(/\D/g, '');
-  
+
   if (cleaned.length < 13 || cleaned.length > 19) return false;
 
   let sum = 0;

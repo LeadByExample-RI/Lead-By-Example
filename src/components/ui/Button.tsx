@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { cn } from '@/utils';
+import * as React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -7,35 +7,35 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * @default 'primary'
    */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'accent';
-  
+
   /**
    * The size of the button
    * @default 'md'
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Whether the button should take full width
    * @default false
    */
   fullWidth?: boolean;
-  
+
   /**
    * Whether the button is in a loading state
    * @default false
    */
   isLoading?: boolean;
-  
+
   /**
    * Icon to display before the button text
    */
   leftIcon?: React.ReactNode;
-  
+
   /**
    * Icon to display after the button text
    */
   rightIcon?: React.ReactNode;
-  
+
   /**
    * Children content
    */
@@ -44,12 +44,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 /**
  * Button component with multiple variants and sizes
- * 
+ *
  * @example
  * <Button variant="primary" size="lg">
  *   Click Me
  * </Button>
- * 
+ *
  * @example
  * <Button variant="outline" leftIcon={<Icon />}>
  *   With Icon
@@ -83,8 +83,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         'bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 hover:shadow-lg hover:-translate-y-0.5 focus:ring-primary-500',
       outline:
         'border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 focus:ring-white/50',
-      ghost:
-        'text-white hover:bg-white/10 focus:ring-white/50',
+      ghost: 'text-white hover:bg-white/10 focus:ring-white/50',
     };
 
     const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
@@ -108,7 +107,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading && (
           <svg
-            className="animate-spin h-4 w-4"
+            className="h-4 w-4 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

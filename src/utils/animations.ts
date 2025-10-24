@@ -9,13 +9,13 @@ type Variants = Record<string, unknown>;
  */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { duration: 0.5, ease: 'easeOut' }
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
-  exit: { 
-    opacity: 0, 
-    transition: { duration: 0.3 }
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3 },
   },
 };
 
@@ -24,15 +24,15 @@ export const fadeIn: Variants = {
  */
 export const slideUp: Variants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1, 
-    transition: { duration: 0.4, ease: 'easeOut' }
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: 'easeOut' },
   },
-  exit: { 
-    y: -20, 
-    opacity: 0, 
-    transition: { duration: 0.3 }
+  exit: {
+    y: -20,
+    opacity: 0,
+    transition: { duration: 0.3 },
   },
 };
 
@@ -41,15 +41,15 @@ export const slideUp: Variants = {
  */
 export const slideDown: Variants = {
   hidden: { y: -20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1, 
-    transition: { duration: 0.4, ease: 'easeOut' }
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: 'easeOut' },
   },
-  exit: { 
-    y: 20, 
-    opacity: 0, 
-    transition: { duration: 0.3 }
+  exit: {
+    y: 20,
+    opacity: 0,
+    transition: { duration: 0.3 },
   },
 };
 
@@ -58,15 +58,15 @@ export const slideDown: Variants = {
  */
 export const slideLeft: Variants = {
   hidden: { x: -20, opacity: 0 },
-  visible: { 
-    x: 0, 
-    opacity: 1, 
-    transition: { duration: 0.4, ease: 'easeOut' }
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: 'easeOut' },
   },
-  exit: { 
-    x: -20, 
-    opacity: 0, 
-    transition: { duration: 0.3 }
+  exit: {
+    x: -20,
+    opacity: 0,
+    transition: { duration: 0.3 },
   },
 };
 
@@ -75,15 +75,15 @@ export const slideLeft: Variants = {
  */
 export const slideRight: Variants = {
   hidden: { x: 20, opacity: 0 },
-  visible: { 
-    x: 0, 
-    opacity: 1, 
-    transition: { duration: 0.4, ease: 'easeOut' }
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: 'easeOut' },
   },
-  exit: { 
-    x: 20, 
-    opacity: 0, 
-    transition: { duration: 0.3 }
+  exit: {
+    x: 20,
+    opacity: 0,
+    transition: { duration: 0.3 },
   },
 };
 
@@ -92,15 +92,15 @@ export const slideRight: Variants = {
  */
 export const scaleIn: Variants = {
   hidden: { scale: 0.9, opacity: 0 },
-  visible: { 
-    scale: 1, 
-    opacity: 1, 
-    transition: { duration: 0.3, ease: 'easeOut' }
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.3, ease: 'easeOut' },
   },
-  exit: { 
-    scale: 0.9, 
-    opacity: 0, 
-    transition: { duration: 0.2 }
+  exit: {
+    scale: 0.9,
+    opacity: 0,
+    transition: { duration: 0.2 },
   },
 };
 
@@ -109,19 +109,19 @@ export const scaleIn: Variants = {
  */
 export const popIn: Variants = {
   hidden: { scale: 0, opacity: 0 },
-  visible: { 
-    scale: 1, 
-    opacity: 1, 
-    transition: { 
-      type: 'spring', 
-      stiffness: 400, 
-      damping: 20 
-    }
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 20,
+    },
   },
-  exit: { 
-    scale: 0, 
-    opacity: 0, 
-    transition: { duration: 0.2 }
+  exit: {
+    scale: 0,
+    opacity: 0,
+    transition: { duration: 0.2 },
   },
 };
 
@@ -155,20 +155,20 @@ export const staggerItem: Variants = {
  * Page transition variants
  */
 export const pageVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 20 
+  hidden: {
+    opacity: 0,
+    y: 20,
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.4,
       ease: 'easeOut',
     },
   },
-  exit: { 
-    opacity: 0, 
+  exit: {
+    opacity: 0,
     y: -20,
     transition: {
       duration: 0.3,
@@ -182,13 +182,13 @@ export const pageVariants: Variants = {
  */
 export const backdropVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
-    transition: { duration: 0.2 }
+    transition: { duration: 0.2 },
   },
-  exit: { 
+  exit: {
     opacity: 0,
-    transition: { duration: 0.2 }
+    transition: { duration: 0.2 },
   },
 };
 
@@ -196,13 +196,13 @@ export const backdropVariants: Variants = {
  * Modal content animation
  */
 export const modalVariants: Variants = {
-  hidden: { 
-    scale: 0.95, 
+  hidden: {
+    scale: 0.95,
     opacity: 0,
     y: 20,
   },
-  visible: { 
-    scale: 1, 
+  visible: {
+    scale: 1,
     opacity: 1,
     y: 0,
     transition: {
@@ -210,11 +210,11 @@ export const modalVariants: Variants = {
       duration: 0.3,
     },
   },
-  exit: { 
-    scale: 0.95, 
+  exit: {
+    scale: 0.95,
     opacity: 0,
     y: 20,
-    transition: { duration: 0.2 }
+    transition: { duration: 0.2 },
   },
 };
 
@@ -222,11 +222,11 @@ export const modalVariants: Variants = {
  * Drawer animation (from right)
  */
 export const drawerVariants: Variants = {
-  hidden: { 
+  hidden: {
     x: '100%',
     opacity: 0,
   },
-  visible: { 
+  visible: {
     x: 0,
     opacity: 1,
     transition: {
@@ -235,7 +235,7 @@ export const drawerVariants: Variants = {
       stiffness: 300,
     },
   },
-  exit: { 
+  exit: {
     x: '100%',
     opacity: 0,
     transition: {
@@ -248,14 +248,14 @@ export const drawerVariants: Variants = {
  * Accordion content animation
  */
 export const accordionVariants: Variants = {
-  collapsed: { 
+  collapsed: {
     height: 0,
     opacity: 0,
     transition: {
       duration: 0.3,
     },
   },
-  expanded: { 
+  expanded: {
     height: 'auto',
     opacity: 1,
     transition: {
@@ -285,7 +285,7 @@ export const buttonTap = {
  */
 export const rotate: Variants = {
   initial: { rotate: 0 },
-  animate: { 
+  animate: {
     rotate: 360,
     transition: {
       duration: 0.3,

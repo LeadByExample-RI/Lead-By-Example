@@ -59,9 +59,9 @@ export function formatDate(
   } = {}
 ): string {
   const { format = 'long', locale = 'en-US' } = options;
-  
+
   const dateObj = typeof date === 'string' ? new Date(date) : date;
-  
+
   if (isNaN(dateObj.getTime())) {
     return 'Invalid date';
   }
@@ -73,14 +73,14 @@ export function formatDate(
         day: 'numeric',
         year: 'numeric',
       });
-    
+
     case 'time':
       return dateObj.toLocaleTimeString(locale, {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
       });
-    
+
     case 'datetime':
       return dateObj.toLocaleString(locale, {
         month: 'short',
@@ -90,19 +90,19 @@ export function formatDate(
         minute: '2-digit',
         hour12: true,
       });
-    
+
     case 'relative':
       const now = new Date();
       const diffInMs = now.getTime() - dateObj.getTime();
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-      
+
       if (diffInDays === 0) return 'Today';
       if (diffInDays === 1) return 'Yesterday';
       if (diffInDays < 7) return `${diffInDays} days ago`;
       if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
       if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
       return `${Math.floor(diffInDays / 365)} years ago`;
-    
+
     case 'long':
     default:
       return dateObj.toLocaleDateString(locale, {
@@ -125,7 +125,7 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
   delay: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func(...args), delay);
@@ -143,7 +143,7 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
   delay: number
 ): (...args: Parameters<T>) => void {
   let lastCall = 0;
-  
+
   return (...args: Parameters<T>) => {
     const now = Date.now();
     if (now - lastCall >= delay) {
@@ -161,11 +161,11 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
 export function generateId(length: number = 8): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
-  
+
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  
+
   return result;
 }
 
@@ -190,7 +190,7 @@ export function isEmpty(value: unknown): boolean {
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
-  if (obj instanceof Array) return obj.map(item => deepClone(item)) as unknown as T;
+  if (obj instanceof Array) return obj.map((item) => deepClone(item)) as unknown as T;
   if (typeof obj === 'object') {
     const clonedObj = {} as T;
     for (const key in obj) {
@@ -231,11 +231,11 @@ export function isValidPhone(phone: string): boolean {
 export function formatPhone(phone: string): string {
   const cleaned = phone.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-  
+
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
   }
-  
+
   return phone;
 }
 
@@ -260,7 +260,7 @@ export function truncateText(text: string, maxLength: number, suffix: string = '
 export function getInitials(name: string, maxLength: number = 2): string {
   return name
     .split(' ')
-    .map(word => word.charAt(0).toUpperCase())
+    .map((word) => word.charAt(0).toUpperCase())
     .filter(Boolean)
     .slice(0, maxLength)
     .join('');
@@ -281,15 +281,15 @@ export function getTimeRemaining(targetDate: Date | string): {
   const target = typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
   const now = new Date();
   const difference = target.getTime() - now.getTime();
-  
+
   const isPast = difference < 0;
   const absDifference = Math.abs(difference);
-  
+
   const days = Math.floor(absDifference / (1000 * 60 * 60 * 24));
   const hours = Math.floor((absDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((absDifference % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((absDifference % (1000 * 60)) / 1000);
-  
+
   return { days, hours, minutes, seconds, isPast };
 }
 
@@ -319,10 +319,13 @@ export function isInViewport(element: HTMLElement, threshold: number = 0.1): boo
   const rect = element.getBoundingClientRect();
   const windowHeight = window.innerHeight || document.documentElement.clientHeight;
   const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-  
-  const vertInView = rect.top <= windowHeight * (1 - threshold) && rect.top + rect.height >= windowHeight * threshold;
-  const horInView = rect.left <= windowWidth * (1 - threshold) && rect.left + rect.width >= windowWidth * threshold;
-  
+
+  const vertInView =
+    rect.top <= windowHeight * (1 - threshold) &&
+    rect.top + rect.height >= windowHeight * threshold;
+  const horInView =
+    rect.left <= windowWidth * (1 - threshold) && rect.left + rect.width >= windowWidth * threshold;
+
   return vertInView && horInView;
 }
 
@@ -364,11 +367,11 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 export function getUrlParams(url: string = window.location.href): Record<string, string> {
   const urlObj = new URL(url);
   const params: Record<string, string> = {};
-  
+
   urlObj.searchParams.forEach((value, key) => {
     params[key] = value;
   });
-  
+
   return params;
 }
 
@@ -380,12 +383,12 @@ export function getUrlParams(url: string = window.location.href): Record<string,
  */
 export function buildUrl(baseUrl: string, params: Record<string, unknown>): string {
   const url = new URL(baseUrl);
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== null && value !== undefined && value !== '') {
       url.searchParams.set(key, String(value));
     }
   });
-  
+
   return url.toString();
 }

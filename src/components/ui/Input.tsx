@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import { cn } from '@/utils/helpers';
+import React from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -14,7 +14,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 /**
  * Input component with label, error states, and helper text
- * 
+ *
  * @example
  * <Input
  *   label="Email"
@@ -35,26 +35,20 @@ export function Input({
 }: InputProps) {
   return (
     <div className={cn('flex flex-col gap-1.5', fullWidth && 'w-full')}>
-      {label && (
-        <label className="text-sm font-medium text-white">
-          {label}
-        </label>
-      )}
-      
+      {label && <label className="text-sm font-medium text-white">{label}</label>}
+
       <div className="relative">
         {leftIcon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-            {leftIcon}
-          </div>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">{leftIcon}</div>
         )}
-        
+
         <input
           className={cn(
-            'w-full px-4 py-2 rounded-lg',
+            'w-full rounded-lg px-4 py-2',
             'bg-white/10 backdrop-blur-sm',
             'border border-white/20',
             'text-white placeholder:text-white/50',
-            'focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent',
+            'focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent-500',
             'transition-all duration-200',
             error && 'border-error-500 focus:ring-error-500',
             leftIcon && 'pl-10',
@@ -63,25 +57,17 @@ export function Input({
           )}
           {...props}
         />
-        
+
         {rightIcon && (
           <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
             {rightIcon}
           </div>
         )}
       </div>
-      
-      {error && (
-        <span className="text-sm text-error-400">
-          {error}
-        </span>
-      )}
-      
-      {helperText && !error && (
-        <span className="text-sm text-white/60">
-          {helperText}
-        </span>
-      )}
+
+      {error && <span className="text-sm text-error-400">{error}</span>}
+
+      {helperText && !error && <span className="text-sm text-white/60">{helperText}</span>}
     </div>
   );
 }

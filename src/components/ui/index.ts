@@ -3,14 +3,15 @@
  * Reusable primitive components
  */
 
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
-
-export { Card, CardHeader, CardBody, CardFooter } from './Card';
-export type { CardProps, CardHeaderProps, CardBodyProps, CardFooterProps } from './Card';
-
+export { GlassButton } from './GlassButton';
+export { GlassCard } from './GlassCard';
+export { ProgressBar } from './ProgressBar';
+export { Heading, Text } from './Typography';
 export { Input } from './Input';
-export type { InputProps } from './Input';
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './Card';
 
-export { Badge } from './Badge';
-export type { BadgeProps } from './Badge';
+export type { GlassButtonProps } from './GlassButton';
+export type { GlassCardProps } from './GlassCard';
+export type { ProgressBarProps } from './ProgressBar';
+export type { HeadingProps, TextProps } from './Typography';
+export type { InputProps } from './Input';

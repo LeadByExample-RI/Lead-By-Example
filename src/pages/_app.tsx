@@ -1,7 +1,7 @@
+import '@/styles/globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Analytics } from '@vercel/analytics/next';
-import '@/styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,26 +11,26 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#01514C" />
         <meta name="msapplication-TileColor" content="#01514C" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
-        
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-        
+
         {/* Security headers */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        
+
         {/* Performance optimizations */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://vercel.live" />
       </Head>
-      
+
       <Component {...pageProps} />
       <Analytics />
     </>
