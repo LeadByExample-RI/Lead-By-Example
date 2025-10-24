@@ -153,7 +153,7 @@ export function Footer() {
               ))}
             </div>
 
-            <GlassCard className="p-4" variant="subtle">
+            <GlassCard className="p-4" variant="light">
               <Text size="sm" className="text-white/80 mb-2">
                 Join our newsletter for updates
               </Text>
