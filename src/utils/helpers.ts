@@ -1,132 +1,182 @@
-// General utility helper functions
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
- * Debounce function to limit the rate of function execution
+ * Utility function to merge Tailwind classes with proper precedence
+ * Uses clsx and tailwind-merge to handle class conflicts
  */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+/**
+ * Format number as USD currency
+ * @param amount - The amount to format
+ * @param options - Formatting options
+ * @returns Formatted currency string
+ */
+export function formatCurrency(
+  amount: number,
+  options: {
+    showCents?: boolean;
+    currency?: string;
+    locale?: string;
+  } = {}
+): string {
+  const { showCents = true, currency = 'USD', locale = 'en-US' } = options;
+
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: showCents ? 2 : 0,
+    maximumFractionDigits: showCents ? 2 : 0,
+  }).format(amount);
+}
+
+/**
+ * Calculate percentage progress from current and goal amounts
+ * @param current - Current amount raised
+ * @param goal - Goal amount
+ * @returns Percentage as a number (0-100)
+ */
+export function calculateProgress(current: number, goal: number): number {
+  if (goal === 0) return 0;
+  const progress = (current / goal) * 100;
+  return Math.min(Math.max(progress, 0), 100); // Clamp between 0-100
+}
+
+/**
+ * Format date string for display with multiple format options
+ * @param date - Date to format (Date object or string)
+ * @param options - Formatting options
+ * @returns Formatted date string
+ */
+export function formatDate(
+  date: Date | string,
+  options: {
+    format?: 'long' | 'short' | 'time' | 'datetime' | 'relative';
+    locale?: string;
+  } = {}
+): string {
+  const { format = 'long', locale = 'en-US' } = options;
+  
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  
+  if (isNaN(dateObj.getTime())) {
+    return 'Invalid date';
+  }
+
+  switch (format) {
+    case 'short':
+      return dateObj.toLocaleDateString(locale, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    
+    case 'time':
+      return dateObj.toLocaleTimeString(locale, {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      });
+    
+    case 'datetime':
+      return dateObj.toLocaleString(locale, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      });
+    
+    case 'relative':
+      const now = new Date();
+      const diffInMs = now.getTime() - dateObj.getTime();
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      
+      if (diffInDays === 0) return 'Today';
+      if (diffInDays === 1) return 'Yesterday';
+      if (diffInDays < 7) return `${diffInDays} days ago`;
+      if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
+      if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
+      return `${Math.floor(diffInDays / 365)} years ago`;
+    
+    case 'long':
+    default:
+      return dateObj.toLocaleDateString(locale, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+  }
+}
+
+/**
+ * Debounce function to limit how often a function can be called
+ * @param func - Function to debounce
+ * @param delay - Delay in milliseconds
+ * @returns Debounced function
+ */
+export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  delay: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
+  let timeoutId: NodeJS.Timeout;
+  
   return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
   };
 }
 
 /**
- * Throttle function to limit function execution to once per interval
+ * Throttle function to limit how often a function can be called
+ * @param func - Function to throttle
+ * @param delay - Delay in milliseconds
+ * @returns Throttled function
  */
-export function throttle<T extends (...args: unknown[]) => unknown>(
+export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit: number
+  delay: number
 ): (...args: Parameters<T>) => void {
-  let inThrottle: boolean;
+  let lastCall = 0;
+  
   return (...args: Parameters<T>) => {
-    if (!inThrottle) {
+    const now = Date.now();
+    if (now - lastCall >= delay) {
+      lastCall = now;
       func(...args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }
 
 /**
  * Generate a random ID string
+ * @param length - Length of the ID (default: 8)
+ * @returns Random ID string
  */
 export function generateId(length: number = 8): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
+  
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
+  
   return result;
 }
 
 /**
- * Format a date string to a readable format
- */
-export function formatDate(
-  date: string | Date,
-  options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }
-): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  return dateObj.toLocaleDateString('en-US', options);
-}
-
-/**
- * Format a relative time string (e.g., "2 hours ago")
- */
-export function formatRelativeTime(date: string | Date): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
-
-  if (diffInSeconds < 60) return 'just now';
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-  if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-  if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
-  return `${Math.floor(diffInSeconds / 31536000)} years ago`;
-}
-
-/**
- * Capitalize the first letter of a string
- */
-export function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-/**
- * Convert a string to kebab-case
- */
-export function kebabCase(str: string): string {
-  return str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
-}
-
-/**
- * Convert a string to camelCase
- */
-export function camelCase(str: string): string {
-  return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
-      return index === 0 ? word.toLowerCase() : word.toUpperCase();
-    })
-    .replace(/\s+/g, '');
-}
-
-/**
- * Truncate text to a specified length with ellipsis
- */
-export function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '...';
-}
-
-/**
- * Extract initials from a name
- */
-export function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase())
-    .join('')
-    .slice(0, 2);
-}
-
-/**
  * Check if a value is empty (null, undefined, empty string, empty array, empty object)
+ * @param value - Value to check
+ * @returns True if value is empty
  */
-export function isEmpty(value: unknown): boolean {
+export function isEmpty(value: any): boolean {
   if (value == null) return true;
-  if (typeof value === 'string') return value.trim() === '';
+  if (typeof value === 'string') return value.trim().length === 0;
   if (Array.isArray(value)) return value.length === 0;
   if (typeof value === 'object') return Object.keys(value).length === 0;
   return false;
@@ -134,15 +184,17 @@ export function isEmpty(value: unknown): boolean {
 
 /**
  * Deep clone an object
+ * @param obj - Object to clone
+ * @returns Cloned object
  */
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') return obj;
-  if (obj instanceof Date) return new Date(obj.getTime()) as T;
-  if (obj instanceof Array) return obj.map(item => deepClone(item)) as T;
+  if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
+  if (obj instanceof Array) return obj.map(item => deepClone(item)) as unknown as T;
   if (typeof obj === 'object') {
     const clonedObj = {} as T;
     for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (obj.hasOwnProperty(key)) {
         clonedObj[key] = deepClone(obj[key]);
       }
     }
@@ -152,177 +204,188 @@ export function deepClone<T>(obj: T): T {
 }
 
 /**
- * Merge objects deeply
+ * Validate email format
+ * @param email - Email address to validate
+ * @returns True if email is valid
  */
-export function deepMerge<T extends Record<string, unknown>>(
-  target: T,
-  ...sources: Partial<T>[]
-): T {
-  if (!sources.length) return target;
-  const source = sources.shift();
-
-  if (isObject(target) && isObject(source)) {
-    for (const key in source) {
-      if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} });
-        deepMerge(target[key] as Record<string, unknown>, source[key] as Record<string, unknown>);
-      } else {
-        Object.assign(target, { [key]: source[key] });
-      }
-    }
-  }
-
-  return deepMerge(target, ...sources);
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 /**
- * Check if a value is an object
+ * Validate phone number format (US format)
+ * @param phone - Phone number to validate
+ * @returns True if phone is valid
  */
-function isObject(item: unknown): item is Record<string, unknown> {
-  return item !== null && typeof item === 'object' && !Array.isArray(item);
+export function isValidPhone(phone: string): boolean {
+  const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  return phoneRegex.test(phone.replace(/\D/g, ''));
 }
 
 /**
- * Format file size in human readable format
+ * Format phone number to standard US format
+ * @param phone - Phone number to format
+ * @returns Formatted phone number
  */
-export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 Bytes';
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
-/**
- * Generate a color from a string (useful for avatars)
- */
-export function stringToColor(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+export function formatPhone(phone: string): string {
+  const cleaned = phone.replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+  
+  if (match) {
+    return `(${match[1]}) ${match[2]}-${match[3]}`;
   }
   
-  const hue = hash % 360;
-  return `hsl(${hue}, 70%, 60%)`;
+  return phone;
 }
 
 /**
- * Check if the current environment is development
+ * Truncate text to specified length with ellipsis
+ * @param text - Text to truncate
+ * @param maxLength - Maximum length
+ * @param suffix - Suffix to add (default: '...')
+ * @returns Truncated text
  */
-export function isDevelopment(): boolean {
-  return process.env.NODE_ENV === 'development';
+export function truncateText(text: string, maxLength: number, suffix: string = '...'): string {
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength - suffix.length) + suffix;
 }
 
 /**
- * Check if the current environment is production
+ * Get initials from a name
+ * @param name - Full name
+ * @param maxLength - Maximum number of initials (default: 2)
+ * @returns Initials
  */
-export function isProduction(): boolean {
-  return process.env.NODE_ENV === 'production';
+export function getInitials(name: string, maxLength: number = 2): string {
+  return name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .filter(Boolean)
+    .slice(0, maxLength)
+    .join('');
 }
 
 /**
- * Check if code is running on the client side
+ * Calculate time remaining from now to a target date
+ * @param targetDate - Target date
+ * @returns Object with time remaining
  */
-export function isClient(): boolean {
-  return typeof window !== 'undefined';
-}
-
-/**
- * Check if code is running on the server side
- */
-export function isServer(): boolean {
-  return typeof window === 'undefined';
-}
-
-/**
- * Get a nested object property safely
- */
-export function getNestedProperty<T>(
-  obj: Record<string, unknown>,
-  path: string,
-  defaultValue?: T
-): T | undefined {
-  const keys = path.split('.');
-  let current = obj;
-
-  for (const key of keys) {
-    if (current === null || current === undefined || !(key in current)) {
-      return defaultValue;
-    }
-    current = current[key] as Record<string, unknown>;
-  }
-
-  return current as T;
-}
-
-/**
- * Set a nested object property safely
- */
-export function setNestedProperty(
-  obj: Record<string, unknown>,
-  path: string,
-  value: unknown
-): void {
-  const keys = path.split('.');
-  const lastKey = keys.pop();
+export function getTimeRemaining(targetDate: Date | string): {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isPast: boolean;
+} {
+  const target = typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
+  const now = new Date();
+  const difference = target.getTime() - now.getTime();
   
-  if (!lastKey) return;
-
-  let current = obj;
-  for (const key of keys) {
-    if (!(key in current) || typeof current[key] !== 'object' || current[key] === null) {
-      current[key] = {};
-    }
-    current = current[key] as Record<string, unknown>;
-  }
-
-  current[lastKey] = value;
+  const isPast = difference < 0;
+  const absDifference = Math.abs(difference);
+  
+  const days = Math.floor(absDifference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((absDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((absDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((absDifference % (1000 * 60)) / 1000);
+  
+  return { days, hours, minutes, seconds, isPast };
 }
 
 /**
- * Remove undefined properties from an object
+ * Scroll to element smoothly
+ * @param elementId - ID of element to scroll to
+ * @param offset - Offset from top (default: 0)
  */
-export function removeUndefined<T extends Record<string, unknown>>(obj: T): T {
-  const cleaned = {} as T;
-  for (const key in obj) {
-    if (obj[key] !== undefined) {
-      cleaned[key] = obj[key];
-    }
+export function scrollToElement(elementId: string, offset: number = 0): void {
+  const element = document.getElementById(elementId);
+  if (element) {
+    const top = element.offsetTop - offset;
+    window.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
   }
-  return cleaned;
 }
 
 /**
- * Create a promise that resolves after a specified delay
+ * Check if element is in viewport
+ * @param element - Element to check
+ * @param threshold - Threshold for visibility (0-1, default: 0.1)
+ * @returns True if element is in viewport
  */
-export function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+export function isInViewport(element: HTMLElement, threshold: number = 0.1): boolean {
+  const rect = element.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  
+  const vertInView = rect.top <= windowHeight * (1 - threshold) && rect.top + rect.height >= windowHeight * threshold;
+  const horInView = rect.left <= windowWidth * (1 - threshold) && rect.left + rect.width >= windowWidth * threshold;
+  
+  return vertInView && horInView;
 }
 
 /**
- * Retry a function with exponential backoff
+ * Copy text to clipboard
+ * @param text - Text to copy
+ * @returns Promise that resolves when text is copied
  */
-export async function retry<T>(
-  fn: () => Promise<T>,
-  maxAttempts: number = 3,
-  baseDelay: number = 1000
-): Promise<T> {
-  let lastError: Error;
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      return await fn();
-    } catch (error) {
-      lastError = error as Error;
-      
-      if (attempt === maxAttempts) {
-        throw lastError;
-      }
-
-      const delayMs = baseDelay * Math.pow(2, attempt - 1);
-      await delay(delayMs);
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } else {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const result = document.execCommand('copy');
+      textArea.remove();
+      return result;
     }
+  } catch (error) {
+    console.error('Failed to copy text: ', error);
+    return false;
   }
+}
 
-  throw lastError!;
+/**
+ * Get URL parameters as object
+ * @param url - URL to parse (default: current URL)
+ * @returns Object with URL parameters
+ */
+export function getUrlParams(url: string = window.location.href): Record<string, string> {
+  const urlObj = new URL(url);
+  const params: Record<string, string> = {};
+  
+  urlObj.searchParams.forEach((value, key) => {
+    params[key] = value;
+  });
+  
+  return params;
+}
+
+/**
+ * Build URL with parameters
+ * @param baseUrl - Base URL
+ * @param params - Parameters to add
+ * @returns Complete URL with parameters
+ */
+export function buildUrl(baseUrl: string, params: Record<string, any>): string {
+  const url = new URL(baseUrl);
+  
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== null && value !== undefined && value !== '') {
+      url.searchParams.set(key, String(value));
+    }
+  });
+  
+  return url.toString();
 }
