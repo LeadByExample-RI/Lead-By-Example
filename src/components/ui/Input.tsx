@@ -3,140 +3,87 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { InputProps } from '@/types/components';
-import { cn } from '@/utils/cn';
-// Animation will be added inline for now
-// import { microAnimations } from '@/utils/animations';
+import { cn } from '@/utils';
 
-const inputVariants = {
-  default: 'border-neutral-300 focus:border-primary-500 focus:ring-primary-500',
-  filled: 'bg-neutral-100 border-transparent focus:bg-white focus:border-primary-500 focus:ring-primary-500',
-  flushed: 'border-0 border-b-2 border-neutral-300 rounded-none focus:border-primary-500 focus:ring-0 px-0',
-  unstyled: 'border-0 focus:ring-0 p-0'
-};
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+  helperText?: string;
+  fullWidth?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+}
 
-const inputSizes = {
-  sm: 'px-3 py-2 text-sm',
-  md: 'px-4 py-2.5 text-sm',
-  lg: 'px-4 py-3 text-base'
-};
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({
-    type = 'text',
-    size = 'md',
-    variant = 'default',
-    placeholder,
-    label,
-    helperText,
-    errorMessage,
-    required = false,
-    disabled = false,
-    readOnly = false,
-    leftElement,
-    rightElement,
-    className,
-    id,
-    name,
-    ...props
-  }, ref) => {
-    const generatedId = React.useId();
-    const inputId = id || name || generatedId;
-    const hasError = Boolean(errorMessage);
-
-    const inputClasses = cn(
-      // Base styles
-      'w-full transition-all duration-200 placeholder:text-neutral-400',
-      'focus:outline-none focus:ring-2 focus:ring-offset-0',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
-      'read-only:bg-neutral-50 read-only:cursor-default',
+/**
+ * Input component with label, error states, and helper text
+ * 
+ * @example
+ * <Input
+ *   label="Email"
+ *   type="email"
+ *   placeholder="Enter your email"
+ *   error="Invalid email"
+ * />
+ */
+export function Input({
+  label,
+  error,
+  helperText,
+  fullWidth = false,
+  leftIcon,
+  rightIcon,
+  className,
+  ...props
+}: InputProps) {
+  return (
+    <div className={cn('flex flex-col gap-1.5', fullWidth && 'w-full')}>
+      {label && (
+        <label className="text-sm font-medium text-white">
+          {label}
+        </label>
+      )}
       
-      // Variant styles
-      variant !== 'unstyled' && 'border rounded-lg',
-      inputVariants[variant],
-      
-      // Size styles
-      inputSizes[size],
-      
-      // Error state
-      hasError && variant !== 'unstyled' && 'border-error-500 focus:border-error-500 focus:ring-error-500',
-      
-      // Left/right elements padding
-      leftElement && 'pl-10',
-      rightElement && 'pr-10',
-      
-      className
-    );
-
-    const containerClasses = cn(
-      'relative',
-      disabled && 'opacity-50'
-    );
-
-    return (
-      <div className="space-y-1">
-        {label && (
-          <label
-            htmlFor={inputId}
-            className={cn(
-              'block text-sm font-medium text-neutral-700 dark:text-neutral-300',
-              required && "after:content-['*'] after:ml-0.5 after:text-error-500"
-            )}
-          >
-            {label}
-          </label>
+      <div className="relative">
+        {leftIcon && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+            {leftIcon}
+          </div>
         )}
         
-        <div className={containerClasses}>
-          {leftElement && (
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-neutral-400 w-4 h-4">{leftElement}</span>
-            </div>
+        <input
+          className={cn(
+            'w-full px-4 py-2 rounded-lg',
+            'bg-white/10 backdrop-blur-sm',
+            'border border-white/20',
+            'text-white placeholder:text-white/50',
+            'focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent',
+            'transition-all duration-200',
+            error && 'border-error-500 focus:ring-error-500',
+            leftIcon && 'pl-10',
+            rightIcon && 'pr-10',
+            className
           )}
-          
-          <motion.input
-            ref={ref}
-            id={inputId}
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            required={required}
-            disabled={disabled}
-            readOnly={readOnly}
-            className={inputClasses}
-            whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-            aria-invalid={hasError}
-            aria-describedby={
-              helperText || errorMessage 
-                ? `${inputId}-description` 
-                : undefined
-            }
-            {...props}
-          />
-          
-          {rightElement && (
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-              <span className="text-neutral-400 w-4 h-4">{rightElement}</span>
-            </div>
-          )}
-        </div>
+          {...props}
+        />
         
-        {(helperText || errorMessage) && (
-          <p
-            id={`${inputId}-description`}
-            className={cn(
-              'text-xs',
-              hasError ? 'text-error-600' : 'text-neutral-500'
-            )}
-          >
-            {errorMessage || helperText}
-          </p>
+        {rightIcon && (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+            {rightIcon}
+          </div>
         )}
       </div>
-    );
-  }
-);
-
-Input.displayName = 'Input';
-
-export { Input };
-export type { InputProps };
+      
+      {error && (
+        <span className="text-sm text-error-400">
+          {error}
+        </span>
+      )}
+      
+      {helperText && !error && (
+        <span className="text-sm text-white/60">
+          {helperText}
+        </span>
+      )}
+    </div>
+  );
+}

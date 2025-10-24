@@ -1,9 +1,16 @@
-export { GlassCard } from './GlassCard';
-export { GlassButton } from './GlassButton';
-export { Heading, Text } from './Typography';
-export { ProgressBar } from './ProgressBar';
+/**
+ * UI Components Library
+ * Reusable primitive components
+ */
 
-export type { GlassCardProps } from './GlassCard';
-export type { GlassButtonProps } from './GlassButton';
-export type { HeadingProps, TextProps } from './Typography';
-export type { ProgressBarProps } from './ProgressBar';
+export { Button } from './Button';
+export type { ButtonProps } from './Button';
+
+export { Card, CardHeader, CardBody, CardFooter } from './Card';
+export type { CardProps, CardHeaderProps, CardBodyProps, CardFooterProps } from './Card';
+
+export { Input } from './Input';
+export type { InputProps } from './Input';
+
+export { Badge } from './Badge';
+export type { BadgeProps } from './Badge';

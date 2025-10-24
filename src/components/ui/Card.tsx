@@ -3,7 +3,85 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CardProps } from '@/types/components';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils';
+
+export interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  variant?: 'default' | 'glass' | 'glass-dark';
+  hover?: boolean;
+}
+
+export interface CardHeaderProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface CardBodyProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface CardFooterProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+/**
+ * Card component with header, body, and footer sections
+ * 
+ * @example
+ * <Card>
+ *   <CardHeader>Title</CardHeader>
+ *   <CardBody>Content</CardBody>
+ *   <CardFooter>Actions</CardFooter>
+ * </Card>
+ */
+export function Card({ children, className, variant = 'default', hover = false }: CardProps) {
+  const variants = {
+    default: 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700',
+    glass: 'glass',
+    'glass-dark': 'glass-dark',
+  };
+
+  return (
+    <div
+      className={cn(
+        'rounded-xl p-6 transition-all duration-300',
+        variants[variant],
+        hover && 'hover:shadow-lg hover:-translate-y-1 cursor-pointer',
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function CardHeader({ children, className }: CardHeaderProps) {
+  return (
+    <div className={cn('mb-4', className)}>
+      {children}
+    </div>
+  );
+}
+
+export function CardBody({ children, className }: CardBodyProps) {
+  return (
+    <div className={cn('mb-4', className)}>
+      {children}
+    </div>
+  );
+}
+
+export function CardFooter({ children, className }: CardFooterProps) {
+  return (
+    <div className={cn('mt-4 pt-4 border-t border-white/10', className)}>
+      {children}
+    </div>
+  );
+}
+
 // Animation will be added inline for now
 // import { microAnimations } from '@/utils/animations';
 
