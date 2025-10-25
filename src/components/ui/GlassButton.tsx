@@ -29,16 +29,16 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     };
 
     const variantClasses = {
-      primary: 'bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700',
-      secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700',
-      outline: 'border-2 border-white/20 text-white hover:bg-white/10',
-      ghost: 'text-white hover:bg-white/10',
+      primary: 'bg-gradient-to-r from-accent-500 to-accent-600 text-primary-900 font-bold hover:from-accent-600 hover:to-accent-700 shadow-lg shadow-accent-500/30',
+      secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white font-semibold hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/30',
+      outline: 'border-2 border-white/30 bg-white/10 text-white hover:bg-white/20 hover:border-white/40',
+      ghost: 'text-white hover:bg-white/15 border border-white/10',
     };
 
     const baseClasses = cn(
-      'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus-ring',
-      'backdrop-blur-md border border-white/20 shadow-glass',
-      'hover:scale-105 hover:shadow-xl hover-lift',
+      'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-300 focus-ring',
+      'backdrop-blur-md shadow-glass depth-3d',
+      'hover-lift active:scale-95',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
       sizeClasses[size],
       variantClasses[variant],
