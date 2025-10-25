@@ -49,7 +49,20 @@ const testimonials = [
 ];
 
 export default function Home() {
-  const [selectedFundraiser, setSelectedFundraiser] = useState<typeof activeFundraiser | null>(null);
+  const [selectedFundraiser, setSelectedFundraiser] = useState<{
+    id: number;
+    title: string;
+    shortDescription: string;
+    fullDescription: string;
+    image: string;
+    raised: number;
+    goal: number;
+    percentage: number;
+    donors: number;
+    daysLeft: number;
+    status: 'active' | 'completed';
+    category: string;
+  } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFundraiserClick = (id: number) => {
