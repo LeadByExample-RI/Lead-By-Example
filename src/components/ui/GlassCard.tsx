@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
 import { cn } from '@/utils/helpers';
+import React, { forwardRef } from 'react';
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'dark' | 'light';
@@ -33,11 +33,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     );
 
     return (
-      <div
-        ref={ref}
-        className={cn('relative', baseClasses)}
-        {...props}
-      >
+      <div ref={ref} className={cn('relative', baseClasses)} {...props}>
         {children}
       </div>
     );
