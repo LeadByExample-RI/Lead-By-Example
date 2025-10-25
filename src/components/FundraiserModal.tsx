@@ -155,8 +155,8 @@ export default function FundraiserModal({ fundraiser, isOpen, closeModal }: Fund
                         Community Impact
                       </h3>
                       <p className="text-gray-700 italic">
-                        "This fundraiser changed lives in our community. The support we received was overwhelming 
-                        and will benefit families for years to come."
+                        &ldquo;This fundraiser changed lives in our community. The support we received was overwhelming 
+                        and will benefit families for years to come.&rdquo;
                       </p>
                       <p className="text-sm text-gray-600 mt-2">— Community Leader</p>
                     </div>

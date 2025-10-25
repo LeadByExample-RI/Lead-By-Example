@@ -32,10 +32,10 @@ export default function CommunitySection({ testimonials }: CommunitySectionProps
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>
             <p className="text-2xl md:text-3xl font-heading text-off-white italic mb-6">
-              "Quem tene amor, tene tudu."
+              &ldquo;Quem tene amor, tene tudu.&rdquo;
             </p>
             <p className="text-lg text-gold-light">
-              — Cape Verdean Proverb: "Whoever has love, has everything."
+              &mdash; Cape Verdean Proverb: &ldquo;Whoever has love, has everything.&rdquo;
             </p>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function CommunitySection({ testimonials }: CommunitySectionProps
                 </div>
               </div>
               <p className="text-gray-700 italic">
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
             </div>
           ))}

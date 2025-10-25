@@ -1,5 +1,3 @@
-import ProgressBar from './ProgressBar';
-
 interface PrevalentFundraiserProps {
   fundraiser: {
     id: number;

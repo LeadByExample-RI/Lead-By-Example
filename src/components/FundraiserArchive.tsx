@@ -24,7 +24,7 @@ export default function FundraiserArchive({ fundraisers, onCardClick }: Fundrais
             Past Fundraisers
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Celebrating our community's achievements and the impact we've made together
+            Celebrating our community&apos;s achievements and the impact we&apos;ve made together
           </p>
           <div className="w-24 h-1 bg-gold mx-auto mt-4"></div>
         </div>

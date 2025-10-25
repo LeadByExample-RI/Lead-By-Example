@@ -53,7 +53,7 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
             
             {/* Proverb in Creole */}
             <p className="text-3xl md:text-4xl font-heading text-off-white italic mb-6 leading-relaxed">
-              "{proverbs[0].creole}"
+              &ldquo;{proverbs[0].creole}&rdquo;
             </p>
             
             {/* English Translation */}
@@ -91,7 +91,7 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
               
               {/* Quote */}
               <p className="text-gray-700 italic leading-relaxed">
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
             </div>
           ))}

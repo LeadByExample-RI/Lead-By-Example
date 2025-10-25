@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,11 +32,11 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            <a href="/" 
+            <Link href="/" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
                aria-label="Go to home page">
               Home
-            </a>
+            </Link>
             <a href="/fundraisers" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
                aria-label="View all fundraisers">
@@ -77,13 +78,13 @@ export default function Header() {
         <div className="lg:hidden bg-cape-verde-dark border-t border-gold/20">
           <ul className="container mx-auto px-4 py-4 space-y-3">
             <li>
-              <a 
+              <Link 
                 href="/" 
                 className="block text-gold hover:text-gold-light transition-colors duration-300 font-semibold py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <a 
