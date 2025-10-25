@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,27 +31,27 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/" 
+            <a href="#home" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
-               aria-label="Go to home page">
+               aria-label="Go to home section">
               Home
-            </Link>
-            <a href="/fundraisers" 
+            </a>
+            <a href="#fundraisers" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
-               aria-label="View all fundraisers">
+               aria-label="View fundraisers section">
               Fundraisers
             </a>
-            <a href="/community" 
+            <a href="#community" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
-               aria-label="Join our community">
+               aria-label="Join our community section">
               Community
             </a>
-            <a href="/about" 
+            <a href="#community" 
                className="text-gold hover:text-gold-light font-semibold text-lg transition-colors duration-300 hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-gold rounded px-2 py-1"
                aria-label="Learn about us">
               About
             </a>
-            <a href="/contact" 
+            <a href="#community" 
                className="bg-gold hover:bg-gold-dark text-royal-purple font-bold px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-gold focus-visible:ring-offset-2"
                aria-label="Contact us to get involved">
               Get Involved
@@ -78,17 +77,17 @@ export default function Header() {
         <div className="lg:hidden bg-cape-verde-dark border-t border-gold/20">
           <ul className="container mx-auto px-4 py-4 space-y-3">
             <li>
-              <Link 
-                href="/" 
+              <a 
+                href="#home" 
                 className="block text-gold hover:text-gold-light transition-colors duration-300 font-semibold py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
-              </Link>
+              </a>
             </li>
             <li>
               <a 
-                href="/fundraisers" 
+                href="#fundraisers" 
                 className="block text-gold hover:text-gold-light transition-colors duration-300 font-semibold py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -97,7 +96,7 @@ export default function Header() {
             </li>
             <li>
               <a 
-                href="/community" 
+                href="#community" 
                 className="block text-gold hover:text-gold-light transition-colors duration-300 font-semibold py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -106,7 +105,7 @@ export default function Header() {
             </li>
             <li>
               <a 
-                href="/about" 
+                href="#community" 
                 className="block text-gold hover:text-gold-light transition-colors duration-300 font-semibold py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -115,7 +114,7 @@ export default function Header() {
             </li>
             <li>
               <a 
-                href="/contact" 
+                href="#community" 
                 className="block bg-gold hover:bg-gold-dark text-royal-purple font-bold py-3 px-6 rounded-full transition-all duration-300 text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
