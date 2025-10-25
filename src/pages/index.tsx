@@ -1,6 +1,8 @@
 import { Testimonials } from '@/components/sections/Testimonials';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Home() {
   const [email, setEmail] = useState('');
