@@ -12,7 +12,8 @@
 
 ## 🎯 When to Choose Windsurf + Cascade Mode
 
-### ✅ Choose This Mode If You:
+### ✅ Choose This Mode If You
+
 - **Prefer waterfall methodology** over agile iterations
 - **Value contextual awareness** throughout development
 - **Like sequential progress** with clear milestones
@@ -20,7 +21,8 @@
 - **Need comprehensive documentation** generation
 - **Require predictable timelines** and structured approach
 
-### ❌ Consider Other Modes If You:
+### ❌ Consider Other Modes If You
+
 - Need rapid prototyping (use Qoder Quest Mode)
 - Prefer iterative development cycles
 - Want maximum flexibility in approach
@@ -33,23 +35,27 @@
 The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the previous with automatic context inheritance:
 
 ### Level 1: 🎯 Strategic Planning & Architecture
+
 **Duration:** 1-1.5 hours  
 **Focus:** High-level system design and strategic decisions
 
-#### Key Activities:
+#### Key Activities
+
 - **Requirements Analysis**: Define functional and non-functional requirements
 - **Architecture Design**: Create system architecture diagrams
 - **Technology Stack Selection**: Choose frameworks, libraries, and tools
 - **Risk Assessment**: Identify potential challenges and mitigation strategies
 - **Success Metrics**: Define measurable outcomes
 
-#### Deliverables:
+#### Deliverables
+
 - Architecture documentation
 - Technology stack rationale
 - Risk mitigation plan
 - Success criteria definition
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Project requirements flow to all subsequent levels
 - Architectural decisions constrain implementation choices
 - Risk factors inform validation strategies
@@ -57,24 +63,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 2: 📋 Detailed Design & Specifications
+
 **Duration:** 1-1.5 hours  
 **Focus:** Detailed component design and interface specifications
 
-#### Key Activities:
+#### Key Activities
+
 - **Component Design**: Break down architecture into implementable components
 - **API Specifications**: Define interfaces, endpoints, and data contracts
 - **Database Schema**: Design data models and relationships
 - **UI/UX Wireframes**: Create user interface mockups
 - **Integration Points**: Define how components interact
 
-#### Deliverables:
+#### Deliverables
+
 - Component specifications
 - API documentation
 - Database schema
 - UI/UX wireframes
 - Integration diagrams
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Architecture constraints from Level 1
 - Component interfaces inform implementation
 - Design patterns cascade to development
@@ -82,24 +92,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 3: 🏗️ Foundation & Infrastructure Setup
+
 **Duration:** 1-1.5 hours  
 **Focus:** Project scaffolding and infrastructure preparation
 
-#### Key Activities:
+#### Key Activities
+
 - **Project Initialization**: Set up development environment
 - **Dependency Management**: Configure package managers and dependencies
 - **Build System**: Establish build and deployment pipelines
 - **Development Tools**: Configure linting, formatting, and testing tools
 - **Environment Configuration**: Set up development, staging, and production environments
 
-#### Deliverables:
+#### Deliverables
+
 - Project scaffold
 - Build configuration
 - Development environment setup
 - CI/CD pipeline foundation
 - Environment configuration files
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Technology choices from Level 1 & 2
 - Build requirements inform tooling
 - Environment needs cascade to deployment
@@ -107,24 +121,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 4: 🔧 Core Implementation
+
 **Duration:** 2-3 hours  
 **Focus:** Primary feature development and core functionality
 
-#### Key Activities:
+#### Key Activities
+
 - **Core Logic Implementation**: Build primary business logic
 - **Data Layer Development**: Implement database interactions
 - **Service Layer Creation**: Build application services and utilities
 - **Component Development**: Create reusable UI components
 - **Integration Implementation**: Connect system components
 
-#### Deliverables:
+#### Deliverables
+
 - Core application logic
 - Data access layer
 - Service implementations
 - UI component library
 - Integration modules
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Design specifications from Level 2
 - Infrastructure setup from Level 3
 - Component interfaces guide implementation
@@ -133,24 +151,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 5: 🎨 User Interface & Experience
+
 **Duration:** 1-2 hours  
 **Focus:** Frontend development and user experience optimization
 
-#### Key Activities:
+#### Key Activities
+
 - **UI Component Assembly**: Combine components into complete interfaces
 - **Responsive Design**: Ensure cross-device compatibility
 - **User Flow Implementation**: Build complete user journeys
 - **Accessibility Features**: Implement WCAG compliance
 - **Performance Optimization**: Optimize frontend performance
 
-#### Deliverables:
+#### Deliverables
+
 - Complete user interfaces
 - Responsive layouts
 - Accessibility features
 - Performance optimizations
 - User experience flows
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - UI specifications from Level 2
 - Component library from Level 4
 - Performance requirements from Level 1
@@ -159,24 +181,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 6: 🧪 Testing & Quality Assurance
+
 **Duration:** 1-1.5 hours  
 **Focus:** Comprehensive testing and quality validation
 
-#### Key Activities:
+#### Key Activities
+
 - **Unit Testing**: Test individual components and functions
 - **Integration Testing**: Validate component interactions
 - **End-to-End Testing**: Test complete user workflows
 - **Performance Testing**: Validate system performance
 - **Security Testing**: Check for vulnerabilities
 
-#### Deliverables:
+#### Deliverables
+
 - Unit test suite
 - Integration tests
 - E2E test scenarios
 - Performance benchmarks
 - Security audit results
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Requirements from Level 1 inform test cases
 - Component specifications guide unit tests
 - User flows from Level 5 define E2E tests
@@ -185,24 +211,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 7: 📚 Documentation & Knowledge Transfer
+
 **Duration:** 1 hour  
 **Focus:** Comprehensive documentation and knowledge sharing
 
-#### Key Activities:
+#### Key Activities
+
 - **Technical Documentation**: Document APIs, components, and architecture
 - **User Documentation**: Create user guides and tutorials
 - **Deployment Guides**: Document deployment procedures
 - **Maintenance Documentation**: Create troubleshooting and maintenance guides
 - **Knowledge Base**: Build searchable documentation
 
-#### Deliverables:
+#### Deliverables
+
 - API documentation
 - User guides
 - Deployment documentation
 - Maintenance procedures
 - Knowledge base articles
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - All previous levels contribute to documentation
 - Implementation details inform technical docs
 - User flows guide user documentation
@@ -211,24 +241,28 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ---
 
 ### Level 8: 🚀 Deployment & Monitoring
+
 **Duration:** 1 hour  
 **Focus:** Production deployment and monitoring setup
 
-#### Key Activities:
+#### Key Activities
+
 - **Production Deployment**: Deploy to production environment
 - **Monitoring Setup**: Configure application and infrastructure monitoring
 - **Alerting Configuration**: Set up automated alerts and notifications
 - **Performance Monitoring**: Track application performance metrics
 - **User Analytics**: Implement user behavior tracking
 
-#### Deliverables:
+#### Deliverables
+
 - Production deployment
 - Monitoring dashboards
 - Alert configurations
 - Performance metrics
 - Analytics setup
 
-#### Context Inheritance:
+#### Context Inheritance
+
 - Infrastructure from Level 3 enables deployment
 - Performance requirements from Level 1 guide monitoring
 - Test results from Level 6 inform health checks
@@ -239,6 +273,7 @@ The Windsurf + Cascade Mode follows 8 distinct levels, each building upon the pr
 ## 🔄 Context Inheritance Mechanisms
 
 ### Automatic Context Flow
+
 Each level automatically inherits relevant context from previous levels:
 
 ```mermaid
@@ -266,6 +301,7 @@ graph TD
 ```
 
 ### Context Types
+
 1. **Requirements Context**: User needs and business requirements
 2. **Technical Context**: Architecture decisions and constraints
 3. **Implementation Context**: Code patterns and component interfaces
@@ -277,52 +313,62 @@ graph TD
 ## 🎛️ Intelligent Flow Control
 
 ### Validation Gates
+
 Each level includes validation gates that must pass before proceeding:
 
 #### Level 1 → Level 2 Gate
+
 - [ ] Architecture review completed
 - [ ] Technology stack approved
 - [ ] Risk assessment documented
 - [ ] Success criteria defined
 
 #### Level 2 → Level 3 Gate
+
 - [ ] Component specifications reviewed
 - [ ] API contracts defined
 - [ ] Database schema validated
 - [ ] UI/UX approved
 
 #### Level 3 → Level 4 Gate
+
 - [ ] Development environment functional
 - [ ] Build system operational
 - [ ] Dependencies resolved
 - [ ] CI/CD pipeline configured
 
 #### Level 4 → Level 5 Gate
+
 - [ ] Core functionality implemented
 - [ ] Unit tests passing
 - [ ] Integration points working
 - [ ] Code review completed
 
 #### Level 5 → Level 6 Gate
+
 - [ ] UI components functional
 - [ ] User flows complete
 - [ ] Responsive design verified
 - [ ] Accessibility features implemented
 
 #### Level 6 → Level 7 Gate
+
 - [ ] All tests passing
 - [ ] Performance benchmarks met
 - [ ] Security audit completed
 - [ ] Quality gates satisfied
 
 #### Level 7 → Level 8 Gate
+
 - [ ] Documentation complete
 - [ ] Deployment procedures tested
 - [ ] Knowledge transfer completed
 - [ ] Maintenance guides available
 
 ### Rollback Mechanisms
+
 If validation fails at any gate:
+
 1. **Identify Root Cause**: Analyze why validation failed
 2. **Rollback to Previous Level**: Return to the last successful level
 3. **Address Issues**: Fix problems identified in validation
@@ -336,6 +382,7 @@ If validation fails at any gate:
 ### Continuous Validation Strategies
 
 #### Code Quality Validation
+
 ```typescript
 // Example: Automated code quality checks
 interface ValidationResult {
@@ -361,6 +408,7 @@ class CascadeValidator {
 ```
 
 #### Performance Validation
+
 ```typescript
 // Example: Performance monitoring at each level
 class PerformanceValidator {
@@ -380,6 +428,7 @@ class PerformanceValidator {
 ```
 
 ### Validation Checkpoints
+
 - **Entry Validation**: Verify prerequisites before starting each level
 - **Progress Validation**: Monitor progress during level execution
 - **Exit Validation**: Confirm completion criteria before advancing
@@ -392,6 +441,7 @@ class PerformanceValidator {
 ### Automatic Documentation Features
 
 #### Architecture Documentation
+
 ```typescript
 // Example: Auto-generated architecture docs
 interface ArchitectureDoc {
@@ -416,6 +466,7 @@ class DocumentationGenerator {
 ```
 
 #### API Documentation
+
 ```typescript
 // Example: Auto-generated API docs
 interface APIDocumentation {
@@ -438,6 +489,7 @@ class APIDocGenerator {
 ```
 
 ### Documentation Types Generated
+
 1. **Technical Documentation**: API specs, component docs, architecture guides
 2. **User Documentation**: User guides, tutorials, FAQ
 3. **Operational Documentation**: Deployment guides, monitoring procedures
@@ -450,6 +502,7 @@ class APIDocGenerator {
 ### Example 1: E-commerce Platform
 
 #### Level 1: Strategic Planning
+
 ```yaml
 # Architecture Decision Record
 title: E-commerce Platform Architecture
@@ -469,6 +522,7 @@ consequences: |
 ```
 
 #### Level 2: Detailed Design
+
 ```typescript
 // Component Specifications
 interface ProductService {
@@ -486,6 +540,7 @@ interface OrderService {
 ```
 
 #### Level 3: Foundation Setup
+
 ```json
 {
   "name": "ecommerce-platform",
@@ -510,6 +565,7 @@ interface OrderService {
 ### Example 2: Task Management App
 
 #### Cascade Flow Overview
+
 1. **Level 1**: Define task management requirements and choose React + Firebase
 2. **Level 2**: Design task, project, and user components with real-time sync
 3. **Level 3**: Set up React project with Firebase SDK and authentication
@@ -524,6 +580,7 @@ interface OrderService {
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Development environment setup
 - Version control system (Git)
 - Project management tools
@@ -533,6 +590,7 @@ interface OrderService {
 ### Step-by-Step Startup
 
 #### 1. Initialize Cascade Context
+
 ```typescript
 interface CascadeContext {
   projectId: string;
@@ -552,6 +610,7 @@ const cascade = new CascadeContext({
 ```
 
 #### 2. Execute Level 1
+
 ```bash
 # Start with strategic planning
 npm run cascade:level1
@@ -564,6 +623,7 @@ npm run cascade:level1
 ```
 
 #### 3. Validate and Progress
+
 ```bash
 # Validate current level
 npm run cascade:validate
@@ -576,6 +636,7 @@ npm run cascade:review
 ```
 
 ### Command Line Interface
+
 ```bash
 # Cascade CLI commands
 cascade init [project-name]           # Initialize new cascade project
@@ -593,6 +654,7 @@ cascade deploy                        # Execute deployment
 ## 📊 Progress Tracking
 
 ### Level Completion Metrics
+
 - **Requirements Coverage**: Percentage of requirements addressed
 - **Code Quality Score**: Automated code quality assessment
 - **Test Coverage**: Percentage of code covered by tests
@@ -600,6 +662,7 @@ cascade deploy                        # Execute deployment
 - **Performance Benchmarks**: Performance metrics vs. targets
 
 ### Dashboard Example
+
 ```
 🌊 Windsurf + Cascade Progress Dashboard
 
@@ -629,30 +692,37 @@ Quality Metrics:
 ### Common Issues and Solutions
 
 #### Issue: Validation Gate Failure
+
 **Symptoms**: Cannot advance to next level
 **Solutions**:
+
 1. Review validation results for specific failures
 2. Address identified issues systematically
 3. Re-run validation after fixes
 4. Consider rollback if issues are fundamental
 
 #### Issue: Context Inheritance Problems
+
 **Symptoms**: Information not flowing between levels
 **Solutions**:
+
 1. Verify context mapping configuration
 2. Check for missing context providers
 3. Validate context serialization/deserialization
 4. Review level dependencies
 
 #### Issue: Performance Degradation
+
 **Symptoms**: Slow execution or high resource usage
 **Solutions**:
+
 1. Profile performance at each level
 2. Optimize resource-intensive operations
 3. Implement caching strategies
 4. Consider parallel processing where appropriate
 
 ### Debug Commands
+
 ```bash
 # Debug cascade execution
 cascade debug --level [1-8]          # Debug specific level
@@ -666,6 +736,7 @@ cascade debug --performance          # Show performance metrics
 ## 📈 Best Practices
 
 ### Development Best Practices
+
 1. **Maintain Context Integrity**: Ensure information flows correctly between levels
 2. **Validate Early and Often**: Don't skip validation gates
 3. **Document Decisions**: Record architectural and design decisions
@@ -673,6 +744,7 @@ cascade debug --performance          # Show performance metrics
 5. **Monitor Progress**: Track metrics and adjust as needed
 
 ### Team Collaboration
+
 1. **Clear Handoffs**: Ensure clean transitions between levels
 2. **Shared Context**: Maintain shared understanding of project context
 3. **Regular Reviews**: Conduct reviews at validation gates
@@ -680,6 +752,7 @@ cascade debug --performance          # Show performance metrics
 5. **Continuous Improvement**: Refine process based on experience
 
 ### Quality Assurance
+
 1. **Automated Validation**: Use automated tools for consistent validation
 2. **Peer Reviews**: Include peer reviews at critical gates
 3. **Performance Monitoring**: Track performance throughout development
@@ -691,6 +764,7 @@ cascade debug --performance          # Show performance metrics
 ## 🎯 Success Metrics
 
 ### Project Success Indicators
+
 - **On-Time Delivery**: Project completed within estimated timeline
 - **Quality Standards**: All quality gates passed successfully
 - **Requirements Coverage**: All requirements implemented and tested
@@ -698,6 +772,7 @@ cascade debug --performance          # Show performance metrics
 - **Documentation Completeness**: Comprehensive documentation delivered
 
 ### Process Success Indicators
+
 - **Smooth Level Transitions**: Minimal rollbacks or validation failures
 - **Context Integrity**: Information flows correctly between levels
 - **Team Satisfaction**: Team reports positive experience with process
@@ -709,6 +784,7 @@ cascade debug --performance          # Show performance metrics
 ## 🔮 Advanced Features
 
 ### AI-Assisted Development
+
 ```typescript
 // Example: AI-powered context analysis
 interface AIAssistant {
@@ -728,6 +804,7 @@ class CascadeAI {
 ```
 
 ### Integration Capabilities
+
 - **IDE Integration**: Seamless integration with popular IDEs
 - **CI/CD Integration**: Automated pipeline integration
 - **Project Management**: Integration with project management tools
@@ -735,6 +812,7 @@ class CascadeAI {
 - **Documentation Integration**: Automated documentation generation
 
 ### Customization Options
+
 - **Custom Validation Rules**: Define project-specific validation criteria
 - **Custom Level Definitions**: Modify or extend the 8-level structure
 - **Custom Context Types**: Add domain-specific context information
@@ -746,19 +824,22 @@ class CascadeAI {
 ## 📚 Resources and References
 
 ### Documentation Links
+
 - [Windsurf IDE Documentation](https://windsurf.ai/docs)
 - [Cascade Development Methodology](https://cascade.dev)
 - [Best Practices Guide](./best-practices.md)
 - [Troubleshooting Guide](./troubleshooting.md)
 
 ### Community Resources
+
 - [Windsurf + Cascade Community Forum](https://community.windsurf.ai)
 - [Example Projects Repository](https://github.com/windsurf-ai/cascade-examples)
 - [Video Tutorials](https://youtube.com/windsurf-cascade)
 - [Blog Posts and Articles](https://blog.windsurf.ai/cascade)
 
 ### Support
-- **Technical Support**: support@windsurf.ai
+
+- **Technical Support**: <support@windsurf.ai>
 - **Community Support**: [Discord Server](https://discord.gg/windsurf)
 - **Documentation Issues**: [GitHub Issues](https://github.com/windsurf-ai/docs/issues)
 
@@ -769,6 +850,7 @@ class CascadeAI {
 Windsurf + Cascade Mode provides a structured, contextual approach to software development that emphasizes quality, documentation, and continuous integration. By following the 8-level cascade structure with intelligent flow control and automatic context inheritance, teams can deliver high-quality software with predictable timelines and comprehensive documentation.
 
 The methodology is particularly well-suited for:
+
 - **Enterprise Projects**: Large-scale projects requiring comprehensive documentation
 - **Regulated Industries**: Projects requiring audit trails and quality assurance
 - **Team Environments**: Projects with multiple developers requiring coordination

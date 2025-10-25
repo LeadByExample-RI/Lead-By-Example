@@ -5,6 +5,7 @@
 A premium, production-ready Call to Action website featuring:
 
 ### ✨ Premium Features
+
 - **Glassmorphic Design** - Modern frosted glass effects
 - **3D Depth Effects** - Layered components with perspective
 - **Smooth Animations** - Micro-interactions throughout
@@ -54,6 +55,7 @@ A premium, production-ready Call to Action website featuring:
 ## 🚀 Quick Start (3 Steps)
 
 ### Step 1: Extract Files
+
 ```bash
 # Extract the compressed archive
 tar -xzf lead-by-example-cta.tar.gz
@@ -61,12 +63,14 @@ cd lead-by-example-cta
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 # Install all required packages
 npm install
 ```
 
 ### Step 3: Run Development Server
+
 ```bash
 # Start the dev server
 npm run dev
@@ -78,11 +82,13 @@ npm run dev
 ## 🛠️ Full Installation Guide
 
 ### Prerequisites
+
 - **Node.js 18+** - [Download here](https://nodejs.org/)
 - **npm** (comes with Node.js)
 - **Git** (for version control) - [Download here](https://git-scm.com/)
 
 ### Verify Installation
+
 ```bash
 node --version   # Should be v18.0.0 or higher
 npm --version    # Should be v9.0.0 or higher
@@ -91,11 +97,13 @@ npm --version    # Should be v9.0.0 or higher
 ### Installation Steps
 
 1. **Navigate to Project**
+
    ```bash
    cd lead-by-example-cta
    ```
 
 2. **Install Dependencies**
+
    ```bash
    npm install
    # This installs:
@@ -108,12 +116,13 @@ npm --version    # Should be v9.0.0 or higher
    ```
 
 3. **Start Development**
+
    ```bash
    npm run dev
    ```
 
 4. **Open Browser**
-   - Go to: http://localhost:3000
+   - Go to: <http://localhost:3000>
    - The page should load with all animations
 
 ## 📁 Project Structure
@@ -150,7 +159,9 @@ lead-by-example-cta/
 ### Update Content
 
 #### Current Fundraiser (Hero Section)
+
 Edit: `src/pages/index.tsx`
+
 ```typescript
 const currentFundraiser = {
   title: 'Your Event Title',
@@ -163,7 +174,9 @@ const currentFundraiser = {
 ```
 
 #### Testimonials
+
 Edit: `src/components/Testimonials.tsx`
+
 ```typescript
 const testimonials: Testimonial[] = [
   {
@@ -177,7 +190,9 @@ const testimonials: Testimonial[] = [
 ```
 
 #### Archive Fundraisers
+
 Edit: `src/components/Archive.tsx`
+
 ```typescript
 const archivedFundraisers: ArchivedFundraiser[] = [
   {
@@ -194,6 +209,7 @@ const archivedFundraisers: ArchivedFundraiser[] = [
 ### Change Colors
 
 Edit: `tailwind.config.js`
+
 ```javascript
 colors: {
   verdean: {
@@ -219,6 +235,7 @@ colors: {
 ### Option 1: GitHub + Vercel (Easiest)
 
 1. **Create GitHub Repository**
+
    ```bash
    git init
    git add .
@@ -252,6 +269,7 @@ vercel --prod
 ### Environment Variables
 
 Add in Vercel Dashboard:
+
 ```env
 NEXT_PUBLIC_APP_NAME=Lead By Example
 NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
@@ -275,15 +293,18 @@ npm run type-check   # Check TypeScript types
 ## 📱 Testing
 
 ### Desktop
+
 - Chrome, Firefox, Safari, Edge
 - All should work perfectly
 
 ### Mobile
+
 - iOS Safari
 - Android Chrome
 - Test all interactions and forms
 
 ### Responsive Breakpoints
+
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
@@ -291,6 +312,7 @@ npm run type-check   # Check TypeScript types
 ## 🐛 Troubleshooting
 
 ### Port Already in Use
+
 ```bash
 # Kill process on port 3000
 npx kill-port 3000
@@ -300,6 +322,7 @@ PORT=3001 npm run dev
 ```
 
 ### Module Not Found
+
 ```bash
 # Clean install
 rm -rf node_modules package-lock.json
@@ -307,6 +330,7 @@ npm install
 ```
 
 ### Build Errors
+
 ```bash
 # Check TypeScript errors
 npm run build
@@ -316,6 +340,7 @@ npm run lint -- --fix
 ```
 
 ### Slow Performance
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -327,6 +352,7 @@ npm run build
 ## 📊 Performance Optimization
 
 ### Already Implemented
+
 - ✅ Code splitting
 - ✅ Image optimization
 - ✅ Lazy loading
@@ -334,7 +360,9 @@ npm run build
 - ✅ Font optimization
 
 ### Lighthouse Scores
+
 Expected scores:
+
 - Performance: 90+
 - Accessibility: 95+
 - Best Practices: 95+
@@ -343,6 +371,7 @@ Expected scores:
 ## 🔒 Security
 
 ### Best Practices Implemented
+
 - ✅ HTTPS enforced (on Vercel)
 - ✅ Security headers configured
 - ✅ Input validation (forms)
@@ -355,6 +384,7 @@ Expected scores:
 
 1. Get tracking ID from Google Analytics
 2. Add to `src/pages/_app.tsx`:
+
    ```typescript
    // Add script in <Head>
    <script
@@ -372,18 +402,21 @@ Expected scores:
 ## 💡 Best Practices
 
 ### Content Updates
+
 - Update fundraiser data regularly
 - Add new testimonials as they come
 - Archive completed fundraisers
 - Keep contact info current
 
 ### Maintenance
+
 - Update dependencies monthly
 - Test on new browsers
 - Monitor performance
 - Backup data regularly
 
 ### SEO
+
 - Update meta descriptions
 - Add alt text to images
 - Keep URLs clean
@@ -392,25 +425,31 @@ Expected scores:
 ## 📞 Support
 
 ### Developer Contact
+
 **StrayDog Syndications LLC**
+
 - Website: [straydog-syndications-llc.com](https://www.straydog-syndications-llc.com)
-- Email: dev@straydogsyndications.com
+- Email: <dev@straydogsyndications.com>
 
 ### Client Contact
+
 **Lead By Example**
+
 - Founder: Robert McKinney Sr.
 - Phone: (401) 699-6544
-- Email: contact@leadbyexample.org
+- Email: <contact@leadbyexample.org>
 
 ## 📝 Additional Resources
 
 ### Documentation
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [React Docs](https://react.dev)
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
 - [Framer Motion Docs](https://www.framer.com/motion/)
 
 ### Learning Resources
+
 - [Next.js Tutorial](https://nextjs.org/learn)
 - [React Tutorial](https://react.dev/learn)
 - [Tailwind CSS Tutorial](https://tailwindcss.com/docs/utility-first)
@@ -431,7 +470,7 @@ Before going live:
 - [ ] Test performance
 - [ ] Backup project files
 
-## 🎉 You're Ready!
+## 🎉 You're Ready
 
 Your premium Lead By Example website is ready to deploy and make an impact!
 

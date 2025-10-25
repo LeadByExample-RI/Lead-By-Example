@@ -15,6 +15,7 @@
 **Finding:** Despite comprehensive documentation claiming project completion, **zero source code exists**. The project is currently in the **planning/documentation phase only**.
 
 **Impact:**
+
 - Cannot run development server
 - Cannot test functionality
 - Cannot deploy to production
@@ -33,7 +34,7 @@
 **Location:** 120 Hawkins Street, Providence, RI 02908  
 **Contact:** Robert McKinney Sr.  
 **Phone:** (401) 699-6544  
-**Email:** contact@leadbyexample.org
+**Email:** <contact@leadbyexample.org>
 
 ### Current Fundraiser
 
@@ -44,6 +45,7 @@
 **Location:** Lincoln Woods State Park, Site A&B  
 
 **Features:**
+
 - Free food and refreshments
 - Free haircuts for youth
 - Family activities and games
@@ -57,21 +59,25 @@
 ### Color Palette
 
 **Primary - Cape Verdean Blue-Green:**
+
 - Hex: #01514C
 - Usage: Primary accents, borders, highlights
 - Cultural significance: Cape Verdean heritage
 
 **Secondary - Royal Purple:**
+
 - Hex: #4B306A (light), #421B5A (dark)
 - Usage: Backgrounds, cards, overlays
 - Meaning: Richness, dignity, transformation
 
 **Accent - Brilliant Gold:**
+
 - Hex: #FFD700 (bright), #E5C100 (rich)
 - Usage: CTAs, highlights, success states
 - Meaning: Hope, achievement, value
 
 **Neutrals:**
+
 - Light: #F6F6F6
 - Dark: #000000
 - White/transparency for glassmorphism
@@ -79,6 +85,7 @@
 ### Design Style: Glassmorphism
 
 **Characteristics:**
+
 - Semi-transparent backgrounds (rgba(255,255,255,0.1))
 - Backdrop blur effects (blur(20px))
 - Subtle borders (rgba(255,255,255,0.2))
@@ -86,6 +93,7 @@
 - 3D transforms and shadows
 
 **Why Glassmorphism?**
+
 - Modern, premium aesthetic
 - Stands out from typical nonprofit sites
 - Works well with gradient backgrounds
@@ -96,47 +104,62 @@
 ## 🛠️ TECHNOLOGY STACK
 
 ### Frontend Framework
+
 **Next.js 14.x**
+
 - **Why:** Server-side rendering, optimal performance, SEO benefits
 - **Router:** Pages Router (NOT App Router - important distinction)
 - **Features:** Image optimization, API routes, static generation
 
 ### UI Library
+
 **React 18.x**
+
 - **Why:** Industry standard, excellent ecosystem
 - **Approach:** Functional components with hooks
 - **State:** React Context + Zustand (optional)
 
 ### Language
+
 **TypeScript 5.x**
+
 - **Why:** Type safety, better DX, fewer runtime errors
 - **Mode:** Strict mode enabled
 - **Configuration:** Absolute imports with @/* alias
 
 ### Styling
+
 **Tailwind CSS 3.x**
+
 - **Why:** Utility-first, fast development, small bundle
 - **Plugins:** forms, typography, aspect-ratio
 - **Theme:** Custom colors, animations, utilities
 
 ### Animation
+
 **Framer Motion 11.x**
+
 - **Why:** Declarative, performant, React-first
 - **Usage:** Scroll animations, page transitions, micro-interactions
 - **Performance:** transform and opacity only
 
 ### Form Handling
+
 **React Hook Form 7.x + Zod 3.x**
+
 - **Why:** Performance, DX, type-safe validation
 - **Usage:** Newsletter form with multi-select interests
 - **Features:** Error handling, loading states, success feedback
 
 ### Icons
+
 **Lucide React 0.439.x**
+
 - **Why:** Beautiful, consistent, tree-shakeable
 - **Usage:** UI icons throughout (heart, users, trophy, etc.)
 
 ### Utilities
+
 - **clsx 2.x:** Conditional classnames
 - **tailwind-merge 2.x:** Merge Tailwind classes without conflicts
 
@@ -149,6 +172,7 @@
 **Purpose:** First impression, current fundraiser showcase
 
 **Features:**
+
 - Animated gradient background with floating orbs
 - Two-column layout (text left, card right)
 - Organization name and tagline
@@ -164,6 +188,7 @@
   - Support CTA button
 
 **Design Notes:**
+
 - Must be compelling and clear
 - Mobile: stack vertically
 - Progress bar animates on load
@@ -176,6 +201,7 @@
 **Purpose:** Social proof, success stories
 
 **Features:**
+
 - 3D card carousel with rotation effect
 - 4 testimonials from youth, volunteers, parents
 - Navigation arrows (previous/next)
@@ -186,11 +212,13 @@
 - Name, role, and testimonial text
 
 **Impact Statistics Below:**
+
 - 87% Graduation Rate
 - 92% Post-Program Success
 - 95% Community Satisfaction
 
 **Design Notes:**
+
 - Current card prominent, others at 50% opacity
 - Smooth slide/rotate transitions
 - Keyboard navigation (arrow keys)
@@ -204,6 +232,7 @@
 **Purpose:** Show past success, build trust
 
 **Features:**
+
 - 3 completed fundraiser cards in grid
 - Each card shows:
   - Trophy icon with animation
@@ -214,16 +243,19 @@
   - Impact metrics (youth served, funds raised)
 
 **Past Fundraisers:**
+
 1. Summer Youth Program 2024: $15K raised, 150 youth
 2. Back to School Drive 2024: $12K raised, 200 backpacks
 3. Holiday Community Dinner 2024: $8K raised, 300 families
 
 **Combined Impact Panel:**
+
 - $35K Total Raised
 - 650 Lives Impacted
 - 100% Goal Achievement
 
 **Design Notes:**
+
 - Grid: 3 cols desktop, 2 tablet, 1 mobile
 - Stagger animation (cards appear sequentially)
 - Trophy rotates on hover
@@ -236,6 +268,7 @@
 **Purpose:** Build email list, community engagement
 
 **Features:**
+
 - First name input (required)
 - Email input (required, validated)
 - Interest checkboxes (select at least one):
@@ -249,11 +282,13 @@
 - Privacy policy link
 
 **Validation Rules:**
+
 - First name: 2+ characters
 - Email: valid format
 - At least one interest selected
 
 **Design Notes:**
+
 - Glassmorphic container
 - Inputs have glass effect
 - Focus state: gold ring
@@ -268,13 +303,14 @@
 **Purpose:** Show collaboration, credibility
 
 **Features:**
+
 - 2 partner organization cards:
   1. **Open Doors RI**
      - Focus: Housing & employment for formerly incarcerated
-     - URL: www.opendoorsri.org
+     - URL: <www.opendoorsri.org>
   2. **Reentry Campus Program**
      - Focus: Education & community reintegration
-     - URL: www.reentrycampusprogram.org
+     - URL: <www.reentrycampusprogram.org>
 
 - Each card has:
   - Organization icon/logo placeholder
@@ -283,12 +319,14 @@
   - External link opens new tab
 
 **Partnership CTA:**
+
 - "Want to Partner With Us?" section
 - Brief text about opportunities
 - "Get in Touch" email button
 - Phone number with icon
 
 **Design Notes:**
+
 - Side-by-side desktop, stacked mobile
 - Glassmorphic cards
 - Hover: lift and glow
@@ -304,11 +342,13 @@
 **Layout - 4 Columns:**
 
 **Column 1 - About:**
+
 - "Lead By Example" heading
 - Mission statement (2-3 sentences)
 - Logo or icon
 
 **Column 2 - Quick Links:**
+
 - About Us
 - Our Programs
 - Get Involved
@@ -316,12 +356,14 @@
 - Privacy Policy
 
 **Column 3 - Contact:**
+
 - Address: 120 Hawkins St, Providence, RI 02908
 - Phone: (401) 699-6544
-- Email: contact@leadbyexample.org
+- Email: <contact@leadbyexample.org>
 - Each with appropriate icon
 
 **Column 4 - Connect:**
+
 - "Follow Us" heading
 - Social media icons:
   - Facebook
@@ -330,12 +372,14 @@
 - Newsletter signup CTA
 
 **Bottom Bar:**
+
 - Copyright: "© 2025 Lead By Example"
 - **Developer Credit:** "Built with ❤️ by StrayDog Syndications LLC"
-- Link: www.straydog-syndications-llc.com
+- Link: <www.straydog-syndications-llc.com>
 - Legal: Privacy | Terms | Cookies
 
 **Design Notes:**
+
 - Dark background (royal-900)
 - Gradient border-top
 - Links turn gold on hover
@@ -403,6 +447,7 @@ Lead-By-Example/
 ### PHASE 1: Foundation Setup (2-4 hours) ⚡ CRITICAL
 
 **Tasks:**
+
 1. Initialize Next.js 14 project with TypeScript
 2. Install all dependencies (Tailwind, Framer Motion, etc.)
 3. Configure TypeScript (strict mode, path aliases)
@@ -413,6 +458,7 @@ Lead-By-Example/
 8. Create .env.example
 
 **Deliverables:**
+
 - ✅ Running development server at localhost:3000
 - ✅ All dependencies installed (no errors)
 - ✅ TypeScript compiling successfully
@@ -421,6 +467,7 @@ Lead-By-Example/
 - ✅ Linting and formatting configured
 
 **Success Criteria:**
+
 - `npm run dev` starts without errors
 - Can import from `@/` aliases
 - Tailwind classes render correctly
@@ -431,6 +478,7 @@ Lead-By-Example/
 ### PHASE 2: Core Components (8-12 hours) 🎯 HIGH PRIORITY
 
 **Tasks:**
+
 1. Create Hero component with fundraiser card
 2. Build Testimonials carousel with 3D effects
 3. Implement Archive section with past fundraisers
@@ -439,6 +487,7 @@ Lead-By-Example/
 6. Build Footer with all columns and developer credit
 
 **Deliverables:**
+
 - ✅ All 6 main components functional
 - ✅ Proper TypeScript typing on all props
 - ✅ Responsive design (mobile, tablet, desktop)
@@ -446,6 +495,7 @@ Lead-By-Example/
 - ✅ Components render without errors
 
 **Success Criteria:**
+
 - All components visible on page
 - No TypeScript errors
 - Responsive at all breakpoints
@@ -456,6 +506,7 @@ Lead-By-Example/
 ### PHASE 3: Design System (4-6 hours) 🎨 HIGH PRIORITY
 
 **Tasks:**
+
 1. Implement glassmorphism utility classes
 2. Add 3D depth effects to cards
 3. Configure custom Tailwind theme (colors, animations)
@@ -464,6 +515,7 @@ Lead-By-Example/
 6. Add base CSS animations (fadeIn, slideIn, etc.)
 
 **Deliverables:**
+
 - ✅ Glassmorphic design throughout site
 - ✅ Custom Tailwind theme configured
 - ✅ Reusable utility classes
@@ -471,6 +523,7 @@ Lead-By-Example/
 - ✅ Colors match specifications
 
 **Success Criteria:**
+
 - Glass effects render correctly
 - Colors match design system
 - Animations smooth (60fps)
@@ -481,6 +534,7 @@ Lead-By-Example/
 ### PHASE 4: Animations (4-6 hours) ✨ MEDIUM PRIORITY
 
 **Tasks:**
+
 1. Install and configure Framer Motion
 2. Implement scroll-triggered animations (useInView)
 3. Add hover effects to interactive elements
@@ -489,6 +543,7 @@ Lead-By-Example/
 6. Add micro-interactions (button clicks, form feedback)
 
 **Deliverables:**
+
 - ✅ Smooth scroll animations throughout
 - ✅ Interactive hover states on cards/buttons
 - ✅ Loading animations during async actions
@@ -496,6 +551,7 @@ Lead-By-Example/
 - ✅ Animations respect prefers-reduced-motion
 
 **Success Criteria:**
+
 - Elements fade/slide in on scroll
 - Hover effects smooth and responsive
 - Animations don't cause layout shift
@@ -506,6 +562,7 @@ Lead-By-Example/
 ### PHASE 5: Forms & Validation (3-4 hours) 📝 MEDIUM PRIORITY
 
 **Tasks:**
+
 1. Set up React Hook Form in Newsletter component
 2. Configure Zod validation schemas
 3. Implement form validation (real-time)
@@ -514,6 +571,7 @@ Lead-By-Example/
 6. Test edge cases and error scenarios
 
 **Deliverables:**
+
 - ✅ Newsletter form validates correctly
 - ✅ Error messages display appropriately
 - ✅ Success feedback after submission
@@ -521,6 +579,7 @@ Lead-By-Example/
 - ✅ All validation rules working
 
 **Success Criteria:**
+
 - Required fields validated
 - Email format checked
 - Interest selection required
@@ -532,6 +591,7 @@ Lead-By-Example/
 ### PHASE 6: Content Integration (2-3 hours) 📄 MEDIUM PRIORITY
 
 **Tasks:**
+
 1. Add real fundraiser data to Hero
 2. Input 4 testimonials with content
 3. Add 3 past fundraiser records to Archive
@@ -540,6 +600,7 @@ Lead-By-Example/
 6. Include developer credits in Footer
 
 **Deliverables:**
+
 - ✅ All content populated accurately
 - ✅ Real data integrated (not placeholders)
 - ✅ Contact information correct
@@ -547,6 +608,7 @@ Lead-By-Example/
 - ✅ Links functional
 
 **Success Criteria:**
+
 - Fundraiser shows correct amounts
 - Testimonials are real stories
 - Contact info matches client
@@ -558,6 +620,7 @@ Lead-By-Example/
 ### PHASE 7: Optimization (3-4 hours) ⚡ MEDIUM PRIORITY
 
 **Tasks:**
+
 1. Optimize images (Next.js Image component)
 2. Configure lazy loading for below-fold content
 3. Implement code splitting
@@ -566,6 +629,7 @@ Lead-By-Example/
 6. Configure sitemap.xml and robots.txt
 
 **Deliverables:**
+
 - ✅ Lighthouse Performance score 90+
 - ✅ SEO meta tags configured
 - ✅ Fast load times (< 3s)
@@ -573,6 +637,7 @@ Lead-By-Example/
 - ✅ Code splitting working
 
 **Success Criteria:**
+
 - First Contentful Paint < 1.5s
 - Time to Interactive < 3.5s
 - Bundle size reasonable
@@ -584,6 +649,7 @@ Lead-By-Example/
 ### PHASE 8: Testing & QA (4-6 hours) 🧪 HIGH PRIORITY
 
 **Tasks:**
+
 1. Test all components functionality
 2. Verify responsive design (mobile, tablet, desktop)
 3. Test form validation edge cases
@@ -593,6 +659,7 @@ Lead-By-Example/
 7. Mobile device testing (iOS, Android)
 
 **Deliverables:**
+
 - ✅ All components working correctly
 - ✅ Responsive on all devices
 - ✅ Accessible (keyboard nav, screen readers)
@@ -600,6 +667,7 @@ Lead-By-Example/
 - ✅ No critical bugs
 
 **Success Criteria:**
+
 - Components render on all browsers
 - Mobile experience smooth
 - Keyboard navigation works
@@ -611,6 +679,7 @@ Lead-By-Example/
 ### PHASE 9: Deployment Setup (2-3 hours) 🚀 HIGH PRIORITY
 
 **Tasks:**
+
 1. Configure Vercel project
 2. Set environment variables
 3. Configure custom domain (if applicable)
@@ -619,6 +688,7 @@ Lead-By-Example/
 6. Test production build
 
 **Deliverables:**
+
 - ✅ Vercel project configured
 - ✅ Production deployment live
 - ✅ Custom domain (if applicable)
@@ -626,6 +696,7 @@ Lead-By-Example/
 - ✅ CI/CD working
 
 **Success Criteria:**
+
 - Site accessible at production URL
 - Environment variables set
 - Deployments automatic on push
@@ -637,6 +708,7 @@ Lead-By-Example/
 ### PHASE 10: Documentation & Handoff (2-3 hours) 📚 MEDIUM PRIORITY
 
 **Tasks:**
+
 1. Update documentation (README, setup guide)
 2. Create deployment guide for client
 3. Write maintenance documentation
@@ -645,6 +717,7 @@ Lead-By-Example/
 6. Conduct client training session
 
 **Deliverables:**
+
 - ✅ Updated documentation
 - ✅ Deployment guide complete
 - ✅ Maintenance docs written
@@ -652,6 +725,7 @@ Lead-By-Example/
 - ✅ Client trained (optional)
 
 **Success Criteria:**
+
 - Docs accurate and complete
 - Client can update content
 - Deployment process clear
@@ -664,6 +738,7 @@ Lead-By-Example/
 ### Total Estimated Hours: 34-51 hours
 
 **Breakdown by Priority:**
+
 - CRITICAL: 2-4 hours (Foundation)
 - HIGH: 14-22 hours (Components + Testing + Deployment)
 - MEDIUM: 18-25 hours (Design + Animations + Forms + Content + Optimization + Documentation)
@@ -671,11 +746,13 @@ Lead-By-Example/
 **Recommended Timeline:**
 
 **Week 1: Core Development**
+
 - Day 1-2: Phase 1 (Foundation) + Start Phase 2
 - Day 3-4: Phase 2 (Components) + Phase 3 (Design)
 - Day 5: Phase 4 (Animations) + Phase 5 (Forms)
 
 **Week 2: Polish & Launch**
+
 - Day 1: Phase 6 (Content) + Phase 7 (Optimization)
 - Day 2-3: Phase 8 (Testing & QA)
 - Day 4: Phase 9 (Deployment)
@@ -690,6 +767,7 @@ Lead-By-Example/
 ### Must Have (MVP)
 
 **Functionality:**
+
 - ✅ All 6 components functional and visible
 - ✅ Responsive design working (mobile, tablet, desktop)
 - ✅ Forms validate and provide feedback
@@ -698,6 +776,7 @@ Lead-By-Example/
 - ✅ Accessible (WCAG 2.1 AA compliant)
 
 **Performance:**
+
 - ✅ Page loads in < 3 seconds
 - ✅ No critical console errors
 - ✅ Works on major browsers
@@ -708,6 +787,7 @@ Lead-By-Example/
 ### Should Have
 
 **Design:**
+
 - ✅ Glassmorphic design implemented throughout
 - ✅ Animations smooth and purposeful
 - ✅ Performance optimized (Lighthouse 90+)
@@ -715,6 +795,7 @@ Lead-By-Example/
 - ✅ Cross-browser tested
 
 **Quality:**
+
 - ✅ TypeScript strict mode, no 'any' types
 - ✅ No ESLint errors
 - ✅ Code formatted consistently
@@ -725,6 +806,7 @@ Lead-By-Example/
 ### Nice to Have
 
 **Enhancements:**
+
 - ✅ Custom domain configured
 - ✅ Analytics integrated (GA, Vercel)
 - ✅ A/B testing capability
@@ -739,31 +821,37 @@ Lead-By-Example/
 ## 🚨 RISKS & MITIGATION
 
 ### Risk 1: No Existing Codebase
+
 **Severity:** HIGH  
 **Impact:** Must build everything from scratch  
 **Mitigation:** Follow phased approach, use proven patterns, leverage AI tools
 
 ### Risk 2: Timeline Pressure
+
 **Severity:** MEDIUM  
 **Impact:** Fundraiser event is August 2, 2025  
 **Mitigation:** Start immediately, focus on MVP first, add enhancements iteratively
 
 ### Risk 3: Scope Creep
+
 **Severity:** MEDIUM  
 **Impact:** Premium features take significant time  
 **Mitigation:** Define clear MVP, phase enhancements, manage expectations
 
 ### Risk 4: Browser Compatibility
+
 **Severity:** LOW  
 **Impact:** Complex animations may not work on older browsers  
 **Mitigation:** Test early, provide fallbacks, focus on modern browsers
 
 ### Risk 5: Performance Issues
+
 **Severity:** MEDIUM  
 **Impact:** Heavy animations + glassmorphism can cause lag  
 **Mitigation:** Test on low-end devices, optimize early, use transform/opacity only
 
 ### Risk 6: Accessibility Gaps
+
 **Severity:** MEDIUM  
 **Impact:** Glassmorphism can reduce contrast  
 **Mitigation:** Test with tools, ensure proper ARIA, validate color contrast
@@ -772,15 +860,16 @@ Lead-By-Example/
 
 ## 💼 STAKEHOLDER COMMUNICATION
 
-### Client: Robert McKinney Sr.
+### Client: Robert McKinney Sr
 
 **Communication Plan:**
+
 - **Frequency:** Weekly progress updates
 - **Format:** Email summary + demo link
 - **Content:** Completed features, next steps, any blockers
 - **Expectation Setting:** Clear timeline, realistic scope
 
-**Key Message:** 
+**Key Message:**
 "Project is in planning phase with comprehensive documentation. Development begins immediately with 1-2 week timeline to MVP launch."
 
 ### Development Team
@@ -789,6 +878,7 @@ Lead-By-Example/
 **Junior Developer:** @miasmith81
 
 **Collaboration:**
+
 - Daily standups (15 min)
 - Code reviews on all PRs
 - Pair programming on complex features
@@ -797,12 +887,14 @@ Lead-By-Example/
 ### End Users
 
 **Target Audience:**
+
 - Community members
 - Potential donors
 - Volunteers
 - Program participants
 
 **Priority:**
+
 - Accessibility (WCAG 2.1 AA)
 - Mobile experience (60%+ traffic)
 - Fast loading (impatient users)
@@ -815,30 +907,36 @@ Lead-By-Example/
 ### For Junior Developer (@miasmith81)
 
 **Next.js:**
-- Official docs: https://nextjs.org/docs
-- Learn tutorial: https://nextjs.org/learn
+
+- Official docs: <https://nextjs.org/docs>
+- Learn tutorial: <https://nextjs.org/learn>
 
 **TypeScript:**
-- Handbook: https://www.typescriptlang.org/docs/handbook
-- React + TypeScript: https://react-typescript-cheatsheet.netlify.app
+
+- Handbook: <https://www.typescriptlang.org/docs/handbook>
+- React + TypeScript: <https://react-typescript-cheatsheet.netlify.app>
 
 **Tailwind CSS:**
-- Docs: https://tailwindcss.com/docs
-- UI components: https://tailwindui.com
+
+- Docs: <https://tailwindcss.com/docs>
+- UI components: <https://tailwindui.com>
 
 **Framer Motion:**
-- Docs: https://www.framer.com/motion
-- Examples: https://www.framer.com/motion/examples
+
+- Docs: <https://www.framer.com/motion>
+- Examples: <https://www.framer.com/motion/examples>
 
 ### For Senior Developer (@StrayDogSyn)
 
 **Architecture:**
-- Next.js patterns: https://nextjs.org/docs/pages/building-your-application
-- Performance optimization: https://web.dev/vitals
+
+- Next.js patterns: <https://nextjs.org/docs/pages/building-your-application>
+- Performance optimization: <https://web.dev/vitals>
 
 **Accessibility:**
-- WCAG guidelines: https://www.w3.org/WAI/WCAG21/quickref
-- Testing tools: https://www.deque.com/axe
+
+- WCAG guidelines: <https://www.w3.org/WAI/WCAG21/quickref>
+- Testing tools: <https://www.deque.com/axe>
 
 ---
 
@@ -847,6 +945,7 @@ Lead-By-Example/
 ### Lighthouse Scores
 
 **Target (Production):**
+
 - Performance: 90+
 - Accessibility: 95+
 - Best Practices: 95+
@@ -855,6 +954,7 @@ Lead-By-Example/
 ### Load Times
 
 **Target Metrics:**
+
 - First Contentful Paint: < 1.5s
 - Largest Contentful Paint: < 2.5s
 - Time to Interactive: < 3.5s
@@ -864,6 +964,7 @@ Lead-By-Example/
 ### Bundle Size
 
 **Target:**
+
 - Total JavaScript: < 200KB
 - Total CSS: < 50KB
 - First Load JS: < 150KB
@@ -1001,24 +1102,28 @@ Lead-By-Example/
 ### Development Team
 
 **StrayDog Syndications LLC**
-- Website: www.straydog-syndications-llc.com
+
+- Website: <www.straydog-syndications-llc.com>
 - Senior Dev: @StrayDogSyn (GitHub)
 - Junior Dev: @miasmith81 (GitHub)
 
 ### Client Contact
 
 **Lead By Example**
+
 - Robert McKinney Sr., Founder
 - Phone: (401) 699-6544
-- Email: contact@leadbyexample.org
+- Email: <contact@leadbyexample.org>
 - Address: 120 Hawkins St, Providence, RI 02908
 
 ### Project Resources
 
 **GitHub Repository:**
-- https://github.com/StrayDogSyn/Lead-By-Example
+
+- <https://github.com/StrayDogSyn/Lead-By-Example>
 
 **Documentation:**
+
 - README.md
 - SETUP.md
 - CONTRIBUTING.md
@@ -1026,6 +1131,7 @@ Lead-By-Example/
 - DEPLOYMENT.md
 
 **Design Assets:**
+
 - Client brief PDF
 - Mockup document
 - Color palette specifications

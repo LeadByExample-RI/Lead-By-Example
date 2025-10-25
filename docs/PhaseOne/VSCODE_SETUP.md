@@ -11,11 +11,13 @@
 ### 2. Open in VS Code
 
 **Option A: Using VS Code UI**
+
 - File → Open Folder
 - Navigate to extracted `lead-by-example-cta` folder
 - Click "Select Folder"
 
 **Option B: Using Terminal**
+
 ```bash
 cd path/to/lead-by-example-cta
 code .
@@ -37,7 +39,7 @@ This will take about 2-3 minutes and install all required packages.
 npm run dev
 ```
 
-Your site will be available at: http://localhost:3000
+Your site will be available at: <http://localhost:3000>
 
 ---
 
@@ -88,6 +90,7 @@ Install these for the best experience:
    - Extension ID: `dbaeumer.vscode-eslint`
 
 **Install via Command Palette:**
+
 - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
 - Type "Extensions: Install Extensions"
 - Search and install each extension
@@ -117,12 +120,14 @@ Create `.vscode/settings.json` in your project:
 ## 🐛 Troubleshooting
 
 ### Node Modules Not Found
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 ### Port 3000 Already in Use
+
 ```bash
 # Windows
 npx kill-port 3000
@@ -132,6 +137,7 @@ lsof -ti:3000 | xargs kill
 ```
 
 ### TypeScript Errors in VS Code
+
 - Press `Ctrl+Shift+P`
 - Type "TypeScript: Restart TS Server"
 - Press Enter
@@ -185,6 +191,7 @@ LEAD-BY-EXAMPLE-CTA (Workspace)
 When you run `npm run dev`, any changes you make to files will automatically reload in the browser. No need to restart the server!
 
 **Try it:**
+
 1. Start dev server: `npm run dev`
 2. Open `src/pages/index.tsx`
 3. Change the fundraiser amount
@@ -214,6 +221,7 @@ git push -u origin main
 ### Recommended .gitignore
 
 Already included! It ignores:
+
 - `node_modules/`
 - `.next/`
 - `.env*.local`
@@ -240,7 +248,7 @@ Open these in VS Code for reference:
 3. ✅ Install extensions (recommended)
 4. ✅ Run `npm install`
 5. ✅ Run `npm run dev`
-6. ✅ Open http://localhost:3000
+6. ✅ Open <http://localhost:3000>
 7. ✅ Start customizing!
 
 ---
@@ -260,8 +268,8 @@ Open these in VS Code for reference:
 
 1. Check the documentation files
 2. Contact StrayDog Syndications LLC
-3. Check Next.js docs: https://nextjs.org/docs
-4. Check Tailwind docs: https://tailwindcss.com/docs
+3. Check Next.js docs: <https://nextjs.org/docs>
+4. Check Tailwind docs: <https://tailwindcss.com/docs>
 
 ---
 

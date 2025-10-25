@@ -11,12 +11,14 @@
 **Your project has NO SOURCE CODE despite comprehensive documentation.**
 
 **What this means:**
+
 - Cannot run `npm run dev`
 - Cannot test anything
 - Cannot deploy
 - Must build everything from scratch
 
 **What we're doing NOW:**
+
 - Initialize Next.js project
 - Install dependencies
 - Get development server running
@@ -37,8 +39,9 @@ git --version   # Any recent version
 ```
 
 **Don't have these?**
-- Node.js: https://nodejs.org (download LTS version)
-- Git: https://git-scm.com/downloads
+
+- Node.js: <https://nodejs.org> (download LTS version)
+- Git: <https://git-scm.com/downloads>
 
 ---
 
@@ -95,7 +98,7 @@ npm install zustand
 npm run dev
 ```
 
-**Open browser:** http://localhost:3000
+**Open browser:** <http://localhost:3000>
 
 **You should see:** Next.js default page
 
@@ -306,9 +309,10 @@ export default function Home() {
 npm run dev
 ```
 
-**Open browser:** http://localhost:3000
+**Open browser:** <http://localhost:3000>
 
 **You should see:**
+
 - ✅ Dark gradient background
 - ✅ Glassmorphic card
 - ✅ "Lead By Example" heading
@@ -317,9 +321,10 @@ npm run dev
 
 ---
 
-## 🎉 SUCCESS!
+## 🎉 SUCCESS
 
 You now have:
+
 - ✅ Working Next.js + TypeScript project
 - ✅ Tailwind CSS with custom theme
 - ✅ Framer Motion animations
@@ -356,6 +361,7 @@ lead-by-example/
 **Next component: Testimonials** (2-3 hours)
 
 Follow the detailed guide:
+
 - `VSCODE_IMPLEMENTATION_GUIDE.md` - for VS Code
 - `CURSOR_AI_IMPLEMENTATION_GUIDE.md` - for Cursor AI
 - `GITHUB_COPILOT_IMPLEMENTATION_GUIDE.md` - for Copilot
@@ -444,6 +450,7 @@ Track your progress:
 ## 🎓 What You Learned
 
 In 30 minutes, you:
+
 - ✅ Initialized a production-ready Next.js project
 - ✅ Configured TypeScript with path aliases
 - ✅ Set up Tailwind CSS with custom theme
@@ -469,11 +476,12 @@ In 30 minutes, you:
 
 **Stuck?** Check these resources:
 
-- **Next.js Docs:** https://nextjs.org/docs
-- **Tailwind Docs:** https://tailwindcss.com/docs
-- **Framer Motion:** https://www.framer.com/motion
+- **Next.js Docs:** <https://nextjs.org/docs>
+- **Tailwind Docs:** <https://tailwindcss.com/docs>
+- **Framer Motion:** <https://www.framer.com/motion>
 
 **Team Support:**
+
 - Senior Dev: @StrayDogSyn
 - Junior Dev: @miasmith81
 
@@ -482,12 +490,14 @@ In 30 minutes, you:
 ## 🎯 Current Status
 
 **✅ COMPLETE:**
+
 - Project initialized
 - Dependencies installed
 - First component built
 - Development server running
 
 **⏳ NEXT:**
+
 - Testimonials component
 - Archive section
 - Newsletter form

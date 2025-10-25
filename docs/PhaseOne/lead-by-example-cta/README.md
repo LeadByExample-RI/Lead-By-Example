@@ -5,6 +5,7 @@ A premium, modern call-to-action website for the Lead By Example nonprofit organ
 ## ✨ Features
 
 ### Premium Design Elements
+
 - **Glassmorphic UI** - Modern glass-card effects with backdrop blur
 - **3D Depth** - Layered components with perspective transforms
 - **Smooth Animations** - Framer Motion powered micro-interactions
@@ -13,6 +14,7 @@ A premium, modern call-to-action website for the Lead By Example nonprofit organ
 - **Custom Animations** - Float, glow, shimmer, and fade effects
 
 ### Key Sections
+
 1. **Hero Section** - Prominent current fundraiser display with progress tracking
 2. **Testimonials** - 3D carousel showcasing success stories
 3. **Archive** - Past fundraiser milestones with achievement badges
@@ -21,6 +23,7 @@ A premium, modern call-to-action website for the Lead By Example nonprofit organ
 6. **Footer** - Contact info and developer credits
 
 ### Technical Highlights
+
 - ⚡ Next.js 14 with React 18
 - 🎨 Tailwind CSS with custom theme
 - 📱 Fully responsive and accessible
@@ -33,7 +36,8 @@ A premium, modern call-to-action website for the Lead By Example nonprofit organ
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -92,10 +96,12 @@ lead-by-example-cta/
 ## 🎨 Color Palette
 
 ### Cape Verdean Colors
+
 - **Primary**: `#01514C` - Deep greenish-blue
 - **Accent**: Various earth tones and coastal vibes
 
 ### Modern Palette
+
 - **Royal Purple**: `#4B306A` (primary), `#421B5A` (deep)
 - **Gold**: `#FFD700` (brilliant), `#E5C100` (rich)
 - **Neutrals**: `#F6F6F6` (light), `#000000` (dark)
@@ -103,6 +109,7 @@ lead-by-example-cta/
 ## 🔧 Configuration
 
 ### Environment Variables
+
 Create a `.env.local` file:
 
 ```env
@@ -111,6 +118,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 ### Customization
+
 - **Colors**: Edit `tailwind.config.js`
 - **Fonts**: Modify font imports in `src/pages/index.tsx`
 - **Content**: Update component data in respective files
@@ -119,6 +127,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ## 🚀 Deployment to Vercel
 
 ### Option 1: Git Integration (Recommended)
+
 1. Push code to GitHub
 2. Visit [vercel.com](https://vercel.com)
 3. Import your repository
@@ -126,6 +135,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 5. Deploy!
 
 ### Option 2: Vercel CLI
+
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -138,6 +148,7 @@ vercel --prod
 ```
 
 ### Deployment Checklist
+
 - [ ] Update environment variables in Vercel dashboard
 - [ ] Configure custom domain (optional)
 - [ ] Enable Vercel Analytics (optional)
@@ -146,12 +157,15 @@ vercel --prod
 ## 🎯 Key Features Explained
 
 ### Glassmorphism
+
 Premium glass-card effects using:
+
 - `backdrop-blur-xl` for frosted glass
 - `bg-white/10` for translucent backgrounds
 - Custom shadow combinations for depth
 
 ### 3D Effects
+
 ```css
 .depth-3d {
   transform-style: preserve-3d;
@@ -160,11 +174,13 @@ Premium glass-card effects using:
 ```
 
 ### Animation System
+
 - **Intersection Observer**: Components animate when scrolled into view
 - **Framer Motion**: Smooth page transitions and micro-interactions
 - **Custom Keyframes**: Tailwind config includes float, glow, shimmer
 
 ### Form Validation
+
 - React Hook Form for performance
 - Zod schema validation
 - Real-time error feedback
@@ -189,12 +205,14 @@ All components are mobile-first and fully responsive.
 ## 🐛 Troubleshooting
 
 ### Port already in use
+
 ```bash
 # Use different port
 PORT=3001 npm run dev
 ```
 
 ### Module not found
+
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules package-lock.json
@@ -202,6 +220,7 @@ npm install
 ```
 
 ### TypeScript errors
+
 ```bash
 # Regenerate types
 npm run build
@@ -214,25 +233,31 @@ This project was developed by StrayDog Syndications LLC for the Lead By Example 
 ## 🙏 Credits
 
 ### Client
+
 **Lead By Example Organization**
+
 - Founder: Robert McKinney Sr.
 - Location: Providence, RI
 - Contact: (401) 699-6544
 
 ### Development Team
+
 **StrayDog Syndications LLC**
+
 - Website: [straydog-syndications-llc.com](https://www.straydog-syndications-llc.com)
 - Senior Developer: @StrayDogSyn
 - Junior Developer: @miasmith81
 
 ### Partner Organizations
+
 - [Open Doors RI](https://www.opendoorsri.org)
 - [Reentry Campus Program](https://www.reentrycampusprogram.org)
 
 ## 📞 Support
 
 For technical support or questions:
-- Email: contact@leadbyexample.org
+
+- Email: <contact@leadbyexample.org>
 - Phone: (401) 699-6544
 
 ---

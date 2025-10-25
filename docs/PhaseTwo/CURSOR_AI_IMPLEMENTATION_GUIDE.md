@@ -11,6 +11,7 @@
 You are helping build a premium nonprofit website for "Lead By Example," a Providence, RI organization working to end the school-to-prison pipeline. This is a Next.js 14 + TypeScript + Tailwind CSS project with glassmorphic design and Framer Motion animations.
 
 ### Project Context
+
 - **Client**: Robert McKinney Sr., Lead By Example
 - **Purpose**: Call-to-action website for fundraising
 - **Current Fundraiser**: All Sides of Town Cookout 2025 ($10K goal, $6.25K raised)
@@ -23,6 +24,7 @@ You are helping build a premium nonprofit website for "Lead By Example," a Provi
 ### Step 1: Initialize Project
 
 **Cursor Command (Cmd/Ctrl+K):**
+
 ```
 Initialize a Next.js 14 project with TypeScript, Tailwind CSS, and the following dependencies:
 - framer-motion for animations
@@ -37,12 +39,14 @@ Set up path aliases with @/* pointing to src/*.
 ### Step 2: Configure Cursor for This Project
 
 **In Cursor Settings (Cmd/Ctrl+,):**
+
 1. Enable "Cursor Tab" for AI completions
 2. Set model to GPT-4 or Claude-3.5-Sonnet
 3. Enable "Predict Next Edit"
 4. Set auto-save on
 
 **Create `.cursorrules` file:**
+
 ```
 # Project-Specific AI Instructions for Lead By Example
 
@@ -92,6 +96,7 @@ Set up path aliases with @/* pointing to src/*.
 ### Prompt 1: Hero Component
 
 **Cursor Chat (Cmd/Ctrl+L):**
+
 ```
 Create a Hero component for a nonprofit website with these requirements:
 
@@ -144,6 +149,7 @@ Reference our design system:
 ### Prompt 2: Testimonials Carousel
 
 **Cursor Chat:**
+
 ```
 Create a Testimonials carousel component with:
 
@@ -196,6 +202,7 @@ Technical requirements:
 ### Prompt 3: Archive Section
 
 **Cursor Chat:**
+
 ```
 Create an Archive section displaying past fundraisers:
 
@@ -243,6 +250,7 @@ Technical:
 ### Prompt 4: Newsletter Form
 
 **Cursor Chat:**
+
 ```
 Create a Newsletter signup form component:
 
@@ -296,6 +304,7 @@ Technical:
 ### Prompt 5: Partners Section
 
 **Cursor Chat:**
+
 ```
 Create a Partners section featuring partner organizations:
 
@@ -342,6 +351,7 @@ Technical:
 ### Prompt 6: Footer
 
 **Cursor Chat:**
+
 ```
 Create a comprehensive Footer component:
 
@@ -693,23 +703,27 @@ Generate deployment checklist and Vercel configuration.
 ## 💡 Pro Tips for Cursor AI
 
 ### 1. Context Management
+
 - Use `@workspace` to reference entire project
 - Use `@folder` for specific directories
 - Use `@file` to reference specific files
 
 ### 2. Iterative Refinement
+
 - Start with basic prompt
 - Review AI output
 - Use "Modify" to refine
 - Accept changes incrementally
 
 ### 3. Code Generation Best Practices
+
 - Be specific about requirements
 - Include design specifications
 - Reference existing patterns
 - Request TypeScript interfaces
 
 ### 4. Debugging with AI
+
 - Share error messages in chat
 - Ask for step-by-step debugging
 - Request explanation of issues
@@ -769,6 +783,7 @@ Explain [concept] in the context of this project:
 Track your progress:
 
 ### Setup ☐
+
 - [ ] Initialize Next.js project
 - [ ] Install dependencies
 - [ ] Configure Cursor AI
@@ -776,6 +791,7 @@ Track your progress:
 - [ ] Create project structure
 
 ### Components ☐
+
 - [ ] Hero component
 - [ ] Testimonials carousel
 - [ ] Archive section
@@ -784,6 +800,7 @@ Track your progress:
 - [ ] Footer component
 
 ### Polish ☐
+
 - [ ] Glassmorphism refinement
 - [ ] Animation improvements
 - [ ] Mobile optimization
@@ -791,6 +808,7 @@ Track your progress:
 - [ ] Performance optimization
 
 ### Testing ☐
+
 - [ ] Unit tests
 - [ ] Integration tests
 - [ ] Accessibility tests
@@ -798,6 +816,7 @@ Track your progress:
 - [ ] Mobile device testing
 
 ### Deployment ☐
+
 - [ ] Environment setup
 - [ ] Build optimization
 - [ ] SEO configuration

@@ -25,11 +25,13 @@ git checkout -b dev/your-name
 ## 1️⃣ VS Code + Claude Code
 
 ### Setup
+
 ```bash
 code lead-by-example-website
 ```
 
 ### Primary Responsibilities
+
 - Core application architecture
 - TypeScript configuration
 - API routes (future)
@@ -40,6 +42,7 @@ code lead-by-example-website
 ### Tasks for This IDE
 
 #### Phase 1: Architecture ✅ COMPLETE
+
 - [x] Set up Next.js project structure
 - [x] Configure TypeScript
 - [x] Create custom hooks (`useInView`)
@@ -47,18 +50,21 @@ code lead-by-example-website
 - [x] Define type system
 
 #### Phase 2: Backend Logic (Future)
+
 - [ ] Create API routes for form submissions
 - [ ] Add email integration
 - [ ] Implement analytics tracking
 - [ ] Add donation processing
 
 ### Best Practices
+
 - Use Claude Code for complex refactoring
 - Let AI suggest architectural improvements
 - Ask Claude to optimize TypeScript types
 - Request code reviews for critical logic
 
 ### Example Claude Code Prompts
+
 ```
 "Refactor the useInView hook to support multiple threshold values"
 "Add error handling to the helpers.ts utility functions"
@@ -71,11 +77,13 @@ code lead-by-example-website
 ## 2️⃣ Cursor + Copilot
 
 ### Setup
+
 ```bash
 cursor lead-by-example-website
 ```
 
 ### Primary Responsibilities
+
 - React component scaffolding
 - Boilerplate code generation
 - Component logic
@@ -85,6 +93,7 @@ cursor lead-by-example-website
 ### Tasks for This IDE
 
 #### Component Development ✅ COMPLETE
+
 - [x] Hero component with fundraiser card
 - [x] Testimonials carousel
 - [x] Archive section
@@ -93,18 +102,21 @@ cursor lead-by-example-website
 - [x] Footer component
 
 #### Future Enhancements
+
 - [ ] Add loading skeletons
 - [ ] Create reusable Button component
 - [ ] Build Modal component for fundraiser details
 - [ ] Add Image gallery component
 
 ### Best Practices
+
 - Use Copilot for repetitive patterns
 - Tab through suggestions for props
 - Let Copilot write test cases
 - Use inline suggestions for quick fixes
 
 ### Example Copilot Use Cases
+
 ```typescript
 // Type this comment and let Copilot complete:
 // Create a reusable button component with variants
@@ -120,11 +132,13 @@ const handleSubmit = async (data: FormData) => {
 ## 3️⃣ Windsurf + Cascade
 
 ### Setup
+
 ```bash
 windsurf lead-by-example-website
 ```
 
 ### Primary Responsibilities
+
 - Tailwind CSS customization
 - Component styling
 - Responsive design
@@ -134,6 +148,7 @@ windsurf lead-by-example-website
 ### Tasks for This IDE
 
 #### Styling ✅ COMPLETE
+
 - [x] Custom Tailwind theme
 - [x] Glassmorphic effects
 - [x] Animation keyframes
@@ -141,18 +156,21 @@ windsurf lead-by-example-website
 - [x] Global styles
 
 #### Future Design Tasks
+
 - [ ] Dark mode toggle
 - [ ] Additional color schemes
 - [ ] Print stylesheets
 - [ ] Accessibility contrast adjustments
 
 ### Best Practices
+
 - Use Cascade for design system queries
 - Ask for responsive design suggestions
 - Request animation timing optimization
 - Get color palette recommendations
 
 ### Example Cascade Prompts
+
 ```
 "Adjust the glassmorphic effect to be more pronounced"
 "Create a dark mode variant for the hero section"
@@ -165,11 +183,13 @@ windsurf lead-by-example-website
 ## 4️⃣ Qoder + Quest
 
 ### Setup
+
 ```bash
 qoder lead-by-example-website
 ```
 
 ### Primary Responsibilities
+
 - Unit testing
 - Integration testing
 - Accessibility testing
@@ -179,6 +199,7 @@ qoder lead-by-example-website
 ### Tasks for This IDE
 
 #### Quality Assurance
+
 - [ ] Write unit tests for components
 - [ ] Add integration tests
 - [ ] Run accessibility audits
@@ -186,6 +207,7 @@ qoder lead-by-example-website
 - [ ] SEO checks
 
 #### Testing Checklist
+
 ```bash
 # Linting
 npm run lint
@@ -204,12 +226,14 @@ npm run dev
 ```
 
 ### Best Practices
+
 - Use Quest for automated testing suggestions
 - Run accessibility checks regularly
 - Profile performance bottlenecks
 - Monitor bundle size
 
 ### Example Quest Prompts
+
 ```
 "Generate unit tests for the Hero component"
 "Check accessibility compliance of Newsletter form"
@@ -222,11 +246,13 @@ npm run dev
 ## 5️⃣ TRAE + Solo & Flow
 
 ### Setup
+
 ```bash
 trae lead-by-example-website
 ```
 
 ### Primary Responsibilities
+
 - Documentation generation
 - API documentation
 - Deployment configurations
@@ -236,24 +262,28 @@ trae lead-by-example-website
 ### Tasks for This IDE
 
 #### Documentation ✅ COMPLETE
+
 - [x] README.md
 - [x] Multi-IDE workflow guide
 - [x] Component documentation
 - [x] Setup instructions
 
 #### Future Documentation
+
 - [ ] API documentation (when added)
 - [ ] Component storybook
 - [ ] Deployment guides
 - [ ] Troubleshooting FAQ
 
 ### Best Practices
+
 - Use Solo for doc generation
 - Let Flow suggest documentation improvements
 - Keep docs synchronized with code
 - Generate changelog automatically
 
 ### Example TRAE Prompts
+
 ```
 "Generate JSDoc comments for all components"
 "Create a deployment checklist"
@@ -284,6 +314,7 @@ git push origin dev/your-name
 ### Collaboration Strategy
 
 #### Scenario 1: Multiple developers, same feature
+
 ```bash
 # Developer A (VS Code) - Architecture
 git checkout -b feat/donation-system
@@ -307,6 +338,7 @@ git push origin feat/donation-system
 ```
 
 #### Scenario 2: Different features, parallel work
+
 ```bash
 # Each developer works on separate branch
 Developer A: feat/email-integration
@@ -368,6 +400,7 @@ git push origin main
 ### Current Status
 
 #### Components ✅ Complete
+
 - [x] Hero
 - [x] Testimonials
 - [x] Archive
@@ -376,6 +409,7 @@ git push origin main
 - [x] Footer
 
 #### Configuration ✅ Complete
+
 - [x] Next.js config
 - [x] TypeScript config
 - [x] Tailwind config
@@ -383,6 +417,7 @@ git push origin main
 - [x] Prettier config
 
 #### Documentation ✅ Complete
+
 - [x] README
 - [x] IDE Workflow Guide
 - [x] Project structure
@@ -390,24 +425,28 @@ git push origin main
 ### Next Phases
 
 #### Phase 2: Enhancement
+
 - [ ] Add more testimonials
 - [ ] Create image gallery
 - [ ] Add blog section
 - [ ] Implement search
 
 #### Phase 3: Testing
+
 - [ ] Unit tests
 - [ ] Integration tests
 - [ ] E2E tests
 - [ ] Accessibility audit
 
 #### Phase 4: Optimization
+
 - [ ] Performance tuning
 - [ ] SEO optimization
 - [ ] Analytics integration
 - [ ] A/B testing setup
 
 #### Phase 5: Deployment
+
 - [ ] Vercel setup
 - [ ] CI/CD pipeline
 - [ ] Custom domain
@@ -420,6 +459,7 @@ git push origin main
 ### Issue: Merge Conflicts
 
 **Solution:**
+
 ```bash
 # Fetch latest changes
 git fetch origin main
@@ -438,6 +478,7 @@ git push origin your-branch --force
 ### Issue: Dependencies Out of Sync
 
 **Solution:**
+
 ```bash
 # Clean install
 rm -rf node_modules package-lock.json
@@ -450,6 +491,7 @@ npm ci
 ### Issue: TypeScript Errors After Pull
 
 **Solution:**
+
 ```bash
 # Regenerate types
 npm run type-check
@@ -461,6 +503,7 @@ npm run type-check
 ### Issue: Build Fails Locally
 
 **Solution:**
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -503,17 +546,20 @@ npm run build
 ## 🤝 Team Communication
 
 ### Daily Standup Questions
+
 1. What did you work on yesterday?
 2. What are you working on today?
 3. Any blockers or questions?
 
 ### Weekly Sync
+
 - Demo completed features
 - Review upcoming tasks
 - Discuss technical challenges
 - Plan next sprint
 
 ### Code Review Guidelines
+
 - Be constructive and respectful
 - Focus on code quality, not style preferences
 - Ask questions instead of making demands

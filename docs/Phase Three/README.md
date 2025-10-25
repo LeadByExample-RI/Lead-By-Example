@@ -25,11 +25,12 @@ A premium, production-ready call-to-action website for Lead By Example nonprofit
 
 **Client:** Lead By Example (Robert McKinney Sr.)
 **Developer:** StrayDog Syndications LLC (@StrayDogSyn, @miasmith81)
-**Contact:** contact@leadbyexample.org | (401) 699-6544
+**Contact:** <contact@leadbyexample.org> | (401) 699-6544
 
 ## ✨ Features
 
 ### Design
+
 - **Glassmorphic UI** - Modern frosted-glass aesthetic
 - **Cape Verdean Colors** - #01514C, #4B306A, #FFD700
 - **3D Depth Effects** - Layered components with perspective
@@ -37,6 +38,7 @@ A premium, production-ready call-to-action website for Lead By Example nonprofit
 - **Responsive Design** - Mobile-first, works on all devices
 
 ### Components
+
 - **Hero Section** - Animated background with current fundraiser card
 - **Testimonials** - 3D carousel with 4 success stories
 - **Archive** - Past fundraiser milestones with progress tracking
@@ -45,6 +47,7 @@ A premium, production-ready call-to-action website for Lead By Example nonprofit
 - **Footer** - Complete contact info with developer credit
 
 ### Technical
+
 - **TypeScript** - Full type safety
 - **SEO Optimized** - Meta tags, Open Graph, structured data
 - **Accessible** - WCAG 2.1 AA compliant
@@ -84,7 +87,8 @@ npm run dev
 
 This project is designed to leverage multiple IDEs for optimal development. Here's how to organize work across different tools:
 
-### **1. VS Code + Claude Code** 
+### **1. VS Code + Claude Code**
+
 **Best for:** Core architecture & backend logic
 
 ```bash
@@ -100,6 +104,7 @@ code lead-by-example-website
 ```
 
 **Key files:**
+
 - `/src/hooks/useInView.ts`
 - `/src/utils/helpers.ts`
 - `/src/types/index.ts`
@@ -107,6 +112,7 @@ code lead-by-example-website
 - `next.config.js`
 
 ### **2. Cursor + Copilot**
+
 **Best for:** Rapid component development
 
 ```bash
@@ -122,11 +128,13 @@ cursor lead-by-example-website
 ```
 
 **Key files:**
+
 - `/src/components/*.tsx`
 - `/src/pages/*.tsx`
 - Component logic and structure
 
 ### **3. Windsurf + Cascade**
+
 **Best for:** UI/UX & styling
 
 ```bash
@@ -142,11 +150,13 @@ windsurf lead-by-example-website
 ```
 
 **Key files:**
+
 - `tailwind.config.js`
 - `/src/styles/globals.css`
 - Component className definitions
 
 ### **4. Qoder + Quest**
+
 **Best for:** Testing & QA
 
 ```bash
@@ -162,6 +172,7 @@ qoder lead-by-example-website
 ```
 
 **Test commands:**
+
 ```bash
 npm run lint
 npm run type-check
@@ -169,6 +180,7 @@ npm run format:check
 ```
 
 ### **5. TRAE + Solo & Flow**
+
 **Best for:** Documentation & deployment
 
 ```bash
@@ -184,6 +196,7 @@ trae lead-by-example-website
 ```
 
 **Key files:**
+
 - `README.md`
 - `.github/workflows/`
 - `vercel.json` (future)
@@ -202,6 +215,7 @@ graph LR
 ```
 
 **Best Practices:**
+
 1. **Commit often** - Each IDE's work should be atomic commits
 2. **Clear messages** - Use conventional commits (`feat:`, `fix:`, `style:`)
 3. **Pull before push** - Always sync before starting work
@@ -364,24 +378,32 @@ We welcome contributions! Here's how:
 
 1. **Fork the repository**
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/amazing-feature
    ```
+
 3. **Make your changes**
 4. **Test thoroughly**
+
    ```bash
    npm run lint
    npm run type-check
    npm run build
    ```
+
 5. **Commit using conventional commits**
+
    ```bash
    git commit -m "feat: add amazing feature"
    ```
+
 6. **Push to your fork**
+
    ```bash
    git push origin feature/amazing-feature
    ```
+
 7. **Open a Pull Request**
 
 ### Commit Convention
@@ -397,12 +419,14 @@ We welcome contributions! Here's how:
 ## 📊 Current Fundraiser Data
 
 **Event:** All Sides of Town Cookout 2025
+
 - **Goal:** $10,000
 - **Raised:** $6,250 (62.5%)
 - **Date:** August 2, 2025
 - **Location:** Lincoln Woods State Park, Site A&B
 
 **Features:**
+
 - Free food for all attendees
 - Free haircuts and styling
 - Activities and games for youth
@@ -413,15 +437,17 @@ We welcome contributions! Here's how:
 ## 📞 Support
 
 ### Client Contact
+
 - **Organization:** Lead By Example
 - **Contact:** Robert McKinney Sr.
 - **Address:** 120 Hawkins Street, Providence, RI 02908
 - **Phone:** (401) 699-6544
-- **Email:** contact@leadbyexample.org
+- **Email:** <contact@leadbyexample.org>
 
 ### Developer Contact
+
 - **Company:** StrayDog Syndications LLC
-- **Website:** https://www.straydog-syndications-llc.com
+- **Website:** <https://www.straydog-syndications-llc.com>
 - **Senior Dev:** [@StrayDogSyn](https://github.com/StrayDogSyn)
 - **Junior Dev:** [@miasmith81](https://github.com/miasmith81)
 

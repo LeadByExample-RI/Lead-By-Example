@@ -1,6 +1,7 @@
 # 📋 Level 2: Detailed Design & Specifications
 
 ## Context Inheritance from Level 1
+
 - **Architecture**: Next.js 14 + React 18 + TypeScript
 - **Styling**: Tailwind CSS + Framer Motion
 - **Performance**: < 3s load, 95+ Lighthouse score
@@ -10,6 +11,7 @@
 ## Component Architecture Design
 
 ### Design System Hierarchy
+
 ```
 Design System
 ├── Tokens (Colors, Typography, Spacing)
@@ -22,6 +24,7 @@ Design System
 ### Core Component Specifications
 
 #### 1. Design Tokens
+
 ```typescript
 // src/types/design-tokens.ts
 export interface DesignTokens {
@@ -60,6 +63,7 @@ interface ColorScale {
 ```
 
 #### 2. Button Component
+
 ```typescript
 // src/components/ui/Button.tsx
 export interface ButtonProps {
@@ -94,6 +98,7 @@ const buttonAnimations = {
 ```
 
 #### 3. Input Component
+
 ```typescript
 // src/components/ui/Input.tsx
 export interface InputProps {
@@ -118,6 +123,7 @@ export interface InputProps {
 ```
 
 #### 4. Card Component
+
 ```typescript
 // src/components/ui/Card.tsx
 export interface CardProps {
@@ -146,6 +152,7 @@ const cardAnimations = {
 ### Layout Components
 
 #### 1. Navigation Component
+
 ```typescript
 // src/components/layout/Navigation.tsx
 export interface NavigationProps {
@@ -169,6 +176,7 @@ export interface NavigationItem {
 ```
 
 #### 2. Header Component
+
 ```typescript
 // src/components/layout/Header.tsx
 export interface HeaderProps {
@@ -189,6 +197,7 @@ export interface HeaderAction {
 ```
 
 #### 3. Footer Component
+
 ```typescript
 // src/components/layout/Footer.tsx
 export interface FooterProps {
@@ -214,6 +223,7 @@ export interface FooterLink {
 ### Page Components & Templates
 
 #### 1. Hero Section
+
 ```typescript
 // src/components/sections/Hero.tsx
 export interface HeroProps {
@@ -246,6 +256,7 @@ export interface HeroAnimations {
 ```
 
 #### 2. Feature Section
+
 ```typescript
 // src/components/sections/Features.tsx
 export interface FeaturesProps {
@@ -273,6 +284,7 @@ export interface Feature {
 ### Form Components
 
 #### 1. Contact Form
+
 ```typescript
 // src/components/forms/ContactForm.tsx
 export interface ContactFormProps {
@@ -307,6 +319,7 @@ export interface FormField {
 ### Animation Specifications
 
 #### 1. Page Transitions
+
 ```typescript
 // src/utils/animations.ts
 export const pageTransitions = {
@@ -332,6 +345,7 @@ export const pageTransitions = {
 ```
 
 #### 2. Scroll Animations
+
 ```typescript
 export const scrollAnimations = {
   fadeInUp: {
@@ -354,6 +368,7 @@ export const scrollAnimations = {
 ## State Management Architecture
 
 ### Global State Structure
+
 ```typescript
 // src/store/types.ts
 export interface AppState {
@@ -386,6 +401,7 @@ export interface ContentState {
 ```
 
 ### Store Implementation
+
 ```typescript
 // src/store/ui-store.ts
 import { create } from 'zustand';
@@ -440,6 +456,7 @@ export const useUIStore = create<UIStore>()(
 ## API Design & Data Flow
 
 ### Content Management
+
 ```typescript
 // src/types/api.ts
 export interface ContentAPI {
@@ -476,6 +493,7 @@ export interface ContentBlock {
 ```
 
 ### Form Handling
+
 ```typescript
 // src/types/forms.ts
 export interface FormAPI {
@@ -494,6 +512,7 @@ export interface FormSubmissionResult {
 ## Responsive Design Specifications
 
 ### Breakpoint Strategy
+
 ```typescript
 // tailwind.config.js breakpoints
 const breakpoints = {
@@ -507,6 +526,7 @@ const breakpoints = {
 ```
 
 ### Component Responsive Behavior
+
 ```typescript
 // src/components/ui/Grid.tsx
 export interface GridProps {
@@ -535,6 +555,7 @@ type ResponsiveValue<T> = T | {
 ## Accessibility Specifications
 
 ### WCAG 2.1 AA Compliance Requirements
+
 ```typescript
 // src/types/accessibility.ts
 export interface AccessibilityFeatures {
@@ -561,6 +582,7 @@ export interface AccessibilityFeatures {
 ```
 
 ### Focus Management
+
 ```typescript
 // src/hooks/useFocusManagement.ts
 export interface FocusManagementHook {
@@ -575,6 +597,7 @@ export interface FocusManagementHook {
 ## Performance Specifications
 
 ### Bundle Optimization Strategy
+
 ```typescript
 // next.config.js optimization
 const bundleOptimization = {
@@ -601,6 +624,7 @@ const bundleOptimization = {
 ```
 
 ### Loading Strategies
+
 ```typescript
 // src/components/ui/LazyImage.tsx
 export interface LazyImageProps {
@@ -620,6 +644,7 @@ export interface LazyImageProps {
 ## Integration Points
 
 ### Third-party Services
+
 ```typescript
 // src/services/integrations.ts
 export interface IntegrationServices {
@@ -645,24 +670,28 @@ export interface IntegrationServices {
 ## Validation Checklist
 
 ### Component Specifications
+
 - [ ] All core UI components specified with TypeScript interfaces
 - [ ] Animation specifications defined for micro-interactions
 - [ ] Responsive behavior documented for all components
 - [ ] Accessibility requirements specified (WCAG 2.1 AA)
 
 ### Architecture Design
+
 - [ ] State management architecture defined
 - [ ] API interfaces and data flow documented
 - [ ] Performance optimization strategies specified
 - [ ] Integration points identified and documented
 
 ### Design System
+
 - [ ] Design tokens defined (colors, typography, spacing)
 - [ ] Component hierarchy established
 - [ ] Consistent naming conventions applied
 - [ ] Reusability and composability ensured
 
 ### Context Preparation
+
 - [ ] Component specifications ready for implementation
 - [ ] State management patterns defined
 - [ ] Performance requirements translated to technical specs

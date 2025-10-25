@@ -1,6 +1,6 @@
 # 🎮 Qoder + Quest Mode: Lead By Example Edition
 
-## 🌟 Welcome, Developer!
+## 🌟 Welcome, Developer
 
 Embark on an epic journey to build the **Lead By Example** platform through gamified development. This guide transforms your coding experience into an achievement-driven adventure with XP rewards, badges, and boss battles!
 
@@ -13,6 +13,7 @@ Embark on an epic journey to build the **Lead By Example** platform through gami
 ## 🎯 Your Quest Log
 
 ### Current Status
+
 - **Total XP:** 0 / 10,000
 - **Level:** 1
 - **Quests Completed:** 0 / 8
@@ -38,25 +39,30 @@ Embark on an epic journey to build the **Lead By Example** platform through gami
 ## 🗺️ Main Quests
 
 ### Quest 1: Environment Setup & Configuration
+
 **XP Reward:** 500 XP  
 **Difficulty:** ⭐ Easy  
 **Estimated Time:** 45-60 minutes
 
 #### 📝 Quest Briefing
+
 Set up your development environment and configure the project foundation. This quest unlocks your ability to start building!
 
 #### 🎯 Sub-Quests
 
 ##### 1.1: Prerequisites Installation (100 XP)
+
 **Objective:** Install required development tools
 
 **Tasks:**
+
 - [ ] Install Node.js v18+ ([Download](https://nodejs.org/))
 - [ ] Verify installation: `node --version` (must show v18+)
 - [ ] Install Git ([Download](https://git-scm.com/))
 - [ ] Choose package manager (npm/yarn/pnpm)
 
 **Validation:**
+
 ```powershell
 node --version  # Should output v18.x.x or higher
 npm --version   # Should output 9.x.x or higher
@@ -68,15 +74,18 @@ git --version   # Should output 2.x.x or higher
 ---
 
 ##### 1.2: Project Initialization (150 XP)
+
 **Objective:** Clone and initialize the project
 
 **Tasks:**
+
 - [ ] Clone repository: `git clone https://github.com/StrayDogSyn/Lead-By-Example.git`
 - [ ] Navigate to project: `cd Lead-By-Example`
 - [ ] Install dependencies: `npm install`
 - [ ] Verify installation (no errors in console)
 
 **Validation:**
+
 ```powershell
 # Should complete without errors
 npm install
@@ -90,15 +99,18 @@ ls node_modules
 ---
 
 ##### 1.3: Environment Configuration (150 XP)
+
 **Objective:** Configure environment variables
 
 **Tasks:**
+
 - [ ] Copy `.env.example` to `.env.local`
 - [ ] Review all environment variables
 - [ ] Set NEXT_PUBLIC_SITE_URL to `http://localhost:3000`
 - [ ] Configure any API keys (if available)
 
 **Validation:**
+
 ```powershell
 # Verify .env.local exists
 cat .env.local
@@ -111,15 +123,18 @@ cat .env.local
 ---
 
 ##### 1.4: Development Server Launch (100 XP)
+
 **Objective:** Start the development server
 
 **Tasks:**
+
 - [ ] Run: `npm run dev`
 - [ ] Wait for server to start (usually ~5-10 seconds)
 - [ ] Open browser to `http://localhost:3000`
 - [ ] Verify homepage loads successfully
 
 **Validation:**
+
 ```powershell
 npm run dev
 # Should output: "ready - started server on 0.0.0.0:3000"
@@ -130,6 +145,7 @@ npm run dev
 ---
 
 #### 🏆 Quest 1 Completion Rewards
+
 - **500 XP Total**
 - **4 Achievements Unlocked**
 - **Badge Earned:** 🎖️ **"Environment Master"**
@@ -138,25 +154,30 @@ npm run dev
 ---
 
 ### Quest 2: Core Architecture Foundation
+
 **XP Reward:** 800 XP  
 **Difficulty:** ⭐⭐ Moderate  
 **Estimated Time:** 60-90 minutes
 
 #### 📝 Quest Briefing
+
 Build the foundational architecture including directory structure, TypeScript configuration, and core utilities.
 
 #### 🎯 Sub-Quests
 
 ##### 2.1: Directory Structure Setup (150 XP)
+
 **Objective:** Create organized project structure
 
 **Tasks:**
+
 - [ ] Create `src/components/` directory structure
 - [ ] Create `src/pages/` for Next.js routes
 - [ ] Create `src/styles/` for global styles
 - [ ] Create `src/utils/`, `src/hooks/`, `src/context/`, `src/types/`
 
 **Directory Structure to Create:**
+
 ```
 src/
 ├── components/
@@ -176,6 +197,7 @@ src/
 ```
 
 **Validation:**
+
 ```powershell
 # Verify structure
 tree src -L 2
@@ -186,15 +208,18 @@ tree src -L 2
 ---
 
 ##### 2.2: TypeScript Configuration (200 XP)
+
 **Objective:** Configure TypeScript for type safety
 
 **Tasks:**
+
 - [ ] Review `tsconfig.json` settings
 - [ ] Add path aliases: `@/components`, `@/utils`, etc.
 - [ ] Enable strict mode
 - [ ] Test type checking: `npm run type-check`
 
 **Configuration:**
+
 ```json
 {
   "compilerOptions": {
@@ -211,6 +236,7 @@ tree src -L 2
 ```
 
 **Validation:**
+
 ```powershell
 npm run type-check  # Should pass with no errors
 ```
@@ -220,15 +246,18 @@ npm run type-check  # Should pass with no errors
 ---
 
 ##### 2.3: Utility Functions Creation (250 XP)
+
 **Objective:** Build core utility functions
 
 **Tasks:**
+
 - [ ] Create `src/utils/cn.ts` for className utilities
 - [ ] Create `src/utils/formatters.ts` for data formatting
 - [ ] Create `src/utils/validators.ts` for validation helpers
 - [ ] Write unit tests for each utility
 
 **Example: `src/utils/cn.ts`**
+
 ```typescript
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -239,6 +268,7 @@ export function cn(...inputs: ClassValue[]) {
 ```
 
 **Validation:**
+
 - [ ] All utilities have TypeScript types
 - [ ] No linting errors: `npm run lint`
 - [ ] Functions are exported and importable
@@ -248,15 +278,18 @@ export function cn(...inputs: ClassValue[]) {
 ---
 
 ##### 2.4: Global Styles Setup (200 XP)
+
 **Objective:** Configure Tailwind and global styles
 
 **Tasks:**
+
 - [ ] Configure `tailwind.config.js` with custom theme
 - [ ] Set up dark/light mode support
 - [ ] Create global CSS variables
 - [ ] Test theme switching
 
 **Tailwind Theme Extension:**
+
 ```javascript
 module.exports = {
   theme: {
@@ -276,6 +309,7 @@ module.exports = {
 ```
 
 **Validation:**
+
 - [ ] Tailwind classes compile correctly
 - [ ] Dark mode classes work (if implemented)
 - [ ] No CSS conflicts
@@ -285,6 +319,7 @@ module.exports = {
 ---
 
 #### 🏆 Quest 2 Completion Rewards
+
 - **800 XP Total (1,300 XP cumulative)**
 - **4 Achievements Unlocked (8 total)**
 - **Badge Earned:** 🎖️ **"Foundation Builder"**
@@ -294,31 +329,37 @@ module.exports = {
 ---
 
 ### Quest 3: Component Library Creation
+
 **XP Reward:** 1,200 XP  
 **Difficulty:** ⭐⭐ Moderate  
 **Estimated Time:** 90-120 minutes
 
 #### 📝 Quest Briefing
+
 Build a comprehensive component library with reusable UI elements. This is the heart of your application!
 
 #### 🎯 Sub-Quests
 
 ##### 3.1: UI Primitives (300 XP)
+
 **Objective:** Create fundamental UI components
 
 **Tasks:**
+
 - [ ] Create `Button` component with variants (primary, secondary, outline)
 - [ ] Create `Card` component with header, body, footer
 - [ ] Create `Input` component with validation states
 - [ ] Create `Badge` component for status indicators
 
 **Component Checklist:**
+
 - [ ] TypeScript interfaces for props
 - [ ] Variant support using Tailwind
 - [ ] Accessibility attributes (ARIA labels)
 - [ ] Responsive design
 
 **Example: Button Component**
+
 ```typescript
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
@@ -338,6 +379,7 @@ export const Button: React.FC<ButtonProps> = ({
 ```
 
 **Validation:**
+
 - [ ] Components render without errors
 - [ ] All variants display correctly
 - [ ] TypeScript types are accurate
@@ -348,21 +390,25 @@ export const Button: React.FC<ButtonProps> = ({
 ---
 
 ##### 3.2: Layout Components (300 XP)
+
 **Objective:** Build structural layout components
 
 **Tasks:**
+
 - [ ] Create `Header` component with navigation
 - [ ] Create `Footer` component with links
 - [ ] Create `Layout` wrapper component
 - [ ] Create `Container` component for content width
 
 **Features to Implement:**
+
 - [ ] Responsive navigation (mobile menu)
 - [ ] Sticky header on scroll
 - [ ] Footer with social links
 - [ ] Max-width containers
 
 **Validation:**
+
 - [ ] Layout is responsive on all screen sizes
 - [ ] Navigation works on mobile and desktop
 - [ ] Components compose together cleanly
@@ -372,21 +418,25 @@ export const Button: React.FC<ButtonProps> = ({
 ---
 
 ##### 3.3: Interactive Components (400 XP)
+
 **Objective:** Build interactive UI elements
 
 **Tasks:**
+
 - [ ] Create `Modal` component with backdrop
 - [ ] Create `Dropdown` menu component
 - [ ] Create `Tabs` component for content switching
 - [ ] Create `Tooltip` component for hints
 
 **Interactive Features:**
+
 - [ ] Keyboard navigation support
 - [ ] Focus management
 - [ ] Click-outside detection
 - [ ] Smooth animations
 
 **Validation:**
+
 - [ ] All interactions work smoothly
 - [ ] Keyboard navigation functions
 - [ ] No console errors during interactions
@@ -397,15 +447,18 @@ export const Button: React.FC<ButtonProps> = ({
 ---
 
 ##### 3.4: Component Documentation (200 XP)
+
 **Objective:** Document your component library
 
 **Tasks:**
+
 - [ ] Create README for each component category
 - [ ] Add JSDoc comments to all components
 - [ ] Create usage examples
 - [ ] Document props and variants
 
 **Documentation Template:**
+
 ```typescript
 /**
  * Button component with multiple variants
@@ -418,6 +471,7 @@ export const Button: React.FC<ButtonProps> = ({
 ```
 
 **Validation:**
+
 - [ ] All components have documentation
 - [ ] Examples are accurate and runnable
 - [ ] Props are clearly documented
@@ -427,6 +481,7 @@ export const Button: React.FC<ButtonProps> = ({
 ---
 
 #### 🏆 Quest 3 Completion Rewards
+
 - **1,200 XP Total (2,500 XP cumulative)**
 - **4 Achievements Unlocked (12 total)**
 - **Badge Earned:** 🎖️ **"Component Master"**
@@ -436,31 +491,37 @@ export const Button: React.FC<ButtonProps> = ({
 ---
 
 ### Quest 4: Page Routing & Navigation
+
 **XP Reward:** 1,000 XP  
 **Difficulty:** ⭐⭐ Moderate  
 **Estimated Time:** 60-90 minutes
 
 #### 📝 Quest Briefing
+
 Implement Next.js routing and create key pages for the Lead By Example platform.
 
 #### 🎯 Sub-Quests
 
 ##### 4.1: Homepage Creation (300 XP)
+
 **Objective:** Build an engaging homepage
 
 **Tasks:**
+
 - [ ] Create `pages/index.tsx` with hero section
 - [ ] Add mission statement section
 - [ ] Add featured content section
 - [ ] Add call-to-action section
 
 **Sections to Include:**
+
 - [ ] Hero with tagline: "Inspiring Change Through Action"
 - [ ] Value propositions (3-4 key points)
 - [ ] Featured stories or initiatives
 - [ ] Contact/Get Involved CTA
 
 **Validation:**
+
 - [ ] Page loads at `http://localhost:3000`
 - [ ] All sections render correctly
 - [ ] Responsive on mobile and desktop
@@ -471,21 +532,25 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 ---
 
 ##### 4.2: About & Mission Pages (250 XP)
+
 **Objective:** Create informational pages
 
 **Tasks:**
+
 - [ ] Create `pages/about.tsx`
 - [ ] Create `pages/mission.tsx`
 - [ ] Add team information section
 - [ ] Add impact metrics section
 
 **Content to Include:**
+
 - [ ] Organization background
 - [ ] Mission and vision statements
 - [ ] Team members (can use placeholder data)
 - [ ] Impact statistics
 
 **Validation:**
+
 - [ ] Routes work: `/about`, `/mission`
 - [ ] Content is well-structured
 - [ ] Images load correctly
@@ -496,15 +561,18 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 ---
 
 ##### 4.3: Navigation System (300 XP)
+
 **Objective:** Implement site-wide navigation
 
 **Tasks:**
+
 - [ ] Create navigation menu in Header
 - [ ] Add active route highlighting
 - [ ] Implement mobile hamburger menu
 - [ ] Add breadcrumbs component
 
 **Navigation Links:**
+
 - [ ] Home
 - [ ] About
 - [ ] Mission
@@ -512,12 +580,14 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 - [ ] Contact
 
 **Features:**
+
 - [ ] Active link highlighting
 - [ ] Smooth scroll to sections
 - [ ] Mobile menu with animation
 - [ ] Keyboard accessible
 
 **Validation:**
+
 - [ ] All links navigate correctly
 - [ ] Active states update properly
 - [ ] Mobile menu functions smoothly
@@ -528,21 +598,25 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 ---
 
 ##### 4.4: Error & 404 Pages (150 XP)
+
 **Objective:** Handle errors gracefully
 
 **Tasks:**
+
 - [ ] Create `pages/404.tsx` for not found
 - [ ] Create `pages/_error.tsx` for errors
 - [ ] Add helpful error messages
 - [ ] Add navigation back to home
 
 **Error Page Features:**
+
 - [ ] Friendly error message
 - [ ] Suggested actions
 - [ ] Link back to homepage
 - [ ] Consistent with site design
 
 **Validation:**
+
 - [ ] Navigate to `/nonexistent` shows 404
 - [ ] Error page is user-friendly
 - [ ] Links work to return home
@@ -552,6 +626,7 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 ---
 
 #### 🏆 Quest 4 Completion Rewards
+
 - **1,000 XP Total (3,500 XP cumulative)**
 - **4 Achievements Unlocked (16 total)**
 - **Badge Earned:** 🎖️ **"Route Master"**
@@ -561,25 +636,30 @@ Implement Next.js routing and create key pages for the Lead By Example platform.
 ---
 
 ### Quest 5: State Management & Context
+
 **XP Reward:** 1,500 XP  
 **Difficulty:** ⭐⭐⭐ Advanced  
 **Estimated Time:** 90-120 minutes
 
 #### 📝 Quest Briefing
+
 Implement state management using React Context and Zustand for complex application state.
 
 #### 🎯 Sub-Quests
 
 ##### 5.1: Theme Context Setup (400 XP)
+
 **Objective:** Create dark/light mode functionality
 
 **Tasks:**
+
 - [ ] Create `ThemeContext` in `src/context/ThemeContext.tsx`
 - [ ] Implement theme toggle function
 - [ ] Persist theme preference to localStorage
 - [ ] Add theme toggle button to header
 
 **Implementation Steps:**
+
 ```typescript
 // ThemeContext.tsx
 interface ThemeContextType {
@@ -593,12 +673,14 @@ export const ThemeProvider: React.FC = ({ children }) => {
 ```
 
 **Features:**
+
 - [ ] Theme switches instantly
 - [ ] Preference persists on reload
 - [ ] No flash of unstyled content
 - [ ] Smooth transition animation
 
 **Validation:**
+
 - [ ] Toggle button changes theme
 - [ ] Theme persists after page refresh
 - [ ] All components respect theme
@@ -609,21 +691,25 @@ export const ThemeProvider: React.FC = ({ children }) => {
 ---
 
 ##### 5.2: User Preferences State (400 XP)
+
 **Objective:** Manage user preferences
 
 **Tasks:**
+
 - [ ] Create preferences context or Zustand store
 - [ ] Implement settings for notifications, language, etc.
 - [ ] Create settings page
 - [ ] Persist preferences
 
 **Preferences to Manage:**
+
 - [ ] Theme (light/dark)
 - [ ] Font size preference
 - [ ] Animation preferences (reduced motion)
 - [ ] Newsletter subscription
 
 **Validation:**
+
 - [ ] All preferences save correctly
 - [ ] Settings page updates state
 - [ ] Preferences persist across sessions
@@ -634,9 +720,11 @@ export const ThemeProvider: React.FC = ({ children }) => {
 ---
 
 ##### 5.3: Form State Management (400 XP)
+
 **Objective:** Implement React Hook Form with Zod
 
 **Tasks:**
+
 - [ ] Install `react-hook-form` and `zod`
 - [ ] Create form schemas using Zod
 - [ ] Build contact form with validation
@@ -644,12 +732,14 @@ export const ThemeProvider: React.FC = ({ children }) => {
 
 **Form to Create:**
 Contact Form with fields:
+
 - [ ] Name (required, min 2 chars)
 - [ ] Email (required, valid email)
 - [ ] Message (required, min 10 chars)
 - [ ] Submit button with loading state
 
 **Validation Schema:**
+
 ```typescript
 import { z } from 'zod';
 
@@ -661,6 +751,7 @@ const contactSchema = z.object({
 ```
 
 **Validation:**
+
 - [ ] Form validates on submit
 - [ ] Errors display correctly
 - [ ] Success message shows after submit
@@ -671,15 +762,18 @@ const contactSchema = z.object({
 ---
 
 ##### 5.4: Global State with Zustand (300 XP)
+
 **Objective:** Implement Zustand for app state
 
 **Tasks:**
+
 - [ ] Install Zustand: `npm install zustand`
 - [ ] Create global store for app state
 - [ ] Implement loading states
 - [ ] Add notification/toast system
 
 **Store Structure:**
+
 ```typescript
 interface AppState {
   isLoading: boolean;
@@ -694,6 +788,7 @@ export const useAppStore = create<AppState>((set) => ({
 ```
 
 **Validation:**
+
 - [ ] Store updates globally
 - [ ] Multiple components can access state
 - [ ] State persists correctly
@@ -704,6 +799,7 @@ export const useAppStore = create<AppState>((set) => ({
 ---
 
 #### 🏆 Quest 5 Completion Rewards
+
 - **1,500 XP Total (5,000 XP cumulative)**
 - **4 Achievements Unlocked (20 total)**
 - **Badge Earned:** 🎖️ **"State Master"**
@@ -713,25 +809,30 @@ export const useAppStore = create<AppState>((set) => ({
 ---
 
 ### Quest 6: Micro-interactions & Animations
+
 **XP Reward:** 1,800 XP  
 **Difficulty:** ⭐⭐⭐ Advanced  
 **Estimated Time:** 120-150 minutes
 
 #### 📝 Quest Briefing
+
 Bring your application to life with premium animations and micro-interactions using Framer Motion.
 
 #### 🎯 Sub-Quests
 
 ##### 6.1: Framer Motion Setup (300 XP)
+
 **Objective:** Install and configure animation library
 
 **Tasks:**
+
 - [ ] Install Framer Motion: `npm install framer-motion`
 - [ ] Create animation utilities in `src/utils/animations.ts`
 - [ ] Set up common animation variants
 - [ ] Test basic animations
 
 **Animation Variants to Create:**
+
 ```typescript
 export const fadeIn = {
   hidden: { opacity: 0 },
@@ -745,6 +846,7 @@ export const slideUp = {
 ```
 
 **Validation:**
+
 - [ ] Framer Motion imports successfully
 - [ ] Test animation renders
 - [ ] No performance issues
@@ -755,15 +857,18 @@ export const slideUp = {
 ---
 
 ##### 6.2: Page Transitions (400 XP)
+
 **Objective:** Add smooth page transitions
 
 **Tasks:**
+
 - [ ] Wrap pages with Framer Motion AnimatePresence
 - [ ] Create page enter/exit animations
 - [ ] Implement route change animations
 - [ ] Add loading animations between routes
 
 **Implementation:**
+
 ```typescript
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -785,6 +890,7 @@ export default function MyApp({ Component, pageProps, router }) {
 ```
 
 **Validation:**
+
 - [ ] Pages transition smoothly
 - [ ] No layout shift during transitions
 - [ ] Exit animations complete before new page
@@ -795,15 +901,18 @@ export default function MyApp({ Component, pageProps, router }) {
 ---
 
 ##### 6.3: Button & Hover Effects (500 XP)
+
 **Objective:** Add micro-interactions to interactive elements
 
 **Tasks:**
+
 - [ ] Add hover scale effects to buttons
 - [ ] Implement ripple effect on click
 - [ ] Add loading spinner animations
 - [ ] Create success/error button states
 
 **Interactions to Implement:**
+
 - [ ] Hover: Scale 1.05, brightness increase
 - [ ] Click: Ripple effect from click point
 - [ ] Loading: Spinner with text change
@@ -811,6 +920,7 @@ export default function MyApp({ Component, pageProps, router }) {
 - [ ] Error: Shake animation
 
 **Example:**
+
 ```typescript
 <motion.button
   whileHover={{ scale: 1.05 }}
@@ -822,6 +932,7 @@ export default function MyApp({ Component, pageProps, router }) {
 ```
 
 **Validation:**
+
 - [ ] All buttons have hover effects
 - [ ] Click feedback is instant
 - [ ] Loading states animate smoothly
@@ -832,21 +943,25 @@ export default function MyApp({ Component, pageProps, router }) {
 ---
 
 ##### 6.4: Scroll Animations (600 XP)
+
 **Objective:** Animate elements as they enter viewport
 
 **Tasks:**
+
 - [ ] Create scroll-triggered animations
 - [ ] Implement stagger animations for lists
 - [ ] Add parallax effects to hero section
 - [ ] Create reveal animations for cards
 
 **Scroll Features:**
+
 - [ ] Elements fade in on scroll into view
 - [ ] List items stagger animate
 - [ ] Images have parallax effect
 - [ ] Smooth reveal transitions
 
 **Implementation:**
+
 ```typescript
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -869,6 +984,7 @@ export const ScrollReveal = ({ children }) => {
 ```
 
 **Validation:**
+
 - [ ] Elements animate on scroll
 - [ ] Animations trigger once (not repeatedly)
 - [ ] Performance is good (no jank)
@@ -879,6 +995,7 @@ export const ScrollReveal = ({ children }) => {
 ---
 
 #### 🏆 Quest 6 Completion Rewards
+
 - **1,800 XP Total (6,800 XP cumulative)**
 - **4 Achievements Unlocked (24 total)**
 - **Badge Earned:** 🎖️ **"Animation Master"**
@@ -888,25 +1005,30 @@ export const ScrollReveal = ({ children }) => {
 ---
 
 ### Quest 7: Forms & Validation System
+
 **XP Reward:** 1,200 XP  
 **Difficulty:** ⭐⭐ Moderate  
 **Estimated Time:** 90 minutes
 
 #### 📝 Quest Briefing
+
 Build comprehensive form components with robust validation and excellent UX.
 
 #### 🎯 Sub-Quests
 
 ##### 7.1: Contact Form (400 XP)
+
 **Objective:** Create fully functional contact form
 
 **Tasks:**
+
 - [ ] Build contact form component
 - [ ] Add Zod validation schema
 - [ ] Implement real-time validation
 - [ ] Add success/error toast notifications
 
 **Form Features:**
+
 - [ ] Name, email, message fields
 - [ ] Character counters for text areas
 - [ ] Real-time validation feedback
@@ -914,6 +1036,7 @@ Build comprehensive form components with robust validation and excellent UX.
 - [ ] Success message on submit
 
 **Validation:**
+
 - [ ] Form validates before submit
 - [ ] Errors show in real-time
 - [ ] Success toast appears
@@ -924,21 +1047,25 @@ Build comprehensive form components with robust validation and excellent UX.
 ---
 
 ##### 7.2: Newsletter Signup (300 XP)
+
 **Objective:** Create newsletter subscription form
 
 **Tasks:**
+
 - [ ] Build compact newsletter form
 - [ ] Email validation
 - [ ] Add to footer component
 - [ ] Implement double opt-in flow (UI only)
 
 **Features:**
+
 - [ ] Email input with validation
 - [ ] Subscribe button
 - [ ] Privacy policy checkbox
 - [ ] Confirmation message
 
 **Validation:**
+
 - [ ] Email format validation
 - [ ] Checkbox required
 - [ ] Success state shows
@@ -949,21 +1076,25 @@ Build comprehensive form components with robust validation and excellent UX.
 ---
 
 ##### 7.3: Form Components Library (300 XP)
+
 **Objective:** Build reusable form components
 
 **Tasks:**
+
 - [ ] Create `FormInput` component
 - [ ] Create `FormTextarea` component
 - [ ] Create `FormSelect` component
 - [ ] Create `FormCheckbox` component
 
 **Component Features:**
+
 - [ ] Label and error display
 - [ ] Controlled component pattern
 - [ ] Accessibility attributes
 - [ ] Consistent styling
 
 **Validation:**
+
 - [ ] All components work with React Hook Form
 - [ ] Error states display correctly
 - [ ] Components are accessible
@@ -974,21 +1105,25 @@ Build comprehensive form components with robust validation and excellent UX.
 ---
 
 ##### 7.4: Validation & Error Handling (200 XP)
+
 **Objective:** Implement comprehensive validation
 
 **Tasks:**
+
 - [ ] Create validation utility functions
 - [ ] Add custom error messages
 - [ ] Implement field-level validation
 - [ ] Add form-level validation
 
 **Validation Rules:**
+
 - [ ] Email format validation
 - [ ] Phone number formatting
 - [ ] Required field validation
 - [ ] Custom regex patterns
 
 **Validation:**
+
 - [ ] All validation rules work
 - [ ] Error messages are clear
 - [ ] Validation is performant
@@ -999,6 +1134,7 @@ Build comprehensive form components with robust validation and excellent UX.
 ---
 
 #### 🏆 Quest 7 Completion Rewards
+
 - **1,200 XP Total (8,000 XP cumulative)**
 - **4 Achievements Unlocked (28 total)**
 - **Badge Earned:** 🎖️ **"Form Master"**
@@ -1008,19 +1144,23 @@ Build comprehensive form components with robust validation and excellent UX.
 ---
 
 ### Quest 8: 👹 BOSS FIGHT - Production Deployment
+
 **XP Reward:** 2,000 XP  
 **Difficulty:** ⭐⭐⭐⭐ Boss Level  
 **Estimated Time:** 120-180 minutes
 
 #### 📝 Boss Fight Briefing
+
 This is it! Deploy your application to production on Vercel. This final challenge will test everything you've learned.
 
 #### 🎯 Boss Battle Phases
 
 ##### Phase 1: Pre-Deployment Checks (400 XP)
+
 **Objective:** Ensure application is production-ready
 
 **Tasks:**
+
 - [ ] Run full build: `npm run build`
 - [ ] Fix all build errors and warnings
 - [ ] Run linter: `npm run lint` (no errors allowed)
@@ -1028,6 +1168,7 @@ This is it! Deploy your application to production on Vercel. This final challeng
 - [ ] Test production build locally: `npm run start`
 
 **Quality Checklist:**
+
 - [ ] No TypeScript errors
 - [ ] No ESLint warnings
 - [ ] All images optimized
@@ -1035,6 +1176,7 @@ This is it! Deploy your application to production on Vercel. This final challeng
 - [ ] Performance metrics acceptable
 
 **Validation:**
+
 ```powershell
 npm run build    # Must succeed
 npm run lint     # No errors
@@ -1047,15 +1189,18 @@ npm run start    # Server starts successfully
 ---
 
 ##### Phase 2: Vercel Account Setup (300 XP)
+
 **Objective:** Prepare deployment platform
 
 **Tasks:**
+
 - [ ] Create Vercel account at [vercel.com](https://vercel.com)
 - [ ] Install Vercel CLI: `npm i -g vercel`
 - [ ] Connect GitHub repository
 - [ ] Verify CLI login: `vercel login`
 
 **Validation:**
+
 - [ ] Vercel account active
 - [ ] CLI authenticated
 - [ ] Repository connected
@@ -1066,21 +1211,25 @@ npm run start    # Server starts successfully
 ---
 
 ##### Phase 3: Environment Configuration (400 XP)
+
 **Objective:** Configure production environment
 
 **Tasks:**
+
 - [ ] Review all environment variables in `.env.example`
 - [ ] Add variables to Vercel project settings
 - [ ] Set production API URLs
 - [ ] Configure domain settings (if custom domain)
 
 **Environment Variables to Set:**
+
 - [ ] NEXT_PUBLIC_SITE_URL (production URL)
 - [ ] Any API keys or secrets
 - [ ] Analytics IDs
 - [ ] Feature flags
 
 **Validation:**
+
 - [ ] All required variables set
 - [ ] No sensitive data in code
 - [ ] Variables accessible in build
@@ -1091,15 +1240,18 @@ npm run start    # Server starts successfully
 ---
 
 ##### Phase 4: Initial Deployment (500 XP)
+
 **Objective:** Deploy to Vercel
 
 **Tasks:**
+
 - [ ] Run deployment command: `vercel`
 - [ ] Review deployment preview
 - [ ] Test all pages on preview URL
 - [ ] Fix any deployment issues
 
 **Deployment Steps:**
+
 ```powershell
 # Deploy to preview
 vercel
@@ -1112,6 +1264,7 @@ vercel --prod
 ```
 
 **Testing Checklist:**
+
 - [ ] Homepage loads correctly
 - [ ] All routes accessible
 - [ ] Forms submit properly
@@ -1120,6 +1273,7 @@ vercel --prod
 - [ ] Mobile responsive
 
 **Validation:**
+
 - [ ] Deployment succeeds
 - [ ] Site is accessible via URL
 - [ ] All features work
@@ -1130,9 +1284,11 @@ vercel --prod
 ---
 
 ##### Phase 5: Final Boss - Production Verification (400 XP)
+
 **Objective:** Complete final production checks
 
 **Tasks:**
+
 - [ ] Run Lighthouse audit (score >90 in all categories)
 - [ ] Test on multiple devices
 - [ ] Verify SEO meta tags
@@ -1140,6 +1296,7 @@ vercel --prod
 - [ ] Monitor for errors in Vercel dashboard
 
 **Final Boss Checklist:**
+
 - [ ] Lighthouse Performance: >90
 - [ ] Lighthouse Accessibility: >90
 - [ ] Lighthouse Best Practices: >90
@@ -1150,6 +1307,7 @@ vercel --prod
 - [ ] Analytics tracking works
 
 **Boss Battle Strategy:**
+
 1. Open Lighthouse in Chrome DevTools
 2. Run audit on production URL
 3. Fix any issues below 90
@@ -1157,6 +1315,7 @@ vercel --prod
 5. Monitor deployment logs
 
 **Validation:**
+
 - [ ] All Lighthouse scores >90
 - [ ] No errors in console
 - [ ] Site performs well
@@ -1167,6 +1326,7 @@ vercel --prod
 ---
 
 #### 🏆 Quest 8 Completion Rewards
+
 - **2,000 XP Total (10,000 XP cumulative)**
 - **5 Boss Achievements Unlocked (33 total)**
 - **Badge Earned:** 🎖️ **"Deployment Champion"**
@@ -1175,9 +1335,10 @@ vercel --prod
 
 ---
 
-## 🎉 Campaign Complete!
+## 🎉 Campaign Complete
 
 ### Your Final Stats
+
 - **Total XP Earned:** 10,000 / 10,000
 - **Final Level:** 10 - Master Developer
 - **Quests Completed:** 8 / 8
@@ -1187,6 +1348,7 @@ vercel --prod
 ### 🏅 Achievement Gallery
 
 #### Quest Achievements
+
 - 🛠️ Toolsmith
 - 🌱 Seed Planter
 - ⚙️ Configurator
@@ -1217,6 +1379,7 @@ vercel --prod
 - ✅ Validation Veteran
 
 #### Boss Achievements
+
 - 🛡️ Quality Guardian
 - 🔐 Access Granter
 - 🔧 Config Master
@@ -1224,6 +1387,7 @@ vercel --prod
 - 👹 Production Master
 
 #### Legendary Badges
+
 - 🎖️ Environment Master
 - 🎖️ Foundation Builder
 - 🎖️ Component Master
@@ -1298,12 +1462,14 @@ Use this checklist to track your progress through the campaign:
 ## 💡 Tips for Success
 
 ### General Tips
+
 - **Take breaks** between quests to avoid burnout
 - **Test frequently** as you build
 - **Commit to Git** after completing each quest
 - **Document your learnings** along the way
 
 ### Technical Tips
+
 - Use TypeScript strictly for better code quality
 - Follow component-driven development principles
 - Keep components small and focused
@@ -1311,6 +1477,7 @@ Use this checklist to track your progress through the campaign:
 - Optimize images before adding to project
 
 ### Performance Tips
+
 - Monitor bundle size as you add dependencies
 - Use Next.js Image component for images
 - Implement code splitting for larger components
@@ -1323,16 +1490,19 @@ Use this checklist to track your progress through the campaign:
 ### Common Issues
 
 **Build Errors:**
+
 - Clear `.next` folder and rebuild
 - Delete `node_modules` and reinstall
 - Check for TypeScript errors
 
 **Styling Issues:**
+
 - Verify Tailwind configuration
 - Check for CSS specificity conflicts
 - Clear browser cache
 
 **Deployment Issues:**
+
 - Verify all environment variables are set
 - Check build logs for errors
 - Ensure all dependencies are in package.json
@@ -1342,6 +1512,7 @@ Use this checklist to track your progress through the campaign:
 ## 🎓 What's Next?
 
 After completing this quest mode, you'll have:
+
 - ✅ A fully functional Next.js application
 - ✅ Production deployment on Vercel
 - ✅ Modern component library
@@ -1350,6 +1521,7 @@ After completing this quest mode, you'll have:
 - ✅ Professional development practices
 
 ### Continue Your Journey
+
 - Add more pages and features
 - Implement backend API routes
 - Add authentication system

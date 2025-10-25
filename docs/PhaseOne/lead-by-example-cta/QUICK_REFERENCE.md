@@ -10,8 +10,8 @@ npm run build  # Build for production
 
 ## 📱 View Your Site
 
-**Development:** http://localhost:3000
-**Production:** https://your-site.vercel.app
+**Development:** <http://localhost:3000>
+**Production:** <https://your-site.vercel.app>
 
 ## 🎯 Main Features
 
@@ -27,7 +27,9 @@ npm run build  # Build for production
 ## 📝 Update Content
 
 ### Change Current Fundraiser
+
 File: `src/pages/index.tsx`
+
 ```typescript
 const currentFundraiser = {
   title: 'Event Name',
@@ -39,7 +41,9 @@ const currentFundraiser = {
 ```
 
 ### Add Testimonial
+
 File: `src/components/Testimonials.tsx`
+
 ```typescript
 {
   id: 5,
@@ -50,7 +54,9 @@ File: `src/components/Testimonials.tsx`
 ```
 
 ### Archive a Fundraiser
+
 File: `src/components/Archive.tsx`
+
 ```typescript
 {
   id: 4,
@@ -64,6 +70,7 @@ File: `src/components/Archive.tsx`
 ## 🎨 Customize Colors
 
 File: `tailwind.config.js`
+
 ```javascript
 verdean: { 500: '#01514C' },  // Green-blue
 royal: { 500: '#4B306A' },    // Purple
@@ -73,12 +80,14 @@ gold: { 500: '#FFD700' },     // Gold
 ## 🚀 Deploy to Vercel
 
 ### Method 1: GitHub
+
 ```bash
 git push origin main
 # Auto-deploys on Vercel
 ```
 
 ### Method 2: CLI
+
 ```bash
 vercel --prod
 ```
@@ -86,13 +95,15 @@ vercel --prod
 ## 📞 Key Contacts
 
 **Client**
+
 - Robert McKinney Sr.
 - (401) 699-6544
-- contact@leadbyexample.org
+- <contact@leadbyexample.org>
 
 **Developer**
+
 - StrayDog Syndications LLC
-- www.straydog-syndications-llc.com
+- <www.straydog-syndications-llc.com>
 
 ## 🔧 Troubleshooting
 

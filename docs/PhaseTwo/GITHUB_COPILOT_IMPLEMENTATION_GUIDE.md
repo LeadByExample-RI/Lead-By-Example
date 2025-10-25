@@ -58,16 +58,19 @@ export default function Component({ props }: ComponentProps) {
 ```
 
 ## Animation Guidelines
+
 - Use Framer Motion for complex animations
 - Scroll-triggered with useInView hook
 - 60fps target (transform and opacity only)
 - Respect prefers-reduced-motion
 
 ## Naming Conventions
+
 - Components: PascalCase (Hero.tsx)
 - Utilities: camelCase (helpers.ts)
 - Constants: UPPER_SNAKE_CASE
 - CSS classes: kebab-case (but use Tailwind utilities)
+
 ```
 
 ---
@@ -182,6 +185,7 @@ export default function Hero({ fundraiser }: HeroProps) {
 ```
 
 **Copilot Tips:**
+
 - Write the JSX structure in comments first
 - Copilot will suggest the actual JSX
 - Use descriptive variable names
@@ -416,6 +420,7 @@ describe('Hero Component', () => {
 ### Useful Prompts for Copilot Chat
 
 **General Development:**
+
 ```
 /explain - Explain the selected code
 /fix - Suggest a fix for problems in the code
@@ -426,6 +431,7 @@ describe('Hero Component', () => {
 **Project-Specific:**
 
 1. **Component Generation:**
+
 ```
 @workspace Generate a Testimonials carousel component following our project patterns. Should have:
 - 3D card effect
@@ -437,12 +443,14 @@ describe('Hero Component', () => {
 ```
 
 2. **Bug Fixing:**
+
 ```
 @workspace /fix The progress bar animation isn't triggering on scroll. 
 Using Framer Motion and useInView hook.
 ```
 
 3. **Refactoring:**
+
 ```
 @workspace Refactor this component to improve:
 - Performance (memo, useCallback)
@@ -452,6 +460,7 @@ Using Framer Motion and useInView hook.
 ```
 
 4. **Testing:**
+
 ```
 @workspace /tests Generate comprehensive tests for the Newsletter form component including:
 - Validation testing
@@ -467,6 +476,7 @@ Using Framer Motion and useInView hook.
 ### 1. Write Descriptive Comments First
 
 **❌ Less Effective:**
+
 ```typescript
 function calc(a, b) {
   return a / b * 100;
@@ -474,6 +484,7 @@ function calc(a, b) {
 ```
 
 **✅ More Effective:**
+
 ```typescript
 /**
  * Calculate percentage of fundraising goal completion
@@ -488,11 +499,13 @@ function calculateFundraisingPercentage(raised: number, goal: number): number {
 ### 2. Use Type Definitions
 
 **❌ Less Effective:**
+
 ```typescript
 const data = getData();
 ```
 
 **✅ More Effective:**
+
 ```typescript
 interface FundraiserData {
   id: string;
@@ -701,6 +714,7 @@ export const animations = {
 As you work, Copilot learns your patterns:
 
 **After implementing 2-3 glassmorphic cards:**
+
 ```typescript
 // Next card - just start typing:
 <div className="
@@ -708,6 +722,7 @@ As you work, Copilot learns your patterns:
 ```
 
 **After using formatCurrency twice:**
+
 ```typescript
 // Next usage - just start typing:
 const display = 
@@ -748,6 +763,7 @@ const display =
 ### Override Strategies
 
 **Pattern 1: Partial Accept**
+
 ```typescript
 // Copilot suggests:
 const [state, setState] = useState(null);
@@ -758,6 +774,7 @@ const [state, setState] = useState<FundraiserData | null>(null);
 ```
 
 **Pattern 2: Provide Example**
+
 ```typescript
 // Show Copilot the pattern once:
 <button className="btn-primary">First Button</button>
@@ -802,16 +819,19 @@ const [state, setState] = useState<FundraiserData | null>(null);
 ### Metrics to Track
 
 **Code Quality:**
+
 - TypeScript errors decreased?
 - Lint warnings decreased?
 - Test coverage improved?
 
 **Development Speed:**
+
 - Components completed per day
 - Time saved on boilerplate
 - Fewer bugs in Copilot code vs hand-written
 
 **Learning:**
+
 - New patterns learned
 - Better code suggestions over time
 - Project context understanding

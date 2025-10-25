@@ -7,6 +7,7 @@ The easiest way to deploy this Next.js application is with Vercel.
 ### Method 1: GitHub Integration (Recommended)
 
 1. **Push to GitHub**
+
    ```bash
    git init
    git add .
@@ -24,6 +25,7 @@ The easiest way to deploy this Next.js application is with Vercel.
    - Vercel will auto-detect Next.js settings
 
 3. **Configure Environment Variables** (optional)
+
    ```
    NEXT_PUBLIC_APP_NAME=Lead By Example
    NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
@@ -63,6 +65,7 @@ vercel --prod
 Add these in Vercel Dashboard → Settings → Environment Variables:
 
 ### Production Variables
+
 ```env
 NEXT_PUBLIC_APP_NAME=Lead By Example
 NEXT_PUBLIC_APP_URL=https://your-domain.com
@@ -72,6 +75,7 @@ NODE_ENV=production
 ## Performance Optimizations
 
 Vercel automatically provides:
+
 - ✅ Global CDN
 - ✅ Automatic HTTPS
 - ✅ Image Optimization
@@ -81,6 +85,7 @@ Vercel automatically provides:
 ## Monitoring
 
 Enable in Vercel Dashboard:
+
 - **Analytics** - Real-time traffic insights
 - **Speed Insights** - Core Web Vitals
 - **Logs** - Runtime logs and errors
@@ -88,6 +93,7 @@ Enable in Vercel Dashboard:
 ## Troubleshooting
 
 ### Build Fails
+
 ```bash
 # Test build locally first
 npm run build
@@ -97,11 +103,13 @@ npm run type-check
 ```
 
 ### Environment Variables Not Working
+
 - Ensure variables start with `NEXT_PUBLIC_` for client-side access
 - Redeploy after adding new variables
 - Check variable scope (Production/Preview/Development)
 
 ### Domain Issues
+
 - Wait 24-48 hours for DNS propagation
 - Verify DNS records are correct
 - Check SSL certificate status
@@ -109,6 +117,7 @@ npm run type-check
 ## Continuous Deployment
 
 Once connected to GitHub:
+
 - Push to `main` → Deploys to production
 - Open PR → Creates preview deployment
 - All commits get unique preview URLs
@@ -138,8 +147,8 @@ Once connected to GitHub:
 
 ## Support
 
-- Vercel Docs: https://vercel.com/docs
-- Next.js Docs: https://nextjs.org/docs
+- Vercel Docs: <https://vercel.com/docs>
+- Next.js Docs: <https://nextjs.org/docs>
 
 ---
 
