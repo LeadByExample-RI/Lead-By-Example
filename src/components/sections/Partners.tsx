@@ -25,7 +25,7 @@ const partners = [
     id: 2,
     name: "Reentry Campus Program",
     description: "An innovative campus-based program focused on education, skill development, and community integration for formerly incarcerated individuals.",
-    website: "https://reentryCampus.org",
+    website: "https://www.reentrycampusprogram.org/",
     logo: "https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20logo%20for%20Reentry%20Campus%20Program%20with%20graduation%20cap%20and%20building%20elements&image_size=square",
     services: [
       "College preparation",
