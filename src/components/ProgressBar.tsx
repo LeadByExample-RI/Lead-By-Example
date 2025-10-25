@@ -20,9 +20,9 @@ export default function ProgressBar({ raised, goal, percentage, daysLeft }: Prog
                      transition-all duration-500 ease-out" 
           style={{ width: `${percentage}%` }}
           role="progressbar"
-          aria-valuenow={percentage}
-          aria-valuemin={0}
-          aria-valuemax={100}
+          aria-valuenow={Number(percentage)}
+          aria-valuemin={Number(0)}
+          aria-valuemax={Number(100)}
           aria-label={`${percentage}% funded`}
         />
       </div>
