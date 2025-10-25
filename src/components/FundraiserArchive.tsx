@@ -43,7 +43,7 @@ export default function FundraiserArchive({ fundraisers, onCardClick }: Fundrais
         {/* View All Button */}
         <div className="text-center mt-12">
           <a 
-            href="/fundraisers" 
+            href="#fundraisers" 
             className="inline-block bg-cape-verde hover:bg-cape-verde-dark text-off-white font-bold 
                      text-lg py-4 px-10 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 
                      transition-all duration-300 focus-visible:ring-4 focus-visible:ring-cape-verde focus-visible:ring-offset-2"

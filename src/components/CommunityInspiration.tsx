@@ -108,7 +108,7 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/contact" 
+                href="#home" 
                 className="bg-royal-purple hover:bg-royal-purple-dark text-off-white font-bold 
                          py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 
                          transition-all duration-300 focus-visible:ring-4 focus-visible:ring-royal-purple focus-visible:ring-offset-2"
@@ -116,7 +116,7 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
                 Start a Fundraiser
               </a>
               <a 
-                href="/community" 
+                href="#community" 
                 className="bg-white hover:bg-gray-50 text-royal-purple font-bold py-4 px-8 
                          rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 
                          transition-all duration-300 border-2 border-royal-purple
