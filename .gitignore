@@ -113,3 +113,23 @@ storybook-static
 /docs/old
 /docs/*.draft.md
 /docs/*.backup.md
+
+# Prevent duplicate projects in docs/ - docs should contain ONLY documentation
+/docs/*/src/
+/docs/*/components/
+/docs/*/pages/
+/docs/*/styles/
+/docs/*/public/
+/docs/*/node_modules/
+/docs/*/package.json
+/docs/*/package-lock.json
+/docs/*/pnpm-lock.yaml
+/docs/*/yarn.lock
+/docs/*/tsconfig.json
+/docs/*/next.config.js
+/docs/*/next.config.mjs
+/docs/*/*.config.js
+/docs/*/*.config.ts
+/docs/*/.eslintrc*
+/docs/*/.prettierrc*
+/docs/*/.gitignore
