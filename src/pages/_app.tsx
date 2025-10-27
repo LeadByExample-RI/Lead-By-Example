@@ -1,6 +1,19 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Inter, Montserrat } from 'next/font/google';
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -30,7 +43,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://vercel.live" />
       </Head>
 
-      <Component {...pageProps} />
+      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

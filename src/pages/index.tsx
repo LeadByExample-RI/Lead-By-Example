@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import { Navbar } from '@/components/layout/Navbar';
 import Header from '@/components/Header';
 import PrevalentFundraiser from '@/components/PrevalentFundraiser';
 import FundraiserArchive from '@/components/FundraiserArchive';
@@ -93,9 +94,10 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen">
+        <Navbar />
         <Header />
         
-        <main>
+        <main className="pt-20">{/* Add padding-top to prevent content hiding under fixed navbar */}
           <PrevalentFundraiser 
             fundraiser={activeFundraiser}
             onJoin={handleJoinClick}

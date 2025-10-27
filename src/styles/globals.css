@@ -61,3 +61,42 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 }
+
+/* Cape Verde Brand Colors */
+:root {
+  --cape-verde-dark: oklch(0.15 0.02 240);
+  --off-white: oklch(0.98 0.005 90);
+  --gold: oklch(0.75 0.15 85);
+}
+
+/* Glassmorphism Utilities */
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.shadow-glass {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.3);
+}
+
+.backdrop-blur-lg {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.backdrop-blur-xl {
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
