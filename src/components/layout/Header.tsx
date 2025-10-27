@@ -137,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({
             },
           }}
         >
-          <div className="space-y-1 border-t border-white/10 glass-effect-dark px-4 pb-3 pt-2">
+          <div className="glass-effect-dark space-y-1 border-t border-white/10 px-4 pb-3 pt-2">
             {navigation.items.map((item) => (
               <Link
                 key={item.id}
@@ -145,9 +145,7 @@ const Header: React.FC<HeaderProps> = ({
                 className={cn(
                   'block rounded-md px-3 py-2 text-base font-medium transition-colors duration-200',
                   'hover:bg-white/10',
-                  navigation.activeItem === item.id
-                    ? 'bg-white/10 text-gold'
-                    : 'text-white/90'
+                  navigation.activeItem === item.id ? 'bg-white/10 text-gold' : 'text-white/90'
                 )}
                 onClick={() => {
                   navigation.onItemClick?.(item);
@@ -158,7 +156,7 @@ const Header: React.FC<HeaderProps> = ({
                   {item.icon && <span className="h-4 w-4">{item.icon}</span>}
                   {item.label}
                   {item.badge && (
-                    <span className="ml-auto rounded-full bg-gold px-2 py-0.5 text-xs text-primary-900 font-semibold">
+                    <span className="ml-auto rounded-full bg-gold px-2 py-0.5 text-xs font-semibold text-primary-900">
                       {item.badge}
                     </span>
                   )}
