@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { HeaderProps } from '@/types/components';
 import { Button } from '@/components/ui/Button';
 import { useUIStore } from '@/store/ui-store';
+import { HeaderProps } from '@/types/components';
 import { cn } from '@/utils/helpers';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 const Header: React.FC<HeaderProps> = ({
   variant = 'default',
@@ -15,15 +15,15 @@ const Header: React.FC<HeaderProps> = ({
   actions = [],
   searchEnabled = false,
   mobileMenuEnabled = true,
-  className
+  className,
 }) => {
   const { mobileMenuOpen, toggleMobileMenu } = useUIStore();
 
   const headerClasses = cn(
-    'sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800',
+    'sticky top-0 z-50 w-full',
     variant === 'transparent' && 'bg-transparent border-transparent',
-    variant === 'default' && 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm',
-    variant === 'sticky' && 'bg-white dark:bg-neutral-900 shadow-sm',
+    variant === 'default' && 'glass-effect-dark',
+    variant === 'sticky' && 'glass-effect-dark border-b border-white/10',
     className
   );
 
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             {navigation.logo ? (
@@ -43,9 +43,9 @@ const Header: React.FC<HeaderProps> = ({
                 {navigation.logo}
               </Link>
             ) : (
-              <Link 
-                href="/" 
-                className="text-xl font-bold text-neutral-900 dark:text-neutral-100"
+              <Link
+                href="/"
+                className="text-xl font-bold text-gold transition-colors duration-200 hover:text-gold-light"
               >
                 Lead By Example
               </Link>
@@ -53,25 +53,23 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden items-center space-x-8 md:flex">
             {navigation.items.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 className={cn(
                   'text-sm font-medium transition-colors duration-200',
-                  'hover:text-primary-600 dark:hover:text-primary-400',
-                  navigation.activeItem === item.id
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-neutral-700 dark:text-neutral-300'
+                  'hover:text-gold',
+                  navigation.activeItem === item.id ? 'text-gold' : 'text-white/90'
                 )}
                 onClick={() => navigation.onItemClick?.(item)}
               >
                 <span className="flex items-center gap-2">
-                  {item.icon && <span className="w-4 h-4">{item.icon}</span>}
+                  {item.icon && <span className="h-4 w-4">{item.icon}</span>}
                   {item.label}
                   {item.badge && (
-                    <span className="bg-primary-100 text-primary-800 text-xs px-2 py-0.5 rounded-full">
+                    <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-semibold text-primary-900">
                       {item.badge}
                     </span>
                   )}
@@ -99,7 +97,7 @@ const Header: React.FC<HeaderProps> = ({
                 onClick={action.onClick}
                 className="hidden sm:inline-flex"
               >
-                {action.icon && <span className="w-4 h-4">{action.icon}</span>}
+                {action.icon && <span className="h-4 w-4">{action.icon}</span>}
                 {action.label}
               </Button>
             ))}
@@ -113,11 +111,7 @@ const Header: React.FC<HeaderProps> = ({
                 className="md:hidden"
                 aria-label="Toggle mobile menu"
               >
-                {mobileMenuOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Menu className="w-5 h-5" />
-                )}
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             )}
           </div>
@@ -134,26 +128,26 @@ const Header: React.FC<HeaderProps> = ({
             open: {
               opacity: 1,
               height: 'auto',
-              transition: { duration: 0.3, ease: 'easeOut' }
+              transition: { duration: 0.3, ease: 'easeOut' },
             },
             closed: {
               opacity: 0,
               height: 0,
-              transition: { duration: 0.3, ease: 'easeIn' }
-            }
+              transition: { duration: 0.3, ease: 'easeIn' },
+            },
           }}
         >
-          <div className="px-4 pt-2 pb-3 space-y-1 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+          <div className="space-y-1 border-t border-white/10 glass-effect-dark px-4 pb-3 pt-2">
             {navigation.items.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 className={cn(
-                  'block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200',
-                  'hover:bg-neutral-100 dark:hover:bg-neutral-800',
+                  'block rounded-md px-3 py-2 text-base font-medium transition-colors duration-200',
+                  'hover:bg-white/10',
                   navigation.activeItem === item.id
-                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-neutral-700 dark:text-neutral-300'
+                    ? 'bg-white/10 text-gold'
+                    : 'text-white/90'
                 )}
                 onClick={() => {
                   navigation.onItemClick?.(item);
@@ -161,20 +155,20 @@ const Header: React.FC<HeaderProps> = ({
                 }}
               >
                 <span className="flex items-center gap-2">
-                  {item.icon && <span className="w-4 h-4">{item.icon}</span>}
+                  {item.icon && <span className="h-4 w-4">{item.icon}</span>}
                   {item.label}
                   {item.badge && (
-                    <span className="bg-primary-100 text-primary-800 text-xs px-2 py-0.5 rounded-full ml-auto">
+                    <span className="ml-auto rounded-full bg-gold px-2 py-0.5 text-xs text-primary-900 font-semibold">
                       {item.badge}
                     </span>
                   )}
                 </span>
               </Link>
             ))}
-            
+
             {/* Mobile Actions */}
             {actions.length > 0 && (
-              <div className="pt-4 space-y-2">
+              <div className="space-y-2 pt-4">
                 {actions.map((action) => (
                   <Button
                     key={action.id}
@@ -186,7 +180,7 @@ const Header: React.FC<HeaderProps> = ({
                     }}
                     fullWidth
                   >
-                    {action.icon && <span className="w-4 h-4">{action.icon}</span>}
+                    {action.icon && <span className="h-4 w-4">{action.icon}</span>}
                     {action.label}
                   </Button>
                 ))}

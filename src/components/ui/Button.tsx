@@ -76,7 +76,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
       primary:
-        'bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700 hover:shadow-lg hover:-translate-y-0.5 focus:ring-accent-500',
+        'bg-gradient-to-r from-accent-500 to-accent-600 text-primary-900 font-bold hover:from-accent-400 hover:to-accent-500 hover:shadow-lg hover:-translate-y-0.5 focus:ring-accent-500 shadow-md',
       secondary:
         'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg hover:-translate-y-0.5 focus:ring-secondary-500',
       accent:
