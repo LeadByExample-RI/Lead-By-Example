@@ -12,51 +12,67 @@ module.exports = {
         'cape-verde': {
           DEFAULT: '#01514C',
           dark: '#003d39',
-          light: '#027066'
+          light: '#027066',
         },
         'royal-purple': {
           DEFAULT: '#4B306A',
           dark: '#421B5A',
-          light: '#5d3c7f'
+          light: '#5d3c7f',
         },
-        'gold': {
+        gold: {
           DEFAULT: '#FFD700',
           dark: '#E5C100',
-          light: '#ffed4e'
+          light: '#ffed4e',
         },
         'off-white': '#F6F6F6',
         'coral-accent': '#FF6F61',
         'copper-accent': '#B87333',
+        // Cape Verdean Color Palette - Primary (Deep Green-Blue)
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: '#e6f5f4',
+          100: '#cceae9',
+          200: '#99d5d3',
+          300: '#66c0bd',
+          400: '#33aba7',
+          500: '#01514C', // Main Cape Verde color
+          600: '#014843',
+          700: '#013e3a',
+          800: '#013531',
+          900: '#002c28',
+          950: '#001f1c',
         },
+        // Cape Verdean Color Palette - Secondary (Royal Purple)
         secondary: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-          950: '#4a044e',
+          50: '#f3eff7',
+          100: '#e7dfef',
+          200: '#cfbfdf',
+          300: '#b79fcf',
+          400: '#9f7fbf',
+          500: '#4B306A', // Main Royal Purple color
+          600: '#432b5e',
+          700: '#3b2652',
+          800: '#332046',
+          900: '#2b1b3a',
+          950: '#1f1329',
+        },
+        // Accent color (Brilliant Gold)
+        accent: {
+          50: '#fffef0',
+          100: '#fffce0',
+          200: '#fff9c2',
+          300: '#fff6a3',
+          400: '#fff385',
+          500: '#FFD700', // Main Gold color
+          600: '#e5c100',
+          700: '#ccab00',
+          800: '#b39500',
+          900: '#997f00',
+          950: '#665500',
         },
       },
       fontFamily: {
-        'heading': ['Montserrat', 'var(--font-heading)', 'system-ui', 'sans-serif'],
-        'body': ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['Montserrat', 'var(--font-heading)', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       animation: {
@@ -66,7 +82,7 @@ module.exports = {
         'slide-out': 'slideOut 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
         'bounce-slow': 'bounce 3s infinite',
-        'shimmer': 'shimmer 2s infinite',
+        shimmer: 'shimmer 2s infinite',
       },
       keyframes: {
         fadeIn: {
@@ -95,8 +111,8 @@ module.exports = {
         },
       },
       spacing: {
-        '128': '32rem',
-        '144': '36rem',
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -104,4 +120,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

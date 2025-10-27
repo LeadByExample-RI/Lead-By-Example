@@ -6,45 +6,70 @@
   html {
     font-family: Inter, system-ui, sans-serif;
   }
-  
+
   body {
-    @apply bg-off-white text-gray-900 font-body;
+    @apply font-body min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-900 text-white;
+  }
+
+  /* Hero Section Background */
+  section:first-of-type {
+    @apply relative;
+    background: linear-gradient(135deg, #01514c 0%, #003d39 50%, #4b306a 100%);
+  }
+
+  section:first-of-type::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 opacity-20;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(75, 48, 106, 0.2) 0%, transparent 50%);
+  }
+
+  /* Alternating Section Backgrounds */
+  section:nth-of-type(2n) {
+    background: linear-gradient(180deg, #4b306a 0%, #3b2652 100%);
+  }
+
+  section:nth-of-type(2n + 1):not(:first-of-type) {
+    background: linear-gradient(180deg, #01514c 0%, #003d39 100%);
+  }
+
+  section:nth-of-type(4) {
+    background: linear-gradient(135deg, #01514c 0%, #4b306a 100%);
+  }
+
+  section:last-of-type {
+    background: linear-gradient(180deg, #4b306a 0%, #1f1329 100%);
   }
 }
 
 @layer components {
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  
+
   .btn-primary {
-    @apply bg-gold hover:bg-gold-dark text-black font-bold py-3 px-6 rounded-lg 
-           shadow-lg hover:shadow-xl transform hover:-translate-y-1 
-           transition-all duration-300 focus-visible:ring-4 focus-visible:ring-gold;
+    @apply bg-gold hover:bg-gold-dark focus-visible:ring-gold transform rounded-lg px-6 py-3 font-bold text-black shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:ring-4;
   }
-  
+
   .btn-secondary {
-    @apply border-2 border-royal-purple text-royal-purple 
-           hover:bg-royal-purple hover:text-white font-bold 
-           py-3 px-6 rounded-lg transition-all duration-300
-           focus-visible:ring-4 focus-visible:ring-royal-purple;
+    @apply border-royal-purple text-royal-purple hover:bg-royal-purple focus-visible:ring-royal-purple rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:text-white focus-visible:ring-4;
   }
-  
+
   .card-hover {
-    @apply hover:shadow-xl transform hover:-translate-y-2 
-           transition-all duration-300;
+    @apply transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
   }
-  
+
   .gradient-royal {
-    @apply bg-gradient-to-r from-royal-purple to-royal-purple-dark;
+    @apply from-royal-purple to-royal-purple-dark bg-gradient-to-r;
   }
-  
+
   .gradient-cape {
-    @apply bg-gradient-to-r from-cape-verde to-cape-verde-dark;
+    @apply from-cape-verde to-cape-verde-dark bg-gradient-to-r;
   }
-  
+
   .gradient-gold {
-    @apply bg-gradient-to-r from-gold to-gold-dark;
+    @apply from-gold to-gold-dark bg-gradient-to-r;
   }
 }
 
@@ -52,51 +77,92 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .text-shadow-gold {
     text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
   }
-  
+
   .text-shadow-dark {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
-}
 
-/* Cape Verde Brand Colors */
-:root {
-  --cape-verde-dark: oklch(0.15 0.02 240);
-  --off-white: oklch(0.98 0.005 90);
-  --gold: oklch(0.75 0.15 85);
-}
+  /* Premium Glassmorphic Effects */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
 
-/* Glassmorphism Utilities */
-.glass-button {
-  background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
+  .glass-effect-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
+  .glass-effect-strong {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+  }
 
-.shadow-glass {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
+  /* 3D Depth Effects */
+  .depth-3d {
+    transform: perspective(1000px) translateZ(0);
+    transform-style: preserve-3d;
+  }
 
-.shadow-gold {
-  box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.3);
-}
+  .depth-3d:hover {
+    transform: perspective(1000px) translateZ(20px) rotateX(2deg);
+  }
 
-.backdrop-blur-lg {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-}
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-.backdrop-blur-xl {
-  -webkit-backdrop-filter: blur(24px);
-  backdrop-filter: blur(24px);
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(255, 215, 0, 0.1);
+  }
+
+  .shadow-glass {
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .shadow-glass-dark {
+    box-shadow:
+      0 12px 40px 0 rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 0 20px rgba(1, 81, 76, 0.2);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, #ffd700 0%, #fff9c2 50%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Container Utilities */
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
 }

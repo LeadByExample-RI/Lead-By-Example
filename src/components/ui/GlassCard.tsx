@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
 import { cn } from '@/utils/helpers';
+import React, { forwardRef } from 'react';
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'dark' | 'light';
@@ -18,25 +18,22 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     };
 
     const variantClasses = {
-      default: 'bg-white/10 border-white/20 shadow-glass',
-      dark: 'bg-black/20 border-white/10 shadow-glass-dark',
-      light: 'bg-white/15 border-white/30 shadow-medium',
+      default: 'bg-white/15 border-white/25 shadow-glass',
+      dark: 'bg-black/30 border-white/20 shadow-glass-dark',
+      light: 'bg-white/20 border-white/30 shadow-glass',
     };
 
     const baseClasses = cn(
-      'rounded-xl border transition-all duration-300',
+      'rounded-2xl border transition-all duration-300 depth-3d',
       blurClasses[blur],
       variantClasses[variant],
-      hover && 'hover:scale-105 hover:shadow-xl hover-lift',
+      hover && 'hover-lift cursor-pointer',
+      'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/10 before:to-transparent before:pointer-events-none',
       className
     );
 
     return (
-      <div
-        ref={ref}
-        className={baseClasses}
-        {...props}
-      >
+      <div ref={ref} className={cn('relative', baseClasses)} {...props}>
         {children}
       </div>
     );
