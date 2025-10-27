@@ -71,6 +71,15 @@
   .gradient-gold {
     @apply from-gold to-gold-dark bg-gradient-to-r;
   }
+
+  /* Navbar Glassmorphism */
+  .navbar-glass {
+    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.15), rgba(75, 48, 106, 0.1));
+  }
+
+  .navbar-glass-scrolled {
+    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.25), rgba(75, 48, 106, 0.2));
+  }
 }
 
 @layer utilities {

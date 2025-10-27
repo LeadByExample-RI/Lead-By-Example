@@ -1,3 +1,4 @@
+import { Navbar } from '@/components/layout/Navbar';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -56,6 +57,8 @@ export default function Home() {
       </Head>
 
       <main>
+        <Navbar />
+
         {/* Hero Section with Current Fundraiser */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"

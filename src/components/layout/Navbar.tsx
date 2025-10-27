@@ -11,9 +11,11 @@ export function Navbar() {
   // Navigation links configuration
   const navLinks = [
     { href: '#home', label: 'Home' },
-    { href: '#fundraisers', label: 'Fundraisers' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#mission', label: 'Our Mission' },
+    { href: '#success-stories', label: 'Success Stories' },
+    { href: '#impact', label: 'Impact' },
+    { href: '#get-involved', label: 'Get Involved' },
+    { href: '#partners', label: 'Partners' },
   ]
 
   // Scroll detection for enhanced glassmorphism
@@ -27,10 +29,10 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-b from-secondary-900 to-neutral-900 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'backdrop-blur-xl shadow-glass'
-          : 'backdrop-blur-lg'
+          ? 'glass-effect-strong shadow-glass-dark navbar-glass-scrolled'
+          : 'glass-effect-dark navbar-glass'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,7 +53,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/10"
+                className="px-4 py-2 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/15 hover:backdrop-blur-md hover:border hover:border-white/20"
               >
                 {link.label}
               </Link>
@@ -81,7 +83,7 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div 
-          className="md:hidden bg-cape-verde-dark/95 border-t border-white/10 backdrop-blur-xl"
+          className="md:hidden glass-effect-dark border-t border-white/20"
         >
           <div className="px-4 py-6 space-y-3">
             {navLinks.map((link) => (
