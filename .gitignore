@@ -86,3 +86,30 @@ Desktop.ini
 
 # Storybook
 storybook-static
+
+# Client assets and documentation (non-essential for builds)
+/client_assets
+/assets
+*.zip
+*.pdf
+*.psd
+*.ai
+*.sketch
+*.fig
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.wav
+*.flac
+
+# Documentation drafts and archives
+/docs/drafts
+/docs/archive
+/docs/old
+/docs/*.draft.md
+/docs/*.backup.md
