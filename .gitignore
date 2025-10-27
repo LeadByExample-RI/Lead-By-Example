@@ -86,3 +86,50 @@ Desktop.ini
 
 # Storybook
 storybook-static
+
+# Client assets and documentation (non-essential for builds)
+/client_assets
+/assets
+*.zip
+*.pdf
+*.psd
+*.ai
+*.sketch
+*.fig
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.wav
+*.flac
+
+# Documentation drafts and archives
+/docs/drafts
+/docs/archive
+/docs/old
+/docs/*.draft.md
+/docs/*.backup.md
+
+# Prevent duplicate projects in docs/ - docs should contain ONLY documentation
+/docs/*/src/
+/docs/*/components/
+/docs/*/pages/
+/docs/*/styles/
+/docs/*/public/
+/docs/*/node_modules/
+/docs/*/package.json
+/docs/*/package-lock.json
+/docs/*/pnpm-lock.yaml
+/docs/*/yarn.lock
+/docs/*/tsconfig.json
+/docs/*/next.config.js
+/docs/*/next.config.mjs
+/docs/*/*.config.js
+/docs/*/*.config.ts
+/docs/*/.eslintrc*
+/docs/*/.prettierrc*
+/docs/*/.gitignore
