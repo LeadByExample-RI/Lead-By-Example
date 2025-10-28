@@ -174,4 +174,115 @@
   .section-padding {
     @apply py-20 sm:py-24 lg:py-32;
   }
+
+  /* Purple Dots Animation */
+  .nav-link-dots {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-link-dots::before,
+  .nav-link-dots::after,
+  .nav-link-dots .dot-1,
+  .nav-link-dots .dot-2,
+  .nav-link-dots .dot-3,
+  .nav-link-dots .dot-4,
+  .nav-link-dots .dot-5 {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: #4B306A;
+    border-radius: 50%;
+    opacity: 0;
+    animation: purpleDot 3s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .nav-link-dots::before {
+    top: -15px;
+    left: 20%;
+    animation-delay: 0s;
+  }
+
+  .nav-link-dots::after {
+    top: -15px;
+    left: 40%;
+    animation-delay: 0.3s;
+  }
+
+  .nav-link-dots .dot-1 {
+    top: -15px;
+    left: 60%;
+    animation-delay: 0.6s;
+  }
+
+  .nav-link-dots .dot-2 {
+    top: -15px;
+    left: 80%;
+    animation-delay: 0.9s;
+  }
+
+  .nav-link-dots .dot-3 {
+    top: -15px;
+    right: 20%;
+    animation-delay: 1.2s;
+  }
+
+  .nav-link-dots .dot-4 {
+    top: -15px;
+    right: 10%;
+    animation-delay: 1.5s;
+  }
+
+  .nav-link-dots .dot-5 {
+    top: -15px;
+    right: 5%;
+    animation-delay: 1.8s;
+  }
+
+  @keyframes purpleDot {
+    0% {
+      opacity: 0;
+      transform: translateY(-5px) scale(0.2);
+    }
+    15% {
+      opacity: 0.3;
+      transform: translateY(5px) scale(0.4);
+    }
+    30% {
+      opacity: 0.7;
+      transform: translateY(15px) scale(0.6);
+    }
+    45% {
+      opacity: 1;
+      transform: translateY(25px) scale(0.8);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(35px) scale(1);
+    }
+    75% {
+      opacity: 0.8;
+      transform: translateY(25px) scale(0.8);
+    }
+    90% {
+      opacity: 0.4;
+      transform: translateY(15px) scale(0.6);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(5px) scale(0.2);
+    }
+  }
+
+  .nav-link:hover .nav-link-dots::before,
+  .nav-link:hover .nav-link-dots::after,
+  .nav-link:hover .nav-link-dots .dot-1,
+  .nav-link:hover .nav-link-dots .dot-2,
+  .nav-link:hover .nav-link-dots .dot-3,
+  .nav-link:hover .nav-link-dots .dot-4,
+  .nav-link:hover .nav-link-dots .dot-5 {
+    animation-play-state: running;
+  }
 }
