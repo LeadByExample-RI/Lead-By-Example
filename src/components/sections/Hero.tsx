@@ -218,9 +218,23 @@ export const Hero: React.FC<HeroProps> = ({
                 <Text size="sm" className="text-white/80">
                   {currentFundraiser.date} • {currentFundraiser.time}
                 </Text>
-                <Text size="sm" className="text-accent-500 font-medium">
-                  📍 {currentFundraiser.location}
-                </Text>
+                <button
+                  onClick={() => showMapPlaceholder({
+                    locationName: currentFundraiser.title,
+                    locationAddress: currentFundraiser.location,
+                    locationLat: 41.7301,
+                    locationLng: -71.5662
+                  })}
+                  className="text-left hover:bg-white/10 rounded-lg px-3 py-2 -ml-3 transition-colors group inline-flex items-center gap-2"
+                  data-location-address={currentFundraiser.location}
+                  data-location-lat="41.7301"
+                  data-location-lng="-71.5662"
+                >
+                  <span className="text-accent-500 group-hover:scale-110 transition-transform">📍</span>
+                  <Text size="sm" className="text-accent-500 font-medium group-hover:underline">
+                    {currentFundraiser.location}
+                  </Text>
+                </button>
               </div>
 
               {/* Progress Section */}
