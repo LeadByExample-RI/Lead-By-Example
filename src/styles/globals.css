@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-tech-rgb: 16, 185, 129; /* emerald-500 for tech accent */
+  --gold-rgb: 255, 215, 0; /* gold color */
+  --cape-verde-rgb: 1, 81, 76; /* cape verde primary */
+  --royal-purple-rgb: 75, 48, 106; /* royal purple */
+}
+
 @layer base {
   html {
     font-family: Inter, system-ui, sans-serif;
