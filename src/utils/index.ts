@@ -54,3 +54,9 @@ export {
   staggerContainer,
   staggerItem,
 } from './animations';
+
+// Map utilities
+export {
+  showMapPlaceholder,
+  hideMapPlaceholder,
+} from './map';

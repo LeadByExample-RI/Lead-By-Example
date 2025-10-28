@@ -4,11 +4,19 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { MapPlaceholder } from '../MapPlaceholder'
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('#home')
+  const [isMapOpen, setIsMapOpen] = useState(false)
+  const [mapData, setMapData] = useState<{
+    locationName?: string
+    locationAddress?: string
+    locationLat?: number
+    locationLng?: number
+  }>({})
 
   // Navigation links configuration
   const navLinks = [
@@ -51,6 +59,26 @@ export function Navbar() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Listen for custom map events from other components
+  useEffect(() => {
+    const handleShowMap = (event: CustomEvent) => {
+      const { locationName, locationAddress, locationLat, locationLng } = event.detail
+      setMapData({ locationName, locationAddress, locationLat, locationLng })
+      setIsMapOpen(true)
+    }
+
+    const handleHideMap = () => {
+      setIsMapOpen(false)
+    }
+
+    window.addEventListener('showMapPlaceholder' as any, handleShowMap)
+    window.addEventListener('hideMapPlaceholder' as any, handleHideMap)
+    return () => {
+      window.removeEventListener('showMapPlaceholder' as any, handleShowMap)
+      window.removeEventListener('hideMapPlaceholder' as any, handleHideMap)
+    }
   }, [])
 
   return (
@@ -290,6 +318,16 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Map Placeholder Modal */}
+      <MapPlaceholder
+        isOpen={isMapOpen}
+        onClose={() => setIsMapOpen(false)}
+        locationName={mapData.locationName}
+        locationAddress={mapData.locationAddress}
+        locationLat={mapData.locationLat}
+        locationLng={mapData.locationLng}
+      />
     </nav>
   )
 }
