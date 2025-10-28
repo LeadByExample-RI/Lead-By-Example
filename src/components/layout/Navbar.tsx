@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -53,16 +54,33 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="nav-link px-4 py-2 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/15 hover:backdrop-blur-md hover:border hover:border-white/20"
+                className="relative px-4 py-2 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/15 hover:backdrop-blur-md overflow-hidden group"
               >
-                <span className="nav-link-dots">
-                  {link.label}
-                  <span className="dot-1"></span>
-                  <span className="dot-2"></span>
-                  <span className="dot-3"></span>
-                  <span className="dot-4"></span>
-                  <span className="dot-5"></span>
-                </span>
+                {/* Animated dots - shown on hover */}
+                <motion.div
+                  className='absolute inset-0 flex items-center justify-center gap-1'
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={`loading-dot-${i}`}
+                      className='h-2 w-2 rounded-full bg-gold'
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 1, 0.3],
+                      }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                      }}
+                    />
+                  ))}
+                </motion.div>
+                
+                {/* Link text */}
+                <span className="relative z-10">{link.label}</span>
               </Link>
             ))}
           </div>
@@ -98,16 +116,33 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="nav-link block px-4 py-3 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/10"
+                className="relative block px-4 py-3 text-off-white/90 hover:text-gold font-medium transition-all duration-300 rounded-lg hover:bg-white/10 overflow-hidden group"
               >
-                <span className="nav-link-dots">
-                  {link.label}
-                  <span className="dot-1"></span>
-                  <span className="dot-2"></span>
-                  <span className="dot-3"></span>
-                  <span className="dot-4"></span>
-                  <span className="dot-5"></span>
-                </span>
+                {/* Animated dots - shown on hover */}
+                <motion.div
+                  className='absolute inset-0 flex items-center justify-center gap-1'
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={`mobile-dot-${i}`}
+                      className='h-2 w-2 rounded-full bg-gold'
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 1, 0.3],
+                      }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                      }}
+                    />
+                  ))}
+                </motion.div>
+                
+                {/* Link text */}
+                <span className="relative z-10">{link.label}</span>
               </Link>
             ))}
             <button
