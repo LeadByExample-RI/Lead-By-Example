@@ -26,6 +26,7 @@ export function Navbar() {
     { href: '#impact', label: 'Impact' },
     { href: '#get-involved', label: 'Get Involved' },
     { href: '#partners', label: 'Partners' },
+    { href: '#footer', label: 'Footer' },
   ]
 
   // Smooth scroll handler
