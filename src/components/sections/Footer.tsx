@@ -196,14 +196,14 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-2 text-white/60">
-              <Text size="sm">Made with</Text>
+              <Text size="sm">Built with</Text>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
                 <Heart className="w-4 h-4 text-accent-400 fill-current" />
               </motion.div>
-              <Text size="sm">for our community</Text>
+              <Text size="sm">by StrayDog Syndications LLC for our community</Text>
             </div>
 
             <div className="flex gap-6">
