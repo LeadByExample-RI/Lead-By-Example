@@ -48,8 +48,8 @@ export default function MentorsPage() {
             <div className="text-center">
               <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">Meet Our Mentors</h1>
               <p className="mx-auto max-w-3xl text-xl text-verdean-50 md:text-2xl">
-                Men and women with lived experience, leading by example and making a difference in
-                our community
+                Dedicated community members with lived experience, leading by example and making a
+                difference in our neighborhood
               </p>
             </div>
           </div>
