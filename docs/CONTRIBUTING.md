@@ -21,19 +21,26 @@ We are committed to providing a welcoming and inclusive environment for all cont
 
 1. **Fork the repository**
 2. **Clone your fork**
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/Lead-By-Example.git
    cd Lead-By-Example
    ```
+
 3. **Install dependencies**
+
    ```bash
    npm install
    ```
+
 4. **Set up environment**
+
    ```bash
    cp .env.example .env.local
    ```
+
 5. **Create a branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -42,14 +49,18 @@ We are committed to providing a welcoming and inclusive environment for all cont
 
 1. Make your changes
 2. Run linting and formatting
+
    ```bash
    npm run lint
    npm run format
    ```
+
 3. Test your changes
+
    ```bash
    npm run dev
    ```
+
 4. Commit your changes
 5. Push to your fork
 6. Open a Pull Request

@@ -35,16 +35,16 @@ Click the button below for instant deployment:
    - **Install Command**: `npm install` (auto-detected)
 
 4. **Add Environment Variables**
-   
+
    Click "Environment Variables" and add the following (copy from `.env.example`):
-   
+
    ```
    NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
    NEXT_PUBLIC_APP_NAME=Lead By Example
    NODE_ENV=production
    NEXT_PUBLIC_ENABLE_ANALYTICS=true
    ```
-   
+
    Add any additional variables your project needs.
 
 5. **Deploy**
@@ -72,7 +72,7 @@ Click the button below for instant deployment:
    # From project root
    vercel
    ```
-   
+
    This creates a preview deployment for testing.
 
 4. **Deploy to Production**
@@ -101,12 +101,13 @@ Once connected via Method 1 or 2:
    - Pull requests → Preview deployment with unique URL
 
 2. **Deployment Workflow**
+
    ```bash
    git add .
    git commit -m "Your commit message"
    git push origin main
    ```
-   
+
    Vercel automatically builds and deploys!
 
 ## 🔐 Environment Variables Setup
@@ -122,6 +123,7 @@ Once connected via Method 1 or 2:
 ### Optional Variables
 
 See `.env.example` for complete list including:
+
 - Analytics (Google Analytics, etc.)
 - Authentication (OAuth providers)
 - CMS integration
@@ -160,9 +162,9 @@ vercel env pull .env.local
    - Follow DNS configuration instructions
 
 2. **DNS Configuration**
-   
+
    Add these records to your DNS provider:
-   
+
    ```
    Type: A
    Name: @
@@ -213,6 +215,7 @@ In Vercel Dashboard under Project Settings:
 ### Performance Optimizations
 
 Vercel automatically provides:
+
 - ✅ Global CDN
 - ✅ Automatic HTTPS
 - ✅ Image Optimization
@@ -243,16 +246,19 @@ vercel logs [deployment-url]
 ### Build Failures
 
 **Check build logs:**
+
 ```bash
 vercel logs
 ```
 
 **Common issues:**
+
 - Missing environment variables
 - TypeScript errors
 - Dependency issues
 
 **Solutions:**
+
 ```bash
 # Locally test build
 npm run build
@@ -283,11 +289,13 @@ vercel env ls
 ## 🔄 Redeployment
 
 ### Redeploy via Dashboard
+
 1. Go to Deployments
 2. Click "..." on a deployment
 3. Select "Redeploy"
 
 ### Redeploy via CLI
+
 ```bash
 # Redeploy latest
 vercel --prod
@@ -297,6 +305,7 @@ vercel rollback [deployment-url]
 ```
 
 ### Trigger Redeployment via Git
+
 ```bash
 git commit --allow-empty -m "Trigger redeploy"
 git push
