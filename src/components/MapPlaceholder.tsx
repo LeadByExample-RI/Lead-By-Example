@@ -52,7 +52,7 @@ export function MapPlaceholder({
         <>
           {/* Backdrop/Overlay */}
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[1000]"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9998]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -62,7 +62,7 @@ export function MapPlaceholder({
           />
 
           {/* Modal Container */}
-          <div className="fixed inset-0 z-[1001] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             <motion.div
               className="relative w-full max-w-[1200px] bg-white rounded-lg shadow-2xl border-2 border-[#4B306A] overflow-hidden"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
