@@ -1,17 +1,19 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Header } from '@/components/layout/Header';
-import { NavigationItem } from '@/types/components';
+import { Inter, Montserrat } from 'next/font/google';
 
-const navigationItems: NavigationItem[] = [
-  { id: 'home', label: 'Home', href: '/' },
-  { id: 'mission', label: 'Our Mission', href: '#mission' },
-  { id: 'stories', label: 'Success Stories', href: '#stories' },
-  { id: 'impact', label: 'Impact', href: '#impact' },
-  { id: 'get-involved', label: 'Get Involved', href: '#get-involved' },
-  { id: 'partners', label: 'Partners', href: '#partners' },
-];
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -30,9 +32,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-        {/* Security headers */}
+        {/* Security headers - Note: X-Frame-Options is set in vercel.json, not in meta tags */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -41,28 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://vercel.live" />
       </Head>
 
-      <Header
-        variant="sticky"
-        navigation={{
-          items: navigationItems,
-        }}
-        actions={[
-          {
-            id: 'donate',
-            label: 'Donate Now',
-            variant: 'primary',
-            onClick: () => {
-              const donateSection = document.querySelector('#donate');
-              if (donateSection) {
-                donateSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            },
-          },
-        ]}
-        mobileMenuEnabled={true}
-      />
-
-      <Component {...pageProps} />
+      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }
