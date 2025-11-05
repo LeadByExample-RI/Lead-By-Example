@@ -93,6 +93,9 @@ client_assets/*
 !client_assets/.gitkeep
 !client_assets/PLACEHOLDER.txt
 
+# Temporary Claude folder
+temp-claude/
+
 # Other assets and large files
 /assets
 *.zip
