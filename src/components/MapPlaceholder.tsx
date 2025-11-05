@@ -48,9 +48,9 @@ export function MapPlaceholder({
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          {/* Backdrop/Overlay - Below navbar */}
+          {/* Backdrop/Overlay - ABOVE navbar (z-[100]) */}
           <motion.div
-            className="fixed top-20 left-0 right-0 bottom-0 bg-black/40 backdrop-blur-sm z-40 pointer-events-auto"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] pointer-events-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -59,18 +59,19 @@ export function MapPlaceholder({
             aria-hidden="true"
           />
 
-          {/* Modal Container - Centered below navbar, responsive */}
-          <div className="fixed top-20 left-0 right-0 bottom-0 z-50 pointer-events-none flex items-center justify-center px-4 sm:px-6 md:px-8 py-4 overflow-auto">
-            <motion.div
-              className="relative bg-white rounded-2xl shadow-2xl w-full h-full max-w-6xl max-h-[calc(100vh-10rem)] sm:max-h-[calc(100vh-8rem)] md:h-auto md:max-h-[85vh] overflow-hidden border-2 border-[#4B306A] pointer-events-auto"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="relative bg-gradient-to-r from-[#01514c] to-[#01514c]/90 p-6 border-b-2 border-[#4B306A]">
+          {/* Modal Container - ABOVE backdrop (z-[101]), with top padding for navbar clearance */}
+          <div className="fixed inset-0 z-[101] overflow-auto pointer-events-none">
+            <div className="flex min-h-full items-center justify-center p-4 pt-24">
+              <motion.div
+                className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-8rem)] overflow-hidden border-2 border-[#4B306A] pointer-events-auto"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="relative bg-gradient-to-r from-[#01514c] to-[#01514c]/90 p-6 border-b-2 border-[#4B306A]">
                 <h2 className="text-2xl font-bold text-white pr-12">
                   {locationName}
                 </h2>
@@ -200,7 +201,8 @@ export function MapPlaceholder({
                   {(locationLat && locationLng) && ` Location data is ready for integration.`}
                 </p>
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </>
       )}
