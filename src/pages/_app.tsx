@@ -32,9 +32,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-        {/* Security headers */}
+        {/* Security headers - Note: X-Frame-Options is set in vercel.json, not in meta tags */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 

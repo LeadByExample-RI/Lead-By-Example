@@ -1,0 +1,16 @@
+<!-- 
+  Placeholder for favicon and icon files
+  
+  To remove 404 errors for icon files, add these files to the /public directory:
+  
+  - favicon.ico
+  - favicon-16x16.png
+  - favicon-32x32.png
+  - apple-touch-icon.png
+  - android-chrome-192x192.png
+  - android-chrome-512x512.png
+  - og-image.jpg
+  - twitter-image.jpg
+  
+  See /public/README.md for detailed instructions and tools.
+-->
