@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
+import { showMapPlaceholder } from '@/utils/map'
 
 
 const socialLinks = [
@@ -67,10 +68,21 @@ export function Footer() {
                 <Phone className="w-5 h-5 text-accent-400" />
                 <Text size="sm">(401) 555-0123</Text>
               </div>
-              <div className="flex items-center gap-3 text-white/70">
-                <MapPin className="w-5 h-5 text-accent-400" />
-                <Text size="sm">Providence, Rhode Island</Text>
-              </div>
+              <button
+                onClick={() => showMapPlaceholder({
+                  locationName: 'Lead By Example',
+                  locationAddress: 'Providence, Rhode Island',
+                  locationLat: 41.8240,
+                  locationLng: -71.4128
+                })}
+                className="flex items-center gap-3 text-white/70 hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
+                data-location-address="Providence, Rhode Island"
+                data-location-lat="41.8240"
+                data-location-lng="-71.4128"
+              >
+                <MapPin className="w-5 h-5 text-accent-400 group-hover:scale-110 transition-transform" />
+                <Text size="sm" className="group-hover:text-accent-400 transition-colors">Providence, Rhode Island</Text>
+              </button>
             </div>
           </motion.div>
 
