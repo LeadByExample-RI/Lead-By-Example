@@ -99,6 +99,7 @@ export function Partners() {
                     width={64}
                     height={64}
                     className="h-16 w-16 rounded-lg border border-white/20 object-cover"
+                    unoptimized
                   />
                   <div className="flex-1">
                     <div className="mb-2 flex items-center gap-3">
