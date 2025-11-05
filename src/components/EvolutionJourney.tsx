@@ -228,7 +228,7 @@ export default function EvolutionJourney() {
             />
 
             {/* Stage Markers */}
-            {journeyStages.map((stage, index) => (
+            {journeyStages.map((stage) => (
               <motion.button
                 key={stage.id}
                 onClick={() => setSelectedStage(stage.id)}
@@ -407,9 +407,9 @@ export default function EvolutionJourney() {
                         className="mt-8 border-t border-white/10 pt-6"
                       >
                         <p className="mb-4 italic text-gray-300">
-                          "I just put; the mission is to interrupt the school to prison pipeline,
-                          using men and women with lived experience, making a difference in our
-                          community."
+                          &quot;I just put; the mission is to interrupt the school to prison
+                          pipeline, using men and women with lived experience, making a difference
+                          in our community.&quot;
                         </p>
                         <p className="text-sm text-gray-400">- Robert McKinney Sr., Founder</p>
                       </motion.div>

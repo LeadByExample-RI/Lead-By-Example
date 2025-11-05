@@ -46,7 +46,7 @@
 
 **Updated Layout:**
 
-```
+```text
 1. Navbar (with new links)
 2. Hero Section (fundraiser)
 3. ✨ Evolution Journey (NEW!)
@@ -105,7 +105,7 @@
 
 **File:** `tailwind.config.js`
 
-#### New Color Palettes Added:
+#### New Color Palettes Added
 
 1. **Verdean** (Cape Verdean Blue-Green)
 
@@ -122,18 +122,19 @@
    ```
 
 3. **Gold** (Brilliant Gold)
+
    ```css
    gold-50 to gold-900
    Primary: gold-500 (#FFD700)
    ```
 
-#### New Animations:
+#### New Animations
 
 - `float` - Gentle floating effect for elements
 - `glow` - Glowing border effect for emphasis
 - `animate-float` and `animate-glow` utility classes
 
-#### New Utilities:
+#### New Utilities
 
 - `backdropBlur.xs` - Extra small backdrop blur
 - `borderRadius.5xl` - Extra large border radius
@@ -548,9 +549,11 @@ Consider adding these features in future iterations:
    Ensure build succeeds
 
 4. **Deploy to Staging**
+
    ```bash
    vercel --prod
    ```
+
    Test on staging environment
 
 ### Content Updates
@@ -575,26 +578,26 @@ Consider adding these features in future iterations:
 
 ### Developer Support
 
-**StrayDog Syndications LLC**
+#### StrayDog Syndications LLC
 
 - Senior Developer: @StrayDogSyn
 - Junior Developer: @miasmith81
-- Website: www.straydog-syndications-llc.com
+- Website: <www.straydog-syndications-llc.com>
 
 ### Project Owner
 
-**Lead By Example**
+#### Lead By Example
 
 - Founder: Robert McKinney Sr.
 - Phone: (401) 699-6544
-- Email: contact@leadbyexample.org
+- Email: <contact@leadbyexample.org>
 - Address: 120 Hawkins Street, Providence, RI 02908
 
 ---
 
 ## 🌟 The Mission
 
-_"The mission is to interrupt the school to prison pipeline, using men and women with lived experience, making a difference in our community."_
+"The mission is to interrupt the school to prison pipeline, using men and women with lived experience, making a difference in our community."
 
 — Robert McKinney Sr., Founder
 
