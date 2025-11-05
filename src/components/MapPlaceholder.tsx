@@ -52,7 +52,7 @@ export function MapPlaceholder({
         <>
           {/* Backdrop/Overlay */}
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[99998]"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -62,15 +62,16 @@ export function MapPlaceholder({
           />
 
           {/* Modal Container */}
-          <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 mt-20">
-            <motion.div
-              className="relative w-full max-w-[1200px] max-h-[calc(100vh-6rem)] overflow-auto bg-white rounded-lg shadow-2xl border-2 border-[#4B306A]"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              onClick={(e) => e.stopPropagation()}
-            >
+          <div className="fixed inset-0 z-[101] overflow-auto">
+            <div className="flex min-h-full items-center justify-center p-4 pt-24">
+              <motion.div
+                className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-8rem)] overflow-auto border-2 border-[#4B306A]"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                onClick={(e) => e.stopPropagation()}
+              >
               {/* Header */}
               <div className="relative bg-gradient-to-r from-[#01514c] to-[#01514c]/90 p-6 border-b-2 border-[#4B306A]">
                 <h2 className="text-2xl font-bold text-white pr-12">
@@ -201,7 +202,8 @@ export function MapPlaceholder({
                   {(locationLat && locationLng) && ` Location data is ready for integration.`}
                 </p>
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </>
       )}
