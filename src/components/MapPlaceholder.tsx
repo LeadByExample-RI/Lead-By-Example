@@ -48,7 +48,7 @@ export function MapPlaceholder({
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          {/* Backdrop/Overlay */}
+          {/* Backdrop/Overlay - Covers entire screen */}
           <motion.div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] pointer-events-auto"
             initial={{ opacity: 0 }}
@@ -59,10 +59,10 @@ export function MapPlaceholder({
             aria-hidden="true"
           />
 
-          {/* Modal Container - Allows scrolling underneath */}
-          <div className="fixed inset-0 z-[101] pointer-events-none flex items-center justify-center p-4 pt-24 overflow-auto">
+          {/* Modal Container - Centered on screen */}
+          <div className="fixed inset-0 z-[101] pointer-events-none flex items-center justify-center p-4 overflow-auto">
             <motion.div
-              className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-8rem)] overflow-auto border-2 border-[#4B306A] pointer-events-auto"
+              className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-4rem)] overflow-auto border-2 border-[#4B306A] pointer-events-auto my-8"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
