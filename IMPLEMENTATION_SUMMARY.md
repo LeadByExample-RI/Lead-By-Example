@@ -9,6 +9,7 @@ All three requested addresses now have fully functional, interactive Google Map 
 ## 📍 Three Clickable Addresses
 
 ### 1. Lincoln Woods Site A&B
+
 - **Type**: Current Fundraiser Location
 - **Full Location**: Lincoln Woods State Park, Site A&B
 - **Coordinates**: 41.9240, -71.4395
@@ -17,6 +18,7 @@ All three requested addresses now have fully functional, interactive Google Map 
 - **Displays**: "All Sides of Town Cookout 2025" event location
 
 ### 2. 120 Hawkins Street, Providence, RI 02908
+
 - **Type**: Organization Headquarters
 - **Full Address**: 120 Hawkins Street, Providence, RI 02908
 - **Coordinates**: 41.8093, -71.4211
@@ -25,6 +27,7 @@ All three requested addresses now have fully functional, interactive Google Map 
 - **Displays**: Main office address with contact details
 
 ### 3. Providence, Rhode Island
+
 - **Type**: General City Location
 - **Full Location**: Providence, Rhode Island
 - **Coordinates**: 41.8240, -71.4128 (Downtown Providence)
@@ -37,17 +40,20 @@ All three requested addresses now have fully functional, interactive Google Map 
 ## 🎯 Key Features Implemented
 
 ### ✅ Full Page Functionality Maintained
+
 - **NO page freezing** - Users can scroll and interact with everything
 - **NO scroll locking** - Page remains scrollable even when modal is open
 - **NO stuck states** - All elements remain clickable and functional
 - **NO refresh needed** - Modal can be opened/closed unlimited times
 
 ### ✅ Multiple Ways to Close Modal
+
 1. **Red X Button** - Top-right corner with rotation animation
 2. **Click Outside** - Click anywhere on the backdrop
 3. **Escape Key** - Press ESC on keyboard
 
 ### ✅ Smooth User Experience
+
 - Beautiful fade-in/fade-out animations
 - Backdrop blur effect for visual depth
 - Animated location pin (📍) with floating motion
@@ -59,6 +65,7 @@ All three requested addresses now have fully functional, interactive Google Map 
 ## 🔧 Technical Implementation
 
 ### Event Handling
+
 ```typescript
 // Proper event handling prevents page freezing
 const handleClose = (e?: React.MouseEvent) => {
@@ -71,6 +78,7 @@ const handleClose = (e?: React.MouseEvent) => {
 ```
 
 ### No Scroll Lock
+
 ```typescript
 // REMOVED - This was causing the page to freeze:
 // document.body.style.overflow = 'hidden'
@@ -80,6 +88,7 @@ const handleClose = (e?: React.MouseEvent) => {
 ```
 
 ### Pointer Events Strategy
+
 ```typescript
 // Backdrop: pointer-events-auto (catches clicks to close)
 <div className="...backdrop... pointer-events-auto" onClick={handleClose}>
@@ -96,14 +105,18 @@ const handleClose = (e?: React.MouseEvent) => {
 ## 📂 Files Modified
 
 ### 1. Data Structure
+
 **File**: `src/data/fundraisers.ts`
+
 - Added `locationLat` and `locationLng` to `Fundraiser` interface
 - Added `lat` and `lng` to `OrganizationInfo` interface
 - Added coordinates to `currentFundraiser`
 - Added coordinates to `organizationInfo`
 
 ### 2. Map Modal Component
+
 **File**: `src/components/MapPlaceholder.tsx`
+
 - ✅ Removed scroll locking (prevents page freeze)
 - ✅ Added proper event handling with preventDefault/stopPropagation
 - ✅ Implemented pointer-events strategy
@@ -111,19 +124,25 @@ const handleClose = (e?: React.MouseEvent) => {
 - ✅ Maintained Escape key functionality
 
 ### 3. Navbar Component
+
 **File**: `src/components/layout/Navbar.tsx`
+
 - ✅ Removed scroll restoration (no longer needed)
 - ✅ Proper state cleanup on modal close
 - ✅ Map data reset after closing
 
 ### 4. Hero Section
+
 **File**: `src/components/sections/Hero.tsx`
+
 - ✅ Updated to use coordinates from data
 - ✅ Two clickable addresses (Lincoln Woods + 120 Hawkins)
 - ✅ Hover effects and visual feedback
 
 ### 5. Footer Section
+
 **File**: `src/components/sections/Footer.tsx`
+
 - ✅ Clickable Providence, RI location
 - ✅ Proper aria-label for accessibility
 - ✅ Hover effects
@@ -133,6 +152,7 @@ const handleClose = (e?: React.MouseEvent) => {
 ## 🧪 Testing Checklist
 
 ### Page Functionality Tests
+
 - [x] Page scrolls normally when modal is closed
 - [x] Page scrolls normally when modal is OPEN
 - [x] Navbar remains functional at all times
@@ -142,6 +162,7 @@ const handleClose = (e?: React.MouseEvent) => {
 - [x] Can open/close modal multiple times without issues
 
 ### Modal Interaction Tests
+
 - [x] Click "Lincoln Woods Site A&B" → Modal opens with correct location
 - [x] Click "120 Hawkins Street, Providence, RI 02908" → Modal opens
 - [x] Click "Providence, Rhode Island" in footer → Modal opens
@@ -153,6 +174,7 @@ const handleClose = (e?: React.MouseEvent) => {
 - [x] Animated pin displays and floats
 
 ### Visual Tests
+
 - [x] Smooth fade-in animation
 - [x] Smooth fade-out animation
 - [x] Backdrop blur effect works
@@ -205,6 +227,7 @@ const handleClose = (e?: React.MouseEvent) => {
 ## 🎨 Visual Design
 
 ### Address Buttons
+
 - 📍 Icon prefix for visual recognition
 - Hover background: white/10% opacity
 - Text color: Accent gold (#FFD700)
@@ -212,6 +235,7 @@ const handleClose = (e?: React.MouseEvent) => {
 - Scale effect on hover (1.05x)
 
 ### Modal Design
+
 - White background with rounded corners
 - Cape Verde gradient header
 - Red close button (top-right)
@@ -221,6 +245,7 @@ const handleClose = (e?: React.MouseEvent) => {
 - Developer note footer
 
 ### Animations
+
 - **Modal entrance**: Scale from 0.9 to 1.0 + fade in
 - **Modal exit**: Scale to 0.9 + fade out
 - **Backdrop**: Fade in/out with blur
@@ -257,6 +282,7 @@ When ready to integrate actual Google Maps:
 ## 📊 Summary
 
 ### ✅ What Works
+
 - All 3 addresses are clickable
 - Map placeholders display correctly
 - Page NEVER freezes or locks
@@ -268,6 +294,7 @@ When ready to integrate actual Google Maps:
 - Responsive design
 
 ### ✅ What Was Fixed
+
 - ❌ Removed scroll locking → ✅ Page always scrollable
 - ❌ Removed body overflow changes → ✅ No page freeze
 - ❌ Poor event handling → ✅ Proper preventDefault/stopPropagation
@@ -275,6 +302,7 @@ When ready to integrate actual Google Maps:
 - ❌ Complex DOM structure → ✅ Simplified with pointer-events
 
 ### 🎯 Result
+
 **Perfect user experience** - The modal works as a non-blocking overlay that users can open, view, and close without ANY disruption to page functionality. The entire site remains interactive at all times.
 
 ---
@@ -282,6 +310,7 @@ When ready to integrate actual Google Maps:
 ## 📝 Developer Notes
 
 ### Key Learning
+
 The original implementation used `document.body.style.overflow = 'hidden'` to prevent background scrolling. While this is a common pattern for modals, it was causing the page to "freeze" because:
 
 1. It blocked ALL scroll events
@@ -289,7 +318,9 @@ The original implementation used `document.body.style.overflow = 'hidden'` to pr
 3. It required manual restoration which could fail
 
 ### Better Approach
+
 Using CSS `pointer-events` instead:
+
 - Backdrop has `pointer-events-auto` (catches clicks)
 - Container has `pointer-events-none` (allows clicks through)
 - Modal has `pointer-events-auto` (modal is interactive)
@@ -297,6 +328,7 @@ Using CSS `pointer-events` instead:
 This allows the page to remain fully functional while still providing a modal experience.
 
 ### Why This Works
+
 - Page can scroll normally ✅
 - Modal appears "on top" visually ✅
 - Clicking outside closes modal ✅
