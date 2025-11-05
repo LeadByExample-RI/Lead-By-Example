@@ -46,7 +46,7 @@ const totalImpact = {
 
 export function Archive() {
   return (
-    <section className="py-20 bg-gradient-to-b from-neutral-900 to-neutral-800">
+    <section id="impact" className="py-20 bg-gradient-to-b from-neutral-900 to-neutral-800">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"

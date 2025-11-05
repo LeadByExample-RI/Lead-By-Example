@@ -74,7 +74,7 @@ export function Newsletter() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-primary-900 to-secondary-900">
+    <section id="get-involved" className="py-20 bg-gradient-to-b from-primary-900 to-secondary-900">
       <div className="container mx-auto px-6">
         <motion.div
           className="max-w-4xl mx-auto"

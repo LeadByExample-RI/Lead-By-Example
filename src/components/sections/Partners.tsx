@@ -58,7 +58,7 @@ const partnershipBenefits = [
 
 export function Partners() {
   return (
-    <section className="bg-gradient-to-b from-neutral-900 to-primary-900 py-20">
+    <section id="partners" className="bg-gradient-to-b from-neutral-900 to-primary-900 py-20">
       <div className="container mx-auto px-6">
         <motion.div
           className="mb-16 text-center"
