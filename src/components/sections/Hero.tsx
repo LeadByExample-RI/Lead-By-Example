@@ -275,19 +275,20 @@ export const Hero: React.FC<HeroProps> = ({
                 </Text>
                 <ul className="space-y-2">
                   {currentFundraiser.features.map((feature, index) => (
-                    <motion.li
-                      key={index}
-                      className="flex items-center space-x-2 text-white/80"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        x: 0,
-                        transition: { delay: 0.8 + index * 0.1 }
-                      }}
-                    >
-                      <span className="text-accent-500">✓</span>
-                      <Text size="sm">{feature}</Text>
-                    </motion.li>
+                    <li key={index}>
+                      <motion.div
+                        className="flex items-center space-x-2 text-white/80"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ 
+                          opacity: 1, 
+                          x: 0,
+                          transition: { delay: 0.8 + index * 0.1 }
+                        }}
+                      >
+                        <span className="text-accent-500">✓</span>
+                        <Text size="sm">{feature}</Text>
+                      </motion.div>
+                    </li>
                   ))}
                 </ul>
               </div>

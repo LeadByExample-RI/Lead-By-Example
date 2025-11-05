@@ -45,12 +45,14 @@ export default function Home() {
         />
         <meta property="twitter:image" content="/twitter-image.jpg" />
 
+        {/* Icons and Manifest */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        
         {/* Favicon - Removed until icon files are created */}
         {/* <link rel="icon" href="/favicon.ico" /> */}
-        {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /> */}
         {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
         {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> */}
-        <link rel="manifest" href="/site.webmanifest" />
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
