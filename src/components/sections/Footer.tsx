@@ -198,8 +198,9 @@ export function Footer() {
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-xl"
               >
-                <Heart className="w-4 h-4 text-accent-400 fill-current" />
+                ❤️
               </motion.div>
               <Text size="sm">by StrayDog Syndications LLC for our community</Text>
             </div>
