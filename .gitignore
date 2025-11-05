@@ -87,8 +87,13 @@ Desktop.ini
 # Storybook
 storybook-static
 
-# Client assets and documentation (non-essential for builds)
-/client_assets
+# Client assets - ignore contents but keep folder structure
+client_assets/*
+!client_assets/README.md
+!client_assets/.gitkeep
+!client_assets/PLACEHOLDER.txt
+
+# Other assets and large files
 /assets
 *.zip
 *.pdf

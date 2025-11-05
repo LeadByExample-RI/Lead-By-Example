@@ -1,0 +1,61 @@
+===============================================================================
+  CLIENT ASSETS FOLDER - PLACEHOLDER
+===============================================================================
+
+This folder should contain client-provided assets including:
+
+1. Lead_By_Example.pdf
+   - Original project brief from Robert McKinney Sr.
+   - Mission statement and organization details
+   - Requirements and specifications
+
+2. Photos and Images
+   - Event photos (cookouts, bookbag giveaways, etc.)
+   - Community photos
+   - Program participant photos (with proper releases)
+   - Team photos
+
+3. Branding Materials
+   - Logos (if provided)
+   - Color palettes
+   - Typography guidelines
+   - Brand assets
+
+4. Reference Documents
+   - Previous marketing materials
+   - Testimonials
+   - Success stories
+   - Impact data
+
+===============================================================================
+  IMPORTANT NOTES
+===============================================================================
+
+- This folder is in .gitignore to protect client privacy
+- Files here should not be committed to version control
+- Contact client for access to original materials:
+  
+  Robert McKinney Sr.
+  Founder/Outreach Director
+  Lead By Example
+  120 Hawkins Street, Providence R.I. 02908
+  Phone: (401) 699-6544
+  Email: contact@leadbyexample.org
+
+- Store these files securely
+- Only share with authorized team members
+- Respect copyright and privacy considerations
+
+===============================================================================
+  FOR DEVELOPMENT
+===============================================================================
+
+When you receive client assets:
+
+1. Place them in this folder
+2. Reference them when creating website content
+3. Optimize images before placing in /public folder
+4. Keep originals here for reference
+5. Document any usage rights or restrictions
+
+===============================================================================

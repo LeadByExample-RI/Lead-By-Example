@@ -98,19 +98,19 @@ The application will be available at [http://localhost:3000](http://localhost:30
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build for production |
-| `npm start` | Start production server (after build) |
-| `npm run lint` | Run ESLint to check code quality |
-| `npm run lint:fix` | Auto-fix ESLint issues |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
-| `npm run type-check` | Run TypeScript type checking |
-| `npm test` | Run tests |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Generate test coverage report |
+| Command                 | Description                              |
+| ----------------------- | ---------------------------------------- |
+| `npm run dev`           | Start development server with hot reload |
+| `npm run build`         | Build for production                     |
+| `npm start`             | Start production server (after build)    |
+| `npm run lint`          | Run ESLint to check code quality         |
+| `npm run lint:fix`      | Auto-fix ESLint issues                   |
+| `npm run format`        | Format code with Prettier                |
+| `npm run format:check`  | Check code formatting                    |
+| `npm run type-check`    | Run TypeScript type checking             |
+| `npm test`              | Run tests                                |
+| `npm run test:watch`    | Run tests in watch mode                  |
+| `npm run test:coverage` | Generate test coverage report            |
 
 ## Project Structure Overview
 
@@ -123,7 +123,9 @@ Lead-By-Example/
 ├── next.config.js       # Next.js configuration
 ├── tailwind.config.js   # Tailwind CSS configuration
 ├── tsconfig.json        # TypeScript configuration
-├── client_assets/       # Project assets and resources
+├── client_assets/       # Client resources (folder tracked, contents ignored)
+│   ├── README.md        # Documentation about client assets
+│   └── ...             # Client-provided photos, PDFs, etc. (gitignored)
 ├── public/              # Static files (images, fonts, etc.)
 └── src/
     ├── components/      # Reusable React components
@@ -134,6 +136,8 @@ Lead-By-Example/
     ├── context/        # React Context providers
     └── types/          # TypeScript type definitions
 ```
+
+> **Note**: The `client_assets/` folder is tracked in git with documentation files, but client materials (photos, PDFs, etc.) are excluded via `.gitignore` for privacy and size management.
 
 ## Common Issues & Solutions
 

@@ -84,8 +84,11 @@ Lead-By-Example/
 │   └── setup.sh              # macOS/Linux setup
 │
 ├── 📦 client_assets/         # Client Resources
-│   ├── iCloud Photos...      # Client photos
-│   └── Lead_By_Example.pdf   # Project brief
+│   ├── README.md             # Documentation (tracked in git)
+│   ├── .gitkeep              # Keeps folder structure (tracked)
+│   ├── PLACEHOLDER.txt       # Instructions (tracked)
+│   ├── iCloud Photos...      # Client photos (gitignored)
+│   └── Lead_By_Example.pdf   # Project brief (gitignored)
 │
 ├── 📁 src/                   # Source Code (To Be Created)
 │   ├── components/           # React components

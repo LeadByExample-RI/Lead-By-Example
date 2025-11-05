@@ -43,8 +43,12 @@ Lead-By-Example/
 ├── scripts/        # Setup scripts
 ├── src/            # Source code (you'll work here)
 ├── public/         # Static assets
-└── client_assets/  # Client-provided assets
+└── client_assets/  # Client resources (folder tracked, contents private)
+    ├── README.md   # Info about expected client materials
+    └── ...         # Client photos, PDFs (gitignored)
 ```
+
+> **Note**: Place client-provided materials in `client_assets/` - the folder structure is tracked but contents are private (see `.gitignore`).
 
 ## 🎯 Common Tasks
 
