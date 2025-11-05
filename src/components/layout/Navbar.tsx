@@ -85,8 +85,8 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'glass-effect-strong shadow-glass-dark navbar-glass-scrolled'
-          : 'glass-effect-dark navbar-glass'
+          ? 'bg-primary-900/95 backdrop-blur-md shadow-lg border-b border-white/10'
+          : 'bg-primary-900/90 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
