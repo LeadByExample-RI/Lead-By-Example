@@ -71,6 +71,7 @@ export function Navbar() {
 
     const handleHideMap = () => {
       setIsMapOpen(false)
+      setMapData({}) // Clear map data on close
     }
 
     window.addEventListener('showMapPlaceholder' as any, handleShowMap)
@@ -80,6 +81,14 @@ export function Navbar() {
       window.removeEventListener('hideMapPlaceholder' as any, handleHideMap)
     }
   }, [])
+
+  // Handle map close with proper cleanup
+  const handleMapClose = () => {
+    setIsMapOpen(false)
+    setMapData({})
+    // Ensure body scroll is restored
+    document.body.style.overflow = 'unset'
+  }
 
   return (
     <nav
@@ -322,7 +331,7 @@ export function Navbar() {
       {/* Map Placeholder Modal */}
       <MapPlaceholder
         isOpen={isMapOpen}
-        onClose={() => setIsMapOpen(false)}
+        onClose={handleMapClose}
         locationName={mapData.locationName}
         locationAddress={mapData.locationAddress}
         locationLat={mapData.locationLat}

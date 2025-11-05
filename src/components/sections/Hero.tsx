@@ -170,13 +170,13 @@ export const Hero: React.FC<HeroProps> = ({
                   onClick={() => showMapPlaceholder({
                     locationName: 'Lead By Example - Headquarters',
                     locationAddress: organizationInfo.address,
-                    locationLat: 41.8295,
-                    locationLng: -71.4128
+                    locationLat: organizationInfo.lat,
+                    locationLng: organizationInfo.lng
                   })}
                   className="flex items-center space-x-2 w-full text-left hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
                   data-location-address={organizationInfo.address}
-                  data-location-lat="41.8295"
-                  data-location-lng="-71.4128"
+                  data-location-lat={organizationInfo.lat}
+                  data-location-lng={organizationInfo.lng}
                 >
                   <span className="text-accent-500 group-hover:scale-110 transition-transform">📍</span>
                   <Text size="sm" className="text-accent-500 group-hover:underline">
@@ -222,13 +222,13 @@ export const Hero: React.FC<HeroProps> = ({
                   onClick={() => showMapPlaceholder({
                     locationName: currentFundraiser.title,
                     locationAddress: currentFundraiser.location,
-                    locationLat: 41.7301,
-                    locationLng: -71.5662
+                    locationLat: currentFundraiser.locationLat,
+                    locationLng: currentFundraiser.locationLng
                   })}
                   className="text-left hover:bg-white/10 rounded-lg px-3 py-2 -ml-3 transition-colors group inline-flex items-center gap-2"
                   data-location-address={currentFundraiser.location}
-                  data-location-lat="41.7301"
-                  data-location-lng="-71.5662"
+                  data-location-lat={currentFundraiser.locationLat}
+                  data-location-lng={currentFundraiser.locationLng}
                 >
                   <span className="text-accent-500 group-hover:scale-110 transition-transform">📍</span>
                   <Text size="sm" className="text-accent-500 font-medium group-hover:underline">

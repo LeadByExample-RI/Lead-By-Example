@@ -76,9 +76,7 @@ export function Footer() {
                   locationLng: -71.4128
                 })}
                 className="flex items-center gap-3 text-white/70 hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
-                data-location-address="Providence, Rhode Island"
-                data-location-lat="41.8240"
-                data-location-lng="-71.4128"
+                aria-label="View location on map"
               >
                 <MapPin className="w-5 h-5 text-accent-400 group-hover:scale-110 transition-transform" />
                 <Text size="sm" className="group-hover:text-accent-400 transition-colors">Providence, Rhode Island</Text>

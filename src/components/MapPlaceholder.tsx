@@ -21,15 +21,19 @@ export function MapPlaceholder({
   locationLat,
   locationLng,
 }: MapPlaceholderProps) {
-  // Prevent body scroll when modal is open
+  // Prevent body scroll when modal is open and ensure cleanup
   useEffect(() => {
     if (isOpen) {
+      // Store original overflow value
+      const originalOverflow = document.body.style.overflow
       document.body.style.overflow = 'hidden'
+      
+      return () => {
+        // Restore original overflow value
+        document.body.style.overflow = originalOverflow || 'unset'
+      }
     } else {
-      document.body.style.overflow = 'unset'
-    }
-    
-    return () => {
+      // Ensure overflow is restored when modal closes
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
@@ -42,12 +46,22 @@ export function MapPlaceholder({
       }
     }
     
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscape)
+      return () => window.removeEventListener('keydown', handleEscape)
+    }
   }, [isOpen, onClose])
 
+  // Handle close with proper cleanup
+  const handleClose = () => {
+    // Ensure body scroll is restored
+    document.body.style.overflow = 'unset'
+    // Call the onClose callback
+    onClose()
+  }
+
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <>
           {/* Backdrop/Overlay */}
@@ -57,7 +71,7 @@ export function MapPlaceholder({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            onClick={onClose}
+            onClick={handleClose}
             aria-hidden="true"
           />
 
@@ -83,11 +97,12 @@ export function MapPlaceholder({
                 
                 {/* Close Button */}
                 <motion.button
-                  onClick={onClose}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-[#4B306A] transition-colors shadow-lg"
+                  onClick={handleClose}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors shadow-lg z-10"
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label="Close map"
+                  type="button"
                 >
                   <X size={24} strokeWidth={3} />
                 </motion.button>
