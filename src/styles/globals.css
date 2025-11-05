@@ -79,13 +79,36 @@
     @apply from-gold to-gold-dark bg-gradient-to-r;
   }
 
-  /* Navbar Glassmorphism */
+  /* Navbar Glassmorphism - Enhanced */
   .navbar-glass {
-    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.15), rgba(75, 48, 106, 0.1));
+    background: linear-gradient(
+      to bottom,
+      rgba(1, 81, 76, 0.15),
+      rgba(75, 48, 106, 0.1)
+    );
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 4px 16px rgba(1, 81, 76, 0.2);
   }
 
   .navbar-glass-scrolled {
-    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.25), rgba(75, 48, 106, 0.2));
+    background: linear-gradient(
+      to bottom,
+      rgba(1, 81, 76, 0.25),
+      rgba(75, 48, 106, 0.2)
+    );
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 12px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 8px 24px rgba(1, 81, 76, 0.3),
+      0 4px 12px rgba(75, 48, 106, 0.2);
   }
 }
 
@@ -105,16 +128,16 @@
   /* Premium Glass Morphic Effects */
   .glass-effect {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 
   .glass-effect-dark {
     background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.5),
@@ -123,12 +146,33 @@
 
   .glass-effect-strong {
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.37),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Glass Button Effect */
+  .glass-button {
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 0 20px rgba(255, 215, 0, 0.2);
   }
 
   /* 3D Depth Effects */
