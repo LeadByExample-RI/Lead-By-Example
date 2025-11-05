@@ -62,9 +62,9 @@ export function MapPlaceholder({
           />
 
           {/* Modal Container */}
-          <div className="fixed inset-0 z-[99999] flex items-start justify-center px-4 pt-32 pb-8 overflow-y-auto">
+          <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
             <motion.div
-              className="relative w-full max-w-[1200px] bg-white rounded-lg shadow-2xl border-2 border-[#4B306A] overflow-hidden my-auto"
+              className="relative w-full max-w-[1200px] bg-white rounded-lg shadow-2xl border-2 border-[#4B306A] overflow-hidden"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
