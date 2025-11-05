@@ -79,13 +79,36 @@
     @apply from-gold to-gold-dark bg-gradient-to-r;
   }
 
-  /* Navbar Glassmorphism */
+  /* Enhanced Navbar Glassmorphism */
   .navbar-glass {
-    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.15), rgba(75, 48, 106, 0.1));
+    background: linear-gradient(
+      to bottom,
+      rgba(1, 81, 76, 0.2),
+      rgba(75, 48, 106, 0.15)
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(1, 81, 76, 0.1);
   }
 
   .navbar-glass-scrolled {
-    background: linear-gradient(to bottom, rgba(1, 81, 76, 0.25), rgba(75, 48, 106, 0.2));
+    background: linear-gradient(
+      to bottom,
+      rgba(1, 81, 76, 0.35),
+      rgba(75, 48, 106, 0.3)
+    );
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 0 60px rgba(1, 81, 76, 0.2),
+      0 4px 16px rgba(75, 48, 106, 0.3);
   }
 }
 
@@ -112,23 +135,25 @@
   }
 
   .glass-effect-dark {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(255, 215, 0, 0.05);
   }
 
   .glass-effect-strong {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.37),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+      0 0 30px rgba(255, 215, 0, 0.08);
   }
 
   /* 3D Depth Effects */
@@ -163,6 +188,38 @@
       0 12px 40px 0 rgba(0, 0, 0, 0.5),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
       0 0 20px rgba(1, 81, 76, 0.2);
+  }
+
+  /* Navbar shimmer effect */
+  @keyframes navbarShimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .navbar-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .navbar-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 215, 0, 0.03) 50%,
+      transparent 100%
+    );
+    animation: navbarShimmer 8s ease-in-out infinite;
+    pointer-events: none;
   }
 
   /* Gradient Text */

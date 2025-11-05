@@ -94,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center section-padding">
+    <section id="home" className="min-h-screen flex items-center justify-center section-padding pt-32">
       <div className="container-custom">
         <motion.div
           className="grid lg:grid-cols-2 gap-12 items-center"

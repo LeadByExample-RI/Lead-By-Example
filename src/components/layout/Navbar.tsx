@@ -83,13 +83,23 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 navbar-shimmer transition-all duration-500 ${
         isScrolled
-          ? 'bg-primary-900/95 backdrop-blur-md shadow-lg border-b border-white/10'
-          : 'bg-primary-900/90 backdrop-blur-sm'
+          ? 'glass-effect-strong shadow-glass-dark navbar-glass-scrolled'
+          : 'glass-effect-dark navbar-glass'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Animated gradient overlay for depth */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isScrolled ? 0.3 : 0.15 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-gold/5 via-transparent to-royal-purple/5" />
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-20">
           {/* Logo with enhanced hover effects */}
           <motion.div
@@ -222,13 +232,23 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            className="md:hidden glass-effect-dark border-t border-white/20"
+            className="md:hidden glass-effect-dark border-t border-white/20 backdrop-blur-2xl"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(1, 81, 76, 0.3), rgba(75, 48, 106, 0.25))',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+            }}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-4 py-6 space-y-3">
+            {/* Gradient overlay for mobile menu */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gold/5 to-transparent" />
+            </div>
+            
+            <div className="px-4 py-6 space-y-3 relative z-10">
               {navLinks.map((link, index) => {
                 const isActive = activeSection === link.href
                 
