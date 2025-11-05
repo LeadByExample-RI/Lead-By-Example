@@ -1,11 +1,13 @@
 # Google Map Placeholder Implementation
 
 ## Overview
+
 This document describes the interactive Google Map placeholder implementation for the Lead By Example website. All three specified addresses are now clickable and display map placeholders with proper cleanup to ensure the navbar and site remain fully functional.
 
 ## Implemented Addresses
 
 ### 1. **Lincoln Woods Site A&B** 🏞️
+
 - **Location**: Current Fundraiser (All Sides of Town Cookout 2025)
 - **Coordinates**: 41.9240, -71.4395
 - **Where it appears**: Hero section (right column card)
@@ -13,6 +15,7 @@ This document describes the interactive Google Map placeholder implementation fo
 - **Data Source**: `src/data/fundraisers.ts` - `currentFundraiser` object
 
 ### 2. **120 Hawkins Street, Providence, RI 02908** 🏢
+
 - **Location**: Organization Headquarters
 - **Coordinates**: 41.8093, -71.4211
 - **Where it appears**: Hero section (contact info)
@@ -20,6 +23,7 @@ This document describes the interactive Google Map placeholder implementation fo
 - **Data Source**: `src/data/fundraisers.ts` - `organizationInfo` object
 
 ### 3. **Providence, Rhode Island** 🏙️
+
 - **Location**: General Providence Area
 - **Coordinates**: 41.8240, -71.4128
 - **Where it appears**: Footer section
@@ -51,6 +55,7 @@ This document describes the interactive Google Map placeholder implementation fo
 ### Technical Implementation
 
 #### Data Structure
+
 ```typescript
 // src/data/fundraisers.ts
 export interface Fundraiser {
@@ -71,6 +76,7 @@ export interface OrganizationInfo {
 ```
 
 #### Map Utility Functions
+
 ```typescript
 // src/utils/map.ts
 showMapPlaceholder({
@@ -111,6 +117,7 @@ hideMapPlaceholder() // Close the map
 ### Problem Prevention Measures
 
 ✅ **Body Scroll Restoration**
+
 ```typescript
 // Store and restore original overflow value
 const originalOverflow = document.body.style.overflow
@@ -119,6 +126,7 @@ document.body.style.overflow = originalOverflow || 'unset' // When closed
 ```
 
 ✅ **State Cleanup on Close**
+
 ```typescript
 const handleMapClose = () => {
   setIsMapOpen(false)
@@ -128,6 +136,7 @@ const handleMapClose = () => {
 ```
 
 ✅ **Proper Event Listener Cleanup**
+
 ```typescript
 useEffect(() => {
   if (isOpen) {
@@ -138,6 +147,7 @@ useEffect(() => {
 ```
 
 ✅ **AnimatePresence with Wait Mode**
+
 ```typescript
 <AnimatePresence mode="wait">
   {isOpen && <ModalContent />}
@@ -146,7 +156,8 @@ useEffect(() => {
 
 ### Visual Indicators
 
-**Red X Close Button**
+#### Red X Close Button
+
 - Changed from gold to **red** for better visibility
 - Positioned in top-right corner
 - Rotates 90° on hover
@@ -154,6 +165,7 @@ useEffect(() => {
 - Clear visual indicator to close
 
 **Close Button Features:**
+
 ```typescript
 <motion.button
   onClick={handleClose}
@@ -168,6 +180,7 @@ useEffect(() => {
 ## Testing Checklist
 
 ### Functionality Tests
+
 - [ ] Click Lincoln Woods address → Map opens
 - [ ] Click 120 Hawkins Street address → Map opens
 - [ ] Click Providence, RI address → Map opens
@@ -181,6 +194,7 @@ useEffect(() => {
 - [ ] Mobile menu works after closing map
 
 ### Visual Tests
+
 - [ ] Location pin icon displays
 - [ ] Hover effects work on address buttons
 - [ ] Modal animation smooth
@@ -194,6 +208,7 @@ useEffect(() => {
 When ready to implement actual Google Maps:
 
 1. **Get Google Maps API Key**
+
    ```bash
    # Visit: https://console.cloud.google.com/
    # Enable Maps JavaScript API
@@ -201,11 +216,13 @@ When ready to implement actual Google Maps:
    ```
 
 2. **Add API Key to Environment**
+
    ```env
    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
    ```
 
 3. **Update MapPlaceholder Component**
+
    ```typescript
    // Replace placeholder div with:
    <iframe
@@ -230,6 +247,7 @@ When ready to implement actual Google Maps:
 ## Summary
 
 All three addresses are now:
+
 - ✅ **Clickable** with visual feedback
 - ✅ **Interactive** with map placeholder display
 - ✅ **Functional** with proper cleanup ensuring no navbar issues
