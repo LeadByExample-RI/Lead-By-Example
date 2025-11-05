@@ -21,23 +21,6 @@ export function MapPlaceholder({
   locationLat,
   locationLng,
 }: MapPlaceholderProps) {
-  // Prevent body scroll when modal is open and ensure cleanup
-  useEffect(() => {
-    if (isOpen) {
-      // Store original overflow value
-      const originalOverflow = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-      
-      return () => {
-        // Restore original overflow value
-        document.body.style.overflow = originalOverflow || 'unset'
-      }
-    } else {
-      // Ensure overflow is restored when modal closes
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
-
   // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -53,10 +36,11 @@ export function MapPlaceholder({
   }, [isOpen, onClose])
 
   // Handle close with proper cleanup
-  const handleClose = () => {
-    // Ensure body scroll is restored
-    document.body.style.overflow = 'unset'
-    // Call the onClose callback
+  const handleClose = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     onClose()
   }
 
@@ -66,26 +50,25 @@ export function MapPlaceholder({
         <>
           {/* Backdrop/Overlay */}
           <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] pointer-events-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            onClick={handleClose}
+            onClick={(e) => handleClose(e)}
             aria-hidden="true"
           />
 
-          {/* Modal Container */}
-          <div className="fixed inset-0 z-[101] overflow-auto">
-            <div className="flex min-h-full items-center justify-center p-4 pt-24">
-              <motion.div
-                className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-8rem)] overflow-auto border-2 border-[#4B306A]"
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                onClick={(e) => e.stopPropagation()}
-              >
+          {/* Modal Container - Allows scrolling underneath */}
+          <div className="fixed inset-0 z-[101] pointer-events-none flex items-center justify-center p-4 pt-24 overflow-auto">
+            <motion.div
+              className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-8rem)] overflow-auto border-2 border-[#4B306A] pointer-events-auto"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Header */}
               <div className="relative bg-gradient-to-r from-[#01514c] to-[#01514c]/90 p-6 border-b-2 border-[#4B306A]">
                 <h2 className="text-2xl font-bold text-white pr-12">
@@ -217,8 +200,7 @@ export function MapPlaceholder({
                   {(locationLat && locationLng) && ` Location data is ready for integration.`}
                 </p>
               </div>
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
         </>
       )}

@@ -86,8 +86,6 @@ export function Navbar() {
   const handleMapClose = () => {
     setIsMapOpen(false)
     setMapData({})
-    // Ensure body scroll is restored
-    document.body.style.overflow = 'unset'
   }
 
   return (
