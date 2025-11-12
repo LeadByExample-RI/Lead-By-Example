@@ -7,10 +7,9 @@ import { ReactNode } from 'react';
 // Load Stripe outside component to avoid recreating on every render
 // This is a performance optimization
 // Only load Stripe if the key is available
-const stripePromise =
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
-    : null;
+const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+  : null;
 
 interface StripeProviderProps {
   children: ReactNode;
