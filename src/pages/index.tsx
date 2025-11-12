@@ -1,4 +1,5 @@
 import CommunityCalendar from '@/components/CommunityCalendar';
+import DonationModal from '@/components/DonationModal';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import MentorMatching from '@/components/MentorMatching';
@@ -11,8 +12,11 @@ import { Newsletter } from '@/components/sections/Newsletter';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
+import { useState } from 'react';
 
 export default function Home() {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+
   return (
     <>
       <Head>
@@ -66,6 +70,13 @@ export default function Home() {
       <main>
         <Navbar />
 
+        {/* Stripe Donation Modal */}
+        <DonationModal
+          isOpen={isDonationModalOpen}
+          onClose={() => setIsDonationModalOpen(false)}
+          initialAmount={50}
+        />
+
         {/* Hero Section with Current Fundraiser */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"
@@ -73,6 +84,7 @@ export default function Home() {
           primaryAction={{
             label: 'Donate Now',
             href: '#donate',
+            onClick: () => setIsDonationModalOpen(true),
           }}
           secondaryAction={{
             label: 'Learn More',

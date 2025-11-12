@@ -46,6 +46,12 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 
+# Stripe keys and secrets - NEVER commit these!
+.env.stripe
+.stripe/
+**/STRIPE_SECRET_KEY*
+**/STRIPE_WEBHOOK_SECRET*
+
 # vercel
 .vercel
 .vercel.json.local
@@ -95,6 +101,9 @@ client_assets/*
 
 # Temporary Claude folder
 temp-claude/
+
+# Stripe installation package - reference files only, not needed in repo after installation
+stripe_install/
 
 # Other assets and large files
 /assets
