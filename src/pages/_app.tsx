@@ -1,15 +1,16 @@
+import StripeProvider from '@/components/StripeProvider';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { Inter, Montserrat } from 'next/font/google';
+import Head from 'next/head';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
 });
 
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   display: 'swap',
@@ -40,11 +41,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* Performance optimizations */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://vercel.live" />
+
+        {/* Stripe DNS prefetch for performance */}
+        <link rel="dns-prefetch" href="//js.stripe.com" />
+        <link rel="preconnect" href="https://js.stripe.com" />
       </Head>
 
-      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
-        <Component {...pageProps} />
-      </div>
+      <StripeProvider>
+        <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+          <Component {...pageProps} />
+        </div>
+      </StripeProvider>
     </>
   );
 }

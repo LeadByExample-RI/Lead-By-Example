@@ -1,4 +1,9 @@
+import CommunityCalendar from '@/components/CommunityCalendar';
+import DonationModal from '@/components/DonationModal';
+import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
+import MentorMatching from '@/components/MentorMatching';
+import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -7,8 +12,11 @@ import { Newsletter } from '@/components/sections/Newsletter';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
+import { useState } from 'react';
 
 export default function Home() {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+
   return (
     <>
       <Head>
@@ -48,7 +56,7 @@ export default function Home() {
         {/* Icons and Manifest */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        
+
         {/* Favicon - Removed until icon files are created */}
         {/* <link rel="icon" href="/favicon.ico" /> */}
         {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
@@ -62,6 +70,13 @@ export default function Home() {
       <main>
         <Navbar />
 
+        {/* Stripe Donation Modal */}
+        <DonationModal
+          isOpen={isDonationModalOpen}
+          onClose={() => setIsDonationModalOpen(false)}
+          initialAmount={50}
+        />
+
         {/* Hero Section with Current Fundraiser */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"
@@ -69,6 +84,7 @@ export default function Home() {
           primaryAction={{
             label: 'Donate Now',
             href: '#donate',
+            onClick: () => setIsDonationModalOpen(true),
           }}
           secondaryAction={{
             label: 'Learn More',
@@ -76,11 +92,31 @@ export default function Home() {
           }}
         />
 
+        {/* Evolution Journey - Visual Storytelling of Transformation */}
+        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+          <EvolutionJourney />
+        </section>
+
         {/* Mission Section - Our Purpose */}
         <Mission />
 
         {/* Testimonials Section - Success Stories Carousel */}
         <Testimonials />
+
+        {/* Mentor Matching - Connect with Mentors */}
+        <section id="mentors" className="bg-white">
+          <MentorMatching />
+        </section>
+
+        {/* Resource Library - Educational Content */}
+        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
+          <ResourceLibrary />
+        </section>
+
+        {/* Community Calendar - Upcoming Events */}
+        <section id="events" className="bg-white">
+          <CommunityCalendar />
+        </section>
 
         {/* Archive Section - Past Achievements */}
         <Archive />
