@@ -40,6 +40,7 @@ export function isValidPhone(phone: string): boolean {
  * @example formatPhone("5551234567") // "(555) 123-4567"
  */
 export function formatPhone(phone: string): string {
+  if (!phone) return '';
   const cleaned = phone.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
   if (match) {

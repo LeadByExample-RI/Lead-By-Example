@@ -54,8 +54,8 @@ export default function Home() {
         <meta property="twitter:image" content="/twitter-image.jpg" />
 
         {/* Icons and Manifest */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* Favicon - Removed until icon files are created */}
         {/* <link rel="icon" href="/favicon.ico" /> */}

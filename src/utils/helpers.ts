@@ -238,6 +238,7 @@ export function isValidPhone(phone: string): boolean {
  * @returns Formatted phone number
  */
 export function formatPhone(phone: string): string {
+  if (!phone) return '';
   const cleaned = phone.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
 
