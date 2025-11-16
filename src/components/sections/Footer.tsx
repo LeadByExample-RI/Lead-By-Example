@@ -68,6 +68,25 @@ export function Footer() {
                 <Phone className="w-5 h-5 text-accent-400" />
                 <Text size="sm">(401) 555-0123</Text>
               </div>
+              <motion.div 
+                className="flex items-center gap-3 text-white/70 cursor-pointer hover:text-accent-400 transition-colors duration-300"
+                onClick={() => {
+                  const event = new CustomEvent('showMapPlaceholder', {
+                    detail: {
+                      locationName: 'Lead By Example',
+                      locationAddress: 'Providence, Rhode Island',
+                      locationLat: 41.8240,
+                      locationLng: -71.4128,
+                    },
+                  })
+                  window.dispatchEvent(event)
+                }}
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
+              >
+                <MapPin className="w-5 h-5 text-accent-400" />
+                <Text size="sm">Providence, Rhode Island</Text>
+              </motion.div>
               <button
                 onClick={() => showMapPlaceholder({
                   locationName: 'Lead By Example',

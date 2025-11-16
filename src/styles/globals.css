@@ -117,7 +117,14 @@
 
 @layer utilities {
   .text-balance {
+    /* Use text-wrap with vendor prefix first, then standard property */
+    -webkit-text-wrap: balance;
     text-wrap: balance;
+    /* Fallback for browsers that don't support text-wrap */
+    @supports not (text-wrap: balance) {
+      max-width: 60ch;
+      text-align: left;
+    }
   }
 
   .text-shadow-gold {
