@@ -69,9 +69,6 @@ export default function StripeProvider({ children }: StripeProviderProps) {
     },
   };
 
-  // If Stripe is not configured, render children without Stripe Elements
-  if (!stripePromise) {
-    console.warn('Stripe publishable key not configured. Stripe features will be disabled.');
   // If Stripe is not configured, render children without Stripe context
   if (!stripePromise) {
     if (typeof window !== 'undefined') {
