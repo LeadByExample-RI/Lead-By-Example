@@ -2,6 +2,7 @@ import CommunityCalendar from '@/components/CommunityCalendar';
 import DonationModal from '@/components/DonationModal';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
+import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
 import StripeProvider from '@/components/StripeProvider';
 import ResourceLibrary from '@/components/ResourceLibrary';
@@ -13,10 +14,45 @@ import { Newsletter } from '@/components/sections/Newsletter';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [mapData, setMapData] = useState<{
+    locationName?: string;
+    locationAddress?: string;
+    locationLat?: number;
+    locationLng?: number;
+  }>({});
+
+  // Listen for custom map events from other components
+  useEffect(() => {
+    const handleShowMap = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const { locationName, locationAddress, locationLat, locationLng } = customEvent.detail;
+      setMapData({ locationName, locationAddress, locationLat, locationLng });
+      setIsMapOpen(true);
+    };
+
+    const handleHideMap = () => {
+      setIsMapOpen(false);
+      setMapData({}); // Clear map data on close
+    };
+
+    window.addEventListener('showMapPlaceholder', handleShowMap);
+    window.addEventListener('hideMapPlaceholder', handleHideMap);
+    return () => {
+      window.removeEventListener('showMapPlaceholder', handleShowMap);
+      window.removeEventListener('hideMapPlaceholder', handleHideMap);
+    };
+  }, []);
+
+  // Handle map close with proper cleanup
+  const handleMapClose = () => {
+    setIsMapOpen(false);
+    setMapData({});
+  };
 
   return (
     <>
@@ -132,6 +168,16 @@ export default function Home() {
 
         {/* Footer - Contact Info & Links */}
         <Footer />
+
+        {/* Map Placeholder Modal - Renders on main page */}
+        <MapPlaceholder
+          isOpen={isMapOpen}
+          onClose={handleMapClose}
+          locationName={mapData.locationName}
+          locationAddress={mapData.locationAddress}
+          locationLat={mapData.locationLat}
+          locationLng={mapData.locationLng}
+        />
       </main>
     </>
   );

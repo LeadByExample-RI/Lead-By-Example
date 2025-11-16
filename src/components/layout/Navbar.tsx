@@ -4,19 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { MapPlaceholder } from '../MapPlaceholder';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
-  const [isMapOpen, setIsMapOpen] = useState(false);
-  const [mapData, setMapData] = useState<{
-    locationName?: string;
-    locationAddress?: string;
-    locationLat?: number;
-    locationLng?: number;
-  }>({});
 
   // Navigation links configuration
   const navLinks = [
@@ -74,33 +66,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Listen for custom map events from other components
-  useEffect(() => {
-    const handleShowMap = (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const { locationName, locationAddress, locationLat, locationLng } = customEvent.detail;
-      setMapData({ locationName, locationAddress, locationLat, locationLng });
-      setIsMapOpen(true);
-    };
 
-    const handleHideMap = () => {
-      setIsMapOpen(false);
-      setMapData({}); // Clear map data on close
-    };
-
-    window.addEventListener('showMapPlaceholder', handleShowMap);
-    window.addEventListener('hideMapPlaceholder', handleHideMap);
-    return () => {
-      window.removeEventListener('showMapPlaceholder', handleShowMap);
-      window.removeEventListener('hideMapPlaceholder', handleHideMap);
-    };
-  }, []);
-
-  // Handle map close with proper cleanup
-  const handleMapClose = () => {
-    setIsMapOpen(false);
-    setMapData({});
-  };
 
   return (
     <nav
@@ -332,16 +298,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Map Placeholder Modal */}
-      <MapPlaceholder
-        isOpen={isMapOpen}
-        onClose={handleMapClose}
-        locationName={mapData.locationName}
-        locationAddress={mapData.locationAddress}
-        locationLat={mapData.locationLat}
-        locationLng={mapData.locationLng}
-      />
     </nav>
   );
 }
