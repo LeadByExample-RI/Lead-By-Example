@@ -24,7 +24,7 @@
 ### Step 1: Create Webhook Endpoint in Stripe Dashboard ✅ COMPLETED
 
 ~~1. **Login to Stripe Dashboard**~~
-~~- Go to: https://dashboard.stripe.com/webhooks~~
+~~- Go to: <https://dashboard.stripe.com/webhooks>~~
 ~~- Make sure you're in **Test mode** for testing~~
 
 ~~2. **Add Endpoint**~~
@@ -61,7 +61,7 @@
 
 Or use the Vercel Dashboard:
 
-1. Go to: https://vercel.com/eric-hunter-petross-projects/lead-by-example-mvp/settings/environment-variables
+1. Go to: <https://vercel.com/eric-hunter-petross-projects/lead-by-example-mvp/settings/environment-variables>
 2. Find `STRIPE_WEBHOOK_SECRET`
 3. Edit the Production value
 4. Paste your new webhook secret
@@ -98,7 +98,7 @@ stripe listen --forward-to localhost:3000/api/stripe/webhook
 
 When you run `stripe listen`, it outputs a webhook secret. Copy it to `.env.local`:
 
-```
+```bash
 STRIPE_WEBHOOK_SECRET=whsec_YOUR_CLI_SECRET_HERE
 ```
 
@@ -106,14 +106,14 @@ STRIPE_WEBHOOK_SECRET=whsec_YOUR_CLI_SECRET_HERE
 
 ## Testing Webhooks
 
-### Test Local Webhooks:
+### Test Local Webhooks
 
 ```powershell
 # In a separate terminal, trigger a test event
 stripe trigger payment_intent.succeeded
 ```
 
-### Test Production Webhooks:
+### Test Production Webhooks
 
 1. Go to your Stripe webhook endpoint in the dashboard
 2. Click "Send test webhook"
