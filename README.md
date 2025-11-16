@@ -1,6 +1,6 @@
 # 🌟 Lead By Example
 
-## *Inspiring Change Through Action*
+## _Inspiring Change Through Action_
 
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14.x-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -54,17 +54,17 @@
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|-----------|
+| Category               | Technology                   |
+| ---------------------- | ---------------------------- |
 | **Frontend Framework** | React 18.x with Next.js 14.x |
-| **Build Tool** | Vite 5.x |
-| **Language** | TypeScript 5.x |
-| **Styling** | Tailwind CSS 3.x |
-| **Animations** | Framer Motion |
-| **Icons** | React Icons / Lucide Icons |
-| **State Management** | React Context / Zustand |
-| **Form Handling** | React Hook Form |
-| **Code Quality** | ESLint, Prettier |
+| **Build Tool**         | Vite 5.x                     |
+| **Language**           | TypeScript 5.x               |
+| **Styling**            | Tailwind CSS 3.x             |
+| **Animations**         | Framer Motion                |
+| **Icons**              | React Icons / Lucide Icons   |
+| **State Management**   | React Context / Zustand      |
+| **Form Handling**      | React Hook Form              |
+| **Code Quality**       | ESLint, Prettier             |
 
 ---
 
@@ -220,7 +220,10 @@ This project includes carefully crafted micro-interactions to enhance user engag
 
 ```text
 Lead-By-Example/
-├── client_assets/          # Project assets and resources
+├── client_assets/          # Client-provided resources (see client_assets/README.md)
+│   ├── README.md          # Documentation about client assets
+│   ├── .gitkeep           # Keeps folder in git
+│   └── PLACEHOLDER.txt    # Instructions for client materials
 ├── docs/                   # Documentation
 │   ├── SETUP.md           # Setup instructions
 │   ├── VERCEL_DEPLOYMENT.md # Deployment guide
@@ -249,6 +252,41 @@ Lead-By-Example/
 ├── LICENSE               # MIT License
 └── README.md             # This file
 ```
+
+> **Note**: The `client_assets/` folder structure is tracked in git, but its contents (except documentation files) are ignored to protect client privacy and manage repository size. See `client_assets/README.md` for details about expected contents.
+
+### Client Assets Management
+
+The `client_assets/` folder is designed to store client-provided materials while maintaining privacy:
+
+**What's tracked in git:**
+
+- `README.md` - Documentation about the folder
+- `.gitkeep` - Ensures folder structure is preserved
+- `PLACEHOLDER.txt` - Instructions for client materials
+
+**What's ignored (not tracked):**
+
+- Client photos and images
+- PDF documents (e.g., `Lead_By_Example.pdf`)
+- Brand assets (logos, PSDs, AI files)
+- Other client-provided files
+
+**Why this approach?**
+
+- 🔒 Protects client privacy
+- 📦 Keeps repository size manageable
+- 📁 Maintains consistent folder structure across clones
+- 🔄 Easy to add client materials locally without affecting version control
+
+**To add client materials:**
+
+1. Place files in `client_assets/` folder
+2. Files will be automatically ignored by git
+3. Reference them when needed for development
+4. Optimize and copy to `public/` for web use
+
+📖 **See [docs/CLIENT_ASSETS_GUIDE.md](docs/CLIENT_ASSETS_GUIDE.md) for detailed management instructions.**
 
 ---
 

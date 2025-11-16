@@ -6,6 +6,8 @@ export interface Fundraiser {
   date: string;
   time: string;
   location: string;
+  locationLat?: number;
+  locationLng?: number;
   features: string[];
   description?: string;
 }
@@ -14,6 +16,8 @@ export interface OrganizationInfo {
   address: string;
   phone: string;
   email: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface KeyStatistics {
@@ -30,6 +34,8 @@ export const currentFundraiser: Fundraiser = {
   date: 'August 2, 2025',
   time: '12:30pm-8:00pm',
   location: 'Lincoln Woods Site A&B',
+  locationLat: 41.9240,
+  locationLng: -71.4395,
   features: [
     'Free food for all attendees',
     'Free haircuts',
@@ -48,7 +54,9 @@ export const keyStatistics: KeyStatistics = {
 export const organizationInfo: OrganizationInfo = {
   address: '120 Hawkins Street, Providence, RI 02908',
   phone: '(401) 699-6544',
-  email: 'contact@leadbyexample.org'
+  email: 'contact@leadbyexample.org',
+  lat: 41.8093,
+  lng: -71.4211
 };
 
 export const pastFundraisers: Fundraiser[] = [

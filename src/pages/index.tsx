@@ -1,4 +1,11 @@
+import CommunityCalendar from '@/components/CommunityCalendar';
+import DonationModal from '@/components/DonationModal';
+import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
+import { MapPlaceholder } from '@/components/MapPlaceholder';
+import MentorMatching from '@/components/MentorMatching';
+import StripeProvider from '@/components/StripeProvider';
+import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -7,8 +14,46 @@ import { Newsletter } from '@/components/sections/Newsletter';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [mapData, setMapData] = useState<{
+    locationName?: string;
+    locationAddress?: string;
+    locationLat?: number;
+    locationLng?: number;
+  }>({});
+
+  // Listen for custom map events from other components
+  useEffect(() => {
+    const handleShowMap = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const { locationName, locationAddress, locationLat, locationLng } = customEvent.detail;
+      setMapData({ locationName, locationAddress, locationLat, locationLng });
+      setIsMapOpen(true);
+    };
+
+    const handleHideMap = () => {
+      setIsMapOpen(false);
+      setMapData({}); // Clear map data on close
+    };
+
+    window.addEventListener('showMapPlaceholder', handleShowMap);
+    window.addEventListener('hideMapPlaceholder', handleHideMap);
+    return () => {
+      window.removeEventListener('showMapPlaceholder', handleShowMap);
+      window.removeEventListener('hideMapPlaceholder', handleHideMap);
+    };
+  }, []);
+
+  // Handle map close with proper cleanup
+  const handleMapClose = () => {
+    setIsMapOpen(false);
+    setMapData({});
+  };
+
   return (
     <>
       <Head>
@@ -45,12 +90,14 @@ export default function Home() {
         />
         <meta property="twitter:image" content="/twitter-image.jpg" />
 
+        {/* Icons and Manifest */}
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
         {/* Favicon - Removed until icon files are created */}
         {/* <link rel="icon" href="/favicon.ico" /> */}
-        {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /> */}
         {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
         {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> */}
-        <link rel="manifest" href="/site.webmanifest" />
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,6 +107,15 @@ export default function Home() {
       <main>
         <Navbar />
 
+        {/* Stripe Donation Modal */}
+        <StripeProvider>
+          <DonationModal
+            isOpen={isDonationModalOpen}
+            onClose={() => setIsDonationModalOpen(false)}
+            initialAmount={50}
+          />
+        </StripeProvider>
+
         {/* Hero Section with Current Fundraiser */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"
@@ -67,6 +123,7 @@ export default function Home() {
           primaryAction={{
             label: 'Donate Now',
             href: '#donate',
+            onClick: () => setIsDonationModalOpen(true),
           }}
           secondaryAction={{
             label: 'Learn More',
@@ -74,11 +131,31 @@ export default function Home() {
           }}
         />
 
+        {/* Evolution Journey - Visual Storytelling of Transformation */}
+        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+          <EvolutionJourney />
+        </section>
+
         {/* Mission Section - Our Purpose */}
         <Mission />
 
         {/* Testimonials Section - Success Stories Carousel */}
         <Testimonials />
+
+        {/* Mentor Matching - Connect with Mentors */}
+        <section id="mentors" className="bg-white">
+          <MentorMatching />
+        </section>
+
+        {/* Resource Library - Educational Content */}
+        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
+          <ResourceLibrary />
+        </section>
+
+        {/* Community Calendar - Upcoming Events */}
+        <section id="events" className="bg-white">
+          <CommunityCalendar />
+        </section>
 
         {/* Archive Section - Past Achievements */}
         <Archive />
@@ -91,6 +168,16 @@ export default function Home() {
 
         {/* Footer - Contact Info & Links */}
         <Footer />
+
+        {/* Map Placeholder Modal - Renders on main page */}
+        <MapPlaceholder
+          isOpen={isMapOpen}
+          onClose={handleMapClose}
+          locationName={mapData.locationName}
+          locationAddress={mapData.locationAddress}
+          locationLat={mapData.locationLat}
+          locationLng={mapData.locationLng}
+        />
       </main>
     </>
   );

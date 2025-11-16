@@ -1,0 +1,10 @@
+{
+  "name": "Lead By Example",
+  "short_name": "LeadByEx",
+  "description": "Breaking the School-to-Prison Pipeline through mentorship, education, and support",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#01514C",
+  "theme_color": "#01514C",
+  "icons": []
+}

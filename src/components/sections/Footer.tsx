@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
+import { showMapPlaceholder } from '@/utils/map'
 
 
 const socialLinks = [
@@ -32,7 +33,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-b from-secondary-900 to-neutral-900">
+    <footer id="footer" className="relative bg-gradient-to-b from-secondary-900 to-neutral-900">
       <div className="container mx-auto px-6 py-16">
         <motion.div
           className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12"
@@ -86,6 +87,19 @@ export function Footer() {
                 <MapPin className="w-5 h-5 text-accent-400" />
                 <Text size="sm">Providence, Rhode Island</Text>
               </motion.div>
+              <button
+                onClick={() => showMapPlaceholder({
+                  locationName: 'Lead By Example',
+                  locationAddress: 'Providence, Rhode Island',
+                  locationLat: 41.8240,
+                  locationLng: -71.4128
+                })}
+                className="flex items-center gap-3 text-white/70 hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
+                aria-label="View location on map"
+              >
+                <MapPin className="w-5 h-5 text-accent-400 group-hover:scale-110 transition-transform" />
+                <Text size="sm" className="group-hover:text-accent-400 transition-colors">Providence, Rhode Island</Text>
+              </button>
             </div>
           </motion.div>
 
@@ -199,14 +213,15 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-2 text-white/60">
-              <Text size="sm">Made with</Text>
+              <Text size="sm">Built with</Text>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-xl"
               >
-                <Heart className="w-4 h-4 text-accent-400 fill-current" />
+                ❤️
               </motion.div>
-              <Text size="sm">for our community</Text>
+              <Text size="sm">by StrayDog Syndications LLC for our community</Text>
             </div>
 
             <div className="flex gap-6">

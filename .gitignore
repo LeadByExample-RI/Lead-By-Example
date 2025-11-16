@@ -46,6 +46,12 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 
+# Stripe keys and secrets - NEVER commit these!
+.env.stripe
+.stripe/
+**/STRIPE_SECRET_KEY*
+**/STRIPE_WEBHOOK_SECRET*
+
 # vercel
 .vercel
 .vercel.json.local
@@ -87,8 +93,19 @@ Desktop.ini
 # Storybook
 storybook-static
 
-# Client assets and documentation (non-essential for builds)
-/client_assets
+# Client assets - ignore contents but keep folder structure
+client_assets/*
+!client_assets/README.md
+!client_assets/.gitkeep
+!client_assets/PLACEHOLDER.txt
+
+# Temporary Claude folder
+temp-claude/
+
+# Stripe installation package - reference files only, not needed in repo after installation
+stripe_install/
+
+# Other assets and large files
 /assets
 *.zip
 *.pdf
@@ -133,3 +150,6 @@ storybook-static
 /docs/*/.eslintrc*
 /docs/*/.prettierrc*
 /docs/*/.gitignore
+
+# Vercel environment files (contains secrets)
+.env.vercel
