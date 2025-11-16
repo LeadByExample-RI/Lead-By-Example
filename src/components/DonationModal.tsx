@@ -8,6 +8,7 @@ import { CheckCircle, DollarSign, Heart, Info, Loader2, X, XCircle } from 'lucid
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import StripeProvider from './StripeProvider';
 
 // Validation schema with Zod
 const donationSchema = z.object({
@@ -21,7 +22,7 @@ const donationSchema = z.object({
 // Preset donation amounts
 const PRESET_AMOUNTS = [25, 50, 100, 250];
 
-export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: DonationModalProps) {
+function DonationModalContent({ isOpen, onClose, initialAmount = 50 }: DonationModalProps) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -484,5 +485,13 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+export default function DonationModal(props: DonationModalProps) {
+  return (
+    <StripeProvider>
+      <DonationModalContent {...props} />
+    </StripeProvider>
   );
 }
