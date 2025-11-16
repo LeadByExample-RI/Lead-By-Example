@@ -1,4 +1,3 @@
-import StripeProvider from '@/components/StripeProvider';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
@@ -47,11 +46,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://js.stripe.com" />
       </Head>
 
-      <StripeProvider>
-        <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
-          <Component {...pageProps} />
-        </div>
-      </StripeProvider>
+      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }
