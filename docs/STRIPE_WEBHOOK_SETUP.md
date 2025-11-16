@@ -8,8 +8,8 @@
 - **Status**: ✅ Active
 - **Endpoint URL**: `https://lead-by-example-mvp.vercel.app/api/stripe/webhook`
 - **API Version**: 2025-10-29.clover
-- **Webhook Secret**: `whsec_3SuJNKA7BsUlbXZGk5dIeHvOeslYRXJb`
-- **Dashboard Link**: https://dashboard.stripe.com/acct_1SSRSgJbDiLxseXw/workbench/webhooks/we_1STvwVJbDiLxseXw9CiGZPIr
+- **Webhook Secret**: Configured in Vercel environment variables (never commit secrets!)
+- **Dashboard Link**: View in your Stripe Dashboard > Webhooks
 
 **Events Configured:**
 
