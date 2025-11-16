@@ -9,6 +9,7 @@ import { CheckCircle, DollarSign, Heart, Info, Loader2, X, XCircle } from 'lucid
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import StripeProvider from './StripeProvider';
 
 // Validation schema with Zod
 const donationSchema = z.object({
@@ -22,6 +23,7 @@ const donationSchema = z.object({
 // Preset donation amounts
 const PRESET_AMOUNTS = [25, 50, 100, 250];
 
+function DonationModalContent({ isOpen, onClose, initialAmount = 50 }: DonationModalProps) {
 // Load Stripe
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
@@ -246,6 +248,51 @@ function DonationFormContent({
   };
 
   return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleClose}
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+          />
+
+          {/* Modal */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="my-8 w-full max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-br from-[#4B306A]/95 to-[#421B5A]/95 shadow-2xl backdrop-blur-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="sticky top-0 rounded-t-2xl border-b border-white/10 bg-[#4B306A]/95 p-6 backdrop-blur-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#FFD700] to-[#E5C100] shadow-lg"
+                    >
+                      <Heart className="h-6 w-6 text-[#4B306A]" fill="currentColor" />
+                    </motion.div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">Support Our Mission</h2>
+                      <p className="text-sm text-white/70">All Sides of Town Cookout 2025</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    disabled={isProcessing}
+                    aria-label="Close donation modal"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <X className="h-5 w-5 text-white" />
+                  </button>
     <>
       {/* Backdrop */}
       <motion.div
@@ -591,5 +638,13 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
         <DonationFormContent onClose={onClose} initialAmount={initialAmount} />
       </Elements>
     </AnimatePresence>
+  );
+}
+
+export default function DonationModal(props: DonationModalProps) {
+  return (
+    <StripeProvider>
+      <DonationModalContent {...props} />
+    </StripeProvider>
   );
 }
