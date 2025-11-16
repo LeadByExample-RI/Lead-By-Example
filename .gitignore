@@ -150,3 +150,6 @@ stripe_install/
 /docs/*/.eslintrc*
 /docs/*/.prettierrc*
 /docs/*/.gitignore
+
+# Vercel environment files (contains secrets)
+.env.vercel
