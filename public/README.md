@@ -39,8 +39,8 @@ Use these colors when creating icons:
 
 You can use these tools to generate all required icon sizes from a single logo:
 
-1. **Favicon Generator**: https://realfavicongenerator.net/
-2. **PWA Asset Generator**: https://www.pwabuilder.com/imageGenerator
+1. **Favicon Generator**: <https://realfavicongenerator.net/>
+2. **PWA Asset Generator**: <https://www.pwabuilder.com/imageGenerator>
 3. **Figma/Canva**: Design your own icons
 
 ## Design Guidelines
