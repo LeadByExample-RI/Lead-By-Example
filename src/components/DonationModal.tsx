@@ -224,6 +224,7 @@ function DonationModalContent({ isOpen, onClose, initialAmount = 50 }: DonationM
                   <button
                     onClick={handleClose}
                     disabled={isProcessing}
+                    aria-label="Close donation modal"
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <X className="h-5 w-5 text-white" />

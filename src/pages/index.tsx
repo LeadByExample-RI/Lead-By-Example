@@ -3,6 +3,7 @@ import DonationModal from '@/components/DonationModal';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import MentorMatching from '@/components/MentorMatching';
+import StripeProvider from '@/components/StripeProvider';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
@@ -71,11 +72,13 @@ export default function Home() {
         <Navbar />
 
         {/* Stripe Donation Modal */}
-        <DonationModal
-          isOpen={isDonationModalOpen}
-          onClose={() => setIsDonationModalOpen(false)}
-          initialAmount={50}
-        />
+        <StripeProvider>
+          <DonationModal
+            isOpen={isDonationModalOpen}
+            onClose={() => setIsDonationModalOpen(false)}
+            initialAmount={50}
+          />
+        </StripeProvider>
 
         {/* Hero Section with Current Fundraiser */}
         <Hero
