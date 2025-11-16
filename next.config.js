@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
-  
+
   // Image optimization
   images: {
     remotePatterns: [
@@ -34,11 +34,11 @@ module.exports = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
         ],
       },
@@ -47,11 +47,11 @@ module.exports = {
         headers: [
           {
             key: 'Content-Type',
-            value: 'application/manifest+json'
+            value: 'application/manifest+json',
           },
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -60,14 +60,14 @@ module.exports = {
         headers: [
           {
             key: 'Content-Type',
-            value: 'text/plain'
+            value: 'text/plain',
           },
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600'
+            value: 'public, max-age=3600',
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
