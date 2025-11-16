@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 
 // Load Stripe outside component to avoid recreating on every render
 // This is a performance optimization
+// Only load Stripe if the key is available
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
   : null;
@@ -71,6 +72,11 @@ export default function StripeProvider({ children }: StripeProviderProps) {
   // If Stripe is not configured, render children without Stripe Elements
   if (!stripePromise) {
     console.warn('Stripe publishable key not configured. Stripe features will be disabled.');
+  // If Stripe is not configured, render children without Stripe context
+  if (!stripePromise) {
+    if (typeof window !== 'undefined') {
+      console.warn('Stripe publishable key not found. Payment features will be disabled.');
+    }
     return <>{children}</>;
   }
 

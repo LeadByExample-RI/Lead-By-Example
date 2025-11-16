@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#01514C"/>
+  
+  <!-- Text "LBE" -->
+  <text x="256" y="320" font-family="Arial, sans-serif" font-size="180" font-weight="bold" text-anchor="middle" fill="#FFD700">
+    LBE
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="256" y="380" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#F6F6F6">
+    Lead By Example
+  </text>
+</svg>

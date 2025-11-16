@@ -3,36 +3,56 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export function Navbar() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
 
   // Navigation links configuration
   const navLinks = [
-    { href: '#home', label: 'Home' },
+    { href: '/', label: 'Home' },
     { href: '/mentors', label: 'Mentors' },
     { href: '/resources', label: 'Resources' },
     { href: '/events', label: 'Events' },
-    { href: '#mission', label: 'Mission' },
-    { href: '#success-stories', label: 'Success Stories' },
-    { href: '#get-involved', label: 'Get Involved' },
+    { href: '/#mission', label: 'Mission' },
+    { href: '/#journey', label: 'Transformation' },
+    { href: '/#success-stories', label: 'Success Stories' },
+    { href: '/#impact', label: 'Archive' },
+    { href: '/#partners', label: 'Partners' },
+    { href: '/#footer', label: 'Footer' },
+    { href: '/#get-involved', label: 'Get Involved' },
   ];
 
   // Smooth scroll handler
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    setIsMobileMenuOpen(false);
+
+    // Handle homepage sections (format: /#section)
+    if (href.startsWith('/#')) {
       e.preventDefault();
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(href);
-      setIsMobileMenuOpen(false);
-    } else {
-      // For regular page navigation, just close mobile menu
-      setIsMobileMenuOpen(false);
+      const sectionId = href.substring(1); // Get '#section' from '/#section'
+      
+      // If we're not on the homepage, navigate there first
+      if (router.pathname !== '/') {
+        router.push(href).then(() => {
+          // After navigation, scroll to the section
+          setTimeout(() => {
+            const element = document.querySelector(sectionId);
+            element?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        });
+      } else {
+        // Already on homepage, just scroll
+        const element = document.querySelector(sectionId);
+        element?.scrollIntoView({ behavior: 'smooth' });
+        setActiveSection(sectionId);
+      }
     }
+    // For regular page navigation (/, /mentors, /resources, /events), Next.js Link handles it
   };
 
   // Scroll detection for enhanced glassmorphism and active section
