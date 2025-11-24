@@ -112,8 +112,8 @@ export default function Home() {
             label: 'Donate Now',
             href: '#donate',
             onClick: () => {
-              // Dispatch event to open modal at app root level
-              window.dispatchEvent(new Event('open-donation-modal'));
+              // Dispatch event to open cookout-specific modal
+              window.dispatchEvent(new Event('open-cookout-donation-modal'));
             },
           }}
           secondaryAction={{
