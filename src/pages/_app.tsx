@@ -2,6 +2,9 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import DonationModal from '@/components/DonationModal';
+import StripeProvider from '@/components/StripeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,6 +19,25 @@ const montserrat = Montserrat({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [showDonationModal, setShowDonationModal] = useState(false);
+
+  useEffect(() => {
+    // Listen for donation modal trigger from navbar or any component
+    const handleOpenModal = () => setShowDonationModal(true);
+    window.addEventListener('open-donation-modal', handleOpenModal);
+    
+    // Prevent body scroll when modal is open
+    if (showDonationModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      window.removeEventListener('open-donation-modal', handleOpenModal);
+      document.body.style.overflow = 'unset';
+    };
+  }, [showDonationModal]);
   return (
     <>
       <Head>
@@ -49,6 +71,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
         <Component {...pageProps} />
       </div>
+
+      {/* Donation Modal - Renders at ROOT level, outside all components */}
+      <StripeProvider>
+        <DonationModal 
+          isOpen={showDonationModal} 
+          onClose={() => setShowDonationModal(false)}
+          initialAmount={50}
+        />
+      </StripeProvider>
     </>
   );
 }

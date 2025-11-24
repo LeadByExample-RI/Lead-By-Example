@@ -182,7 +182,13 @@ export function Navbar() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <button className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300">
+              <button 
+                onClick={() => {
+                  // Dispatch event to open modal at app root level
+                  window.dispatchEvent(new Event('open-donation-modal'));
+                }}
+                className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300"
+              >
                 {/* Animated border glow */}
                 <motion.div
                   className="absolute inset-0 rounded-full border-2 border-gold/0"
@@ -296,7 +302,13 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
               >
-                <button className="glass-button relative w-full overflow-hidden rounded-full py-3 font-semibold text-off-white transition-all duration-300">
+                <button 
+                  onClick={() => {
+                    // Dispatch event to open modal at app root level
+                    window.dispatchEvent(new Event('open-donation-modal'));
+                  }}
+                  className="glass-button relative w-full overflow-hidden rounded-full py-3 font-semibold text-off-white transition-all duration-300"
+                >
                   {/* Background pulse */}
                   <motion.div
                     className="absolute inset-0 rounded-full bg-gold/20"

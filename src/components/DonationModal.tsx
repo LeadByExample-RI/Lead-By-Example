@@ -254,11 +254,11 @@ function DonationFormContent({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm"
         />
 
         {/* Modal */}
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -279,13 +279,13 @@ function DonationFormContent({
                   </motion.div>
                   <div>
                     <h2 className="text-2xl font-bold text-white">Support Our Mission</h2>
-                    <p className="text-sm text-white/70">All Sides of Town Cookout 2025</p>
                   </div>
                 </div>
                 <button
                   onClick={handleClose}
                   disabled={isProcessing}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
+                  aria-label="Close donation modal"
                 >
                   <X className="h-5 w-5 text-white" />
                 </button>
@@ -336,9 +336,7 @@ function DonationFormContent({
                 <div className="flex items-start gap-3">
                   <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#01514C]" />
                   <p className="text-sm text-white/80">
-                    Your donation directly supports the All Sides of Town Cookout 2025, providing
-                    free food, haircuts, activities, and backpack giveaways for youth in our
-                    community.
+                    Your donation directly supports our mission, &quot;Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we&apos;re building stronger communities through opportunity and empowerment&quot;.
                   </p>
                 </div>
               </div>
@@ -560,9 +558,9 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm"
         />
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -574,6 +572,7 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
               <button
                 onClick={onClose}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+                aria-label="Close payment unavailable message"
               >
                 <X className="h-5 w-5 text-white" />
               </button>

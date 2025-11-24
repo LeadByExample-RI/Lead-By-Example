@@ -1,10 +1,8 @@
 import CommunityCalendar from '@/components/CommunityCalendar';
-import DonationModal from '@/components/DonationModal';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
-import StripeProvider from '@/components/StripeProvider';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
@@ -17,7 +15,6 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [mapData, setMapData] = useState<{
     locationName?: string;
@@ -107,15 +104,6 @@ export default function Home() {
       <main>
         <Navbar />
 
-        {/* Stripe Donation Modal */}
-        <StripeProvider>
-          <DonationModal
-            isOpen={isDonationModalOpen}
-            onClose={() => setIsDonationModalOpen(false)}
-            initialAmount={50}
-          />
-        </StripeProvider>
-
         {/* Hero Section with Current Fundraiser */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"
@@ -123,7 +111,10 @@ export default function Home() {
           primaryAction={{
             label: 'Donate Now',
             href: '#donate',
-            onClick: () => setIsDonationModalOpen(true),
+            onClick: () => {
+              // Dispatch event to open modal at app root level
+              window.dispatchEvent(new Event('open-donation-modal'));
+            },
           }}
           secondaryAction={{
             label: 'Learn More',
