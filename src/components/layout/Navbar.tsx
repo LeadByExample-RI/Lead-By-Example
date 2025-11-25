@@ -18,6 +18,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function Navbar() {
   const router = useRouter();
@@ -138,28 +139,32 @@ export function Navbar() {
               const IconComponent = link.icon;
 
               return (
-                <motion.a
+                <Tooltip
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`group relative rounded-lg px-4 py-2 transition-all duration-300 ${
-                    isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                  content={link.label}
+                  position="bottom"
                 >
-                  {/* Gradient background that appears on hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <motion.a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`group relative rounded-lg px-4 py-2 transition-all duration-300 ${
+                      isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    aria-label={link.label}
+                  >
+                    {/* Gradient background that appears on hover */}
+                    <motion.div
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
 
-                  {/* Content wrapper */}
-                  <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                    <IconComponent className="h-4 w-4 transition-colors duration-200 group-hover:text-[#FFD700]" />
-                    {link.label}
-                  </span>
+                    {/* Content wrapper */}
+                    <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                      <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                    </span>
 
                   {/* Floating particle effects (5 particles in circle pattern) */}
                   {[...Array(5)].map((_, particleIndex) => (
@@ -186,6 +191,7 @@ export function Navbar() {
                     />
                   ))}
                 </motion.a>
+                </Tooltip>
               );
             })}
           </div>
@@ -257,30 +263,34 @@ export function Navbar() {
                 const IconComponent = link.icon;
 
                 return (
-                  <motion.a
+                  <Tooltip
                     key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`group relative block overflow-hidden rounded-lg px-4 py-3 transition-all duration-300 ${
-                      isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
-                    }`}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
+                    content={link.label}
+                    position="right"
                   >
-                    {/* Gradient background that appears on hover */}
-                    <motion.div
-                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <motion.a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`group relative block overflow-hidden rounded-lg px-4 py-3 transition-all duration-300 ${
+                        isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
+                      }`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      aria-label={link.label}
+                    >
+                      {/* Gradient background that appears on hover */}
+                      <motion.div
+                        className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
 
-                    {/* Link text */}
-                    <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                      <IconComponent className="h-4 w-4 transition-colors duration-200 group-hover:text-[#FFD700]" />
-                      {link.label}
-                    </span>
+                      {/* Link text */}
+                      <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                        <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                      </span>
 
                     {/* Floating particle effects (3 particles for mobile) */}
                     {[...Array(3)].map((_, particleIndex) => (
@@ -307,6 +317,7 @@ export function Navbar() {
                       />
                     ))}
                   </motion.a>
+                  </Tooltip>
                 );
               })}
 
