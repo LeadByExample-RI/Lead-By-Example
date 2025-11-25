@@ -1,7 +1,20 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { 
+  Menu, 
+  X, 
+  Home, 
+  Users, 
+  Target, 
+  Heart, 
+  FileText, 
+  Calendar,
+  TrendingUp,
+  Award,
+  Handshake,
+  Mail
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -14,17 +27,17 @@ export function Navbar() {
 
   // Navigation links configuration
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/mentors', label: 'Mentors' },
-    { href: '/resources', label: 'Resources' },
-    { href: '/events', label: 'Events' },
-    { href: '/#mission', label: 'Mission' },
-    { href: '/#journey', label: 'Transformation' },
-    { href: '/#success-stories', label: 'Success Stories' },
-    { href: '/#impact', label: 'Archive' },
-    { href: '/#partners', label: 'Partners' },
-    { href: '/#footer', label: 'Footer' },
-    { href: '/#get-involved', label: 'Get Involved' },
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/mentors', label: 'Mentors', icon: Users },
+    { href: '/resources', label: 'Resources', icon: FileText },
+    { href: '/events', label: 'Events', icon: Calendar },
+    { href: '/#mission', label: 'Mission', icon: Target },
+    { href: '/#journey', label: 'Transformation', icon: TrendingUp },
+    { href: '/#success-stories', label: 'Success Stories', icon: Award },
+    { href: '/#impact', label: 'Archive', icon: FileText },
+    { href: '/#partners', label: 'Partners', icon: Handshake },
+    { href: '/#footer', label: 'Footer', icon: Mail },
+    { href: '/#get-involved', label: 'Get Involved', icon: Heart },
   ];
 
   // Smooth scroll handler
@@ -122,6 +135,7 @@ export function Navbar() {
           <div className="hidden items-center space-x-1 md:flex">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.href;
+              const IconComponent = link.icon;
 
               return (
                 <motion.a
@@ -143,6 +157,7 @@ export function Navbar() {
 
                   {/* Content wrapper */}
                   <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                    <IconComponent className="h-4 w-4 transition-colors duration-200 group-hover:text-[#FFD700]" />
                     {link.label}
                   </span>
 
@@ -239,6 +254,7 @@ export function Navbar() {
             <div className="space-y-3 px-4 py-6">
               {navLinks.map((link, index) => {
                 const isActive = activeSection === link.href;
+                const IconComponent = link.icon;
 
                 return (
                   <motion.a
@@ -261,7 +277,8 @@ export function Navbar() {
                     />
 
                     {/* Link text */}
-                    <span className="relative z-10 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                    <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                      <IconComponent className="h-4 w-4 transition-colors duration-200 group-hover:text-[#FFD700]" />
                       {link.label}
                     </span>
 
