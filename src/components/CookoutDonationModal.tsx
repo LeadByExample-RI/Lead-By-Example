@@ -74,7 +74,7 @@ const appearance: StripeElementsOptions['appearance'] = {
 };
 
 // Inner component that uses Stripe hooks - only rendered when modal is open
-function DonationFormContent({
+function CookoutDonationFormContent({
   onClose,
   initialAmount,
 }: {
@@ -279,6 +279,7 @@ function DonationFormContent({
                   </motion.div>
                   <div>
                     <h2 className="text-2xl font-bold text-white">Support Our Mission</h2>
+                    <p className="text-sm text-white/70">All Sides of Town Cookout 2025</p>
                   </div>
                 </div>
                 <button
@@ -336,7 +337,9 @@ function DonationFormContent({
                 <div className="flex items-start gap-3">
                   <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#01514C]" />
                   <p className="text-sm text-white/80">
-                    Your donation directly supports our mission, &quot;Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we&apos;re building stronger communities through opportunity and empowerment&quot;.
+                    Your donation directly supports the All Sides of Town Cookout 2025, providing
+                    free food, haircuts, activities, and backpack giveaways for youth in our
+                    community.
                   </p>
                 </div>
               </div>
@@ -545,7 +548,7 @@ function DonationFormContent({
 }
 
 // Main modal component wrapper
-export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: DonationModalProps) {
+export default function CookoutDonationModal({ isOpen, onClose, initialAmount = 50 }: DonationModalProps) {
   // Don't render anything if modal is closed or Stripe is not configured
   if (!isOpen) return null;
 
@@ -589,7 +592,7 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
 
   return (
     <Elements stripe={stripePromise} options={{ appearance }}>
-      <DonationFormContent onClose={onClose} initialAmount={initialAmount} />
+      <CookoutDonationFormContent onClose={onClose} initialAmount={initialAmount} />
     </Elements>
   );
 }
