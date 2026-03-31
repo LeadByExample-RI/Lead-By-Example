@@ -9,6 +9,7 @@ export { ProgressBar } from './ProgressBar';
 export { Heading, Text } from './Typography';
 export { Input } from './Input';
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './Card';
+export { Tooltip } from './Tooltip';
 
 export type { GlassButtonProps } from './GlassButton';
 export type { GlassCardProps } from './GlassCard';

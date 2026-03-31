@@ -1,10 +1,24 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { 
+  Menu, 
+  X, 
+  Home, 
+  Users, 
+  Target, 
+  Heart, 
+  FileText, 
+  Calendar,
+  TrendingUp,
+  Award,
+  Handshake,
+  Mail
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function Navbar() {
   const router = useRouter();
@@ -14,17 +28,17 @@ export function Navbar() {
 
   // Navigation links configuration
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/mentors', label: 'Mentors' },
-    { href: '/resources', label: 'Resources' },
-    { href: '/events', label: 'Events' },
-    { href: '/#mission', label: 'Mission' },
-    { href: '/#journey', label: 'Transformation' },
-    { href: '/#success-stories', label: 'Success Stories' },
-    { href: '/#impact', label: 'Archive' },
-    { href: '/#partners', label: 'Partners' },
-    { href: '/#footer', label: 'Footer' },
-    { href: '/#get-involved', label: 'Get Involved' },
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/mentors', label: 'Mentors', icon: Users },
+    { href: '/resources', label: 'Resources', icon: FileText },
+    { href: '/events', label: 'Events', icon: Calendar },
+    { href: '/#mission', label: 'Mission', icon: Target },
+    { href: '/#journey', label: 'Transformation', icon: TrendingUp },
+    { href: '/#success-stories', label: 'Success Stories', icon: Award },
+    { href: '/#impact', label: 'Archive', icon: FileText },
+    { href: '/#partners', label: 'Partners', icon: Handshake },
+    { href: '/#footer', label: 'Footer', icon: Mail },
+    { href: '/#get-involved', label: 'Get Involved', icon: Heart },
   ];
 
   // Smooth scroll handler
@@ -122,29 +136,35 @@ export function Navbar() {
           <div className="hidden items-center space-x-1 md:flex">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.href;
+              const IconComponent = link.icon;
 
               return (
-                <motion.a
+                <Tooltip
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`group relative rounded-lg px-4 py-2 transition-all duration-300 ${
-                    isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                  content={link.label}
+                  position="bottom"
                 >
-                  {/* Gradient background that appears on hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <motion.a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`group relative rounded-lg px-4 py-2 transition-all duration-300 ${
+                      isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    aria-label={link.label}
+                  >
+                    {/* Gradient background that appears on hover */}
+                    <motion.div
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
 
-                  {/* Content wrapper */}
-                  <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                    {link.label}
-                  </span>
+                    {/* Content wrapper */}
+                    <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                      <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                    </span>
 
                   {/* Floating particle effects (5 particles in circle pattern) */}
                   {[...Array(5)].map((_, particleIndex) => (
@@ -171,6 +191,7 @@ export function Navbar() {
                     />
                   ))}
                 </motion.a>
+                </Tooltip>
               );
             })}
           </div>
@@ -182,7 +203,13 @@ export function Navbar() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <button className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300">
+              <button 
+                onClick={() => {
+                  // Dispatch event to open modal at app root level
+                  window.dispatchEvent(new Event('open-donation-modal'));
+                }}
+                className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300"
+              >
                 {/* Animated border glow */}
                 <motion.div
                   className="absolute inset-0 rounded-full border-2 border-gold/0"
@@ -233,31 +260,37 @@ export function Navbar() {
             <div className="space-y-3 px-4 py-6">
               {navLinks.map((link, index) => {
                 const isActive = activeSection === link.href;
+                const IconComponent = link.icon;
 
                 return (
-                  <motion.a
+                  <Tooltip
                     key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`group relative block overflow-hidden rounded-lg px-4 py-3 transition-all duration-300 ${
-                      isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
-                    }`}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
+                    content={link.label}
+                    position="right"
                   >
-                    {/* Gradient background that appears on hover */}
-                    <motion.div
-                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <motion.a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`group relative block overflow-hidden rounded-lg px-4 py-3 transition-all duration-300 ${
+                        isActive ? 'bg-gradient-to-r from-gold/30 to-gold/50' : ''
+                      }`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      aria-label={link.label}
+                    >
+                      {/* Gradient background that appears on hover */}
+                      <motion.div
+                        className="absolute inset-0 rounded-lg bg-gradient-to-r from-gold/20 to-gold/40 opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
 
-                    {/* Link text */}
-                    <span className="relative z-10 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                      {link.label}
-                    </span>
+                      {/* Link text */}
+                      <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                        <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                      </span>
 
                     {/* Floating particle effects (3 particles for mobile) */}
                     {[...Array(3)].map((_, particleIndex) => (
@@ -284,6 +317,7 @@ export function Navbar() {
                       />
                     ))}
                   </motion.a>
+                  </Tooltip>
                 );
               })}
 
@@ -296,7 +330,13 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
               >
-                <button className="glass-button relative w-full overflow-hidden rounded-full py-3 font-semibold text-off-white transition-all duration-300">
+                <button 
+                  onClick={() => {
+                    // Dispatch event to open modal at app root level
+                    window.dispatchEvent(new Event('open-donation-modal'));
+                  }}
+                  className="glass-button relative w-full overflow-hidden rounded-full py-3 font-semibold text-off-white transition-all duration-300"
+                >
                   {/* Background pulse */}
                   <motion.div
                     className="absolute inset-0 rounded-full bg-gold/20"

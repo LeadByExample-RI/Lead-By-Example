@@ -2,6 +2,10 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import DonationModal from '@/components/DonationModal';
+import CookoutDonationModal from '@/components/CookoutDonationModal';
+import StripeProvider from '@/components/StripeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,6 +20,31 @@ const montserrat = Montserrat({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [showDonationModal, setShowDonationModal] = useState(false);
+  const [showCookoutDonationModal, setShowCookoutDonationModal] = useState(false);
+
+  useEffect(() => {
+    // Listen for donation modal trigger from navbar
+    const handleOpenModal = () => setShowDonationModal(true);
+    // Listen for cookout donation modal trigger from Hero/Cookout section
+    const handleOpenCookoutModal = () => setShowCookoutDonationModal(true);
+    
+    window.addEventListener('open-donation-modal', handleOpenModal);
+    window.addEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
+    
+    // Prevent body scroll when either modal is open
+    if (showDonationModal || showCookoutDonationModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      window.removeEventListener('open-donation-modal', handleOpenModal);
+      window.removeEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
+      document.body.style.overflow = 'unset';
+    };
+  }, [showDonationModal, showCookoutDonationModal]);
   return (
     <>
       <Head>
@@ -49,6 +78,23 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
         <Component {...pageProps} />
       </div>
+
+      {/* Donation Modals - Render at ROOT level, outside all components */}
+      <StripeProvider>
+        {/* General Mission Donation Modal - Triggered from Navbar */}
+        <DonationModal 
+          isOpen={showDonationModal} 
+          onClose={() => setShowDonationModal(false)}
+          initialAmount={50}
+        />
+        
+        {/* Cookout-Specific Donation Modal - Triggered from Hero/Cookout section */}
+        <CookoutDonationModal 
+          isOpen={showCookoutDonationModal} 
+          onClose={() => setShowCookoutDonationModal(false)}
+          initialAmount={50}
+        />
+      </StripeProvider>
     </>
   );
 }
