@@ -49,7 +49,7 @@
     "framer-motion": "^11.5.0",
     "lucide-react": "^0.439.0",
     "micro": "^10.0.1",
-    "next": "^16.0.1",
+    "next": "16.0.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.53.0",
