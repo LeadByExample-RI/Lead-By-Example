@@ -1,5 +1,8 @@
 module.exports = {
   reactStrictMode: true,
+  turbopack: {
+    root: __dirname,
+  },
 
   // Image optimization
   images: {

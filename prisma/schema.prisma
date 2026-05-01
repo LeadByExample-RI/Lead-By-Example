@@ -1,0 +1,311 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// AUTHENTICATION & USER MANAGEMENT
+// ============================================================================
+
+/// User account with authentication
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String? // hashed password for email/password auth
+  image         String?
+  role          String    @default("donor") // donor, volunteer, mentor, admin
+
+  // Account relations for OAuth
+  accounts      Account[]
+  sessions      Session[]
+
+  // User donations
+  donations     Donation[]
+
+  // Event registrations
+  eventRegistrations EventRegistration[]
+
+  // Newsletter preferences
+  newsletter    Newsletter?
+
+  // Metadata
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([email])
+}
+
+/// OAuth account linking
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+/// Session management for NextAuth
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// Verification tokens
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================================
+// FUNDRAISING & DONATIONS
+// ============================================================================
+
+/// Donation record
+model Donation {
+  id                    String    @id @default(cuid())
+  
+  // User info
+  userId                String?
+  user                  User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  // Donation details
+  amount                Decimal   @db.Decimal(10, 2)
+  currency              String    @default("USD")
+  status                String    @default("completed") // completed, pending, failed, refunded
+  
+  // Stripe info
+  stripePaymentIntentId String    @unique
+  stripeChargeId        String?
+  
+  // Donor info (captured separately for anonymous donations)
+  donorName             String?
+  donorEmail            String?
+  
+  // Campaign/fundraiser info
+  campaign              String?   // fundraiser name or campaign type
+  eventId               String?
+  event                 Event?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  
+  // Notes
+  notes                 String?   @db.Text
+  
+  // Metadata
+  metadata              Json?     // for additional Stripe metadata
+  
+  // Timestamps
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([stripePaymentIntentId])
+  @@index([userId])
+  @@index([donorEmail])
+  @@index([createdAt])
+  @@index([campaign])
+}
+
+// ============================================================================
+// EVENTS & COMMUNITY ENGAGEMENT
+// ============================================================================
+
+/// Event record
+model Event {
+  id                String    @id @default(cuid())
+  title             String
+  description       String?   @db.Text
+  slug              String    @unique
+  
+  // Event details
+  startDate         DateTime
+  endDate           DateTime?
+  location          String?
+  eventType         String    @default("community") // community, fundraiser, mentorship, workshop
+  
+  // Capacity
+  maxAttendees      Int?
+  registeredCount   Int       @default(0)
+  
+  // Fundraising (if applicable)
+  fundraiserId      String?
+  goal              Decimal?  @db.Decimal(10, 2)
+  raisedAmount      Decimal   @default(0) @db.Decimal(10, 2)
+  
+  // Relations
+  registrations     EventRegistration[]
+  donations         Donation[]
+  
+  // Metadata
+  image             String?
+  tags              String[]  @default([])
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([startDate])
+}
+
+/// Event registration (attendee list)
+model EventRegistration {
+  id                String    @id @default(cuid())
+  
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  eventId           String
+  event             Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  // Registration status
+  status            String    @default("registered") // registered, attended, cancelled
+  
+  // Additional info
+  guestCount        Int       @default(1) // if bringing guests
+  specialRequests   String?   @db.Text
+  
+  // Timestamps
+  registeredAt      DateTime  @default(now())
+  attendedAt        DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@unique([userId, eventId])
+  @@index([userId])
+  @@index([eventId])
+  @@index([status])
+}
+
+// ============================================================================
+// NEWSLETTER & COMMUNICATION
+// ============================================================================
+
+/// Newsletter subscriber
+model Newsletter {
+  id                String    @id @default(cuid())
+  
+  email             String    @unique
+  userId            String?   @unique
+  user              User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  // Subscription status
+  subscribed        Boolean   @default(true)
+  verifiedAt        DateTime?
+  
+  // Preferences
+  frequency         String    @default("weekly") // daily, weekly, monthly
+  interests         String[]  @default(["general"])
+  
+  // Timestamps
+  subscribedAt      DateTime  @default(now())
+  unsubscribedAt    DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([email])
+  @@index([subscribed])
+}
+
+// ============================================================================
+// EMAIL LOGS (for tracking sent emails)
+// ============================================================================
+
+/// Email log for auditing and troubleshooting
+model EmailLog {
+  id                String    @id @default(cuid())
+  
+  recipient         String
+  subject           String
+  emailType         String    // welcome, donation-receipt, event-confirmation, etc.
+  
+  // Status
+  status            String    @default("sent") // queued, sent, failed, bounced
+  failureReason     String?
+  
+  // Relations
+  userId            String?
+  donationId        String?
+  eventId           String?
+  
+  // Metadata
+  metadata          Json?
+  
+  // Timestamps
+  sentAt            DateTime?
+  createdAt         DateTime  @default(now())
+
+  @@index([recipient])
+  @@index([emailType])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ============================================================================
+// ANALYTICS & LOGGING
+// ============================================================================
+
+/// Page view analytics
+model PageView {
+  id                String    @id @default(cuid())
+  
+  path              String
+  referer           String?
+  userAgent         String?
+  
+  // User info (anonymous)
+  ipHash            String?
+  sessionId         String?
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+}
+
+/// Error log for monitoring
+model ErrorLog {
+  id                String    @id @default(cuid())
+  
+  message           String
+  stack             String?   @db.Text
+  context           String?   // api route, component, etc
+  severity          String    @default("error") // error, warning, info
+  
+  // Metadata
+  metadata          Json?
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+  resolvedAt        DateTime?
+
+  @@index([severity])
+  @@index([createdAt])
+}
