@@ -105,6 +105,7 @@ model Donation {
   // Stripe info
   stripePaymentIntentId String    @unique
   stripeChargeId        String?
+  refundedAmount        Decimal?  @db.Decimal(10, 2)
   
   // Donor info (captured separately for anonymous donations)
   donorName             String?

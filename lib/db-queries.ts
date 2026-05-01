@@ -102,7 +102,7 @@ export const donationQueries = {
       where: { stripePaymentIntentId },
       data: {
         status: 'refunded',
-        amount: refundAmount,
+        refundedAmount: refundAmount,
         updatedAt: new Date(),
       },
     });

@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import DonationModal from '@/components/DonationModal';
 import CookoutDonationModal from '@/components/CookoutDonationModal';
-import StripeProvider from '@/components/StripeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -79,22 +78,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </div>
 
-      {/* Donation Modals - Render at ROOT level, outside all components */}
-      <StripeProvider>
-        {/* General Mission Donation Modal - Triggered from Navbar */}
-        <DonationModal 
-          isOpen={showDonationModal} 
-          onClose={() => setShowDonationModal(false)}
-          initialAmount={50}
-        />
-        
-        {/* Cookout-Specific Donation Modal - Triggered from Hero/Cookout section */}
-        <CookoutDonationModal 
-          isOpen={showCookoutDonationModal} 
-          onClose={() => setShowCookoutDonationModal(false)}
-          initialAmount={50}
-        />
-      </StripeProvider>
+      {/* Donation Modals — each manages its own Stripe Elements context */}
+      <DonationModal
+        isOpen={showDonationModal}
+        onClose={() => setShowDonationModal(false)}
+        initialAmount={50}
+      />
+      <CookoutDonationModal
+        isOpen={showCookoutDonationModal}
+        onClose={() => setShowCookoutDonationModal(false)}
+        initialAmount={50}
+      />
     </>
   );
 }

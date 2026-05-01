@@ -110,25 +110,27 @@ function DonationFormContent({
   const isAnonymous = watch('isAnonymous');
   const currentAmount = watch('amount');
 
-  // Create payment intent when amount is selected
-  useEffect(() => {
-    if (currentAmount && currentAmount >= 1 && !clientSecret && !isCreatingIntent) {
-      // Only create intent if form is partially filled
-      const email = watch('donorEmail');
-      const name = watch('donorName');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (email || name) {
-        createPaymentIntent({
-          amount: currentAmount,
-          donorName: name || 'Anonymous',
-          donorEmail: email || 'temp@example.com',
-          isAnonymous: false,
-          newsletter: true,
-        });
-      }
+  // Create payment intent once a valid email and amount are in place
+  useEffect(() => {
+    const email = watch('donorEmail');
+    if (
+      currentAmount >= 1 &&
+      emailRegex.test(email || '') &&
+      !clientSecret &&
+      !isCreatingIntent
+    ) {
+      createPaymentIntent({
+        amount: currentAmount,
+        donorName: watch('donorName') || 'Anonymous',
+        donorEmail: email,
+        isAnonymous: false,
+        newsletter: true,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentAmount]);
+  }, [watch('donorEmail'), currentAmount]);
 
   // Create payment intent
   const createPaymentIntent = async (data: DonationFormData) => {

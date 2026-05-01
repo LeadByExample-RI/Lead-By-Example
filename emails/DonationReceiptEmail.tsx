@@ -16,6 +16,7 @@ interface DonationReceiptEmailProps {
 
 export default function DonationReceiptEmail({
   donorName,
+  donorEmail,
   amount,
   currency,
   campaign,
@@ -192,7 +193,7 @@ export default function DonationReceiptEmail({
             </div>
             <div className="detail-row">
               <span className="detail-label">Email:</span>
-              <span className="detail-value">{donorName}</span>
+              <span className="detail-value">{donorEmail}</span>
             </div>
           </div>
 

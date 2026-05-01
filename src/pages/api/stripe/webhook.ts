@@ -2,6 +2,7 @@ import { buffer } from 'micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { donationQueries } from '@/lib/db-queries';
+import { sendDonationReceipt } from '@/lib/email-service';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-10-29.clover',
@@ -110,6 +111,17 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
     campaign,
     metadata: paymentIntent.metadata as Record<string, string>,
   });
+
+  if (donorEmail) {
+    await sendDonationReceipt({
+      donorName,
+      donorEmail,
+      amount,
+      currency: paymentIntent.currency.toUpperCase(),
+      campaign,
+      transactionId: paymentIntent.id,
+    });
+  }
 }
 
 /**

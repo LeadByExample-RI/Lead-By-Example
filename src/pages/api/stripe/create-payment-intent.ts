@@ -120,7 +120,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Statement descriptor (appears on credit card statement)
       statement_descriptor: 'LEAD BY EXAMPLE',
-      statement_descriptor_suffix: 'DONATION',
+      statement_descriptor_suffix: 'DON',
     });
 
     // Log successful payment intent creation
