@@ -1,6 +1,7 @@
 import { buffer } from 'micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
+import { donationQueries } from '@/lib/db-queries';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-10-29.clover',
@@ -92,93 +93,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 /**
- * Handle successful payment
+ * Handle successful payment — persist to DB
  */
 async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
-  const amount = paymentIntent.amount / 100; // Convert cents to dollars
+  const amount = paymentIntent.amount / 100;
   const donorName = paymentIntent.metadata.donorName || 'Anonymous';
   const donorEmail = paymentIntent.metadata.donorEmail;
   const campaign = paymentIntent.metadata.campaign;
 
-  console.log('🎉 Payment succeeded:', {
-    id: paymentIntent.id,
-    amount: `$${amount.toFixed(2)}`,
-    donor: donorName,
-    email: donorEmail,
-    campaign: campaign,
-    timestamp: new Date().toISOString(),
+  await donationQueries.saveDonation({
+    stripePaymentIntentId: paymentIntent.id,
+    amount,
+    currency: paymentIntent.currency.toUpperCase(),
+    donorName,
+    donorEmail,
+    campaign,
+    metadata: paymentIntent.metadata as Record<string, string>,
   });
-
-  // TODO: Update your database with successful donation
-  // Example implementations:
-
-  // 1. Update total raised amount
-  // await updateCampaignTotal(campaign, amount);
-
-  // 2. Save donation record
-  // await saveDonationRecord({
-  //   paymentIntentId: paymentIntent.id,
-  //   amount,
-  //   donorName,
-  //   donorEmail,
-  //   campaign,
-  //   timestamp: new Date(),
-  // });
-
-  // 3. Send thank you email (if not using Stripe's receipt_email)
-  // await sendThankYouEmail(donorEmail, donorName, amount);
-
-  // 4. Update leaderboard or donor wall
-  // await updateDonorWall(donorName, amount);
-
-  // 5. Trigger notification to team
-  // await notifyTeam(`New donation: $${amount} from ${donorName}`);
-
-  // For now, just log the success
-  console.log('📊 Donation logged successfully');
 }
 
 /**
  * Handle failed payment
  */
 async function handlePaymentFailure(paymentIntent: Stripe.PaymentIntent) {
-  const amount = paymentIntent.amount / 100;
-  const donorEmail = paymentIntent.metadata.donorEmail;
-  const errorMessage = paymentIntent.last_payment_error?.message;
-
-  console.error('❌ Payment failed:', {
+  console.error('Payment failed:', {
     id: paymentIntent.id,
-    amount: `$${amount.toFixed(2)}`,
-    email: donorEmail,
-    reason: errorMessage || 'Unknown error',
-    timestamp: new Date().toISOString(),
+    amount: paymentIntent.amount / 100,
+    reason: paymentIntent.last_payment_error?.message || 'Unknown error',
   });
-
-  // TODO: Optional - send failure notification
-  // await sendPaymentFailureEmail(donorEmail, errorMessage);
-
-  // Log for analytics
-  console.log('📊 Failed payment logged for analysis');
 }
 
 /**
- * Handle refund
+ * Handle refund — update donation status in DB
  */
 async function handleRefund(charge: Stripe.Charge) {
-  const amount = charge.amount / 100;
   const refundAmount = charge.amount_refunded / 100;
-
-  console.log('↩️  Refund processed:', {
-    chargeId: charge.id,
-    originalAmount: `$${amount.toFixed(2)}`,
-    refundedAmount: `$${refundAmount.toFixed(2)}`,
-    timestamp: new Date().toISOString(),
-  });
-
-  // TODO: Update database to reflect refund
-  // await processRefund(charge.id, refundAmount);
-
-  console.log('📊 Refund logged successfully');
+  if (charge.payment_intent && typeof charge.payment_intent === 'string') {
+    await donationQueries.refundDonation(charge.payment_intent, refundAmount);
+  }
 }
 
 /**
