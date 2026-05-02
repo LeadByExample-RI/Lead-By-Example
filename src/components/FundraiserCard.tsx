@@ -88,7 +88,7 @@ export default function FundraiserCard({ fundraiser, onClick }: FundraiserCardPr
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className="bg-gradient-to-r from-cape-verde to-gold h-full rounded-full transition-all duration-500"
-              style={{ '--progress-width': `${Math.min(percentageRaised, 100)}%` } as React.CSSProperties & { '--progress-width': string }}
+              style={{ width: `${Math.min(percentageRaised, 100)}%` }}
             ></div>
           </div>
         </div>
