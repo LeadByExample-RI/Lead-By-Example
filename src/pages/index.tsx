@@ -60,6 +60,8 @@ export default function Home() {
           content="Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
@@ -86,10 +88,6 @@ export default function Home() {
           content="Lead By Example provides mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration."
         />
         <meta property="twitter:image" content="/twitter-image.jpg" />
-
-        {/* Icons and Manifest */}
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* Favicon - Removed until icon files are created */}
         {/* <link rel="icon" href="/favicon.ico" /> */}

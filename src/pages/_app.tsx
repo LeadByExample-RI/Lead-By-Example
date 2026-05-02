@@ -48,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light dark" />
         <meta name="theme-color" content="#01514C" />
         <meta name="msapplication-TileColor" content="#01514C" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
