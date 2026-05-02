@@ -145,7 +145,7 @@ export default function SignInPage() {
             href="/auth/signup"
             className="text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
           >
-            Don't have an account? Sign up
+            Don&apos;t have an account? Sign up
           </Link>
           {/* TODO: Implement forgot password */}
           {/* <Link

@@ -9,15 +9,9 @@ import {
   TrendingUp,
   Award,
   BookOpen,
-  Music,
   Utensils,
   Dumbbell,
-  ChevronLeft,
-  ChevronRight,
-  Filter,
-  Plus,
-  Bell,
-  ExternalLink
+  Bell
 } from 'lucide-react';
 
 interface Event {
@@ -197,8 +191,8 @@ const categoryConfig = {
 
 export default function CommunityCalendar() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [_viewMode, _setViewMode] = useState<'list' | 'calendar'>('list');
+  const [_currentMonth, _setCurrentMonth] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   // Filter events

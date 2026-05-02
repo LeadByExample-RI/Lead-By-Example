@@ -14,7 +14,6 @@ import {
   Download,
   ExternalLink,
   Search,
-  Filter,
   Star,
   Clock,
   Eye
@@ -392,7 +391,7 @@ export default function ResourceLibrary() {
         >
           <h3 className="text-3xl font-bold mb-4">Need More Support?</h3>
           <p className="text-xl mb-8 opacity-90">
-            These resources are here to help, but sometimes you need to talk to someone. We're here for you.
+            These resources are here to help, but sometimes you need to talk to someone. We&apos;re here for you.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
