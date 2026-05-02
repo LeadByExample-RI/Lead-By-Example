@@ -1,4 +1,5 @@
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface Testimonial {
   id: number;
@@ -49,9 +50,11 @@ export default function CommunitySection({ testimonials }: CommunitySectionProps
             >
               <div className="flex items-center gap-4 mb-4">
                 {testimonial.avatar ? (
-                  <img 
+                  <Image 
                     src={testimonial.avatar}
                     alt={`${testimonial.name}'s avatar`}
+                    width={64}
+                    height={64}
                     className="w-16 h-16 rounded-full object-cover" 
                   />
                 ) : (

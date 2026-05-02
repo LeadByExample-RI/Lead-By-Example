@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface Testimonial {
   name: string;
   location: string;
@@ -78,9 +80,11 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
             >
               {/* Avatar & Info */}
               <div className="flex items-center gap-4 mb-5">
-                <img 
+                <Image 
                   src={testimonial.avatar} 
                   alt={`${testimonial.name}'s avatar`}
+                  width={64}
+                  height={64}
                   className="w-16 h-16 rounded-full object-cover border-4 border-gold"
                 />
                 <div>

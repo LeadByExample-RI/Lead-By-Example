@@ -63,8 +63,8 @@ export default function SignUpPage() {
         // Redirect to dashboard or onboarding
         router.push('/');
       }
-    } catch (err: any) {
-      setServerError(err.message || 'An error occurred during sign up');
+    } catch (err: unknown) {
+      setServerError(err instanceof Error ? err.message : 'An error occurred during sign up');
     } finally {
       setIsLoading(false);
     }

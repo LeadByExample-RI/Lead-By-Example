@@ -56,8 +56,8 @@ export default function SignInPage() {
       } else if (result?.ok) {
         router.push(callbackUrl);
       }
-    } catch (err: any) {
-      setServerError(err.message || 'An error occurred during sign in');
+    } catch (err: unknown) {
+      setServerError(err instanceof Error ? err.message : 'An error occurred during sign in');
     } finally {
       setIsLoading(false);
     }

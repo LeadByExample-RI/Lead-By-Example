@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { buffer } from 'micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
@@ -43,11 +44,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!);
 
     console.log('✅ Webhook signature verified:', event.type);
-  } catch (err: any) {
-    console.error('❌ Webhook signature verification failed:', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('❌ Webhook signature verification failed:', message);
     return res.status(400).json({
       error: 'Webhook signature verification failed',
-      message: err.message,
+      message,
     });
   }
 
@@ -84,11 +86,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Acknowledge receipt of event
     res.status(200).json({ received: true });
-  } catch (err: any) {
-    console.error('❌ Error processing webhook:', err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('❌ Error processing webhook:', message);
     res.status(500).json({
       error: 'Webhook processing failed',
-      message: err.message,
+      message,
     });
   }
 }

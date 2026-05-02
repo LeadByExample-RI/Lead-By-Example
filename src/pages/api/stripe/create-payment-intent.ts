@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
@@ -138,19 +139,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       paymentIntentId: paymentIntent.id,
       amount: amount,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
     console.error('❌ Payment intent error:', {
-      message: error.message,
-      type: error.type,
-      code: error.code,
+      message: err.message,
+      type: (error as Record<string, unknown>).type,
+      code: (error as Record<string, unknown>).code,
       timestamp: new Date().toISOString(),
     });
 
     // Handle specific Stripe errors
-    if (error.type === 'StripeCardError') {
+    if ((error as Record<string, unknown>).type === 'StripeCardError') {
       return res.status(400).json({
         error: 'Card error',
-        message: error.message,
+        message: err.message,
       });
     }
 

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface PrevalentFundraiserProps {
   fundraiser: {
     id: number;
@@ -36,10 +38,11 @@ export default function PrevalentFundraiser({ fundraiser, onJoin }: PrevalentFun
               
               {/* Image Section - Takes 2 columns */}
               <div className="md:col-span-2 relative h-64 md:h-auto">
-                <img 
+                <Image 
                   src={fundraiser.image}
                   alt={fundraiser.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
                 
                 {/* Active Badge */}

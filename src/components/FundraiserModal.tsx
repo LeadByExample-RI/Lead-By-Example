@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect } from 'react';
 import { XMarkIcon, ShareIcon, HeartIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface FundraiserModalProps {
   fundraiser: {
@@ -102,9 +103,11 @@ export default function FundraiserModal({ fundraiser, isOpen, closeModal }: Fund
                 <div className="p-8 max-h-[70vh] overflow-y-auto">
                   
                   {/* Hero Image */}
-                  <img 
+                  <Image 
                     src={fundraiser.image}
                     alt={fundraiser.title}
+                    width={800}
+                    height={288}
                     className="w-full h-72 object-cover rounded-2xl mb-8 shadow-lg"
                   />
 
