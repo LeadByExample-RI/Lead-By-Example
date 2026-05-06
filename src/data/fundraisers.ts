@@ -46,7 +46,7 @@ export const currentFundraiser: Fundraiser = {
 };
 
 export const keyStatistics: KeyStatistics = {
-  youthServed: 500,
+  youthServed: 125,
   successRate: 87,
   communityPartners: 25
 };

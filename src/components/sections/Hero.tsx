@@ -192,14 +192,22 @@ export const Hero: React.FC<HeroProps> = ({
                     <Text size="sm">{organizationInfo.phone}</Text>
                   </a>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-accent-500">✉️</span>
-                  <a 
-                    href={`mailto:${organizationInfo.email}`}
-                    className="hover:text-accent-500 transition-colors"
-                  >
-                    <Text size="sm">{organizationInfo.email}</Text>
-                  </a>
+                <div className="flex items-start space-x-2">
+                  <span className="text-accent-500 mt-0.5">✉️</span>
+                  <div className="flex flex-col space-y-1">
+                    <a
+                      href="mailto:robertleadbyexample@gmail.com"
+                      className="hover:text-accent-500 transition-colors"
+                    >
+                      <Text size="sm">robertleadbyexample@gmail.com</Text>
+                    </a>
+                    <a
+                      href="mailto:ronaldleadbyexample@gmail.com"
+                      className="hover:text-accent-500 transition-colors"
+                    >
+                      <Text size="sm">ronaldleadbyexample@gmail.com</Text>
+                    </a>
+                  </div>
                 </div>
               </div>
             </GlassCard>
