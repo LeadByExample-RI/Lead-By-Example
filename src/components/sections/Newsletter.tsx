@@ -53,20 +53,24 @@ export function Newsletter() {
 
   const watchedInterests = watch('interests')
 
-  const onSubmit = async (_data: NewsletterFormData) => {
+  const onSubmit = async (data: NewsletterFormData) => {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      
-      // In a real app, you would send the data to your newsletter service
-      // TODO: Implement newsletter signup API call
-      
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.email, interests: data.interests }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Subscription failed')
+      }
+
       setSubmitStatus('success')
       reset()
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
