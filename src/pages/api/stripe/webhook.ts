@@ -53,47 +53,56 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
-  // Handle different event types
-  try {
-    switch (event.type) {
-      case 'payment_intent.succeeded':
+  // Handle different event types.
+  // Each handler has its own try/catch so internal failures (DB write, email) do not
+  // propagate a 500 to Stripe. A non-200 response causes Stripe to retry, which would
+  // re-trigger email sends on every retry attempt.
+  switch (event.type) {
+    case 'payment_intent.succeeded': {
+      try {
         await handlePaymentSuccess(event.data.object as Stripe.PaymentIntent);
-        break;
-
-      case 'payment_intent.payment_failed':
-        await handlePaymentFailure(event.data.object as Stripe.PaymentIntent);
-        break;
-
-      case 'payment_intent.created':
-        console.log('💰 Payment intent created:', event.data.object.id);
-        break;
-
-      case 'payment_intent.processing':
-        console.log('⏳ Payment processing:', event.data.object.id);
-        break;
-
-      case 'charge.succeeded':
-        console.log('✅ Charge succeeded:', event.data.object.id);
-        break;
-
-      case 'charge.refunded':
-        await handleRefund(event.data.object as Stripe.Charge);
-        break;
-
-      default:
-        console.log(`ℹ️  Unhandled event type: ${event.type}`);
+      } catch (err: unknown) {
+        console.error('❌ Error handling payment_intent.succeeded:', err instanceof Error ? err.message : String(err));
+      }
+      break;
     }
 
-    // Acknowledge receipt of event
-    res.status(200).json({ received: true });
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    console.error('❌ Error processing webhook:', message);
-    res.status(500).json({
-      error: 'Webhook processing failed',
-      message,
-    });
+    case 'payment_intent.payment_failed': {
+      try {
+        await handlePaymentFailure(event.data.object as Stripe.PaymentIntent);
+      } catch (err: unknown) {
+        console.error('❌ Error handling payment_intent.payment_failed:', err instanceof Error ? err.message : String(err));
+      }
+      break;
+    }
+
+    case 'payment_intent.created':
+      console.log('💰 Payment intent created:', event.data.object.id);
+      break;
+
+    case 'payment_intent.processing':
+      console.log('⏳ Payment processing:', event.data.object.id);
+      break;
+
+    case 'charge.succeeded':
+      console.log('✅ Charge succeeded:', event.data.object.id);
+      break;
+
+    case 'charge.refunded': {
+      try {
+        await handleRefund(event.data.object as Stripe.Charge);
+      } catch (err: unknown) {
+        console.error('❌ Error handling charge.refunded:', err instanceof Error ? err.message : String(err));
+      }
+      break;
+    }
+
+    default:
+      console.log(`ℹ️  Unhandled event type: ${event.type}`);
   }
+
+  // Always acknowledge receipt — internal processing failures are logged, not propagated.
+  return res.status(200).json({ received: true });
 }
 
 /**

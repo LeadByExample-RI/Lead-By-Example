@@ -1,0 +1,17 @@
+# Cloudflare Pages security headers
+# This file is IGNORED by Vercel (which uses vercel.json for headers).
+# Activates automatically when deployed to Cloudflare Pages.
+#
+# IMPORTANT — Content-Security-Policy:
+# Do NOT add a restrictive CSP without verifying these external scripts are allowed:
+#   - Stripe.js: https://js.stripe.com
+#   - Google Maps JS API: https://maps.googleapis.com, https://maps.gstatic.com
+#   - Google Fonts: https://fonts.googleapis.com, https://fonts.gstatic.com
+# Add CSP only after auditing all external script/style/connect sources.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(self)
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

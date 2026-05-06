@@ -5,17 +5,17 @@
  * NextAuth v5 returns { handlers, auth, signIn, signOut }, not a function.
  * Pages Router requires a default export that is (req, res) => unknown.
  * We unwrap handlers and dispatch by method to satisfy the type constraint.
+ *
+ * The NextAuth instance lives in lib/auth.ts.
+ * Import { auth } from '@/lib/auth' to check sessions in other API routes.
  */
 
-import NextAuth from 'next-auth';
-import { authConfig } from '@/lib/auth';
+import { handlers } from '@/lib/auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const { handlers } = NextAuth(authConfig);
-
-export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+export default async function authHandler(req: NextApiRequest, res: NextApiResponse) {
   type HandlerFn = (req: NextApiRequest, res: NextApiResponse) => unknown;
-  if (req.method === 'GET') return (handlers.GET as HandlerFn)(req, res);
-  if (req.method === 'POST') return (handlers.POST as HandlerFn)(req, res);
+  if (req.method === 'GET') return (handlers.GET as unknown as HandlerFn)(req, res);
+  if (req.method === 'POST') return (handlers.POST as unknown as HandlerFn)(req, res);
   res.status(405).end();
 }

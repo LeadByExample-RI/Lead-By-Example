@@ -156,14 +156,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
 
-    if (error.type === 'StripeInvalidRequestError') {
+    if ((error as Record<string, unknown>).type === 'StripeInvalidRequestError') {
       return res.status(400).json({
         error: 'Invalid request',
         message: 'Payment information is invalid',
       });
     }
 
-    if (error.type === 'StripeAPIError') {
+    if ((error as Record<string, unknown>).type === 'StripeAPIError') {
       return res.status(500).json({
         error: 'Payment service error',
         message: 'Unable to process payment at this time',

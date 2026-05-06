@@ -1,11 +1,18 @@
 /**
- * NextAuth Configuration
+ * NextAuth Configuration and Initialization
  *
  * Configures authentication for the application using NextAuth.js v5
  * with Prisma adapter for database session management.
+ *
+ * Exports:
+ *   authConfig  — raw config object (for reference)
+ *   handlers    — GET/POST handlers wired into /api/auth/[...nextauth]
+ *   auth        — session accessor for use in any API route or server component
+ *   signIn      — programmatic sign-in helper
+ *   signOut     — programmatic sign-out helper
  */
 
-import { NextAuthConfig } from 'next-auth';
+import NextAuth, { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { db } from '@/lib/db';
@@ -196,3 +203,7 @@ export const authConfig: NextAuthConfig = {
   // Enable debug in development
   debug: process.env.NODE_ENV === 'development',
 };
+
+// Initialize NextAuth and export helpers.
+// Import { auth } from '@/lib/auth' in any API route to check the session.
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);

@@ -5,6 +5,7 @@
  * All email sending goes through this service.
  */
 
+import { renderToStaticMarkup } from 'react-dom/server';
 import { Resend } from 'resend';
 import { db } from './db';
 import DonationReceiptEmail from '@/emails/DonationReceiptEmail';
@@ -85,15 +86,17 @@ export async function sendDonationReceipt(data: {
   message?: string;
 }) {
   try {
-    const html = DonationReceiptEmail({
-      donorName: data.donorName,
-      donorEmail: data.donorEmail,
-      amount: data.amount,
-      currency: data.currency || 'USD',
-      campaign: data.campaign,
-      transactionId: data.transactionId,
-      message: data.message,
-    }) as any as string;
+    const html = renderToStaticMarkup(
+      DonationReceiptEmail({
+        donorName: data.donorName,
+        donorEmail: data.donorEmail,
+        amount: data.amount,
+        currency: data.currency || 'USD',
+        campaign: data.campaign,
+        transactionId: data.transactionId,
+        message: data.message,
+      }),
+    );
 
     return await sendEmail({
       to: data.donorEmail,
@@ -115,10 +118,12 @@ export async function sendWelcomeEmail(data: {
   name?: string;
 }) {
   try {
-    const html = WelcomeEmail({
-      email: data.email,
-      name: data.name,
-    }) as any as string;
+    const html = renderToStaticMarkup(
+      WelcomeEmail({
+        email: data.email,
+        name: data.name,
+      }),
+    );
 
     return await sendEmail({
       to: data.email,

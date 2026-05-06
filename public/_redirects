@@ -1,0 +1,12 @@
+# Cloudflare Pages routing fallback
+# This file is IGNORED by Vercel (which uses vercel.json for routing).
+# Required only when this project is deployed to Cloudflare Pages as a static export.
+#
+# NOTE: This project uses Next.js with SSR API routes. Before migrating to Cloudflare Pages,
+# confirm whether static export (next.config.js output: 'export') or the
+# @cloudflare/next-on-pages adapter will be used. The rule below applies to static export only.
+#
+# For static export (output: 'export' in next.config.js):
+/*    /index.html    200
+
+# For SSR via @cloudflare/next-on-pages, remove the line above and follow the adapter docs.
