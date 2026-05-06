@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
   Video,
@@ -8,12 +8,10 @@ import {
   Heart,
   Brain,
   Users,
-  Briefcase,
   GraduationCap,
   Shield,
   Download,
   ExternalLink,
-  Search,
   Star,
   Clock,
   Eye
@@ -130,22 +128,6 @@ const resources: Resource[] = [
     downloadable: false
   },
   {
-    id: '7',
-    title: 'Career Pathways Explorer',
-    description: 'Discover careers you never knew existed. Interactive guide with salary info, required education, and real stories from people in various fields - including those who started where you are.',
-    category: 'career',
-    type: 'guide',
-    duration: '30 min interactive',
-    traumaInformed: false,
-    ageGroup: '16-24',
-    views: 1523,
-    rating: 4.7,
-    featured: false,
-    tags: ['Career planning', 'Future goals', 'Inspiration'],
-    link: '#',
-    downloadable: false
-  },
-  {
     id: '8',
     title: 'Financial Literacy Basics',
     description: 'Money management skills they don\'t teach in school. Budgeting, banking, credit, avoiding scams, and planning for your future. Practical tips you can use right now.',
@@ -225,13 +207,12 @@ const resources: Resource[] = [
 ];
 
 const categories = [
-  { id: 'all', name: 'All Resources', icon: <BookOpen className="w-5 h-5" />, color: 'gray' },
-  { id: 'trauma-support', name: 'Trauma Support', icon: <Heart className="w-5 h-5" />, color: 'red' },
-  { id: 'mental-health', name: 'Mental Health', icon: <Brain className="w-5 h-5" />, color: 'purple' },
-  { id: 'academic', name: 'Academic', icon: <GraduationCap className="w-5 h-5" />, color: 'blue' },
-  { id: 'life-skills', name: 'Life Skills', icon: <Users className="w-5 h-5" />, color: 'green' },
-  { id: 'career', name: 'Career', icon: <Briefcase className="w-5 h-5" />, color: 'yellow' },
-  { id: 'legal', name: 'Legal Rights', icon: <Shield className="w-5 h-5" />, color: 'orange' }
+  { id: 'all', name: 'All Resources', icon: <BookOpen className="w-5 h-5" /> },
+  { id: 'trauma-support', name: 'Trauma Support', icon: <Heart className="w-5 h-5" /> },
+  { id: 'mental-health', name: 'Mental Health', icon: <Brain className="w-5 h-5" /> },
+  { id: 'academic', name: 'Academic', icon: <GraduationCap className="w-5 h-5" /> },
+  { id: 'life-skills', name: 'Life Skills', icon: <Users className="w-5 h-5" /> },
+  { id: 'legal', name: 'Legal Rights', icon: <Shield className="w-5 h-5" /> },
 ];
 
 const typeIcons = {
@@ -242,19 +223,133 @@ const typeIcons = {
   guide: <BookOpen className="w-5 h-5" />
 };
 
+// --- Connect with a Mentor Modal ---
+interface ConnectFormData { firstName: string; lastName: string; reason: string; phone: string; email: string; }
+interface ConnectErrors { firstName?: string; lastName?: string; reason?: string; phone?: string; email?: string; }
+
+function ConnectMentorModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState<ConnectFormData>({ firstName: '', lastName: '', reason: '', phone: '', email: '' });
+  const [errors, setErrors] = useState<ConnectErrors>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = () => {
+    const e: ConnectErrors = {};
+    if (!form.firstName.trim()) e.firstName = 'This field is required';
+    if (!form.lastName.trim()) e.lastName = 'This field is required';
+    if (!form.reason.trim()) e.reason = 'This field is required';
+    if (!form.phone.trim()) e.phone = 'This field is required';
+    if (!form.email.trim()) e.email = 'This field is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Please enter a valid email address';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    if (!validate()) return;
+    const body = [
+      'This person is looking to connect with a mentor.',
+      `First Name: ${form.firstName}`,
+      `Last Name: ${form.lastName}`,
+      `Phone: ${form.phone}`,
+      `Email: ${form.email}`,
+      `Reason: ${form.reason}`,
+    ].join('%0A');
+    window.location.href = `mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Connect%20with%20a%20Mentor%20Request%20%E2%80%94%20Lead%20By%20Example&body=${body}`;
+    setSubmitted(true);
+  };
+
+  const inputClass = 'w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 transition-all';
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}>
+      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        onClick={(e) => e.stopPropagation()}>
+        {submitted ? (
+          <div className="text-center py-8">
+            <div className="text-5xl mb-4">✅</div>
+            <h3 className="text-white text-xl font-bold mb-4">Your request has been submitted! We&apos;ll connect you with a mentor soon.</h3>
+            <button type="button" onClick={onClose} className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all">Close</button>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-white text-2xl font-bold">Connect with a Mentor</h3>
+              <button type="button" onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all">✕</button>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div><input type="text" placeholder="First Name" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className={inputClass} />{errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}</div>
+              <div><input type="text" placeholder="Last Name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className={inputClass} />{errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}</div>
+              <div><textarea placeholder="Tell us why you're looking for a mentor..." rows={4} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={inputClass} />{errors.reason && <p className="text-red-400 text-sm mt-1">{errors.reason}</p>}</div>
+              <div><input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
+              <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
+              <button type="submit" className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
+            </form>
+          </>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// --- Crisis Resources Modal ---
+const crisisResources = [
+  { emoji: '🆘', name: 'National Suicide Prevention Lifeline', contact: 'Call or Text: 988', hours: 'Available 24/7', tel: '988' },
+  { emoji: '📞', name: 'Crisis Text Line', contact: 'Text HOME to 741741', hours: 'Available 24/7', tel: null },
+  { emoji: '🚨', name: 'National Domestic Violence Hotline', contact: '1-800-799-7233 | Text START to 88788', hours: 'Available 24/7', tel: '18007997233' },
+  { emoji: '🧠', name: 'SAMHSA National Helpline (Mental Health & Substance Use)', contact: '1-800-662-4357', hours: 'Free, confidential, 24/7', tel: '18006624357' },
+  { emoji: '👶', name: 'Childhelp National Child Abuse Hotline', contact: '1-800-422-4453', hours: 'Available 24/7', tel: '18004224453' },
+  { emoji: '🏠', name: 'National Alliance on Mental Illness (NAMI) Helpline', contact: '1-800-950-6264', hours: 'Mon–Fri, 10am–10pm ET', tel: '18009506264' },
+  { emoji: '❤️', name: 'Trevor Project (LGBTQ+ Youth)', contact: '1-866-488-7386 | Text START to 678-678', hours: 'Available 24/7', tel: '18664887386' },
+  { emoji: '🍽️', name: 'National Eating Disorder Helpline', contact: '1-800-931-2237', hours: 'Mon–Thu 9am–9pm, Fri 9am–5pm ET', tel: '18009312237' },
+  { emoji: '🚔', name: 'National Human Trafficking Hotline', contact: '1-888-373-7888 | Text HELP to 233733', hours: 'Available 24/7', tel: '18883737888' },
+];
+
+function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}>
+      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+        className="w-full max-w-xl rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-white text-2xl font-bold">Crisis Resources</h3>
+          <button type="button" onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all">✕</button>
+        </div>
+        <div className="space-y-4">
+          {crisisResources.map((r, i) => (
+            <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl flex-shrink-0">{r.emoji}</span>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">{r.name}</h4>
+                  {r.tel ? (
+                    <a href={`tel:${r.tel}`} className="text-gold-400 hover:text-gold-300 text-sm font-medium transition-colors">{r.contact}</a>
+                  ) : (
+                    <p className="text-gold-400 text-sm font-medium">{r.contact}</p>
+                  )}
+                  <p className="text-white/60 text-xs mt-1">{r.hours}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function ResourceLibrary() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [showTraumaInformedOnly, setShowTraumaInformedOnly] = useState(false);
+  const [showConnectModal, setShowConnectModal] = useState(false);
+  const [showCrisisModal, setShowCrisisModal] = useState(false);
 
   const filteredResources = resources.filter(resource => {
-    const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
-    const matchesSearch = searchTerm === '' ||
-      resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      resource.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesTraumaFilter = !showTraumaInformedOnly || resource.traumaInformed;
-    return matchesCategory && matchesSearch && matchesTraumaFilter;
+    return selectedCategory === 'all' || resource.category === selectedCategory;
   });
 
   const featuredResources = filteredResources.filter(r => r.featured);
@@ -276,33 +371,19 @@ export default function ResourceLibrary() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
             Trauma-informed resources designed to support your journey. All content created with care, understanding, and respect for your experiences.
           </p>
-
-          {/* Trauma-Informed Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-verdean-100 text-verdean-800 rounded-full text-sm font-medium">
             <Heart className="w-4 h-4 fill-verdean-600" />
             Many resources are trauma-informed and culturally responsive
           </div>
         </motion.div>
 
-        {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
-          {/* Search Bar */}
-          <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search resources, topics, or keywords..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-300 focus:border-verdean-500 focus:ring-2 focus:ring-verdean-500/20 outline-none transition-all shadow-sm"
-            />
-          </div>
-
-          {/* Category Filter Pills */}
+        {/* Category Filter Pills */}
+        <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => (
               <motion.button
                 key={category.id}
+                type="button"
                 onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -316,21 +397,6 @@ export default function ResourceLibrary() {
                 {category.name}
               </motion.button>
             ))}
-          </div>
-
-          {/* Trauma-Informed Toggle */}
-          <div className="flex justify-center">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showTraumaInformedOnly}
-                onChange={(e) => setShowTraumaInformedOnly(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 text-verdean-500 focus:ring-verdean-500"
-              />
-              <span className="text-gray-700 font-medium">
-                Show only trauma-informed resources
-              </span>
-            </label>
           </div>
         </div>
 
@@ -363,26 +429,22 @@ export default function ResourceLibrary() {
           </div>
         )}
 
-        {/* No Results */}
         {filteredResources.length === 0 && (
           <div className="text-center py-16">
             <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">No resources found</h3>
-            <p className="text-gray-500 mb-6">Try adjusting your search or filter criteria</p>
+            <p className="text-gray-500 mb-6">Try selecting a different category</p>
             <button
-              onClick={() => {
-                setSearchTerm('');
-                setSelectedCategory('all');
-                setShowTraumaInformedOnly(false);
-              }}
+              type="button"
+              onClick={() => setSelectedCategory('all')}
               className="px-6 py-3 bg-verdean-500 text-white rounded-full font-semibold hover:bg-verdean-600 transition-all"
             >
-              Clear Filters
+              View All
             </button>
           </div>
         )}
 
-        {/* Help CTA */}
+        {/* Need More Support CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -394,20 +456,34 @@ export default function ResourceLibrary() {
             These resources are here to help, but sometimes you need to talk to someone. We&apos;re here for you.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+            <button
+              type="button"
+              onClick={() => setShowConnectModal(true)}
+              className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105"
+            >
               Connect with a Mentor
             </button>
-            <button className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-full font-semibold hover:bg-white/20 transition-all">
+            <button
+              type="button"
+              onClick={() => setShowCrisisModal(true)}
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-full font-semibold hover:bg-white/20 transition-all"
+            >
               Crisis Resources
             </button>
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showConnectModal && <ConnectMentorModal onClose={() => setShowConnectModal(false)} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showCrisisModal && <CrisisResourcesModal onClose={() => setShowCrisisModal(false)} />}
+      </AnimatePresence>
     </section>
   );
 }
 
-// Resource Card Component
 function ResourceCard({ resource, index, featured = false }: { resource: Resource; index: number; featured?: boolean }) {
   return (
     <motion.div
@@ -415,20 +491,15 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all group cursor-pointer ${
-        featured ? 'ring-2 ring-gold-500' : ''
-      }`}
+      className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all group cursor-pointer ${featured ? 'ring-2 ring-gold-500' : ''}`}
     >
-      {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-verdean-500 to-purple-500 flex items-center justify-center text-white">
             {typeIcons[resource.type]}
           </div>
           <div>
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-              {resource.type}
-            </div>
+            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{resource.type}</div>
             {resource.traumaInformed && (
               <div className="flex items-center gap-1 text-xs text-verdean-600 font-medium">
                 <Heart className="w-3 h-3 fill-verdean-500" />
@@ -437,71 +508,44 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
             )}
           </div>
         </div>
-        {featured && (
-          <Star className="w-5 h-5 text-gold-500 fill-gold-500" />
-        )}
+        {featured && <Star className="w-5 h-5 text-gold-500 fill-gold-500" />}
       </div>
 
-      {/* Title & Description */}
-      <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-verdean-600 transition-colors">
-        {resource.title}
-      </h4>
-      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-        {resource.description}
-      </p>
+      <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-verdean-600 transition-colors">{resource.title}</h4>
+      <p className="text-sm text-gray-600 mb-4 line-clamp-3">{resource.description}</p>
 
-      {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-4">
         {resource.tags.slice(0, 3).map((tag, i) => (
-          <span
-            key={i}
-            className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
-          >
-            {tag}
-          </span>
+          <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">{tag}</span>
         ))}
       </div>
 
-      {/* Meta Info */}
       <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 pb-4 border-b border-gray-100">
         {resource.duration && (
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            {resource.duration}
-          </div>
+          <div className="flex items-center gap-1"><Clock className="w-4 h-4" />{resource.duration}</div>
         )}
-        <div className="flex items-center gap-1">
-          <Eye className="w-4 h-4" />
-          {resource.views.toLocaleString()}
-        </div>
-        <div className="flex items-center gap-1">
-          <Star className="w-4 h-4 text-gold-500 fill-gold-500" />
-          {resource.rating}
-        </div>
+        <div className="flex items-center gap-1"><Eye className="w-4 h-4" />{resource.views.toLocaleString()}</div>
+        <div className="flex items-center gap-1"><Star className="w-4 h-4 text-gold-500 fill-gold-500" />{resource.rating}</div>
       </div>
 
-      {/* Age Group */}
       <div className="mb-4">
         <span className="text-xs text-gray-500">Age Group:</span>
         <span className="ml-2 text-sm font-medium text-gray-700">{resource.ageGroup}</span>
       </div>
 
-      {/* Actions */}
       <div className="flex gap-2">
         {resource.downloadable && (
-          <button className="flex-1 py-2 px-4 bg-verdean-500 text-white rounded-lg font-medium hover:bg-verdean-600 transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-verdean-500/30">
-            <Download className="w-4 h-4" />
-            Download
+          <button type="button" className="flex-1 py-2 px-4 bg-verdean-500 text-white rounded-lg font-medium hover:bg-verdean-600 transition-all flex items-center justify-center gap-2">
+            <Download className="w-4 h-4" />Download
           </button>
         )}
         {resource.link && (
-          <button className="flex-1 py-2 px-4 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-purple-500/30">
-            <ExternalLink className="w-4 h-4" />
-            Access
+          <button type="button" className="flex-1 py-2 px-4 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-all flex items-center justify-center gap-2">
+            <ExternalLink className="w-4 h-4" />Access
           </button>
         )}
         {!resource.downloadable && !resource.link && (
-          <button className="flex-1 py-2 px-4 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+          <button type="button" className="flex-1 py-2 px-4 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
             View Details
           </button>
         )}

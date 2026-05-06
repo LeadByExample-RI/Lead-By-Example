@@ -67,7 +67,7 @@ const journeyStages: JourneyStage[] = [
       '💭 Questions and uncertainty',
     ],
     stats: [
-      { label: 'Critical Age Range', value: '14-18' },
+      { label: 'Critical Age Range', value: '11-24' },
       { label: 'First Contact with Justice', value: '76% teens' },
       { label: 'Need Positive Role Model', value: '89%' },
     ],
@@ -355,8 +355,8 @@ export default function EvolutionJourney() {
                           className="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm"
                         >
                           <div
-                            className="mb-1 text-3xl font-bold"
-                            style={{ color: currentStage.color }}
+                            className={`mb-1 text-3xl font-bold ${currentStage.id === 3 ? 'text-green-500' : currentStage.id === 4 ? 'text-purple-500' : ''}`}
+                            style={currentStage.id === 3 || currentStage.id === 4 ? {} : { color: currentStage.color }}
                           >
                             {stat.value}
                           </div>
@@ -391,8 +391,8 @@ export default function EvolutionJourney() {
                           className="flex items-start gap-3 text-gray-200"
                         >
                           <ChevronRight
-                            className="mt-0.5 h-5 w-5 flex-shrink-0"
-                            style={{ color: currentStage.color }}
+                            className={`mt-0.5 h-5 w-5 flex-shrink-0 ${currentStage.id === 3 ? 'text-green-500' : currentStage.id === 4 ? 'text-purple-500' : ''}`}
+                            style={currentStage.id === 3 || currentStage.id === 4 ? {} : { color: currentStage.color }}
                           />
                           <span>{intervention}</span>
                         </motion.li>
@@ -450,11 +450,14 @@ export default function EvolutionJourney() {
               Become a Mentor
             </button>
             <button className="transform rounded-full bg-gradient-to-r from-gold-500 to-yellow-600 px-8 py-4 font-semibold text-black transition-all hover:scale-105 hover:shadow-lg hover:shadow-gold-500/50">
-              Support Our Mission
+              Volunteer
             </button>
-            <button className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20">
-              Learn More
-            </button>
+            <a
+              href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
+              className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              Contact Rob or Ron
+            </a>
           </div>
         </motion.div>
       </div>

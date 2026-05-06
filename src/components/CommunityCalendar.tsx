@@ -10,8 +10,7 @@ import {
   Award,
   BookOpen,
   Utensils,
-  Dumbbell,
-  Bell
+  Dumbbell
 } from 'lucide-react';
 
 interface Event {
@@ -191,8 +190,6 @@ const categoryConfig = {
 
 export default function CommunityCalendar() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [_viewMode, _setViewMode] = useState<'list' | 'calendar'>('list');
-  const [_currentMonth, _setCurrentMonth] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   // Filter events
@@ -274,18 +271,6 @@ export default function CommunityCalendar() {
           </div>
         )}
 
-        {/* Upcoming Events List */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Upcoming Events
-          </h3>
-          <div className="space-y-4">
-            {upcomingEvents.map((event, index) => (
-              <EventListCard key={event.id} event={event} index={index} onClick={() => setSelectedEvent(event)} />
-            ))}
-          </div>
-        </div>
-
         {/* No Events */}
         {upcomingEvents.length === 0 && (
           <div className="text-center py-16">
@@ -293,6 +278,7 @@ export default function CommunityCalendar() {
             <h3 className="text-xl font-semibold text-gray-700 mb-2">No events found</h3>
             <p className="text-gray-500 mb-6">Check back soon for upcoming events or try a different category</p>
             <button
+              type="button"
               onClick={() => setSelectedCategory('all')}
               className="px-6 py-3 bg-verdean-500 text-white rounded-full font-semibold hover:bg-verdean-600 transition-all"
             >
@@ -300,23 +286,6 @@ export default function CommunityCalendar() {
             </button>
           </div>
         )}
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-verdean-600 to-purple-600 rounded-3xl p-8 md:p-12 text-center text-white"
-        >
-          <Bell className="w-12 h-12 mx-auto mb-4" />
-          <h3 className="text-3xl font-bold mb-4">Never Miss an Event</h3>
-          <p className="text-xl mb-8 opacity-90">
-            Sign up for our newsletter to get event reminders and exclusive invitations
-          </p>
-          <button className="px-8 py-4 bg-white text-verdean-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
-            Subscribe to Updates
-          </button>
-        </motion.div>
       </div>
 
       {/* Event Detail Modal */}
@@ -391,89 +360,6 @@ function FeaturedEventCard({ event, index, onClick }: { event: Event; index: num
             <span className="opacity-75"> / {event.spotsTotal} spots left</span>
           </div>
         )}
-      </div>
-    </motion.div>
-  );
-}
-
-// Event List Card
-function EventListCard({ event, index, onClick }: { event: Event; index: number; onClick: () => void }) {
-  const category = categoryConfig[event.category];
-  const daysUntil = Math.ceil((event.date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-      onClick={onClick}
-    >
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Date Badge */}
-        <div className="flex-shrink-0">
-          <div className="w-20 h-20 bg-gradient-to-br from-verdean-500 to-purple-500 rounded-2xl flex flex-col items-center justify-center text-white">
-            <div className="text-sm font-semibold">
-              {event.date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
-            </div>
-            <div className="text-3xl font-bold">
-              {event.date.getDate()}
-            </div>
-          </div>
-        </div>
-
-        {/* Event Info */}
-        <div className="flex-1">
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                {category.icon}
-                <span className="font-medium">{category.name}</span>
-              </div>
-              {daysUntil <= 7 && (
-                <span className="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full font-semibold">
-                  {daysUntil === 0 ? 'Today' : daysUntil === 1 ? 'Tomorrow' : `In ${daysUntil} days`}
-                </span>
-              )}
-            </div>
-          </div>
-
-          <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-verdean-600 transition-colors">
-            {event.title}
-          </h4>
-          <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
-
-          <div className="grid md:grid-cols-3 gap-3 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              {event.time}
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4" />
-              {event.location.split(',')[0]}
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              {event.ageGroup}
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="flex-shrink-0 flex flex-col justify-between items-end">
-          <div className="text-right mb-4">
-            <div className="text-2xl font-bold text-verdean-600">{event.cost}</div>
-            {event.spotsAvailable && (
-              <div className="text-sm text-gray-500">
-                {event.spotsAvailable} spots left
-              </div>
-            )}
-          </div>
-          <button className="px-6 py-2 bg-verdean-500 text-white rounded-lg font-semibold hover:bg-verdean-600 transition-all group-hover:shadow-lg group-hover:shadow-verdean-500/30">
-            {event.registrationRequired ? 'Register' : 'Details'}
-          </button>
-        </div>
       </div>
     </motion.div>
   );

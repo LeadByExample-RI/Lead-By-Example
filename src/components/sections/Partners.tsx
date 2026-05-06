@@ -1,9 +1,10 @@
 import { GlassButton } from '@/components/ui/GlassButton';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Heading, Text } from '@/components/ui/Typography';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ExternalLink, Handshake, Heart, Mail, Phone, Users } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const partners = [
   {
@@ -56,7 +57,61 @@ const partnershipBenefits = [
   },
 ];
 
+function ContactModal({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="w-full max-w-md rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 z-[101]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-white text-2xl font-bold">Contact Us</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <p className="text-white font-bold text-lg">Robert McKinney Sr.</p>
+            <a
+              href="mailto:robertleadbyexample@gmail.com"
+              className="text-gold-400 hover:text-gold-300 transition-colors font-medium"
+            >
+              robertleadbyexample@gmail.com
+            </a>
+          </div>
+          <div>
+            <p className="text-white font-bold text-lg">Ronald Hopkins</p>
+            <a
+              href="mailto:ronaldleadbyexample@gmail.com"
+              className="text-gold-400 hover:text-gold-300 transition-colors font-medium"
+            >
+              ronaldleadbyexample@gmail.com
+            </a>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export function Partners() {
+  const [showContactModal, setShowContactModal] = useState(false);
+
   return (
     <section id="partners" className="bg-gradient-to-b from-neutral-900 to-primary-900 py-20">
       <div className="container mx-auto px-6">
@@ -103,9 +158,7 @@ export function Partners() {
                   />
                   <div className="flex-1">
                     <div className="mb-2 flex items-center gap-3">
-                      <Heading level={3} className="text-white">
-                        {partner.name}
-                      </Heading>
+                      <Heading level={3} className="text-white">{partner.name}</Heading>
                       <motion.a
                         href={partner.website}
                         target="_blank"
@@ -168,12 +221,8 @@ export function Partners() {
             >
               <GlassCard className="h-full p-6 text-center" variant="default">
                 <benefit.icon className="mx-auto mb-4 h-12 w-12 text-accent-400" />
-                <Heading level={4} className="mb-3 text-white">
-                  {benefit.title}
-                </Heading>
-                <Text size="sm" className="text-white/70">
-                  {benefit.description}
-                </Text>
+                <Heading level={4} className="mb-3 text-white">{benefit.title}</Heading>
+                <Text size="sm" className="text-white/70">{benefit.description}</Text>
               </GlassCard>
             </motion.div>
           ))}
@@ -189,9 +238,7 @@ export function Partners() {
         >
           <GlassCard className="p-8" variant="dark">
             <div className="mb-8 text-center">
-              <Heading level={3} className="mb-4 text-white">
-                Become a Partner
-              </Heading>
+              <Heading level={3} className="mb-4 text-white">Become a Partner</Heading>
               <Text className="mx-auto max-w-2xl text-white/80">
                 Join our network of community partners and help us create lasting positive change.
                 Together, we can empower more youth and strengthen our communities.
@@ -199,11 +246,8 @@ export function Partners() {
             </div>
 
             <div className="grid gap-8 md:grid-cols-2">
-              {/* Contact Information */}
               <div>
-                <Heading level={4} className="mb-4 text-white">
-                  Get In Touch
-                </Heading>
+                <Heading level={4} className="mb-4 text-white">Get In Touch</Heading>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-white/80">
                     <Mail className="h-5 w-5 text-accent-400" />
@@ -211,23 +255,15 @@ export function Partners() {
                   </div>
                   <div className="flex items-center gap-3 text-white/80">
                     <Phone className="h-5 w-5 text-accent-400" />
-                    <Text size="sm">(401) 555-0123</Text>
+                    <Text size="sm">(401) 699-6544</Text>
                   </div>
                 </div>
               </div>
 
-              {/* Partnership Types */}
               <div>
-                <Heading level={4} className="mb-4 text-white">
-                  Partnership Opportunities
-                </Heading>
+                <Heading level={4} className="mb-4 text-white">Partnership Opportunities</Heading>
                 <ul className="space-y-2">
-                  {[
-                    'Program collaboration',
-                    'Resource sharing',
-                    'Event partnerships',
-                    'Funding opportunities',
-                  ].map((opportunity, index) => (
+                  {['Program collaboration', 'Resource sharing', 'Event partnerships', 'Funding opportunities'].map((opportunity, index) => (
                     <li key={index} className="flex items-center gap-2 text-white/70">
                       <div className="h-2 w-2 rounded-full bg-secondary-400" />
                       <Text size="sm">{opportunity}</Text>
@@ -237,18 +273,19 @@ export function Partners() {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <GlassButton variant="primary" size="lg">
+            <div className="mt-8 flex justify-center">
+              <GlassButton variant="primary" size="lg" onClick={() => setShowContactModal(true)}>
                 <Mail className="h-5 w-5" />
                 Contact Us
-              </GlassButton>
-              <GlassButton variant="outline" size="lg">
-                Download Partnership Info
               </GlassButton>
             </div>
           </GlassCard>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
+      </AnimatePresence>
     </section>
   );
 }

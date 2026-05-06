@@ -8,7 +8,6 @@ import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Mission } from '@/components/sections/Mission';
-import { Newsletter } from '@/components/sections/Newsletter';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
@@ -148,9 +147,6 @@ export default function Home() {
 
         {/* Archive Section - Past Achievements */}
         <Archive />
-
-        {/* Newsletter Section - Email Signup with Validation */}
-        <Newsletter />
 
         {/* Partners Section - Community Organizations */}
         <Partners />

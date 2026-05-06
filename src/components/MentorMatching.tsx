@@ -1,23 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   Award,
-  BookOpen,
-  Briefcase,
   CheckCircle,
   ChevronRight,
   Clock,
-  Code,
-  Dumbbell,
   Filter,
   Heart,
   MapPin,
-  Music,
-  Palette,
-  Search,
   Star,
   Users,
 } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface Mentor {
   id: string;
@@ -55,79 +48,189 @@ const mentors: Mentor[] = [
   },
   {
     id: '2',
-    name: '[Mentor Name]',
-    photo: 'M1',
-    role: 'Community Volunteer & Mentor',
-    expertise: ['Academic Support', 'Life Skills'],
-    availability: 'Weekends',
+    name: 'Ronald Hopkins',
+    photo: 'RH',
+    role: 'Community Mentor',
+    expertise: ['Life Skills', 'Youth Advocacy', 'Community Support'],
+    availability: 'Flexible - Call to Schedule',
     location: 'Providence, RI',
-    matchesCompleted: 3,
+    matchesCompleted: 8,
     successRate: 100,
-    bio: 'Passionate about helping youth in our community find their path. I believe every young person deserves a chance to succeed.',
-    livedExperience: 'Local community member with lived experience',
-    interests: ['Reading', 'Sports', 'Community Service'],
-    verified: true,
-    featured: false,
-  },
-  {
-    id: '3',
-    name: '[Mentor Name]',
-    photo: 'M2',
-    role: 'Youth Advocate',
-    expertise: ['Sports Mentorship', 'Life Skills'],
-    availability: 'After School Hours',
-    location: 'Providence, RI',
-    matchesCompleted: 5,
-    successRate: 100,
-    bio: 'Using my experience to help young people stay focused and build positive habits through sports and mentorship.',
-    livedExperience: 'Overcame challenges, now giving back to community',
-    interests: ['Basketball', 'Fitness', 'Youth Development'],
-    verified: true,
-    featured: false,
-  },
-  {
-    id: '4',
-    name: '[Mentor Name]',
-    photo: 'M3',
-    role: 'Community Member & Mentor',
-    expertise: ['Career Guidance', 'Life Skills'],
-    availability: 'Evenings',
-    location: 'Providence, RI',
-    matchesCompleted: 2,
-    successRate: 100,
-    bio: 'Committed to helping our youth see possibilities beyond their current circumstances and supporting their journey to success.',
-    livedExperience: 'Local advocate with personal transformation story',
-    interests: ['Career Development', 'Community', 'Mentoring'],
+    bio: 'Ronald is a dedicated community leader and mentor committed to breaking the school-to-prison pipeline and empowering youth in Providence.',
+    livedExperience: 'Community leader with lived experience guiding youth toward positive futures',
+    interests: ['Community Building', 'Youth Development', 'Mentorship'],
     verified: true,
     featured: false,
   },
 ];
 
 const expertiseAreas = [
-  { name: 'Academic Support', icon: <BookOpen className="h-5 w-5" /> },
-  { name: 'Life Skills', icon: <Star className="h-5 w-5" /> },
-  { name: 'Career Guidance', icon: <Briefcase className="h-5 w-5" /> },
-  { name: 'STEM Education', icon: <Code className="h-5 w-5" /> },
-  { name: 'Sports & Fitness', icon: <Dumbbell className="h-5 w-5" /> },
-  { name: 'Arts & Creativity', icon: <Palette className="h-5 w-5" /> },
-  { name: 'Music', icon: <Music className="h-5 w-5" /> },
-  { name: 'Trauma Support', icon: <Heart className="h-5 w-5" /> },
+  'Academic Support',
+  'Life Skills',
+  'Career Guidance',
+  'Sports & Fitness',
+  'Arts & Creativity',
+  'Trauma Support',
 ];
+
+interface MentorFormData {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+}
+
+interface FieldErrors {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  email?: string;
+}
+
+function MentorFormModal({
+  heading,
+  emailSubject,
+  emailBodyIntro,
+  successMessage,
+  onClose,
+}: {
+  heading: string;
+  emailSubject: string;
+  emailBodyIntro: string;
+  successMessage: string;
+  onClose: () => void;
+}) {
+  const [formData, setFormData] = useState<MentorFormData>({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+  });
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = (): boolean => {
+    const newErrors: FieldErrors = {};
+    if (!formData.firstName.trim()) newErrors.firstName = 'This field is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'This field is required';
+    if (!formData.phone.trim()) newErrors.phone = 'This field is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'This field is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    const body = [
+      emailBodyIntro,
+      `First Name: ${formData.firstName}`,
+      `Last Name: ${formData.lastName}`,
+      `Phone: ${formData.phone}`,
+      `Email: ${formData.email}`,
+    ].join('%0A');
+    const mailto = `mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${body}`;
+    window.location.href = mailto;
+    setSubmitted(true);
+  };
+
+  const inputClass =
+    'w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-all';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {submitted ? (
+          <div className="text-center py-8">
+            <div className="text-5xl mb-4">✅</div>
+            <h3 className="text-white text-2xl font-bold mb-4">{successMessage}</h3>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-white text-2xl font-bold">{heading}</h3>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <input type="text" placeholder="First Name" value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  className={inputClass} />
+                {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
+              </div>
+              <div>
+                <input type="text" placeholder="Last Name" value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  className={inputClass} />
+                {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
+              </div>
+              <div>
+                <input type="tel" placeholder="Phone Number" value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className={inputClass} />
+                {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+              </div>
+              <div>
+                <input type="email" placeholder="Email Address" value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className={inputClass} />
+                {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2"
+              >
+                Submit
+              </button>
+            </form>
+          </>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function MentorMatching() {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
+  const [showBecomeMentorModal, setShowBecomeMentorModal] = useState(false);
+  const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
 
   const filteredMentors = mentors.filter((mentor) => {
-    const matchesFilter =
+    return (
       selectedFilter === 'all' ||
-      mentor.expertise.some((exp) => exp.toLowerCase().includes(selectedFilter.toLowerCase()));
-    const matchesSearch =
-      searchTerm === '' ||
-      mentor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      mentor.expertise.some((exp) => exp.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesFilter && matchesSearch;
+      mentor.expertise.some((exp) => exp.toLowerCase().includes(selectedFilter.toLowerCase()))
+    );
   });
 
   return (
@@ -170,36 +273,20 @@ export default function MentorMatching() {
           </div>
         </motion.div>
 
-        {/* Search and Filter */}
-        <div className="mb-8 flex flex-col gap-4 md:flex-row">
-          {/* Search */}
-          <div className="flex-1">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search by name or expertise..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-4 outline-none transition-all focus:border-verdean-500 focus:ring-2 focus:ring-verdean-500/20"
-              />
-            </div>
-          </div>
-
-          {/* Filter Dropdown */}
-          <div className="md:w-64">
+        {/* Filter Dropdown only */}
+        <div className="mb-8 flex justify-center">
+          <div className="w-64">
             <div className="relative">
               <Filter className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
               <select
                 value={selectedFilter}
                 onChange={(e) => setSelectedFilter(e.target.value)}
+                title="Filter mentors by expertise area"
                 className="w-full appearance-none rounded-xl border border-gray-300 bg-white py-3 pl-12 pr-4 outline-none transition-all focus:border-verdean-500 focus:ring-2 focus:ring-verdean-500/20"
               >
                 <option value="all">All Expertise Areas</option>
                 {expertiseAreas.map((area) => (
-                  <option key={area.name} value={area.name}>
-                    {area.name}
-                  </option>
+                  <option key={area} value={area}>{area}</option>
                 ))}
               </select>
             </div>
@@ -229,9 +316,8 @@ export default function MentorMatching() {
                 </div>
               )}
 
-              {/* Mentor Avatar */}
               <div className="mb-4 flex items-start gap-4">
-                <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-verdean-500 to-purple-500 text-xl font-bold text-white">
+                <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gold-500 text-xl font-bold text-black">
                   {mentor.photo}
                 </div>
                 <div className="flex-1">
@@ -245,19 +331,14 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* Expertise Tags */}
               <div className="mb-4 flex flex-wrap gap-2">
                 {mentor.expertise.slice(0, 3).map((exp, i) => (
-                  <span
-                    key={i}
-                    className="rounded-full bg-verdean-50 px-3 py-1 text-xs font-medium text-verdean-700"
-                  >
+                  <span key={i} className="rounded-full bg-verdean-50 px-3 py-1 text-xs font-medium text-verdean-700">
                     {exp}
                   </span>
                 ))}
               </div>
 
-              {/* Stats */}
               <div className="mb-4 grid grid-cols-2 gap-3 border-t border-gray-100 pt-4">
                 <div>
                   <div className="text-sm text-gray-500">Matches</div>
@@ -269,10 +350,8 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* Bio Preview */}
               <p className="mb-4 line-clamp-3 text-sm text-gray-600">{mentor.bio}</p>
 
-              {/* Location & Availability */}
               <div className="space-y-2 text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
@@ -284,8 +363,10 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* CTA */}
-              <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-verdean-500 to-green-600 py-2 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30">
+              <button
+                type="button"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-verdean-500 to-green-600 py-2 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+              >
                 Learn More
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -293,12 +374,11 @@ export default function MentorMatching() {
           ))}
         </div>
 
-        {/* No Results */}
         {filteredMentors.length === 0 && (
           <div className="py-12 text-center">
             <Users className="mx-auto mb-4 h-16 w-16 text-gray-300" />
             <h3 className="mb-2 text-xl font-semibold text-gray-700">No mentors found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+            <p className="text-gray-500">Try adjusting your filter criteria</p>
           </div>
         )}
 
@@ -314,10 +394,18 @@ export default function MentorMatching() {
             Join our community of mentors with lived experience
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="transform rounded-full bg-white px-8 py-4 font-semibold text-purple-600 transition-all hover:scale-105 hover:bg-gray-100">
+            <button
+              type="button"
+              onClick={() => setShowBecomeMentorModal(true)}
+              className="transform rounded-full bg-white px-8 py-4 font-semibold text-purple-600 transition-all hover:scale-105 hover:bg-gray-100"
+            >
               Become a Mentor
             </button>
-            <button className="rounded-full border-2 border-white bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20">
+            <button
+              type="button"
+              onClick={() => setShowRequestMentorModal(true)}
+              className="rounded-full border-2 border-white bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
               Request a Mentor
             </button>
           </div>
@@ -341,9 +429,8 @@ export default function MentorMatching() {
               className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-8"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header */}
               <div className="mb-6 flex items-start gap-4">
-                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-verdean-500 to-purple-500 text-2xl font-bold text-white">
+                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-gold-500 text-2xl font-bold text-black">
                   {selectedMentor.photo}
                 </div>
                 <div className="flex-1">
@@ -367,13 +454,11 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* Bio */}
               <div className="mb-6">
                 <h4 className="mb-2 font-semibold text-gray-900">About</h4>
                 <p className="leading-relaxed text-gray-700">{selectedMentor.bio}</p>
               </div>
 
-              {/* Lived Experience */}
               <div className="mb-6 rounded-xl border border-verdean-100 bg-verdean-50 p-4">
                 <h4 className="mb-2 flex items-center gap-2 font-semibold text-verdean-900">
                   <Heart className="h-5 w-5" />
@@ -382,22 +467,17 @@ export default function MentorMatching() {
                 <p className="text-verdean-800">{selectedMentor.livedExperience}</p>
               </div>
 
-              {/* Expertise */}
               <div className="mb-6">
                 <h4 className="mb-3 font-semibold text-gray-900">Areas of Expertise</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedMentor.expertise.map((exp, i) => (
-                    <span
-                      key={i}
-                      className="rounded-full bg-purple-50 px-4 py-2 font-medium text-purple-700"
-                    >
+                    <span key={i} className="rounded-full bg-purple-50 px-4 py-2 font-medium text-purple-700">
                       {exp}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Interests */}
               <div className="mb-6">
                 <h4 className="mb-3 font-semibold text-gray-900">Interests & Hobbies</h4>
                 <div className="flex flex-wrap gap-2">
@@ -409,7 +489,6 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* Availability */}
               <div className="mb-6 grid gap-4 md:grid-cols-2">
                 <div className="rounded-xl bg-gray-50 p-4">
                   <div className="mb-1 flex items-center gap-2 text-gray-700">
@@ -427,12 +506,16 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="flex gap-4">
-                <button className="flex-1 rounded-xl bg-gradient-to-r from-verdean-500 to-green-600 py-3 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30">
+                <button
+                  type="button"
+                  onClick={() => { setSelectedMentor(null); setShowRequestMentorModal(true); }}
+                  className="flex-1 rounded-xl bg-gradient-to-r from-verdean-500 to-green-600 py-3 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+                >
                   Request This Mentor
                 </button>
                 <button
+                  type="button"
                   onClick={() => setSelectedMentor(null)}
                   className="rounded-xl bg-gray-100 px-6 py-3 font-semibold text-gray-700 transition-all hover:bg-gray-200"
                 >
@@ -441,6 +524,32 @@ export default function MentorMatching() {
               </div>
             </motion.div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Become a Mentor Modal */}
+      <AnimatePresence>
+        {showBecomeMentorModal && (
+          <MentorFormModal
+            heading="Become a Mentor"
+            emailSubject="New Mentor Application — Lead By Example"
+            emailBodyIntro="This person wants to become a mentor.%0A"
+            successMessage="Thank you for your interest in becoming a mentor! We'll reach out soon."
+            onClose={() => setShowBecomeMentorModal(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Request a Mentor Modal */}
+      <AnimatePresence>
+        {showRequestMentorModal && (
+          <MentorFormModal
+            heading="Request a Mentor"
+            emailSubject="Mentor Request — Lead By Example"
+            emailBodyIntro="This person is looking for a mentor.%0A"
+            successMessage="Your mentor request has been submitted! We'll be in touch soon."
+            onClose={() => setShowRequestMentorModal(false)}
+          />
         )}
       </AnimatePresence>
     </section>
