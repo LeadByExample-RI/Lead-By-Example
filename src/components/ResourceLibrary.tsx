@@ -10,8 +10,6 @@ import {
   Users,
   GraduationCap,
   Shield,
-  Download,
-  ExternalLink,
   Star,
   Clock,
   Eye
@@ -533,23 +531,6 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
         <span className="ml-2 text-sm font-medium text-gray-700">{resource.ageGroup}</span>
       </div>
 
-      <div className="flex gap-2">
-        {resource.downloadable && (
-          <button type="button" className="flex-1 py-2 px-4 bg-verdean-500 text-white rounded-lg font-medium hover:bg-verdean-600 transition-all flex items-center justify-center gap-2">
-            <Download className="w-4 h-4" />Download
-          </button>
-        )}
-        {resource.link && (
-          <button type="button" className="flex-1 py-2 px-4 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-all flex items-center justify-center gap-2">
-            <ExternalLink className="w-4 h-4" />Access
-          </button>
-        )}
-        {!resource.downloadable && !resource.link && (
-          <button type="button" className="flex-1 py-2 px-4 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
-            View Details
-          </button>
-        )}
-      </div>
     </motion.div>
   );
 }

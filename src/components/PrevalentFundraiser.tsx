@@ -89,11 +89,11 @@ export default function PrevalentFundraiser({ fundraiser, onJoin }: PrevalentFun
                   </div>
                   
                   {/* Progress Bar Container */}
-                  <div className="relative w-full bg-gray-200 rounded-full h-5 overflow-hidden shadow-inner">
+                  <div className="relative w-full bg-gray-200 rounded-full h-5 overflow-hidden shadow-inner" role="progressbar" aria-label={`${fundraiser.percentage}% of fundraising goal raised`} aria-valuenow={fundraiser.percentage} aria-valuemin={0} aria-valuemax={100}>
                     <div 
                       className="absolute top-0 left-0 h-full bg-gradient-to-r from-royal-purple via-cape-verde to-gold 
                                  rounded-full transition-all duration-700 ease-out shadow-lg"
-                      style={{ width: `${fundraiser.percentage}%` }}
+                      style={{ width: `${fundraiser.percentage}%` } as React.CSSProperties}
                     >
                       {/* Shimmer Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent 

@@ -244,7 +244,7 @@ export default function MentorMatching() {
           className="mb-12 text-center"
         >
           <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Meet Our Mentors</h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-gray-600">
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-gold-500">
             Our dedicated mentors have lived experience and understand the journey. They&apos;re
             here to guide, support, and inspire the next generation.
           </p>

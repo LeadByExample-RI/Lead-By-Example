@@ -1,18 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  GlassCard, 
-  GlassButton, 
-  Heading, 
-  Text, 
-  ProgressBar 
+import {
+  GlassCard,
+  GlassButton,
+  Heading,
+  Text,
 } from '@/components/ui';
-import { 
-  currentFundraiser, 
-  keyStatistics, 
-  organizationInfo 
+import {
+  currentFundraiser,
+  keyStatistics,
+  organizationInfo
 } from '@/data/fundraisers';
-import { formatCurrency, calculateProgress } from '@/utils/helpers';
 import { showMapPlaceholder } from '@/utils/map';
 import { HeroProps } from '@/types/components';
 
@@ -30,8 +28,6 @@ export const Hero: React.FC<HeroProps> = ({
   className: _className,
   ..._props
 }) => {
-  const progressPercentage = calculateProgress(currentFundraiser.raised, currentFundraiser.goal);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,18 +75,6 @@ export const Hero: React.FC<HeroProps> = ({
         ease: 'easeOut'
       }
     })
-  };
-
-  const progressBarVariants = {
-    hidden: { width: 0 },
-    visible: {
-      width: `${progressPercentage}%`,
-      transition: {
-        delay: 0.5,
-        duration: 1.5,
-        ease: 'easeOut'
-      }
-    }
   };
 
   return (
@@ -245,37 +229,6 @@ export const Hero: React.FC<HeroProps> = ({
                 </button>
               </div>
 
-              {/* Progress Section */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-baseline">
-                  <Text size="lg" className="font-bold text-white">
-                    {formatCurrency(currentFundraiser.raised)}
-                  </Text>
-                  <Text size="sm" className="text-white/70">
-                    of {formatCurrency(currentFundraiser.goal)}
-                  </Text>
-                </div>
-                
-                <ProgressBar
-                  value={currentFundraiser.raised}
-                  max={currentFundraiser.goal}
-                  variant="success"
-                  size="lg"
-                  animated={true}
-                />
-
-                <motion.div
-                  className="text-center"
-                  variants={progressBarVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Text size="sm" className="text-accent-500 font-medium">
-                    {Math.round(progressPercentage)}% Funded
-                  </Text>
-                </motion.div>
-              </div>
-
               {/* Features */}
               <div className="space-y-3">
                 <Text size="sm" className="font-medium text-white/90">
@@ -318,7 +271,9 @@ export const Hero: React.FC<HeroProps> = ({
                      variant="outline"
                      size="lg"
                      className="flex-1"
-                     onClick={secondaryAction.onClick || (secondaryAction.href ? () => window.open(secondaryAction.href, '_self') : undefined)}
+                     onClick={() => {
+                       window.location.href = 'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
+                     }}
                    >
                      {secondaryAction.label}
                    </GlassButton>

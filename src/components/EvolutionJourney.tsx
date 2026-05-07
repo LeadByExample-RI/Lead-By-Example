@@ -11,6 +11,130 @@ import {
 } from 'lucide-react';
 import React, { useState } from 'react';
 
+interface JourneyFormModalProps {
+  heading: string;
+  emailSubject: string;
+  onClose: () => void;
+}
+
+function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalProps) {
+  const [form, setForm] = useState({ firstName: '', lastName: '', phone: '', email: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.firstName.trim()) e.firstName = 'Required';
+    if (!form.lastName.trim()) e.lastName = 'Required';
+    if (!form.phone.trim()) e.phone = 'Required';
+    if (!form.email.trim()) e.email = 'Required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email';
+    return e;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    const body = `Name: ${form.firstName} ${form.lastName}%0APhone: ${form.phone}%0AEmail: ${form.email}`;
+    window.location.href = `mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${body}`;
+    setSubmitted(true);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="w-full max-w-md rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 z-[101]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-white text-2xl font-bold">{heading}</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
+          >
+            ✕
+          </button>
+        </div>
+
+        {submitted ? (
+          <div className="text-center py-6">
+            <p className="text-white text-lg mb-6">Thank you! We&apos;ll be in touch soon.</p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2 bg-gold-500 text-black font-semibold rounded-lg hover:bg-gold-600 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  value={form.firstName}
+                  onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-gold-500 rounded-lg px-4 py-3 outline-none"
+                />
+                {errors.firstName && <p className="text-red-400 text-xs mt-1">{errors.firstName}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  value={form.lastName}
+                  onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-gold-500 rounded-lg px-4 py-3 outline-none"
+                />
+                {errors.lastName && <p className="text-red-400 text-xs mt-1">{errors.lastName}</p>}
+              </div>
+            </div>
+            <div>
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-gold-500 rounded-lg px-4 py-3 outline-none"
+              />
+              {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-gold-500 rounded-lg px-4 py-3 outline-none"
+              />
+              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-gold-500 text-black font-semibold py-3 rounded-lg hover:bg-gold-600 transition-colors"
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 interface JourneyStage {
   id: number;
   title: string;
@@ -169,16 +293,32 @@ const journeyStages: JourneyStage[] = [
 
 export default function EvolutionJourney() {
   const [selectedStage, setSelectedStage] = useState<number>(3);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [showMentorModal, setShowMentorModal] = useState(false);
+  const [showVolunteerModal, setShowVolunteerModal] = useState(false);
 
-  React.useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        setSelectedStage((prev) => (prev === 5 ? 1 : prev + 1));
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [isAutoPlaying]);
+  const stageAccentClasses: Record<number, string> = {
+    1: 'text-red-600',
+    2: 'text-orange-500',
+    3: 'text-green-400',
+    4: 'text-purple-500',
+    5: 'text-gold-500',
+  };
+
+  const stageBadgeClasses: Record<number, string> = {
+    1: 'bg-red-600/25',
+    2: 'bg-orange-500/25',
+    3: 'bg-verdean-500/25',
+    4: 'bg-purple-500/25',
+    5: 'bg-gold-500/25',
+  };
+
+  const stageGradientClasses: Record<number, string> = {
+    1: 'bg-gradient-to-br from-red-900/20 to-red-500/20',
+    2: 'bg-gradient-to-br from-orange-900/20 to-orange-500/20',
+    3: 'bg-gradient-to-br from-verdean-900/20 to-verdean-500/20',
+    4: 'bg-gradient-to-br from-royal-purple-dark/20 to-purple-500/20',
+    5: 'bg-gradient-to-br from-yellow-900/20 to-gold-500/20',
+  };
 
   const currentStage = journeyStages.find((s) => s.id === selectedStage) || journeyStages[2];
 
@@ -206,13 +346,6 @@ export default function EvolutionJourney() {
             pipeline
           </p>
 
-          {/* Auto-play toggle */}
-          <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-white backdrop-blur-sm transition-all hover:bg-white/20"
-          >
-            {isAutoPlaying ? '⏸️ Pause Journey' : '▶️ Watch Journey Unfold'}
-          </button>
         </motion.div>
 
         {/* Evolution Timeline */}
@@ -242,12 +375,9 @@ export default function EvolutionJourney() {
                 <motion.div
                   className={`flex h-16 w-16 items-center justify-center rounded-full border-2 backdrop-blur-md transition-all duration-300 md:h-20 md:w-20 ${
                     selectedStage === stage.id
-                      ? 'border-white bg-white/20 shadow-lg shadow-white/50'
+                      ? `border-white shadow-lg shadow-white/50 ${stageBadgeClasses[stage.id]}`
                       : 'border-white/30 bg-white/5 hover:bg-white/10'
                   }`}
-                  style={{
-                    backgroundColor: selectedStage === stage.id ? stage.color + '40' : undefined,
-                  }}
                   animate={{
                     scale: selectedStage === stage.id ? [1, 1.1, 1] : 1,
                   }}
@@ -256,7 +386,7 @@ export default function EvolutionJourney() {
                     duration: 2,
                   }}
                 >
-                  <div style={{ color: selectedStage === stage.id ? stage.color : 'white' }}>
+                  <div className={selectedStage === stage.id ? stageAccentClasses[stage.id] : 'text-white'}>
                     {stage.icon}
                   </div>
                 </motion.div>
@@ -291,10 +421,7 @@ export default function EvolutionJourney() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12"
-            style={{
-              background: `linear-gradient(135deg, ${currentStage.gradientFrom}20, ${currentStage.gradientTo}20)`,
-            }}
+              className={`rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]}`}
           >
             <div className="grid gap-12 md:grid-cols-2">
               {/* Left Column - Description */}
@@ -306,8 +433,7 @@ export default function EvolutionJourney() {
                 >
                   <div className="mb-6 flex items-center gap-4">
                     <div
-                      className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                      style={{ backgroundColor: currentStage.color + '40' }}
+                        className={`flex h-16 w-16 items-center justify-center rounded-2xl ${stageBadgeClasses[currentStage.id]}`}
                     >
                       {currentStage.icon}
                     </div>
@@ -329,16 +455,17 @@ export default function EvolutionJourney() {
                     </h4>
                     <ul className="space-y-2">
                       {currentStage.symbols.map((symbol, index) => (
-                        <motion.li
-                          key={index}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 + index * 0.1 }}
-                          className="flex items-start gap-2 text-gray-300"
-                        >
-                          <span className="mt-1 text-xl">{symbol.split(' ')[0]}</span>
-                          <span>{symbol.substring(symbol.indexOf(' ') + 1)}</span>
-                        </motion.li>
+                        <li key={index}>
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 + index * 0.1 }}
+                            className="flex items-start gap-2 text-gray-300"
+                          >
+                            <span className="mt-1 text-xl">{symbol.split(' ')[0]}</span>
+                            <span>{symbol.substring(symbol.indexOf(' ') + 1)}</span>
+                          </motion.div>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -355,8 +482,7 @@ export default function EvolutionJourney() {
                           className="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm"
                         >
                           <div
-                            className={`mb-1 text-3xl font-bold ${currentStage.id === 3 ? 'text-green-500' : currentStage.id === 4 ? 'text-purple-500' : ''}`}
-                            style={currentStage.id === 3 || currentStage.id === 4 ? {} : { color: currentStage.color }}
+                            className={`mb-1 text-3xl font-bold ${stageAccentClasses[currentStage.id]}`}
                           >
                             {stat.value}
                           </div>
@@ -383,19 +509,19 @@ export default function EvolutionJourney() {
                     </h4>
                     <ul className="space-y-4">
                       {currentStage.interventions.map((intervention, index) => (
-                        <motion.li
-                          key={index}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
-                          className="flex items-start gap-3 text-gray-200"
-                        >
-                          <ChevronRight
-                            className={`mt-0.5 h-5 w-5 flex-shrink-0 ${currentStage.id === 3 ? 'text-green-500' : currentStage.id === 4 ? 'text-purple-500' : ''}`}
-                            style={currentStage.id === 3 || currentStage.id === 4 ? {} : { color: currentStage.color }}
-                          />
-                          <span>{intervention}</span>
-                        </motion.li>
+                        <li key={index}>
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 + index * 0.1 }}
+                            className="flex items-start gap-3 text-gray-200"
+                          >
+                            <ChevronRight
+                              className={`mt-0.5 h-5 w-5 flex-shrink-0 ${stageAccentClasses[currentStage.id]}`}
+                            />
+                            <span>{intervention}</span>
+                          </motion.div>
+                        </li>
                       ))}
                     </ul>
 
@@ -446,10 +572,18 @@ export default function EvolutionJourney() {
             Be Part of the Transformation
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="transform rounded-full bg-gradient-to-r from-verdean-500 to-green-600 px-8 py-4 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-verdean-500/50">
+            <button
+              type="button"
+              onClick={() => setShowMentorModal(true)}
+              className="transform rounded-full bg-gradient-to-r from-verdean-500 to-green-600 px-8 py-4 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-verdean-500/50"
+            >
               Become a Mentor
             </button>
-            <button className="transform rounded-full bg-gradient-to-r from-gold-500 to-yellow-600 px-8 py-4 font-semibold text-black transition-all hover:scale-105 hover:shadow-lg hover:shadow-gold-500/50">
+            <button
+              type="button"
+              onClick={() => setShowVolunteerModal(true)}
+              className="transform rounded-full bg-gradient-to-r from-gold-500 to-yellow-600 px-8 py-4 font-semibold text-black transition-all hover:scale-105 hover:shadow-lg hover:shadow-gold-500/50"
+            >
               Volunteer
             </button>
             <a
@@ -461,6 +595,23 @@ export default function EvolutionJourney() {
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showMentorModal && (
+          <JourneyFormModal
+            heading="Become a Mentor"
+            emailSubject="Become a Mentor - Lead By Example"
+            onClose={() => setShowMentorModal(false)}
+          />
+        )}
+        {showVolunteerModal && (
+          <JourneyFormModal
+            heading="Volunteer"
+            emailSubject="Volunteer - Lead By Example"
+            onClose={() => setShowVolunteerModal(false)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -1,32 +1,27 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
-import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
-import { showMapPlaceholder } from '@/utils/map'
-
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Facebook, href: 'https://www.facebook.com/leadbyexampleri', label: 'Facebook' },
+  { icon: Twitter, href: 'https://twitter.com/leadbyexampleri', label: 'Twitter' },
+  { icon: Instagram, href: 'https://www.instagram.com/leadbyexampleri', label: 'Instagram' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/lead-by-example-ri', label: 'LinkedIn' },
 ]
 
 const quickLinks = [
-  { label: 'About Us', href: '#about' },
-  { label: 'Our Programs', href: '#programs' },
-  { label: 'Get Involved', href: '#volunteer' },
+  { label: 'About Us', href: '#mission' },
+  { label: 'Our Programs', href: '#mentors' },
+  { label: 'Get Involved', href: '#mentors' },
   { label: 'Donate', href: '#donate' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '#partners' },
 ]
 
 const programLinks = [
-  { label: 'Youth Mentorship', href: '#mentorship' },
-  { label: 'Community Events', href: '#events' },
-  { label: 'Educational Support', href: '#education' },
-  { label: 'Career Development', href: '#career' },
-  { label: 'Family Services', href: '#family' },
+  { label: 'Youth Mentorship', href: '#mentors' },
+  { label: 'Educational Support', href: '#resources' },
+  { label: 'Family Services', href: '#partners' },
 ]
 
 export function Footer() {
@@ -43,7 +38,7 @@ export function Footer() {
           viewport={{ once: true }}
         >
           {/* Organization Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -60,51 +55,36 @@ export function Footer() {
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-white/70">
-                <Mail className="w-5 h-5 text-accent-400" />
-                <Text size="sm">info@leadbyexample.org</Text>
+              <div className="flex items-start gap-3 text-white/70">
+                <Mail className="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0" />
+                <div className="flex flex-col space-y-1">
+                  <a
+                    href="mailto:robertleadbyexample@gmail.com"
+                    className="text-sm text-gold-400 hover:text-gold-300 transition-colors"
+                  >
+                    robertleadbyexample@gmail.com
+                  </a>
+                  <a
+                    href="mailto:ronaldleadbyexample@gmail.com"
+                    className="text-sm text-gold-400 hover:text-gold-300 transition-colors"
+                  >
+                    ronaldleadbyexample@gmail.com
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-3 text-white/70">
                 <Phone className="w-5 h-5 text-accent-400" />
-                <Text size="sm">(401) 555-0123</Text>
+                <Text size="sm">(401) 699-6544</Text>
               </div>
-              <motion.div 
-                className="flex items-center gap-3 text-white/70 cursor-pointer hover:text-accent-400 transition-colors duration-300"
-                onClick={() => {
-                  const event = new CustomEvent('showMapPlaceholder', {
-                    detail: {
-                      locationName: 'Lead By Example',
-                      locationAddress: 'Providence, Rhode Island',
-                      locationLat: 41.8240,
-                      locationLng: -71.4128,
-                    },
-                  })
-                  window.dispatchEvent(event)
-                }}
-                whileHover={{ x: 2 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="flex items-center gap-3 text-white/70">
                 <MapPin className="w-5 h-5 text-accent-400" />
-                <Text size="sm">Providence, Rhode Island</Text>
-              </motion.div>
-              <button
-                onClick={() => showMapPlaceholder({
-                  locationName: 'Lead By Example',
-                  locationAddress: 'Providence, Rhode Island',
-                  locationLat: 41.8240,
-                  locationLng: -71.4128
-                })}
-                className="flex items-center gap-3 text-white/70 hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
-                aria-label="View location on map"
-              >
-                <MapPin className="w-5 h-5 text-accent-400 group-hover:scale-110 transition-transform" />
-                <Text size="sm" className="group-hover:text-accent-400 transition-colors">Providence, Rhode Island</Text>
-              </button>
+                <Text size="sm">120 Hawkins Street, Providence, RI 02908</Text>
+              </div>
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -129,7 +109,7 @@ export function Footer() {
           </motion.div>
 
           {/* Programs */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -153,8 +133,8 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Newsletter & Social */}
-          <motion.div 
+          {/* Social */}
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -165,13 +145,15 @@ export function Footer() {
             <Text className="text-white/70 mb-6">
               Follow us on social media for updates and community highlights.
             </Text>
-            
+
             {/* Social Links */}
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-3 bg-white/10 hover:bg-white/20 rounded-full border border-white/20 hover:border-accent-400/50 transition-all duration-300"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -181,19 +163,6 @@ export function Footer() {
                 </motion.a>
               ))}
             </div>
-
-            <GlassCard className="p-4" variant="light">
-              <Text size="sm" className="text-white/80 mb-2">
-                Join our newsletter for updates
-              </Text>
-              <motion.button
-                className="w-full px-4 py-2 bg-accent-500/80 hover:bg-accent-500/90 text-white rounded-lg font-medium transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Subscribe
-              </motion.button>
-            </GlassCard>
           </motion.div>
         </motion.div>
 

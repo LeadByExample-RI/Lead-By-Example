@@ -249,9 +249,22 @@ export function Partners() {
               <div>
                 <Heading level={4} className="mb-4 text-white">Get In Touch</Heading>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-white/80">
-                    <Mail className="h-5 w-5 text-accent-400" />
-                    <Text size="sm">partnerships@leadbyexample.org</Text>
+                  <div className="flex items-start gap-3 text-white/80">
+                    <Mail className="h-5 w-5 text-accent-400 mt-0.5 flex-shrink-0" />
+                    <div className="flex flex-col space-y-1">
+                      <a
+                        href="mailto:robertleadbyexample@gmail.com"
+                        className="text-sm text-gold-400 hover:text-gold-300 transition-colors"
+                      >
+                        robertleadbyexample@gmail.com
+                      </a>
+                      <a
+                        href="mailto:ronaldleadbyexample@gmail.com"
+                        className="text-sm text-gold-400 hover:text-gold-300 transition-colors"
+                      >
+                        ronaldleadbyexample@gmail.com
+                      </a>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3 text-white/80">
                     <Phone className="h-5 w-5 text-accent-400" />
@@ -274,7 +287,13 @@ export function Partners() {
             </div>
 
             <div className="mt-8 flex justify-center">
-              <GlassButton variant="primary" size="lg" onClick={() => setShowContactModal(true)}>
+              <GlassButton
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  window.location.href = 'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Become%20a%20Partner%20-%20Lead%20By%20Example';
+                }}
+              >
                 <Mail className="h-5 w-5" />
                 Contact Us
               </GlassButton>

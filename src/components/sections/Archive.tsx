@@ -140,7 +140,7 @@ export function Archive() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
             <GlassCard className="p-6 text-center" variant="dark">
               <Calendar className="w-12 h-12 text-secondary-400 mx-auto mb-4" />
-              <div className="text-3xl font-bold text-white mb-2">{archiveData.length}</div>
+              <div className="text-3xl font-bold text-white mb-2">28+</div>
               <Text size="sm" className="text-white/70">Successful Events</Text>
             </GlassCard>
           </motion.div>
