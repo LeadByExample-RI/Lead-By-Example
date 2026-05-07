@@ -12,10 +12,7 @@ const socialLinks = [
 
 const quickLinks = [
   { label: 'About Us', href: '#mission' },
-  { label: 'Our Programs', href: '#mentors' },
   { label: 'Get Involved', href: '#mentors' },
-  { label: 'Donate', href: '#donate' },
-  { label: 'Contact', href: '#partners' },
 ]
 
 const programLinks = [
@@ -105,6 +102,17 @@ export function Footer() {
                   </motion.a>
                 </li>
               ))}
+              <li>
+                <motion.button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event('open-donation-modal'))}
+                  className="text-white/70 hover:text-accent-400 transition-colors duration-300 text-left"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Text size="sm">Donate</Text>
+                </motion.button>
+              </li>
             </ul>
           </motion.div>
 

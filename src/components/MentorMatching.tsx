@@ -4,7 +4,6 @@ import {
   CheckCircle,
   ChevronRight,
   Clock,
-  Filter,
   Heart,
   MapPin,
   Star,
@@ -62,15 +61,6 @@ const mentors: Mentor[] = [
     verified: true,
     featured: false,
   },
-];
-
-const expertiseAreas = [
-  'Academic Support',
-  'Life Skills',
-  'Career Guidance',
-  'Sports & Fitness',
-  'Arts & Creativity',
-  'Trauma Support',
 ];
 
 interface MentorFormData {
@@ -221,17 +211,9 @@ function MentorFormModal({
 }
 
 export default function MentorMatching() {
-  const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
   const [showBecomeMentorModal, setShowBecomeMentorModal] = useState(false);
   const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
-
-  const filteredMentors = mentors.filter((mentor) => {
-    return (
-      selectedFilter === 'all' ||
-      mentor.expertise.some((exp) => exp.toLowerCase().includes(selectedFilter.toLowerCase()))
-    );
-  });
 
   return (
     <section className="bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20">
@@ -273,29 +255,9 @@ export default function MentorMatching() {
           </div>
         </motion.div>
 
-        {/* Filter Dropdown only */}
-        <div className="mb-8 flex justify-center">
-          <div className="w-64">
-            <div className="relative">
-              <Filter className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-              <select
-                value={selectedFilter}
-                onChange={(e) => setSelectedFilter(e.target.value)}
-                title="Filter mentors by expertise area"
-                className="w-full appearance-none rounded-xl border border-gray-300 bg-white py-3 pl-12 pr-4 outline-none transition-all focus:border-verdean-500 focus:ring-2 focus:ring-verdean-500/20"
-              >
-                <option value="all">All Expertise Areas</option>
-                {expertiseAreas.map((area) => (
-                  <option key={area} value={area}>{area}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
         {/* Mentor Grid */}
         <div className="mb-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredMentors.map((mentor, index) => (
+          {mentors.map((mentor, index) => (
             <motion.div
               key={mentor.id}
               initial={{ opacity: 0, y: 20 }}
@@ -374,7 +336,7 @@ export default function MentorMatching() {
           ))}
         </div>
 
-        {filteredMentors.length === 0 && (
+        {mentors.length === 0 && (
           <div className="py-12 text-center">
             <Users className="mx-auto mb-4 h-16 w-16 text-gray-300" />
             <h3 className="mb-2 text-xl font-semibold text-gray-700">No mentors found</h3>
