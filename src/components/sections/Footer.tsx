@@ -18,7 +18,7 @@ const quickLinks = [
 const programLinks = [
   { label: 'Youth Mentorship', href: '#mentors' },
   { label: 'Educational Support', href: '#resources' },
-  { label: 'Family Services', href: '#partners' },
+  { label: 'Family Services', href: '#resources' },
 ]
 
 export function Footer() {
