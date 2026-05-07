@@ -6,10 +6,8 @@ import {
   X, 
   Home, 
   Users, 
-  Target, 
-  Heart, 
-  FileText, 
-  Calendar,
+  Target,
+  FileText,
   TrendingUp,
   Award,
   Handshake,
@@ -31,14 +29,12 @@ export function Navbar() {
     { href: '/', label: 'Home', icon: Home },
     { href: '/mentors', label: 'Mentors', icon: Users },
     { href: '/resources', label: 'Resources', icon: FileText },
-    { href: '/events', label: 'Events', icon: Calendar },
     { href: '/#mission', label: 'Mission', icon: Target },
     { href: '/#journey', label: 'Transformation', icon: TrendingUp },
     { href: '/#success-stories', label: 'Success Stories', icon: Award },
     { href: '/#impact', label: 'Archive', icon: FileText },
     { href: '/#partners', label: 'Partners', icon: Handshake },
     { href: '/#footer', label: 'Footer', icon: Mail },
-    { href: '/#get-involved', label: 'Get Involved', icon: Heart },
   ];
 
   // Smooth scroll handler
@@ -76,7 +72,6 @@ export function Navbar() {
       '#mission',
       '#success-stories',
       '#impact',
-      '#get-involved',
       '#partners',
       '#footer',
     ];
