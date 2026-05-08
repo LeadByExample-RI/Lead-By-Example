@@ -85,12 +85,12 @@ export default function FundraiserCard({ fundraiser, onClick }: FundraiserCardPr
             <span className="text-xs text-gray-500">Achievement</span>
             <span className="text-xs font-bold text-royal-purple">{percentageRaised}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden" role="progressbar" aria-label={`${percentageRaised}% achievement towards goal`} aria-valuenow={percentageRaised} aria-valuemin={0} aria-valuemax={100}>
-            <div 
-              className="bg-gradient-to-r from-cape-verde to-gold h-full rounded-full transition-all duration-500"
-              style={{ width: `${Math.min(percentageRaised, 100)}%` } as React.CSSProperties}
-            ></div>
-          </div>
+          <progress
+            className="fundraiser-progress h-2 w-full overflow-hidden rounded-full"
+            max={100}
+            value={Math.min(percentageRaised, 100)}
+            aria-label={`% achievement towards goal`}
+          />
         </div>
         
         {/* See Details Button */}
