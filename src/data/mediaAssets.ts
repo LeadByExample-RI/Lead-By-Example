@@ -1,13 +1,23 @@
 import type { CommunityPhoto, CookoutEdition } from '@/types/media';
 
 export const communityPhotos: CommunityPhoto[] = [
+  // ── Celebration ──────────────────────────────────────────────────────────
   {
     src: '/images/community/cookout-pavilion.png',
-    alt: 'A large crowd of community members gathered at the John Jack F. Duffy Pavilion during an All Sides of Town cookout',
+    alt: 'A large crowd of community members gathered at the Duffy Pavilion during an All Sides of Town cookout',
     caption: 'The whole community, one table.',
     category: 'celebration',
     objectPosition: 'center center',
   },
+  {
+    src: '/images/community/pavilion-dramatic-cool.png',
+    alt: 'Dramatic wide-angle shot of the All Sides of Town cookout pavilion filled with attendees',
+    caption: 'Where the community gathers.',
+    category: 'celebration',
+    objectPosition: 'center center',
+  },
+
+  // ── Community ─────────────────────────────────────────────────────────────
   {
     src: '/images/community/bowl-vignette.jpg',
     alt: 'Community members smiling and gathered at a table during a Lead By Example bowling event',
@@ -16,18 +26,17 @@ export const communityPhotos: CommunityPhoto[] = [
     objectPosition: 'center top',
   },
   {
-    src: '/images/bw/b-w-cool-bowl.jpg',
-    alt: 'Black and white photo of a child bowling at a Lead By Example community event',
-    caption: 'Building confidence, one frame at a time.',
+    src: '/images/community/bowling.jpg',
+    alt: 'Lead By Example youth and mentors bowling together at a community event',
+    caption: 'Every lane, a shared story.',
     category: 'community',
-    isMonochrome: true,
     objectPosition: 'center center',
   },
   {
-    src: '/images/community/panelists.png',
-    alt: 'Lead By Example representatives testifying at a formal government hearing panel',
-    caption: 'When communities speak, systems listen.',
-    category: 'advocacy',
+    src: '/images/community/bench-bowl.jpg',
+    alt: 'Community members seated on benches together at a Lead By Example bowling event',
+    caption: 'Sidelines are where stories begin.',
+    category: 'community',
     objectPosition: 'center center',
   },
   {
@@ -38,10 +47,33 @@ export const communityPhotos: CommunityPhoto[] = [
     objectPosition: 'center center',
   },
   {
-    src: '/images/community/history-culture-warm.jpg',
-    alt: 'Lead By Example mentors and youth posing at the National Museum of African American History and Culture in Washington D.C.',
-    caption: 'Learning where we come from.',
-    category: 'journey',
+    src: '/images/community/ryders.png',
+    alt: 'Lead By Example members gathered at a Ryder\'s community event in Providence',
+    caption: 'Every corner of Providence.',
+    category: 'community',
+    objectPosition: 'center center',
+  },
+  {
+    src: '/images/community/ryders-burn.png',
+    alt: 'Community members at a Ryder\'s event with dramatic warm lighting',
+    caption: 'Showing up for each other.',
+    category: 'community',
+    objectPosition: 'center center',
+  },
+  {
+    src: '/images/community/culture-amp.jpg',
+    alt: 'Youth and mentors at a culture amplification event hosted by Lead By Example',
+    caption: 'Culture as a compass.',
+    category: 'community',
+    objectPosition: 'center center',
+  },
+
+  // ── Advocacy ─────────────────────────────────────────────────────────────
+  {
+    src: '/images/community/panelists.png',
+    alt: 'Lead By Example representatives testifying at a formal government hearing panel',
+    caption: 'When communities speak, systems listen.',
+    category: 'advocacy',
     objectPosition: 'center center',
   },
   {
@@ -50,6 +82,55 @@ export const communityPhotos: CommunityPhoto[] = [
     caption: 'The work behind the work.',
     category: 'advocacy',
     objectPosition: 'center top',
+  },
+  {
+    src: '/images/community/meeting-vignette.jpg',
+    alt: 'Community advocates gathered in a candid planning meeting with a vignette treatment',
+    caption: 'Planning the path forward.',
+    category: 'advocacy',
+    objectPosition: 'center center',
+  },
+  {
+    src: '/images/community/panel-vignette.png',
+    alt: 'Lead By Example representatives at a community panel discussion with a vignette treatment',
+    caption: 'Voices at the table.',
+    category: 'advocacy',
+    objectPosition: 'center center',
+  },
+
+  // ── Journey ───────────────────────────────────────────────────────────────
+  {
+    src: '/images/community/history-culture-warm.jpg',
+    alt: 'Lead By Example mentors and youth posing at the National Museum of African American History and Culture in Washington D.C.',
+    caption: 'Learning where we come from.',
+    category: 'journey',
+    objectPosition: 'center center',
+  },
+
+  // ── Black & white (isMonochrome: reveal color on hover) ───────────────────
+  {
+    src: '/images/bw/b-w-cool-bowl.jpg',
+    alt: 'Black and white photo of a child bowling at a Lead By Example community event',
+    caption: 'Building confidence, one frame at a time.',
+    category: 'community',
+    isMonochrome: true,
+    objectPosition: 'center center',
+  },
+  {
+    src: '/images/bw/cafe-visit.jpg',
+    alt: 'Black and white photo of Lead By Example youth and mentors at a community cafe visit',
+    caption: 'Conversations that change the course.',
+    category: 'community',
+    isMonochrome: true,
+    objectPosition: 'center center',
+  },
+  {
+    src: '/images/bw/history-culture.jpg',
+    alt: 'Black and white photo of Lead By Example mentors and youth at a history and culture museum',
+    caption: 'Roots that ground us.',
+    category: 'journey',
+    isMonochrome: true,
+    objectPosition: 'center center',
   },
 ];
 

@@ -4,58 +4,94 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import type { CommunityPhoto } from '@/types/media';
 import { communityPhotos } from '@/data/mediaAssets';
 
-// Controls masonry column stagger — mix portrait/landscape to create height variation
-const aspectRatios: Record<string, string> = {
-  '/images/community/cookout-pavilion.png':    '4/3',
-  '/images/community/bowl-vignette.jpg':        '3/4',
-  '/images/bw/b-w-cool-bowl.jpg':              '4/3',
-  '/images/community/panelists.png':            '16/9',
-  '/images/community/cafe-warm.jpg':            '3/4',
-  '/images/community/history-culture-warm.jpg': '4/3',
-  '/images/community/bored-meeting.jpg':        '3/2',
+// ─── Animation variants ───────────────────────────────────────────────────────
+
+const headerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.18 } },
 };
 
-const containerVariants = {
+const headerItemVariants = {
+  hidden:  { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
+};
+
+const galleryVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
+  visible: { transition: { staggerChildren: 0.055 } },
 };
 
 const itemVariants = {
-  hidden:   { opacity: 0, y: 20 },
-  visible:  { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  hidden:  { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function CommunityMosaic() {
   const [selected, setSelected] = useState<CommunityPhoto | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
   return (
     <>
       <motion.section
         ref={sectionRef}
         className="relative bg-[#0a0a0a] pt-36 md:pt-40 pb-20"
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
       >
-        {/* Section header */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-          <p className="text-accent-500 text-xs font-semibold uppercase tracking-[0.2em] mb-3">
+        {/* ── Section header ── */}
+        <motion.div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"
+          variants={headerVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
+          <motion.p
+            variants={headerItemVariants}
+            className="text-xs font-black uppercase tracking-[0.28em] mb-4"
+            style={{
+              background: 'linear-gradient(90deg, #4B306A 0%, #8B5CF6 50%, #C4965A 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             Our Community in Motion
-          </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-white">
-            Every gathering, a step forward.
-          </h2>
-        </div>
+          </motion.p>
+          <motion.h2
+            variants={headerItemVariants}
+            className="text-4xl md:text-5xl font-bold tracking-tight text-white"
+          >
+            Every gathering,{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #C4965A 0%, #FFD700 60%, #a78040 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              a step forward.
+            </span>
+          </motion.h2>
+        </motion.div>
 
-        {/* Masonry gallery — CSS columns, 3px gap */}
-        <div
+        {/* ── Masonry photo wall ── */}
+        <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           role="list"
           aria-label="Community photo gallery"
+          variants={galleryVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
         >
-          <div className="columns-2 md:columns-3 gap-[3px]">
+          {/*
+            CSS multi-column masonry:
+            - columns-2 md:columns-3 lg:columns-4 creates 2-4 staggered vertical columns
+            - gap-4 sets column-gap between the columns
+            - Each item gets mb-4 + break-inside-avoid to prevent column breaks through cards
+          */}
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
             {communityPhotos.map((photo) => (
               <GalleryCard
                 key={photo.src}
@@ -65,36 +101,53 @@ export default function CommunityMosaic() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* CTA strip */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-          <div
-            className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl"
+        {/* ── Standalone CTA banner (isolated from masonry) ── */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+          <motion.div
+            className="flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl"
             style={{
-              background: 'rgba(75, 48, 106, 0.88)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 215, 0, 0.28)',
+              background: 'rgba(75, 48, 106, 0.82)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 215, 0, 0.22)',
+              boxShadow: '0 8px 40px rgba(75, 48, 106, 0.45)',
             }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div>
-              <p className="text-5xl font-bold text-lbe-gold leading-none">125+</p>
-              <p className="text-white/70 text-sm mt-1">
+              <p
+                className="text-6xl font-black leading-none"
+                style={{
+                  background: 'linear-gradient(135deg, #FFD700 0%, #C4965A 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                125+
+              </p>
+              <p className="text-white/70 text-sm mt-1.5 max-w-xs">
                 youth served in Providence and surrounding communities
               </p>
             </div>
-            <a
-              href="#about"
-              className="sm:ml-auto border border-lbe-gold/50 text-lbe-gold text-sm px-5 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors whitespace-nowrap"
-            >
-              Our Story →
-            </a>
-          </div>
+            <div className="sm:ml-auto flex flex-col sm:items-end gap-2">
+              <a
+                href="#about"
+                className="border border-lbe-gold/60 text-lbe-gold text-sm px-6 py-2.5 rounded-xl hover:bg-lbe-gold/10 transition-colors whitespace-nowrap font-medium"
+              >
+                Our Story →
+              </a>
+              <p className="text-white/35 text-xs">Lead By Example · Providence, RI</p>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
-      {/* Modal — sibling of section so fixed positioning isn't clipped */}
+      {/* Modal — sibling of section so z-50 fixed positioning isn't clipped */}
       <AnimatePresence>
         {selected && (
           <PhotoModal photo={selected} onClose={() => setSelected(null)} />
@@ -104,7 +157,7 @@ export default function CommunityMosaic() {
   );
 }
 
-// ─── Gallery card ────────────────────────────────────────────────────────────
+// ─── Gallery card ─────────────────────────────────────────────────────────────
 
 interface GalleryCardProps {
   photo: CommunityPhoto;
@@ -114,14 +167,18 @@ interface GalleryCardProps {
 
 function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
   const [hovered, setHovered] = useState(false);
-  const ratio = aspectRatios[photo.src] ?? '4/3';
 
   return (
+    /*
+      break-inside-avoid prevents the card from splitting across columns.
+      mb-4 provides the row gap between cards within a column.
+      The outer motion.div drives the stagger fade-in entry animation.
+      The inner motion.div is the layoutId anchor for the shared element transition.
+    */
     <motion.div
       role="listitem"
       variants={itemVariants}
-      className="break-inside-avoid"
-      style={{ marginBottom: '3px' }}
+      className="break-inside-avoid mb-4"
     >
       <motion.div
         layoutId={`card-${photo.src}`}
@@ -129,35 +186,41 @@ function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative overflow-hidden rounded-xl cursor-pointer"
-        style={{ aspectRatio: ratio }}
         animate={{ opacity: isSelected ? 0 : 1 }}
         transition={{
           opacity: { duration: 0.15 },
-          layout: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+          layout: { duration: 0.42, ease: [0.25, 0.46, 0.45, 0.94] },
         }}
       >
+        {/*
+          width={0} height={0} + style={{ width:'100%', height:'auto' }} is the
+          Next.js pattern for responsive images at their natural aspect ratio.
+          CSS columns masonry requires natural heights to create the stagger effect.
+        */}
         <Image
           src={photo.src}
           alt={photo.alt}
-          fill
+          width={0}
+          height={0}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           style={{
-            objectFit: 'cover',
-            objectPosition: photo.objectPosition ?? 'center',
+            width: '100%',
+            height: 'auto',
+            display: 'block',
             filter: photo.isMonochrome && !hovered ? 'grayscale(1)' : 'grayscale(0)',
+            transform: hovered ? 'scale(1.04)' : 'scale(1)',
             transition: 'filter 0.4s ease, transform 0.35s ease',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)',
           }}
-          sizes="(max-width: 640px) 50vw, 33vw"
           priority={photo.src.includes('cookout-pavilion')}
           loading={photo.src.includes('cookout-pavilion') ? undefined : 'lazy'}
         />
 
-        {/* Hover overlay: hidden by default, reveals "Click to expand" on hover */}
+        {/* Hover overlay: hidden by default, "Click to expand" revealed on hover */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          style={{ background: 'rgba(0,0,0,0.52)' }}
+          style={{ background: 'rgba(0,0,0,0.54)' }}
         >
           <span className="text-white text-[11px] font-semibold tracking-widest uppercase border border-white/50 rounded-full px-4 py-1.5">
             Click to expand
@@ -168,69 +231,77 @@ function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
   );
 }
 
-// ─── Photo modal ─────────────────────────────────────────────────────────────
+// ─── Photo modal ──────────────────────────────────────────────────────────────
 
 function PhotoModal({ photo, onClose }: { photo: CommunityPhoto; onClose: () => void }) {
-  const ratio = aspectRatios[photo.src] ?? '4/3';
-
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8"
+      className="fixed inset-0 z-50 flex items-center justify-center p-6"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={`Expanded view: ${photo.caption}`}
     >
-      {/* Aggressively blurred backdrop */}
+      {/* Heavy backdrop blur keeps focus on the image */}
       <motion.div
-        className="absolute inset-0 bg-black/70 backdrop-blur-lg"
+        className="absolute inset-0 bg-black/75 backdrop-blur-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
       />
 
-      {/* Shared element — animates from the grid card's position */}
+      {/*
+        Shared element: animates from the card's grid position to the modal center.
+        Fixed to max-w-[90vw] / max-h-[85vh]; object-contain ensures no cropping.
+      */}
       <motion.div
         layoutId={`card-${photo.src}`}
-        className="relative z-10 overflow-hidden rounded-2xl"
-        style={{ width: '100%', maxWidth: '800px', aspectRatio: ratio }}
+        className="relative z-10 rounded-2xl overflow-hidden"
+        style={{
+          width: '90vw',
+          maxWidth: '1200px',
+          height: '85vh',
+          maxHeight: '900px',
+          background: 'rgba(0,0,0,0.3)',
+        }}
         onClick={(e) => e.stopPropagation()}
-        transition={{ layout: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } }}
+        transition={{ layout: { duration: 0.42, ease: [0.25, 0.46, 0.45, 0.94] } }}
       >
         <Image
           src={photo.src}
           alt={photo.alt}
           fill
           style={{
-            objectFit: 'cover',
+            objectFit: 'contain',
             objectPosition: photo.objectPosition ?? 'center',
-            filter: 'grayscale(0)', // always full color in modal
           }}
           priority
-          sizes="(max-width: 800px) 100vw, 800px"
+          sizes="90vw"
         />
 
-        {/* Caption — fades in after the layout transition settles */}
+        {/* Caption — fades in once layout animation settles */}
         <motion.div
-          className="absolute inset-x-0 bottom-0 p-6 pt-16"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.90) 0%, transparent 100%)' }}
-          initial={{ opacity: 0, y: 8 }}
+          className="absolute inset-x-0 bottom-0 p-6 pt-20"
+          style={{
+            background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
+          }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
-          transition={{ delay: 0.3, duration: 0.25 }}
+          transition={{ delay: 0.32, duration: 0.28 }}
         >
           <p className="text-white font-semibold text-lg leading-snug">{photo.caption}</p>
-          <p className="text-white/60 text-sm mt-1.5 leading-relaxed">{photo.alt}</p>
+          <p className="text-white/55 text-sm mt-1.5 leading-relaxed line-clamp-2">{photo.alt}</p>
         </motion.div>
 
         {/* Close button */}
         <motion.button
-          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors text-sm"
+          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/55 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/75 transition-colors text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.32 }}
           onClick={onClose}
           aria-label="Close photo"
         >
