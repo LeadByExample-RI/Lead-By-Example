@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Organization Info */}
-            <GlassCard variant="dark" className="space-y-4">
+            <GlassCard variant="dark" hover={false} className="p-6 space-y-4">
               <Heading level={3} className="text-white">
                 Get in Touch
               </Heading>
@@ -157,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({
                     locationLat: organizationInfo.lat,
                     locationLng: organizationInfo.lng
                   })}
-                  className="flex items-center space-x-2 w-full text-left hover:bg-white/10 rounded-lg p-2 -ml-2 transition-colors group"
+                  className="flex items-center space-x-2 w-full text-left hover:bg-white/10 rounded-lg p-2 transition-colors group"
                   data-location-address={organizationInfo.address}
                   data-location-lat={organizationInfo.lat}
                   data-location-lng={organizationInfo.lng}

@@ -216,7 +216,7 @@ const journeyStages: JourneyStage[] = [
     ],
     stats: [
       { label: 'Active Mentors', value: '12+' },
-      { label: 'Youth Served', value: '50+' },
+      { label: 'Youth Served', value: '125+' },
       { label: 'Success Rate', value: '100%' },
     ],
     interventions: [
@@ -403,7 +403,7 @@ export default function EvolutionJourney() {
                 {/* Stage Title (hidden on mobile) */}
                 <span
                   className={`mt-1 hidden max-w-[100px] text-center text-xs md:block ${
-                    selectedStage === stage.id ? 'font-semibold text-white' : 'text-gray-500'
+                    selectedStage === stage.id ? 'font-semibold text-white' : 'text-gray-300'
                   }`}
                 >
                   {stage.title}
@@ -486,7 +486,7 @@ export default function EvolutionJourney() {
                           >
                             {stat.value}
                           </div>
-                          <div className="text-sm text-gray-400">{stat.label}</div>
+                          <div className="text-sm text-gray-300">{stat.label}</div>
                         </motion.div>
                       ))}
                     </div>

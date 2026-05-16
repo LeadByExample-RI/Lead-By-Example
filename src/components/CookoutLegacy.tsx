@@ -162,7 +162,7 @@ export default function CookoutLegacy() {
                 See Event Details
               </a>
               <a
-                href="mailto:contact@leadbyexample.org"
+                href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
                 className="border border-lbe-gold/50 text-lbe-gold px-6 py-3 rounded-xl hover:bg-lbe-gold/10 transition-colors"
               >
                 Help Make It Happen
@@ -189,7 +189,7 @@ export default function CookoutLegacy() {
           If you&apos;d like to help us keep that promise, we&apos;d be grateful.
         </p>
         <a
-          href="mailto:contact@leadbyexample.org"
+          href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
           className="border border-lbe-gold/35 text-lbe-gold/80 text-sm px-5 py-2 rounded-lg hover:border-lbe-gold/60 hover:text-lbe-gold transition-colors"
         >
           Reach Out to Support Us

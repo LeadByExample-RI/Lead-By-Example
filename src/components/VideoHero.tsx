@@ -281,7 +281,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
           <div className="flex justify-center pt-1">
             <a
-              href="mailto:contact@leadbyexample.org"
+              href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
               className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
             >
               Contact Founders

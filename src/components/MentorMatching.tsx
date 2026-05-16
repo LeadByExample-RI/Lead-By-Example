@@ -235,7 +235,7 @@ export default function MentorMatching() {
           <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
             {[
               { label: 'Active Mentors', value: '12+', icon: <Users className="h-6 w-6" /> },
-              { label: 'Youth Helped', value: '50+', icon: <Heart className="h-6 w-6" /> },
+              { label: 'Youth Helped', value: '125+', icon: <Heart className="h-6 w-6" /> },
               { label: 'Success Rate', value: '100%', icon: <Star className="h-6 w-6" /> },
               { label: 'Years Serving', value: '5+', icon: <Award className="h-6 w-6" /> },
             ].map((stat, index) => (
@@ -301,20 +301,20 @@ export default function MentorMatching() {
                 ))}
               </div>
 
-              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-gray-100 pt-4">
+              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
                 <div>
-                  <div className="text-sm text-gray-500">Matches</div>
+                  <div className="text-sm text-gray-600">Matches</div>
                   <div className="text-lg font-bold text-gray-900">{mentor.matchesCompleted}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-gray-500">Success Rate</div>
+                  <div className="text-sm text-gray-600">Success Rate</div>
                   <div className="text-lg font-bold text-green-600">{mentor.successRate}%</div>
                 </div>
               </div>
 
-              <p className="mb-4 line-clamp-3 text-sm text-gray-600">{mentor.bio}</p>
+              <p className="mb-4 line-clamp-3 text-sm text-gray-700">{mentor.bio}</p>
 
-              <div className="space-y-2 text-sm text-gray-500">
+              <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
                   {mentor.location}
