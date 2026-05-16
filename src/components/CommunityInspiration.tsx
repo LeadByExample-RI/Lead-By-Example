@@ -21,7 +21,7 @@ export default function CommunityInspiration({ testimonials }: CommunitySectionP
   ];
 
   return (
-    <section id="community" className="py-20 bg-gradient-to-br from-royal-purple via-royal-purple-dark to-cape-verde relative overflow-hidden">
+    <section id="community-alt-2" className="py-20 bg-gradient-to-br from-royal-purple via-royal-purple-dark to-cape-verde relative overflow-hidden">
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">

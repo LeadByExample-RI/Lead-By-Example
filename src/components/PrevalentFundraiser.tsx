@@ -17,7 +17,7 @@ interface PrevalentFundraiserProps {
 
 export default function PrevalentFundraiser({ fundraiser, onJoin }: PrevalentFundraiserProps) {
   return (
-    <section id="home" className="py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="fundraiser-legacy" className="py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
         
         {/* Section Title */}

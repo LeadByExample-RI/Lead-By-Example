@@ -15,7 +15,7 @@ interface CommunitySectionProps {
 
 export default function CommunitySection({ testimonials }: CommunitySectionProps) {
   return (
-    <section id="community" className="py-16 bg-gradient-to-br from-royal-purple to-royal-purple-dark">
+    <section id="community-alt-1" className="py-16 bg-gradient-to-br from-royal-purple to-royal-purple-dark">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-center text-gold mb-12">
           Our Community Spirit

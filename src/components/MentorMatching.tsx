@@ -143,7 +143,7 @@ function MentorFormModal({
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        className="w-full max-w-lg rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}
       >
         {submitted ? (
@@ -216,7 +216,7 @@ export default function MentorMatching() {
   const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
 
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20">
+    <section className="px-4 py-20">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
@@ -225,8 +225,8 @@ export default function MentorMatching() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Meet Our Mentors</h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-gold-500">
+          <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">Meet Our Mentors</h2>
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-gold-400">
             Our dedicated mentors have lived experience and understand the journey. They&apos;re
             here to guide, support, and inspire the next generation.
           </p>
@@ -245,11 +245,11 @@ export default function MentorMatching() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="rounded-xl bg-white p-4 shadow-md"
+                className="rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-4 shadow-xl"
               >
-                <div className="mb-2 flex justify-center text-verdean-500">{stat.icon}</div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="mb-2 flex justify-center text-gold-400">{stat.icon}</div>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-sm text-gray-200">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -264,70 +264,70 @@ export default function MentorMatching() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`transform cursor-pointer rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl ${
-                mentor.featured ? 'ring-2 ring-gold-500' : ''
+              className={`transform cursor-pointer rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-6 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl ${
+                mentor.featured ? 'ring-2 ring-gold-400' : ''
               }`}
               onClick={() => setSelectedMentor(mentor)}
             >
               {mentor.featured && (
                 <div className="mb-3 flex items-center gap-2">
-                  <Star className="h-4 w-4 fill-gold-500 text-gold-500" />
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gold-700">
+                  <Star className="h-4 w-4 fill-gold-400 text-gold-400" />
+                  <span className="text-xs font-semibold uppercase tracking-wide text-gold-300">
                     Featured Mentor
                   </span>
                 </div>
               )}
 
               <div className="mb-4 flex items-start gap-4">
-                <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gold-500 text-xl font-bold text-black">
+                <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gold-400 text-xl font-bold text-black">
                   {mentor.photo}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold text-gray-900">{mentor.name}</h3>
+                    <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
                     {mentor.verified && (
-                      <CheckCircle className="h-5 w-5 fill-verdean-100 text-verdean-500" />
+                      <CheckCircle className="h-5 w-5 fill-white/20 text-gold-400" />
                     )}
                   </div>
-                  <p className="text-sm text-gray-600">{mentor.role}</p>
+                  <p className="text-sm text-gray-300">{mentor.role}</p>
                 </div>
               </div>
 
               <div className="mb-4 flex flex-wrap gap-2">
                 {mentor.expertise.slice(0, 3).map((exp, i) => (
-                  <span key={i} className="rounded-full bg-verdean-50 px-3 py-1 text-xs font-medium text-verdean-700">
+                  <span key={i} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-200">
                     {exp}
                   </span>
                 ))}
               </div>
 
-              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
+              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-white/20 pt-4">
                 <div>
-                  <div className="text-sm text-gray-600">Matches</div>
-                  <div className="text-lg font-bold text-gray-900">{mentor.matchesCompleted}</div>
+                  <div className="text-sm text-gray-300">Matches</div>
+                  <div className="text-lg font-bold text-white">{mentor.matchesCompleted}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-gray-600">Success Rate</div>
-                  <div className="text-lg font-bold text-green-600">{mentor.successRate}%</div>
+                  <div className="text-sm text-gray-300">Success Rate</div>
+                  <div className="text-lg font-bold text-green-400">{mentor.successRate}%</div>
                 </div>
               </div>
 
-              <p className="mb-4 line-clamp-3 text-sm text-gray-700">{mentor.bio}</p>
+              <p className="mb-4 line-clamp-3 text-sm text-gray-300">{mentor.bio}</p>
 
-              <div className="space-y-2 text-sm text-gray-600">
+              <div className="space-y-2 text-sm text-gray-300">
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
+                  <MapPin className="h-4 w-4 text-gold-400" />
                   {mentor.location}
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
+                  <Clock className="h-4 w-4 text-gold-400" />
                   {mentor.availability}
                 </div>
               </div>
 
               <button
                 type="button"
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-verdean-500 to-green-600 py-2 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-gold-500 to-gold-600 py-2 font-semibold text-black transition-all hover:shadow-lg hover:shadow-gold-500/30"
               >
                 Learn More
                 <ChevronRight className="h-4 w-4" />
@@ -338,9 +338,9 @@ export default function MentorMatching() {
 
         {mentors.length === 0 && (
           <div className="py-12 text-center">
-            <Users className="mx-auto mb-4 h-16 w-16 text-gray-300" />
-            <h3 className="mb-2 text-xl font-semibold text-gray-700">No mentors found</h3>
-            <p className="text-gray-500">Try adjusting your filter criteria</p>
+            <Users className="mx-auto mb-4 h-16 w-16 text-gray-400" />
+            <h3 className="mb-2 text-xl font-semibold text-white">No mentors found</h3>
+            <p className="text-gray-300">Try adjusting your filter criteria</p>
           </div>
         )}
 
@@ -359,7 +359,7 @@ export default function MentorMatching() {
             <button
               type="button"
               onClick={() => setShowBecomeMentorModal(true)}
-              className="transform rounded-full bg-white px-8 py-4 font-semibold text-purple-600 transition-all hover:scale-105 hover:bg-gray-100"
+              className="transform rounded-full bg-gold-400 px-8 py-4 font-semibold text-black transition-all hover:scale-105 hover:bg-gold-300"
             >
               Become a Mentor
             </button>
@@ -388,28 +388,28 @@ export default function MentorMatching() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-8"
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-6 flex items-start gap-4">
-                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-gold-500 text-2xl font-bold text-black">
+                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-gold-400 text-2xl font-bold text-black">
                   {selectedMentor.photo}
                 </div>
                 <div className="flex-1">
                   <div className="mb-1 flex items-center gap-2">
-                    <h3 className="text-2xl font-bold text-gray-900">{selectedMentor.name}</h3>
+                    <h3 className="text-2xl font-bold text-white">{selectedMentor.name}</h3>
                     {selectedMentor.verified && (
-                      <CheckCircle className="h-6 w-6 fill-verdean-100 text-verdean-500" />
+                      <CheckCircle className="h-6 w-6 fill-white/20 text-gold-400" />
                     )}
                   </div>
-                  <p className="mb-2 text-gray-600">{selectedMentor.role}</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <p className="mb-2 text-gray-300">{selectedMentor.role}</p>
+                  <div className="flex items-center gap-4 text-sm text-gray-300">
                     <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-gold-500 text-gold-500" />
+                      <Star className="h-4 w-4 fill-gold-400 text-gold-400" />
                       {selectedMentor.successRate}% Success
                     </div>
                     <div className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
+                      <Users className="h-4 w-4 text-gray-400" />
                       {selectedMentor.matchesCompleted} Matches
                     </div>
                   </div>
@@ -417,23 +417,23 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-2 font-semibold text-gray-900">About</h4>
-                <p className="leading-relaxed text-gray-700">{selectedMentor.bio}</p>
+                <h4 className="mb-2 font-semibold text-white">About</h4>
+                <p className="leading-relaxed text-gray-300">{selectedMentor.bio}</p>
               </div>
 
-              <div className="mb-6 rounded-xl border border-verdean-100 bg-verdean-50 p-4">
-                <h4 className="mb-2 flex items-center gap-2 font-semibold text-verdean-900">
-                  <Heart className="h-5 w-5" />
+              <div className="mb-6 rounded-xl border border-white/20 bg-white/5 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-semibold text-gold-400">
+                  <Heart className="h-5 w-5 text-gold-400" />
                   Lived Experience
                 </h4>
-                <p className="text-verdean-800">{selectedMentor.livedExperience}</p>
+                <p className="text-gray-300">{selectedMentor.livedExperience}</p>
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-3 font-semibold text-gray-900">Areas of Expertise</h4>
+                <h4 className="mb-3 font-semibold text-white">Areas of Expertise</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedMentor.expertise.map((exp, i) => (
-                    <span key={i} className="rounded-full bg-purple-50 px-4 py-2 font-medium text-purple-700">
+                    <span key={i} className="rounded-full bg-white/10 px-4 py-2 font-medium text-gray-200">
                       {exp}
                     </span>
                   ))}
@@ -441,10 +441,10 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-3 font-semibold text-gray-900">Interests & Hobbies</h4>
+                <h4 className="mb-3 font-semibold text-white">Interests & Hobbies</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedMentor.interests.map((interest, i) => (
-                    <span key={i} className="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
+                    <span key={i} className="rounded-full bg-white/10 px-4 py-2 text-gray-200">
                       {interest}
                     </span>
                   ))}
@@ -452,19 +452,19 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6 grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <div className="mb-1 flex items-center gap-2 text-gray-700">
-                    <Clock className="h-5 w-5" />
+                <div className="rounded-xl bg-white/5 border border-white/10 p-4">
+                  <div className="mb-1 flex items-center gap-2 text-gray-200">
+                    <Clock className="h-5 w-5 text-gold-400" />
                     <span className="font-semibold">Availability</span>
                   </div>
-                  <p className="text-gray-600">{selectedMentor.availability}</p>
+                  <p className="text-gray-300">{selectedMentor.availability}</p>
                 </div>
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <div className="mb-1 flex items-center gap-2 text-gray-700">
-                    <MapPin className="h-5 w-5" />
+                <div className="rounded-xl bg-white/5 border border-white/10 p-4">
+                  <div className="mb-1 flex items-center gap-2 text-gray-200">
+                    <MapPin className="h-5 w-5 text-gold-400" />
                     <span className="font-semibold">Location</span>
                   </div>
-                  <p className="text-gray-600">{selectedMentor.location}</p>
+                  <p className="text-gray-300">{selectedMentor.location}</p>
                 </div>
               </div>
 
@@ -472,14 +472,14 @@ export default function MentorMatching() {
                 <button
                   type="button"
                   onClick={() => { setSelectedMentor(null); setShowRequestMentorModal(true); }}
-                  className="flex-1 rounded-xl bg-gradient-to-r from-verdean-500 to-green-600 py-3 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+                  className="flex-1 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 py-3 font-semibold text-black transition-all hover:shadow-lg hover:shadow-gold-500/30"
                 >
                   Request This Mentor
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedMentor(null)}
-                  className="rounded-xl bg-gray-100 px-6 py-3 font-semibold text-gray-700 transition-all hover:bg-gray-200"
+                  className="rounded-xl bg-white/10 border border-white/20 px-6 py-3 font-semibold text-white transition-all hover:bg-white/20"
                 >
                   Close
                 </button>

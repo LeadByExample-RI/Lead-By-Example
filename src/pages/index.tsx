@@ -125,7 +125,7 @@ export default function Home() {
         </section>
 
         {/* Evolution Journey - Visual Storytelling of Transformation */}
-        <section id="journey" className="bg-gradient-to-b from-white to-gray-50" data-section-theme="light">
+        <section id="journey" className="bg-[#4B306A]" data-section-theme="dark">
           <EvolutionJourney />
         </section>
 
@@ -145,12 +145,12 @@ export default function Home() {
         </section>
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="bg-white" data-section-theme="light">
+        <section id="mentors" className="bg-[#01514C]" data-section-theme="dark">
           <MentorMatching />
         </section>
 
         {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white" data-section-theme="light">
+        <section id="resources" className="bg-[#4B306A]" data-section-theme="dark">
           <ResourceLibrary />
         </section>
 
