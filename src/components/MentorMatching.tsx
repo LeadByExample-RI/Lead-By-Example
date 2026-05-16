@@ -10,58 +10,7 @@ import {
   Users,
 } from 'lucide-react';
 import React, { useState } from 'react';
-
-interface Mentor {
-  id: string;
-  name: string;
-  photo: string;
-  role: string;
-  expertise: string[];
-  availability: string;
-  location: string;
-  matchesCompleted: number;
-  successRate: number;
-  bio: string;
-  livedExperience: string;
-  interests: string[];
-  verified: boolean;
-  featured: boolean;
-}
-
-const mentors: Mentor[] = [
-  {
-    id: '1',
-    name: 'Robert McKinney Sr.',
-    photo: 'RM',
-    role: 'Founder & Lead Mentor',
-    expertise: ['Life Skills', 'Career Guidance', 'Leadership Development'],
-    availability: 'Flexible - Call to Schedule',
-    location: 'Providence, RI',
-    matchesCompleted: 12,
-    successRate: 100,
-    bio: "Founder of Lead By Example. I've dedicated my life to interrupting the school-to-prison pipeline using my lived experience to guide our youth toward better futures.",
-    livedExperience: 'Overcame personal challenges, now leading community change',
-    interests: ['Community Building', 'Youth Advocacy', 'Mentorship'],
-    verified: true,
-    featured: true,
-  },
-  {
-    id: '2',
-    name: 'Ronald Hopkins',
-    photo: 'RH',
-    role: 'Community Mentor',
-    expertise: ['Life Skills', 'Youth Advocacy', 'Community Support'],
-    availability: 'Flexible - Call to Schedule',
-    location: 'Providence, RI',
-    matchesCompleted: 8,
-    successRate: 100,
-    bio: 'Ronald is a dedicated community leader and mentor committed to breaking the school-to-prison pipeline and empowering youth in Providence.',
-    livedExperience: 'Community leader with lived experience guiding youth toward positive futures',
-    interests: ['Community Building', 'Youth Development', 'Mentorship'],
-    verified: true,
-    featured: false,
-  },
-];
+import { mentors, type Mentor } from '@/data/siteContent';
 
 interface MentorFormData {
   firstName: string;

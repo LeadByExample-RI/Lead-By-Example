@@ -2,232 +2,33 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  BookOpen,
-  Video,
-  FileText,
-  Headphones,
-  Heart,
-  Brain,
-  Users,
-  GraduationCap,
-  Shield,
-  Star,
   Clock,
   Eye,
+  Heart,
   Search,
   ArrowLeft,
-  ArrowRight
+  ArrowRight,
+  Star,
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
-import { Button } from '@/components/ui';
+import {
+  carouselItems,
+  crisisResources,
+  resources,
+  typeIcons,
+  type Resource,
+} from '@/data/siteContent';
 
-interface Resource {
-  id: string;
-  title: string;
-  description: string;
-  category: 'mental-health' | 'academic' | 'life-skills' | 'career' | 'trauma-support' | 'legal';
-  type: 'video' | 'article' | 'worksheet' | 'podcast' | 'guide';
-  duration?: string;
-  traumaInformed: boolean;
-  ageGroup: string;
-  views: number;
-  rating: number;
-  featured: boolean;
-  tags: string[];
-  link?: string;
-  downloadable: boolean;
-}
-
-const resources: Resource[] = [
+const AtmosphericLightsLoader = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
   {
-    id: '1',
-    title: 'Understanding Your Emotions: A Teen\'s Guide',
-    description: 'Learn healthy ways to identify, process, and express your emotions. Includes practical exercises and coping strategies specifically designed for young people who have experienced trauma.',
-    category: 'trauma-support',
-    type: 'guide',
-    duration: '15 min read',
-    traumaInformed: true,
-    ageGroup: '13-18',
-    views: 1247,
-    rating: 4.8,
-    featured: true,
-    tags: ['Self-awareness', 'Coping skills', 'Emotional regulation'],
-    downloadable: true
-  },
-  {
-    id: '2',
-    title: 'From Streets to Success: Real Stories',
-    description: 'Video series featuring young adults who overcame similar challenges. Hear authentic stories of transformation, resilience, and hope from people who walked in your shoes.',
-    category: 'mental-health',
-    type: 'video',
-    duration: '12 episodes',
-    traumaInformed: true,
-    ageGroup: '14-24',
-    views: 3420,
-    rating: 4.9,
-    featured: true,
-    tags: ['Inspiration', 'Real stories', 'Peer support'],
-    link: '#',
-    downloadable: false
-  },
-  {
-    id: '3',
-    title: 'Building Healthy Relationships',
-    description: 'Navigate friendships, family dynamics, and romantic relationships. Learn about boundaries, communication, and recognizing healthy vs. unhealthy patterns.',
-    category: 'life-skills',
-    type: 'article',
-    duration: '20 min read',
-    traumaInformed: true,
-    ageGroup: '15-19',
-    views: 892,
-    rating: 4.7,
-    featured: false,
-    tags: ['Relationships', 'Boundaries', 'Communication'],
-    downloadable: true
-  },
-  {
-    id: '4',
-    title: 'Your Rights: Dealing with Police & Legal System',
-    description: 'Know your rights and how to protect yourself. Created by advocates and attorneys, this guide helps you navigate encounters with law enforcement and understand the juvenile justice system.',
-    category: 'legal',
-    type: 'guide',
-    duration: '25 min read',
-    traumaInformed: true,
-    ageGroup: '13-21',
-    views: 2156,
-    rating: 4.9,
-    featured: true,
-    tags: ['Rights', 'Legal system', 'Self-advocacy'],
-    downloadable: true
-  },
-  {
-    id: '5',
-    title: 'Study Skills That Actually Work',
-    description: 'Practical strategies for improving grades and staying organized. Includes time management, note-taking, test prep, and motivation techniques designed for students with various learning needs.',
-    category: 'academic',
-    type: 'worksheet',
-    duration: '10 exercises',
-    traumaInformed: false,
-    ageGroup: '13-18',
-    views: 1634,
-    rating: 4.6,
-    featured: false,
-    tags: ['Study skills', 'Organization', 'Academic success'],
-    downloadable: true
-  },
-  {
-    id: '6',
-    title: 'Mindfulness for Tough Times',
-    description: 'Audio meditation and breathing exercises to help you manage stress, anxiety, and difficult emotions. Perfect for when you need a moment of calm or help falling asleep.',
-    category: 'mental-health',
-    type: 'podcast',
-    duration: '8 episodes',
-    traumaInformed: true,
-    ageGroup: '14-24',
-    views: 2891,
-    rating: 4.8,
-    featured: true,
-    tags: ['Mindfulness', 'Stress management', 'Self-care'],
-    link: '#',
-    downloadable: false
-  },
-  {
-    id: '8',
-    title: 'Financial Literacy Basics',
-    description: 'Money management skills they don\'t teach in school. Budgeting, banking, credit, avoiding scams, and planning for your future. Practical tips you can use right now.',
-    category: 'life-skills',
-    type: 'video',
-    duration: '6 videos',
-    traumaInformed: false,
-    ageGroup: '16-24',
-    views: 2045,
-    rating: 4.8,
-    featured: true,
-    tags: ['Money management', 'Budgeting', 'Financial planning'],
-    link: '#',
-    downloadable: false
-  },
-  {
-    id: '9',
-    title: 'Healing from Trauma: A Youth\'s Journey',
-    description: 'Created with trauma specialists, this compassionate guide helps you understand trauma\'s effects and find paths to healing. Includes resources for professional support and peer connection.',
-    category: 'trauma-support',
-    type: 'guide',
-    duration: '35 min read',
-    traumaInformed: true,
-    ageGroup: '14-21',
-    views: 1789,
-    rating: 4.9,
-    featured: true,
-    tags: ['Trauma recovery', 'Healing', 'Professional support'],
-    downloadable: true
-  },
-  {
-    id: '10',
-    title: 'College Application Roadmap',
-    description: 'Step-by-step guide to applying for college, including financial aid, scholarships, essays, and navigating the process as a first-generation student. You CAN do this.',
-    category: 'academic',
-    type: 'guide',
-    duration: '45 min read',
-    traumaInformed: false,
-    ageGroup: '16-18',
-    views: 1345,
-    rating: 4.7,
-    featured: false,
-    tags: ['College prep', 'Financial aid', 'First-generation'],
-    downloadable: true
-  },
-  {
-    id: '11',
-    title: 'Conflict Resolution Skills',
-    description: 'De-escalation techniques, communication strategies, and problem-solving approaches. Learn to handle conflicts without violence or aggression.',
-    category: 'life-skills',
-    type: 'video',
-    duration: '4 videos',
-    traumaInformed: true,
-    ageGroup: '14-21',
-    views: 987,
-    rating: 4.6,
-    featured: false,
-    tags: ['Conflict resolution', 'De-escalation', 'Communication'],
-    link: '#',
-    downloadable: false
-  },
-  {
-    id: '12',
-    title: 'Building Your Support Network',
-    description: 'You don\'t have to do this alone. Learn how to identify trustworthy people, ask for help, and create a support system that has your back.',
-    category: 'mental-health',
-    type: 'article',
-    duration: '15 min read',
-    traumaInformed: true,
-    ageGroup: '13-24',
-    views: 1456,
-    rating: 4.8,
-    featured: false,
-    tags: ['Support network', 'Asking for help', 'Community'],
-    downloadable: true
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
   }
-];
+);
 
-const categories = [
-  { id: 'all', name: 'All Resources', icon: <BookOpen className="w-5 h-5" /> },
-  { id: 'trauma-support', name: 'Trauma Support', icon: <Heart className="w-5 h-5" /> },
-  { id: 'mental-health', name: 'Mental Health', icon: <Brain className="w-5 h-5" /> },
-  { id: 'academic', name: 'Academic', icon: <GraduationCap className="w-5 h-5" /> },
-  { id: 'life-skills', name: 'Life Skills', icon: <Users className="w-5 h-5" /> },
-  { id: 'legal', name: 'Legal Rights', icon: <Shield className="w-5 h-5" /> },
-];
+// ─── Connect with a Mentor Modal ──────────────────────────────────────────────
 
-const typeIcons = {
-  video: <Video className="w-5 h-5" />,
-  article: <FileText className="w-5 h-5" />,
-  worksheet: <FileText className="w-5 h-5" />,
-  podcast: <Headphones className="w-5 h-5" />,
-  guide: <BookOpen className="w-5 h-5" />
-};
-
-// --- Connect with a Mentor Modal ---
 interface ConnectFormData { firstName: string; lastName: string; reason: string; phone: string; email: string; }
 interface ConnectErrors { firstName?: string; lastName?: string; reason?: string; phone?: string; email?: string; }
 
@@ -239,10 +40,10 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
   const validate = () => {
     const e: ConnectErrors = {};
     if (!form.firstName.trim()) e.firstName = 'This field is required';
-    if (!form.lastName.trim()) e.lastName = 'This field is required';
-    if (!form.reason.trim()) e.reason = 'This field is required';
-    if (!form.phone.trim()) e.phone = 'This field is required';
-    if (!form.email.trim()) e.email = 'This field is required';
+    if (!form.lastName.trim())  e.lastName  = 'This field is required';
+    if (!form.reason.trim())    e.reason    = 'This field is required';
+    if (!form.phone.trim())     e.phone     = 'This field is required';
+    if (!form.email.trim())     e.email     = 'This field is required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Please enter a valid email address';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -273,10 +74,10 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
         className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#080b12]/90 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}>
         {submitted ? (
-            <div className="text-center py-8">
+          <div className="text-center py-8">
             <div className="text-5xl mb-4">✅</div>
             <h3 className="text-white text-xl font-bold mb-4">Your request has been submitted! We&apos;ll connect you with a mentor soon.</h3>
-            <Button type="button" onClick={onClose} variant="gold" className="px-8 py-3">Close</Button>
+            <button type="button" onClick={onClose} className="px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-xl hover:opacity-90 transition-all">Close</button>
           </div>
         ) : (
           <>
@@ -286,11 +87,11 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div><input type="text" placeholder="First Name" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className={inputClass} />{errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}</div>
-              <div><input type="text" placeholder="Last Name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className={inputClass} />{errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}</div>
+              <div><input type="text" placeholder="Last Name"  value={form.lastName}  onChange={(e) => setForm({ ...form, lastName:  e.target.value })} className={inputClass} />{errors.lastName  && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}</div>
               <div><textarea placeholder="Tell us why you're looking for a mentor..." rows={4} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={inputClass} />{errors.reason && <p className="text-red-400 text-sm mt-1">{errors.reason}</p>}</div>
-              <div><input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
+              <div><input type="tel"   placeholder="Phone Number"  value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
               <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
-              <Button type="submit" variant="gold" className="w-fit py-3 mt-2">Submit</Button>
+              <button type="submit" className="w-fit py-3 px-6 bg-[#FFD700] text-black font-semibold rounded-xl hover:opacity-90 transition-all mt-2">Submit</button>
             </form>
           </>
         )}
@@ -299,26 +100,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-const AtmosphericLightsLoader = dynamic(
-  () => import('@/components/ui/AtmosphericLights'),
-  {
-    ssr: false,
-    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
-  }
-);
-
-// --- Crisis Resources Modal ---
-const crisisResources = [
-  { emoji: '🆘', name: 'National Suicide Prevention Lifeline', contact: 'Call or Text: 988', hours: 'Available 24/7', tel: '988' },
-  { emoji: '📞', name: 'Crisis Text Line', contact: 'Text HOME to 741741', hours: 'Available 24/7', tel: null },
-  { emoji: '🚨', name: 'National Domestic Violence Hotline', contact: '1-800-799-7233 | Text START to 88788', hours: 'Available 24/7', tel: '18007997233' },
-  { emoji: '🧠', name: 'SAMHSA National Helpline (Mental Health & Substance Use)', contact: '1-800-662-4357', hours: 'Free, confidential, 24/7', tel: '18006624357' },
-  { emoji: '👶', name: 'Childhelp National Child Abuse Hotline', contact: '1-800-422-4453', hours: 'Available 24/7', tel: '18004224453' },
-  { emoji: '🏠', name: 'National Alliance on Mental Illness (NAMI) Helpline', contact: '1-800-950-6264', hours: 'Mon–Fri, 10am–10pm ET', tel: '18009506264' },
-  { emoji: '❤️', name: 'Trevor Project (LGBTQ+ Youth)', contact: '1-866-488-7386 | Text START to 678-678', hours: 'Available 24/7', tel: '18664887386' },
-  { emoji: '🍽️', name: 'National Eating Disorder Helpline', contact: '1-800-931-2237', hours: 'Mon–Thu 9am–9pm, Fri 9am–5pm ET', tel: '18009312237' },
-  { emoji: '🚔', name: 'National Human Trafficking Hotline', contact: '1-888-373-7888 | Text HELP to 233733', hours: 'Available 24/7', tel: '18883737888' },
-];
+// ─── Crisis Resources Modal ───────────────────────────────────────────────────
 
 function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
   return (
@@ -340,9 +122,9 @@ function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
                 <div>
                   <h4 className="text-white font-semibold mb-1">{r.name}</h4>
                   {r.tel ? (
-                    <a href={`tel:${r.tel}`} className="text-gold-400 hover:text-gold-300 text-sm font-medium transition-colors">{r.contact}</a>
+                    <a href={`tel:${r.tel}`} className="text-[#FFD700] hover:opacity-80 text-sm font-medium transition-colors">{r.contact}</a>
                   ) : (
-                    <p className="text-gold-400 text-sm font-medium">{r.contact}</p>
+                    <p className="text-[#FFD700] text-sm font-medium">{r.contact}</p>
                   )}
                   <p className="text-white/60 text-xs mt-1">{r.hours}</p>
                 </div>
@@ -355,183 +137,31 @@ function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Master carousel data — 12 resources
-const carouselItems = [
-  {
-    id: 1,
-    title: 'Understanding Your Emotions',
-    category: 'Trauma Support',
-    description: 'Practical tools for emotional regulation and resilience designed for youth facing systemic challenges.',
-    icon: <Heart className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.8★',
-    views: '1,247 views',
-    url: '/resources/1',
-  },
-  {
-    id: 2,
-    title: 'From Streets to Success',
-    category: 'Inspiration',
-    description: 'Real transformation stories from people who walked your path and found their way forward.',
-    icon: <Video className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.9★',
-    views: '3,420 views',
-    url: '/resources/2',
-  },
-  {
-    id: 3,
-    title: 'Building Healthy Relationships',
-    category: 'Life Skills',
-    description: 'Navigate trust, boundaries, and authentic communication with lasting confidence.',
-    icon: <Users className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.7★',
-    views: '892 views',
-    url: '/resources/3',
-  },
-  {
-    id: 4,
-    title: 'Know Your Legal Rights',
-    category: 'Legal Guide',
-    description: 'A youth-focused guide to protecting yourself when interacting with law enforcement and the justice system.',
-    icon: <Shield className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.9★',
-    views: '2,156 views',
-    url: '/resources/4',
-  },
-  {
-    id: 5,
-    title: 'Study Skills That Work',
-    category: 'Academic',
-    description: 'Evidence-based strategies for improving grades, focus, and academic self-confidence.',
-    icon: <BookOpen className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.6★',
-    views: '1,634 views',
-    url: '/resources/5',
-  },
-  {
-    id: 6,
-    title: 'Mindfulness for Tough Times',
-    category: 'Mental Health',
-    description: 'Breathing exercises and guided meditation practices that work when life feels overwhelming.',
-    icon: <Brain className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.8★',
-    views: '2,891 views',
-    url: '/resources/6',
-  },
-  {
-    id: 7,
-    title: 'Financial Literacy Basics',
-    category: 'Life Skills',
-    description: "Money management, budgeting, and credit — the skills they don't teach in school.",
-    icon: <Star className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.8★',
-    views: '2,045 views',
-    url: '/resources/7',
-  },
-  {
-    id: 8,
-    title: 'Healing from Trauma',
-    category: 'Trauma Support',
-    description: 'A compassionate, specialist-informed guide to understanding and recovering from trauma.',
-    icon: <Clock className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.9★',
-    views: '1,789 views',
-    url: '/resources/8',
-  },
-  {
-    id: 9,
-    title: 'College Application Roadmap',
-    category: 'Academic',
-    description: 'Step-by-step guidance through applications, financial aid, and scholarships — especially for first-generation students.',
-    icon: <GraduationCap className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.7★',
-    views: '1,345 views',
-    url: '/resources/9',
-  },
-  {
-    id: 10,
-    title: 'Conflict Resolution Skills',
-    category: 'Life Skills',
-    description: 'De-escalation techniques and communication strategies to handle conflict without violence or aggression.',
-    icon: <Users className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.6★',
-    views: '987 views',
-    url: '/resources/10',
-  },
-  {
-    id: 11,
-    title: 'Building Your Support Network',
-    category: 'Mental Health',
-    description: "You don't have to do this alone. Learn how to identify trustworthy people and create a community that has your back.",
-    icon: <Heart className="w-9 h-9" />,
-    theme: 'amethyst' as const,
-    rating: '4.8★',
-    views: '1,456 views',
-    url: '/resources/11',
-  },
-  {
-    id: 12,
-    title: 'Career Pathways in Providence',
-    category: 'Career',
-    description: 'Local trade programs, apprenticeships, and employer partnerships that open doors without requiring a four-year degree.',
-    icon: <Star className="w-9 h-9" />,
-    theme: 'jade' as const,
-    rating: '4.7★',
-    views: '1,102 views',
-    url: '/resources/12',
-  },
-];
+// ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function ResourceLibrary() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showCrisisModal, setShowCrisisModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
   const toggleFilter = (filter: string) => {
-    setActiveFilters(prev => 
-      prev.includes(filter) 
-        ? prev.filter(f => f !== filter)
-        : [...prev, filter]
+    setActiveFilters(prev =>
+      prev.includes(filter) ? prev.filter(f => f !== filter) : [...prev, filter]
     );
   };
 
-  // Filter logic for legacy resource cards
-  const filteredResources = resources.filter(resource => {
-    const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
-    const matchesSearch = searchQuery === '' || 
-      resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesFilters = activeFilters.length === 0 || activeFilters.includes(resource.category);
-    return matchesCategory && matchesSearch && matchesFilters;
-  });
-
-  // Filter logic for carousel items — searches title, description, and category
   const filteredCarouselItems = carouselItems.filter(item => {
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilters = activeFilters.length === 0 || 
+    const matchesFilters = activeFilters.length === 0 ||
       activeFilters.some(filter => item.category.toLowerCase().includes(filter.toLowerCase()));
     return matchesSearch && matchesFilters;
   });
 
   const activeResourceCount = filteredCarouselItems.length;
-
-  const featuredResources = filteredResources.filter(r => r.featured);
-  const regularResources = filteredResources.filter(r => !r.featured);
 
   return (
     <section className="py-20 px-4">
@@ -550,7 +180,7 @@ export default function ResourceLibrary() {
             Trauma-informed resources designed to support your journey. All content created with care, understanding, and respect for your experiences.
           </p>
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 text-gray-100 rounded-full text-sm font-medium">
-            <Heart className="w-4 h-4 fill-gold-400 text-gold-400" />
+            <Heart className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
             Many resources are trauma-informed and culturally responsive
           </div>
         </motion.div>
@@ -558,27 +188,24 @@ export default function ResourceLibrary() {
         {/* 3D Saturn Carousel */}
         <SaturnCarousel items={filteredCarouselItems} />
 
-        {/* Command Platform — Resource Control Station */}
+        {/* Command Platform */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-12 bg-[#080b12]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl"
         >
-          {/* Platform Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div>
               <h3 className="text-2xl font-bold text-white mb-1">Resource Command Platform</h3>
               <p className="text-sm text-gray-400">Search, filter, and navigate our ecosystem</p>
             </div>
             <div className="flex items-center gap-3">
-              {/* Drag hint badge — relocated from carousel */}
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
                 <ArrowLeft className="w-3 h-3" />
                 <span>Drag to explore</span>
                 <ArrowRight className="w-3 h-3" />
               </div>
-              {/* Live Resource Counter */}
               <div className="flex items-center gap-2 px-4 py-2 bg-[#4B306A]/40 border border-[#4B306A]/60 rounded-full">
                 <div className="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse" />
                 <span className="text-sm font-medium text-gray-200">
@@ -588,7 +215,7 @@ export default function ResourceLibrary() {
             </div>
           </div>
 
-          {/* Search Console */}
+          {/* Search */}
           <div className="relative mb-6">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="w-5 h-5 text-gray-400" />
@@ -602,13 +229,13 @@ export default function ResourceLibrary() {
             />
           </div>
 
-          {/* Genre Toggle Matrices */}
+          {/* Filter toggles */}
           <div className="flex flex-wrap gap-3 mb-6">
             {[
-              { id: 'trauma-support', label: 'Trauma Support', color: '#4B306A' },
-              { id: 'life-skills', label: 'Life Skills', color: '#01514C' },
-              { id: 'academic', label: 'Academic', color: '#4B306A' },
-              { id: 'legal', label: 'Legal Guidance', color: '#01514C' },
+              { id: 'trauma-support', label: 'Trauma Support' },
+              { id: 'life-skills',    label: 'Life Skills'    },
+              { id: 'academic',       label: 'Academic'       },
+              { id: 'legal',          label: 'Legal Guidance' },
             ].map((filter) => {
               const isActive = activeFilters.includes(filter.id);
               return (
@@ -637,7 +264,7 @@ export default function ResourceLibrary() {
             )}
           </div>
 
-          {/* Support Action Row */}
+          {/* CTA row */}
           <div className="flex flex-wrap justify-center gap-4 pt-6 border-t border-white/10">
             <button
               type="button"
@@ -668,6 +295,8 @@ export default function ResourceLibrary() {
   );
 }
 
+// ─── ResourceCard (available for future list-view use) ────────────────────────
+
 function ResourceCard({ resource, index, featured = false }: { resource: Resource; index: number; featured?: boolean }) {
   return (
     <motion.div
@@ -675,27 +304,27 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all group cursor-pointer ${featured ? 'ring-2 ring-gold-400' : ''}`}
+      className={`bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all group cursor-pointer ${featured ? 'ring-2 ring-[#FFD700]' : ''}`}
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-black">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD700] to-[#C4965A] flex items-center justify-center text-black">
             {typeIcons[resource.type]}
           </div>
           <div>
             <div className="text-xs font-semibold text-gray-300 uppercase tracking-wide">{resource.type}</div>
             {resource.traumaInformed && (
-              <div className="flex items-center gap-1 text-xs text-gold-300 font-medium">
-                <Heart className="w-3 h-3 fill-gold-400 text-gold-400" />
+              <div className="flex items-center gap-1 text-xs text-[#FFD700] font-medium">
+                <Heart className="w-3 h-3 fill-[#FFD700] text-[#FFD700]" />
                 Trauma-Informed
               </div>
             )}
           </div>
         </div>
-        {featured && <Star className="w-5 h-5 text-gold-400 fill-gold-400" />}
+        {featured && <Star className="w-5 h-5 text-[#FFD700] fill-[#FFD700]" />}
       </div>
 
-      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-gold-300 transition-colors">{resource.title}</h4>
+      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#FFD700] transition-colors">{resource.title}</h4>
       <p className="text-sm text-gray-300 mb-4 line-clamp-3">{resource.description}</p>
 
       <div className="flex flex-wrap gap-2 mb-4">
@@ -706,17 +335,19 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
 
       <div className="flex items-center gap-4 text-sm text-gray-300 mb-4 pb-4 border-b border-white/20">
         {resource.duration && (
-          <div className="flex items-center gap-1"><Clock className="w-4 h-4 text-gold-400" />{resource.duration}</div>
+          <div className="flex items-center gap-1"><Clock className="w-4 h-4 text-[#FFD700]" />{resource.duration}</div>
         )}
-        <div className="flex items-center gap-1"><Eye className="w-4 h-4 text-gold-400" />{resource.views.toLocaleString()}</div>
-        <div className="flex items-center gap-1"><Star className="w-4 h-4 text-gold-400 fill-gold-400" />{resource.rating}</div>
+        <div className="flex items-center gap-1"><Eye className="w-4 h-4 text-[#FFD700]" />{resource.views.toLocaleString()}</div>
+        <div className="flex items-center gap-1"><Star className="w-4 h-4 text-[#FFD700] fill-[#FFD700]" />{resource.rating}</div>
       </div>
 
-      <div className="mb-4">
+      <div>
         <span className="text-xs text-gray-300">Age Group:</span>
         <span className="ml-2 text-sm font-medium text-gray-200">{resource.ageGroup}</span>
       </div>
-
     </motion.div>
   );
 }
+
+// Keep ResourceCard + resources reachable so tree-shaking doesn't remove them if a list view is added
+export { ResourceCard, resources };

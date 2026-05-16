@@ -20,7 +20,8 @@ const STATUS_COLORS: Record<string, string> = {
   completed: 'bg-green-500/20 text-green-300',
   refunded: 'bg-yellow-500/20 text-yellow-300',
   failed: 'bg-red-500/20 text-red-300',
-  pending: 'bg-blue-500/20 text-blue-300',
+  // Cape Verde palette: Jade background, Gold text for visibility
+  pending: 'bg-[#01514C]/20 text-[#FFD700]',
 };
 
 function fmt(n: number) {

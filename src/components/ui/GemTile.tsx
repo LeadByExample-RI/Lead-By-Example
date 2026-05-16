@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { ResourceItem } from '@/data/siteContent';
 
-// ─── Ring sizing (shared with SaturnCarousel for tile placement) ──────────────
+// ─── Ring sizing constants ─────────────────────────────────────────────────────
 
 export const TILE_W = 240;
 export const TILE_H = 350;
@@ -21,7 +21,7 @@ type GemTokens = {
   tagBg: string;
   tagBorder: string;
   edgeShimmer: string;
-  extrusion: [string, string, string, string]; // -2px → -4px → -6px → -8px (near→deep)
+  extrusion: [string, string, string, string];
 };
 
 const GEM: Record<GemTheme, GemTokens> = {
@@ -34,10 +34,10 @@ const GEM: Record<GemTheme, GemTokens> = {
     tagBorder:   'rgba(196, 150, 90, 0.42)',
     edgeShimmer: 'rgba(196, 150, 90, 0.55)',
     extrusion: [
-      'rgba(58, 37, 84, 1.00)',  // -2px: near edge — brightest face
-      'rgba(45, 27, 65, 1.00)',  // -4px: mid depth
-      'rgba(30, 17, 46, 1.00)',  // -6px: deep
-      'rgba(16,  8, 28, 1.00)',  // -8px: back face — darkest
+      'rgba(58, 37, 84, 1.00)',
+      'rgba(45, 27, 65, 1.00)',
+      'rgba(30, 17, 46, 1.00)',
+      'rgba(16,  8, 28, 1.00)',
     ],
   },
   jade: {
@@ -49,10 +49,10 @@ const GEM: Record<GemTheme, GemTokens> = {
     tagBorder:   'rgba(255, 215, 0, 0.42)',
     edgeShimmer: 'rgba(255, 215, 0, 0.50)',
     extrusion: [
-      'rgba(1,  62, 58, 1.00)',  // -2px: near edge — brightest face
-      'rgba(1,  48, 45, 1.00)',  // -4px: mid depth
-      'rgba(1,  32, 30, 1.00)',  // -6px: deep
-      'rgba(0,  16, 15, 1.00)',  // -8px: back face — darkest
+      'rgba(1,  62, 58, 1.00)',
+      'rgba(1,  48, 45, 1.00)',
+      'rgba(1,  32, 30, 1.00)',
+      'rgba(0,  16, 15, 1.00)',
     ],
   },
 };
@@ -65,7 +65,6 @@ export function GemTile({ item }: { item: ResourceItem }) {
   const g = GEM[item.theme];
 
   return (
-    // Volumetric wrapper — preserve-3d lets extrusion layers sit behind the face
     <div
       style={{
         position: 'relative',
@@ -74,7 +73,6 @@ export function GemTile({ item }: { item: ResourceItem }) {
         transformStyle: 'preserve-3d',
       }}
     >
-      {/* ── Extrusion depth layers (crystal monolith thickness) ── */}
       {EXTRUSION_DEPTHS.map((depth, i) => (
         <div
           key={depth}
@@ -90,7 +88,6 @@ export function GemTile({ item }: { item: ResourceItem }) {
         />
       ))}
 
-      {/* ── Main card face (Z = 0, GPU-promoted) ── */}
       <div
         style={{
           position: 'absolute',
@@ -113,13 +110,10 @@ export function GemTile({ item }: { item: ResourceItem }) {
           willChange: 'transform',
         }}
       >
-        {/* Diagonal facet overlay */}
         <div
           aria-hidden="true"
           style={{ position: 'absolute', inset: 0, background: g.facet, zIndex: 1, pointerEvents: 'none' }}
         />
-
-        {/* Top-edge shimmer */}
         <div
           aria-hidden="true"
           style={{
@@ -128,8 +122,6 @@ export function GemTile({ item }: { item: ResourceItem }) {
             zIndex: 2, pointerEvents: 'none',
           }}
         />
-
-        {/* Left-edge catch-light */}
         <div
           aria-hidden="true"
           style={{
@@ -139,7 +131,6 @@ export function GemTile({ item }: { item: ResourceItem }) {
           }}
         />
 
-        {/* Card content */}
         <div
           style={{
             position: 'relative', zIndex: 3, height: '100%',
@@ -194,7 +185,7 @@ export function GemTile({ item }: { item: ResourceItem }) {
               transition: 'opacity 0.15s ease',
             }}
           >
-            Explore Resource →
+            Explore Resource &rarr;
           </Link>
         </div>
       </div>
