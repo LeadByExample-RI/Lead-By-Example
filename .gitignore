@@ -185,3 +185,5 @@ stripe_install/
 
 # Vercel environment files (contains secrets)
 .env.vercel
+
+Lead-By-Example/
