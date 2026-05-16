@@ -107,7 +107,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
         {/* ── Glassmorphic control dashboard — top right ── */}
         <div
-          className="absolute top-4 right-4 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl"
+          className="absolute bottom-6 right-8 sm:right-10 md:right-14 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl"
           role="group"
           aria-label="Video controls"
           style={{
