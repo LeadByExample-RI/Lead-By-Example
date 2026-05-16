@@ -590,7 +590,7 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
   }
 
   return (
-    <Elements stripe={stripePromise} options={{ appearance }}>
+    <Elements stripe={stripePromise} options={{ appearance, mode: 'payment', currency: 'usd' }}>
       <DonationFormContent onClose={onClose} initialAmount={initialAmount} />
     </Elements>
   );
