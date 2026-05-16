@@ -86,7 +86,7 @@ export function Navbar() {
     ];
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
 
       // Detect active section
       for (const section of sections) {
@@ -167,7 +167,7 @@ export function Navbar() {
 
                     {/* Content wrapper */}
                     <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                      <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                      <IconComponent className={`h-6 w-6 transition-colors duration-300 group-hover:text-[#FFD700] ${isScrolled ? 'text-[#FFD700]' : ''}`} />
                     </span>
 
                   {/* Floating particle effects (5 particles in circle pattern) */}
@@ -292,8 +292,9 @@ export function Navbar() {
                       />
 
                       {/* Link text */}
-                      <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                        <IconComponent className="h-5 w-5 transition-colors duration-200 group-hover:text-[#FFD700]" />
+                      <span className="relative z-10 flex items-center gap-3 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
+                        <IconComponent className={`h-6 w-6 shrink-0 transition-colors duration-300 group-hover:text-[#FFD700] ${isScrolled ? 'text-[#FFD700]' : ''}`} />
+                        {link.label}
                       </span>
 
                     {/* Floating particle effects (3 particles for mobile) */}
