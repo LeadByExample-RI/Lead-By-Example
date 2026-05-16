@@ -4,11 +4,11 @@ import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
+import { Events } from '@/components/sections/Events';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
-import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
@@ -134,14 +134,14 @@ export default function Home() {
           <Mission />
         </section>
 
+        {/* Events Section - Annual Community Cookouts */}
+        <section id="events" data-section-theme="dark">
+          <Events />
+        </section>
+
         {/* Community in motion photo gallery */}
         <section id="community" aria-label="Community in motion photo gallery" data-section-theme="dark">
           <CommunityMosaic />
-        </section>
-
-        {/* Testimonials Section - Success Stories Carousel */}
-        <section data-section-theme="dark">
-          <Testimonials />
         </section>
 
         {/* Mentor Matching - Connect with Mentors */}

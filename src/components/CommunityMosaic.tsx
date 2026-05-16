@@ -199,7 +199,7 @@ function GalleryCard({ photo, index, isSelected, onSelect }: GalleryCardProps) {
         onClick={onSelect}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative w-full h-full overflow-hidden rounded-xl cursor-pointer"
+        className="relative w-full h-full overflow-hidden rounded-xl cursor-pointer photo-wall-card"
         animate={{ opacity: isSelected ? 0 : 1 }}
         transition={{
           opacity: { duration: 0.15 },

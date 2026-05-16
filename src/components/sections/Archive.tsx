@@ -91,7 +91,7 @@ function VolunteerModal({ onClose }: { onClose: () => void }) {
               <div><input type="text" placeholder="Last Name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className={inputClass} />{errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}</div>
               <div><input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
               <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
-              <button type="submit" className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
+              <button type="submit" className="w-fit py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
             </form>
           </>
         )}

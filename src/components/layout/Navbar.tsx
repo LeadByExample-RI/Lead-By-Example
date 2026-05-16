@@ -9,7 +9,6 @@ import {
   Target,
   FileText,
   TrendingUp,
-  Award,
   Handshake,
   Mail,
   Calendar,
@@ -38,7 +37,6 @@ export function Navbar() {
     { href: '/contact', label: 'Contact', icon: MessageSquare },
     { href: '/#mission', label: 'Mission', icon: Target },
     { href: '/#journey', label: 'Transformation', icon: TrendingUp },
-    { href: '/#success-stories', label: 'Success Stories', icon: Award },
     { href: '/#partners', label: 'Partners', icon: Handshake },
   ];
 
@@ -95,7 +93,7 @@ export function Navbar() {
 
     // Separate passive scroll listener only for active-link highlighting
     const activeSections = [
-      '#home', '#mission', '#success-stories', '#impact', '#partners', '#footer',
+      '#home', '#mission', '#journey', '#partners', '#footer',
     ];
     const handleScroll = () => {
       for (const id of activeSections) {

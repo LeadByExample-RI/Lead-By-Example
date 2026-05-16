@@ -133,7 +133,7 @@ export function Partners() {
 
         {/* Partner Organizations */}
         <motion.div
-          className="mb-16 grid gap-8 lg:grid-cols-2"
+          className="mb-16 grid gap-8 lg:grid-cols-2 auto-rows-fr"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, staggerChildren: 0.1 }}
@@ -145,8 +145,10 @@ export function Partners() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group"
             >
-              <GlassCard className="h-full p-8" variant="dark">
+              <GlassCard className="h-full p-8 group-hover:border-[#FFD700]/30 group-hover:shadow-2xl group-hover:shadow-[#FFD700]/10 transition-all duration-500" variant="dark">
                 <div className="mb-6 flex items-start gap-6">
                   <Image
                     src={partner.logo}
@@ -193,11 +195,11 @@ export function Partners() {
 
                 <GlassButton
                   variant="outline"
-                  className="w-full"
+                  className="w-full group-hover:bg-[#FFD700] group-hover:text-black group-hover:border-[#FFD700] transition-all duration-300"
                   onClick={() => window.open(partner.website, '_blank')}
                 >
                   Learn More
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="h-4 w-4 group-hover:text-black transition-colors" />
                 </GlassButton>
               </GlassCard>
             </motion.div>
@@ -206,7 +208,7 @@ export function Partners() {
 
         {/* Partnership Benefits */}
         <motion.div
-          className="mb-16 grid gap-6 md:grid-cols-3"
+          className="mb-16 grid gap-6 md:grid-cols-3 auto-rows-fr"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, staggerChildren: 0.1 }}
@@ -218,9 +220,11 @@ export function Partners() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -6, transition: { duration: 0.3 } }}
+              className="group"
             >
-              <GlassCard className="h-full p-6 text-center" variant="default">
-                <benefit.icon className="mx-auto mb-4 h-12 w-12 text-accent-400" />
+              <GlassCard className="h-full p-8 text-center group-hover:border-[#FFD700]/30 group-hover:shadow-xl group-hover:shadow-[#FFD700]/5 transition-all duration-500" variant="default">
+                <benefit.icon className="mx-auto mb-4 h-12 w-12 text-[#FFD700] group-hover:scale-110 transition-transform duration-300" />
                 <Heading level={4} className="mb-3 text-white">{benefit.title}</Heading>
                 <Text size="sm" className="text-white/70">{benefit.description}</Text>
               </GlassCard>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
 import { motion, useAnimation } from 'framer-motion';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -16,6 +17,7 @@ interface ResourceItem {
   theme: GemTheme;
   rating: string;
   views: string;
+  url: string;
 }
 
 // ─── Ring Physics Constants ───────────────────────────────────────────────────
@@ -34,7 +36,7 @@ type GemTokens = {
   tagBg: string;
   tagBorder: string;
   edgeShimmer: string;
-  extrusion: [string, string, string]; // near → mid → deep face depths
+  extrusion: [string, string, string, string]; // -2px → -4px → -6px → -8px (near→deep)
 };
 
 const GEM: Record<GemTheme, GemTokens> = {
@@ -46,11 +48,12 @@ const GEM: Record<GemTheme, GemTokens> = {
     tagBg:       'rgba(75, 48, 106, 0.62)',
     tagBorder:   'rgba(196, 150, 90, 0.42)',
     edgeShimmer: 'rgba(196, 150, 90, 0.55)',
-    // Dark indigo extrusion: near edge is slightly warmer (catches ambient light)
+    // Solid amethyst (#4B306A) depth stack — near edge lighter, back face near-black
     extrusion: [
-      'rgba(38, 20, 68, 0.97)',   // -2px: near edge
-      'rgba(24, 12, 48, 0.98)',   // -4px: mid depth
-      'rgba(12,  5, 30, 0.99)',   // -6px: deep back face
+      'rgba(58, 37, 84, 1.00)',   // -2px: near edge — brightest face
+      'rgba(45, 27, 65, 1.00)',   // -4px: mid depth
+      'rgba(30, 17, 46, 1.00)',   // -6px: deep
+      'rgba(16,  8, 28, 1.00)',   // -8px: back face — darkest
     ],
   },
   jade: {
@@ -61,17 +64,18 @@ const GEM: Record<GemTheme, GemTokens> = {
     tagBg:       'rgba(1, 81, 76, 0.62)',
     tagBorder:   'rgba(255, 215, 0, 0.42)',
     edgeShimmer: 'rgba(255, 215, 0, 0.50)',
-    // Deep amber extrusion: near edge catches warm gold light
+    // Solid jade (#01514C) depth stack — near edge lighter, back face near-black
     extrusion: [
-      'rgba(80, 48, 8,  0.97)',   // -2px: near edge
-      'rgba(52, 30, 4,  0.98)',   // -4px: mid depth
-      'rgba(28, 14, 2,  0.99)',   // -6px: deep back face
+      'rgba(1,  62, 58, 1.00)',   // -2px: near edge — brightest face
+      'rgba(1,  48, 45, 1.00)',   // -4px: mid depth
+      'rgba(1,  32, 30, 1.00)',   // -6px: deep
+      'rgba(0,  16, 15, 1.00)',   // -8px: back face — darkest
     ],
   },
 };
 
 // Depth offsets in px — negative Z pushes behind the card face
-const EXTRUSION_DEPTHS = [2, 4, 6] as const;
+const EXTRUSION_DEPTHS = [2, 4, 6, 8] as const;
 
 // ─── GemTile Component ────────────────────────────────────────────────────────
 
@@ -190,6 +194,28 @@ function GemTile({ item }: { item: ResourceItem }) {
             <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)' }}>{item.views}</span>
             <span style={{ fontSize: '0.75rem', fontWeight: 600, color: g.accent }}>{item.rating}</span>
           </div>
+
+          <Link
+            href={item.url}
+            style={{
+              display: 'block',
+              marginTop: '0.85rem',
+              padding: '0.5rem 0',
+              textAlign: 'center',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: g.accent,
+              border: `1px solid ${g.tagBorder}`,
+              borderRadius: '9999px',
+              background: g.tagBg,
+              textDecoration: 'none',
+              transition: 'opacity 0.15s ease',
+            }}
+          >
+            Explore Resource →
+          </Link>
         </div>
       </div>
     </div>

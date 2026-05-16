@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   AlertTriangle,
@@ -10,6 +11,14 @@ import {
   Target,
 } from 'lucide-react';
 import React, { useState } from 'react';
+
+const AtmosphericLightsLoader = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
+  {
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
+  }
+);
 
 interface JourneyFormModalProps {
   heading: string;
@@ -53,7 +62,7 @@ function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalPr
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-md rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 z-[101]"
+        className="w-full max-w-md rounded-2xl border border-white/20 bg-[#080b12]/90 backdrop-blur-xl p-8 z-[101]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
@@ -195,7 +204,15 @@ const journeyStages: JourneyStage[] = [
       { label: 'First Contact with Justice', value: '76% teens' },
       { label: 'Need Positive Role Model', value: '89%' },
     ],
-    interventions: [],
+    interventions: [
+      'Street-level outreach and initial contact',
+      'Crisis intervention and same-day support',
+      'Trust-building through consistent presence',
+      'Connection to peer mentors with lived experience',
+      'Needs assessment — identifying barriers',
+      'Introduction to program resources and community',
+      'Safe space to be heard without judgment',
+    ],
   },
   {
     id: 3,
@@ -324,6 +341,8 @@ export default function EvolutionJourney() {
 
   return (
     <section className="relative overflow-hidden bg-[#4B306A] px-4 py-20">
+      {/* Ambient atmospheric lights */}
+      <AtmosphericLightsLoader />
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute left-10 top-20 h-64 w-64 rounded-full bg-verdean-500 blur-3xl" />
@@ -420,8 +439,8 @@ export default function EvolutionJourney() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-              className={`rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]}`}
+              transition={{ duration: 0.3 }}
+              className={`rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]} ${currentStage.id === 1 || currentStage.id === 2 ? 'translate-y-4 md:translate-y-4' : ''}`}
           >
             <div className="grid gap-12 md:grid-cols-2">
               {/* Left Column - Description */}

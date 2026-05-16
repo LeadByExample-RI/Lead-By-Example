@@ -68,6 +68,11 @@ interface MentorFormData {
   lastName: string;
   phone: string;
   email: string;
+  shortBio: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
 
 interface FieldErrors {
@@ -75,6 +80,11 @@ interface FieldErrors {
   lastName?: string;
   phone?: string;
   email?: string;
+  shortBio?: string;
+  streetAddress?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
 }
 
 function MentorFormModal({
@@ -95,6 +105,11 @@ function MentorFormModal({
     lastName: '',
     phone: '',
     email: '',
+    shortBio: '',
+    streetAddress: '',
+    city: '',
+    state: '',
+    zipCode: '',
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -109,6 +124,10 @@ function MentorFormModal({
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
+    if (!formData.streetAddress.trim()) newErrors.streetAddress = 'Street address is required';
+    if (!formData.city.trim()) newErrors.city = 'City is required';
+    if (!formData.state.trim()) newErrors.state = 'State is required';
+    if (!formData.zipCode.trim()) newErrors.zipCode = 'ZIP code is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -118,10 +137,22 @@ function MentorFormModal({
     if (!validate()) return;
     const body = [
       emailBodyIntro,
+      '',
+      '--- Personal Information ---',
       `First Name: ${formData.firstName}`,
       `Last Name: ${formData.lastName}`,
       `Phone: ${formData.phone}`,
       `Email: ${formData.email}`,
+      '',
+      '--- Mailing Address ---',
+      `Street: ${formData.streetAddress}`,
+      `City: ${formData.city}`,
+      `State: ${formData.state}`,
+      `ZIP: ${formData.zipCode}`,
+      '',
+      '--- Background ---',
+      `Short Bio / Why they want to help:`,
+      formData.shortBio || 'Not provided',
     ].join('%0A');
     const mailto = `mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${body}`;
     window.location.href = mailto;
@@ -172,33 +203,87 @@ function MentorFormModal({
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input type="text" placeholder="First Name" value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  className={inputClass} />
-                {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
+              {/* Personal Info Section */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <input type="text" placeholder="First Name *" value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    className={inputClass} />
+                  {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
+                </div>
+                <div>
+                  <input type="text" placeholder="Last Name *" value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    className={inputClass} />
+                  {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
+                </div>
               </div>
-              <div>
-                <input type="text" placeholder="Last Name" value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className={inputClass} />
-                {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <input type="tel" placeholder="Phone Number *" value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className={inputClass} />
+                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+                </div>
+                <div>
+                  <input type="email" placeholder="Email Address *" value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className={inputClass} />
+                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                </div>
               </div>
-              <div>
-                <input type="tel" placeholder="Phone Number" value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className={inputClass} />
-                {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+
+              {/* Mailing Address Section */}
+              <div className="pt-4 border-t border-white/10">
+                <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Mailing Address</h4>
+                <div className="space-y-3">
+                  <div>
+                    <input type="text" placeholder="Street Address *" value={formData.streetAddress}
+                      onChange={(e) => setFormData({ ...formData, streetAddress: e.target.value })}
+                      className={inputClass} />
+                    {errors.streetAddress && <p className="text-red-400 text-sm mt-1">{errors.streetAddress}</p>}
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="col-span-1">
+                      <input type="text" placeholder="City *" value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        className={inputClass} />
+                      {errors.city && <p className="text-red-400 text-sm mt-1">{errors.city}</p>}
+                    </div>
+                    <div>
+                      <input type="text" placeholder="State *" value={formData.state}
+                        onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                        className={inputClass} />
+                      {errors.state && <p className="text-red-400 text-sm mt-1">{errors.state}</p>}
+                    </div>
+                    <div>
+                      <input type="text" placeholder="ZIP *" value={formData.zipCode}
+                        onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
+                        className={inputClass} />
+                      {errors.zipCode && <p className="text-red-400 text-sm mt-1">{errors.zipCode}</p>}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <input type="email" placeholder="Email Address" value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={inputClass} />
-                {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+
+              {/* Short Bio Section */}
+              <div className="pt-4 border-t border-white/10">
+                <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">About You</h4>
+                <div>
+                  <textarea
+                    placeholder="Short Bio / Why you want to help... (Tell us about your background, skills, and why you want to make a difference)"
+                    rows={4}
+                    value={formData.shortBio}
+                    onChange={(e) => setFormData({ ...formData, shortBio: e.target.value })}
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
               </div>
+
               <button
                 type="submit"
-                className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2"
+                className="w-fit py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2"
               >
                 Submit
               </button>

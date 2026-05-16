@@ -15,18 +15,17 @@ interface OrbConfig {
   duration: number;
 }
 
-// Purple section → warm gold primary + deep green accent
-// Green section  → royal purple primary + gold accent
+// Use strict Cape Verde palette (Jade, Amethyst, Gold) for ambient spotlights
 const PALETTES: Record<AtmosphericTheme, [string, string, string]> = {
   purple: [
-    'rgba(255, 215, 0, 0.38)',
-    'rgba(1, 81, 76, 0.32)',
-    'rgba(255, 215, 0, 0.22)',
+    'rgba(75,48,106,0.36)', // Amethyst
+    'rgba(1,81,76,0.32)',   // Jade
+    'rgba(255,215,0,0.22)', // Gold
   ],
   green: [
-    'rgba(75, 48, 106, 0.38)',
-    'rgba(255, 215, 0, 0.30)',
-    'rgba(75, 48, 106, 0.20)',
+    'rgba(1,81,76,0.36)',   // Jade
+    'rgba(75,48,106,0.32)', // Amethyst
+    'rgba(255,215,0,0.22)', // Gold
   ],
 };
 
@@ -80,7 +79,8 @@ export function AtmosphericLights({ theme }: AtmosphericLightsProps) {
               height,
               borderRadius: '50%',
               background: `radial-gradient(circle, ${colors[i]} 0%, transparent 68%)`,
-              filter: 'blur(90px)',
+              filter: 'blur(120px)',
+              mixBlendMode: 'screen',
               willChange: 'transform',
               ...posStyles,
             }}

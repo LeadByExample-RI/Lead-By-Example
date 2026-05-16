@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
@@ -268,7 +269,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
       onClick={onClose}>
       <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#080b12]/90 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}>
         {submitted ? (
           <div className="text-center py-8">
@@ -288,7 +289,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
               <div><textarea placeholder="Tell us why you're looking for a mentor..." rows={4} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={inputClass} />{errors.reason && <p className="text-red-400 text-sm mt-1">{errors.reason}</p>}</div>
               <div><input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
               <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
-              <button type="submit" className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
+              <button type="submit" className="w-fit py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
             </form>
           </>
         )}
@@ -296,6 +297,14 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
     </motion.div>
   );
 }
+
+const AtmosphericLightsLoader = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
+  {
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
+  }
+);
 
 // --- Crisis Resources Modal ---
 const crisisResources = [
@@ -345,7 +354,7 @@ function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Master carousel data — 8 core resources
+// Master carousel data — 12 resources
 const carouselItems = [
   {
     id: 1,
@@ -356,6 +365,7 @@ const carouselItems = [
     theme: 'amethyst' as const,
     rating: '4.8★',
     views: '1,247 views',
+    url: '/resources/1',
   },
   {
     id: 2,
@@ -366,6 +376,7 @@ const carouselItems = [
     theme: 'jade' as const,
     rating: '4.9★',
     views: '3,420 views',
+    url: '/resources/2',
   },
   {
     id: 3,
@@ -376,6 +387,7 @@ const carouselItems = [
     theme: 'amethyst' as const,
     rating: '4.7★',
     views: '892 views',
+    url: '/resources/3',
   },
   {
     id: 4,
@@ -386,6 +398,7 @@ const carouselItems = [
     theme: 'jade' as const,
     rating: '4.9★',
     views: '2,156 views',
+    url: '/resources/4',
   },
   {
     id: 5,
@@ -396,6 +409,7 @@ const carouselItems = [
     theme: 'amethyst' as const,
     rating: '4.6★',
     views: '1,634 views',
+    url: '/resources/5',
   },
   {
     id: 6,
@@ -406,6 +420,7 @@ const carouselItems = [
     theme: 'jade' as const,
     rating: '4.8★',
     views: '2,891 views',
+    url: '/resources/6',
   },
   {
     id: 7,
@@ -416,6 +431,7 @@ const carouselItems = [
     theme: 'amethyst' as const,
     rating: '4.8★',
     views: '2,045 views',
+    url: '/resources/7',
   },
   {
     id: 8,
@@ -426,6 +442,51 @@ const carouselItems = [
     theme: 'jade' as const,
     rating: '4.9★',
     views: '1,789 views',
+    url: '/resources/8',
+  },
+  {
+    id: 9,
+    title: 'College Application Roadmap',
+    category: 'Academic',
+    description: 'Step-by-step guidance through applications, financial aid, and scholarships — especially for first-generation students.',
+    icon: <GraduationCap className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.7★',
+    views: '1,345 views',
+    url: '/resources/9',
+  },
+  {
+    id: 10,
+    title: 'Conflict Resolution Skills',
+    category: 'Life Skills',
+    description: 'De-escalation techniques and communication strategies to handle conflict without violence or aggression.',
+    icon: <Users className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.6★',
+    views: '987 views',
+    url: '/resources/10',
+  },
+  {
+    id: 11,
+    title: 'Building Your Support Network',
+    category: 'Mental Health',
+    description: "You don't have to do this alone. Learn how to identify trustworthy people and create a community that has your back.",
+    icon: <Heart className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.8★',
+    views: '1,456 views',
+    url: '/resources/11',
+  },
+  {
+    id: 12,
+    title: 'Career Pathways in Providence',
+    category: 'Career',
+    description: 'Local trade programs, apprenticeships, and employer partnerships that open doors without requiring a four-year degree.',
+    icon: <Star className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.7★',
+    views: '1,102 views',
+    url: '/resources/12',
   },
 ];
 
@@ -601,6 +662,7 @@ export default function ResourceLibrary() {
       <AnimatePresence>
         {showCrisisModal && <CrisisResourcesModal onClose={() => setShowCrisisModal(false)} />}
       </AnimatePresence>
+      <AtmosphericLightsLoader theme="green" />
     </section>
   );
 }

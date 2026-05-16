@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import {
   GlassCard,
   GlassButton,
   Heading,
   Text,
 } from '@/components/ui';
+
+const AtmosphericLightsLoader = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
+  {
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
+  }
+);
 import {
   currentFundraiser,
   keyStatistics,
@@ -258,6 +267,7 @@ export const Hero: React.FC<HeroProps> = ({
           background: 'radial-gradient(ellipse at 70% 30%, rgba(75, 48, 106, 0.15) 0%, transparent 50%)',
         }}
       />
+      <AtmosphericLightsLoader theme="purple" />
     </section>
   );
 };
