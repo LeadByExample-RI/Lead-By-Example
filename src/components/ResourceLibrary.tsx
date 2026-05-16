@@ -14,6 +14,7 @@ import {
   Clock,
   Eye
 } from 'lucide-react';
+import SaturnCarousel from './ui/SaturnCarousel';
 
 interface Resource {
   id: string;
@@ -375,72 +376,8 @@ export default function ResourceLibrary() {
           </div>
         </motion.div>
 
-        {/* Category Filter Pills */}
-        <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                type="button"
-                onClick={() => setSelectedCategory(category.id)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${
-                  selectedCategory === category.id
-                    ? 'bg-gold-400 text-black shadow-lg shadow-gold-400/30'
-                    : 'bg-white/10 border border-white/20 text-white hover:bg-white/20 shadow-md'
-                }`}
-              >
-                {category.icon}
-                {category.name}
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
-        {/* Featured Resources */}
-        {featuredResources.length > 0 && (
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <Star className="w-6 h-6 text-gold-400 fill-gold-400" />
-              Featured Resources
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredResources.map((resource, index) => (
-                <ResourceCard key={resource.id} resource={resource} index={index} featured />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* All Resources */}
-        {regularResources.length > 0 && (
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-6">
-              {selectedCategory === 'all' ? 'All Resources' : categories.find(c => c.id === selectedCategory)?.name}
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regularResources.map((resource, index) => (
-                <ResourceCard key={resource.id} resource={resource} index={index} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {filteredResources.length === 0 && (
-          <div className="text-center py-16">
-            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">No resources found</h3>
-            <p className="text-gray-300 mb-6">Try selecting a different category</p>
-            <button
-              type="button"
-              onClick={() => setSelectedCategory('all')}
-              className="px-6 py-3 bg-gold-400 text-black rounded-full font-semibold hover:bg-gold-300 transition-all"
-            >
-              View All
-            </button>
-          </div>
-        )}
+        {/* 3D Saturn Carousel */}
+        <SaturnCarousel />
 
         {/* Need More Support CTA */}
         <motion.div

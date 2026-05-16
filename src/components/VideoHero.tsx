@@ -73,6 +73,7 @@ interface VideoHeroProps {
 export default function VideoHero({ className }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [videoFailed, setVideoFailed] = useState(false);
   // Starts muted — browsers require muted for autoplay. First unmute click unlocks audio.
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.8);
@@ -145,18 +146,27 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
       {/* Inner: clips the video; slightly under full viewport so the page edge shows */}
       <div className="relative overflow-hidden h-[93vh] min-h-[500px]">
-        <video
-          ref={videoRef}
-          src="/video/roy-hero.mp4"
-          poster="/images/community/cookout-pavilion.png"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label="Annual Lead By Example All Sides of Town cookout community video"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {!videoFailed ? (
+          <video
+            ref={videoRef}
+            src="/video/roy-hero.mp4"
+            poster="/images/community/cookout-pavilion.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Annual Lead By Example All Sides of Town cookout community video"
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => setVideoFailed(true)}
+          />
+        ) : (
+          <img
+            src="/images/community/cookout-pavilion.png"
+            alt="Community cookout poster"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
 
         {/* Gradient overlay */}
         <div
