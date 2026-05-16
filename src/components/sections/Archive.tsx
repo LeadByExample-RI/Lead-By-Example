@@ -104,7 +104,7 @@ export function Archive() {
   const [showVolunteerModal, setShowVolunteerModal] = useState(false);
 
   return (
-    <section id="impact" className="py-20 bg-gradient-to-b from-neutral-900 to-neutral-800">
+    <section id="impact" className="py-20 bg-[#4B306A]">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"

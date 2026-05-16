@@ -30,7 +30,7 @@ export default function CookoutLegacy() {
   const pastEditions = cookoutEditions.filter((e) => e.edition < 6);
 
   return (
-    <section ref={sectionRef} className="bg-[#080b14]">
+    <section ref={sectionRef} className="bg-[#01514C]">
       {/* ── Section 1: History header + past-year carousel ── */}
       <div className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

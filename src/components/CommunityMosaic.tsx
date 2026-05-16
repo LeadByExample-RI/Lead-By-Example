@@ -50,7 +50,7 @@ export default function CommunityMosaic() {
     <>
       <motion.section
         ref={sectionRef}
-        className="relative bg-[#0a0a0a] pt-36 md:pt-40 pb-20"
+        className="relative bg-[#4B306A] pt-36 md:pt-40 pb-20"
       >
         {/* ── Section header ── */}
         <motion.div

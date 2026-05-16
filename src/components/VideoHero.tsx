@@ -141,7 +141,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
   return (
     // Outer: overflow-visible so the panel can escape below the section boundary
-    <section className={`relative overflow-visible bg-[#0a0a0a] ${className ?? ''}`}>
+    <section className={`relative overflow-visible bg-[#01514C] ${className ?? ''}`}>
 
       {/* Inner: clips the video; slightly under full viewport so the page edge shows */}
       <div className="relative overflow-hidden h-[93vh] min-h-[500px]">
