@@ -24,7 +24,9 @@
       "Bash(echo \"Dev server starting on PID $!\")",
       "PowerShell(Get-Process | Where-Object { $_.Name -match 'stripe' } -ErrorAction SilentlyContinue; Write-Host \"---\"; netstat -an | findstr \":3000\")",
       "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)",
-      "PowerShell(netstat -ano)"
+      "PowerShell(netstat -ano)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\src\\\\pages\" -Filter \"*.tsx\")",
+      "Bash(Select-Object Name)"
     ],
     "deny": [],
     "ask": []
