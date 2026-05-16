@@ -10,7 +10,12 @@ import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+
+const VideoHero = dynamic(() => import('@/components/VideoHero'), { ssr: false });
+const CommunityMosaic = dynamic(() => import('@/components/CommunityMosaic'));
+const CookoutLegacy = dynamic(() => import('@/components/CookoutLegacy'));
 
 export default function Home() {
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -113,6 +118,16 @@ export default function Home() {
           }}
         />
 
+        {/* Community cookout video */}
+        <section id="cookout-video" aria-label="Community cookout video">
+          <VideoHero />
+        </section>
+
+        {/* Community in motion photo gallery */}
+        <section id="community" aria-label="Community in motion photo gallery">
+          <CommunityMosaic />
+        </section>
+
         {/* Evolution Journey - Visual Storytelling of Transformation */}
         <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
           <EvolutionJourney />
@@ -136,6 +151,11 @@ export default function Home() {
 
         {/* Archive Section - Past Achievements */}
         <Archive />
+
+        {/* Cookout history and year six invitation */}
+        <section id="legacy" aria-label="Cookout history and year six invitation">
+          <CookoutLegacy />
+        </section>
 
         {/* Partners Section - Community Organizations */}
         <Partners />
