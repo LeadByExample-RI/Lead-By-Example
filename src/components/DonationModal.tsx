@@ -2,7 +2,7 @@
 
 import { DonationFormData, DonationModalProps } from '@/types/donation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, DollarSign, Heart, Info, Loader2, X, XCircle } from 'lucide-react';
@@ -188,15 +188,18 @@ function DonationFormContent({
         }
       }
 
-      // Confirm payment with Stripe
-      const { error, paymentIntent } = await stripe.confirmPayment({
-        elements,
-        clientSecret: secret,
-        confirmParams: {
-          return_url: `${window.location.origin}/donation-success`,
-          receipt_email: data.donorEmail,
+      // Confirm payment with Stripe using CardElement API
+      const cardElement = elements.getElement(CardElement);
+      if (!cardElement) throw new Error('Card element not found');
+      const { error, paymentIntent } = await stripe.confirmCardPayment(secret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            email: data.donorEmail,
+            name: data.isAnonymous ? 'Anonymous Donor' : data.donorName,
+          },
         },
-        redirect: 'if_required',
+        receipt_email: data.donorEmail,
       });
 
       if (error) {
@@ -482,7 +485,7 @@ function DonationFormContent({
                 >
                   <h3 className="font-semibold text-white">Payment Information</h3>
                   <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <PaymentElement />
+                    <CardElement options={{ style: { base: { color: 'white', fontFamily: 'system-ui', fontSize: '16px' } } }} />
                   </div>
                 </motion.div>
               )}
@@ -590,7 +593,7 @@ export default function DonationModal({ isOpen, onClose, initialAmount = 50 }: D
   }
 
   return (
-    <Elements stripe={stripePromise} options={{ appearance, mode: 'payment', currency: 'usd' }}>
+    <Elements stripe={stripePromise} options={{ appearance }}>
       <DonationFormContent onClose={onClose} initialAmount={initialAmount} />
     </Elements>
   );

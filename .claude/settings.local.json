@@ -19,7 +19,10 @@
       "Bash(curl -s http://localhost:3000/api/health)",
       "Bash(cat /tmp/nextdev.log 2>&1 | tail -30)",
       "Read(//tmp/**)",
-      "Bash(Remove-Item -Recurse -Force \"C:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\Lead-By-Example\")"
+      "Bash(Remove-Item -Recurse -Force \"C:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\Lead-By-Example\")",
+      "Bash(taskkill /PID 26012 /F)",
+      "PowerShell(Stop-Process -Id 26012 -Force -ErrorAction SilentlyContinue)",
+      "Bash(echo \"Dev server starting on PID $!\")"
     ],
     "deny": [],
     "ask": []
