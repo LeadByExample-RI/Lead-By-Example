@@ -35,9 +35,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "vercel-build": "prisma generate && next build",
-    "postinstall": "echo 'Setup complete! Run npm run dev to start development server.'",
+    "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
