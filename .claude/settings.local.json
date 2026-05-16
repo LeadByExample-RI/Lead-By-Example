@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm run build:*)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(node -e \"const crypto = require\\('crypto'\\); console.log\\(crypto.randomBytes\\(32\\).toString\\('base64'\\)\\);\")",
+      "Bash(stripe --version)",
+      "Bash(grep -v \"=$\")",
+      "Bash(winget install *)"
     ],
     "deny": [],
     "ask": []
