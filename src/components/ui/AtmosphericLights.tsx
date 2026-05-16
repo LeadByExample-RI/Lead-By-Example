@@ -78,7 +78,7 @@ export function AtmosphericLights({ theme }: AtmosphericLightsProps) {
               width,
               height,
               borderRadius: '50%',
-              background: `radial-gradient(circle, ${colors[i]} 0%, transparent 68%)`,
+              background: `radial-gradient(circle, ${colors[i % colors.length]} 0%, transparent 68%)`,
               filter: 'blur(120px)',
               mixBlendMode: 'screen',
               willChange: 'transform',
