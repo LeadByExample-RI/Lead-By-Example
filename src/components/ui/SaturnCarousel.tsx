@@ -126,7 +126,7 @@ type GemTokens = {
 
 const GEM: Record<GemTheme, GemTokens> = {
   amethyst: {
-    bg:          'rgba(75, 48, 106, 0.85)',
+    bg:          'rgba(75, 48, 106, 0.75)',
     glow:        'rgba(75, 48, 106, 0.40)',
     accent:      '#C4965A',
     facet:       'linear-gradient(135deg, rgba(196,150,90,0.14) 0%, transparent 48%, rgba(0,0,0,0.22) 100%)',
@@ -135,7 +135,7 @@ const GEM: Record<GemTheme, GemTokens> = {
     edgeShimmer: 'rgba(196, 150, 90, 0.55)',
   },
   jade: {
-    bg:          'rgba(1, 81, 76, 0.85)',
+    bg:          'rgba(1, 81, 76, 0.75)',
     glow:        'rgba(1, 81, 76, 0.40)',
     accent:      '#FFD700',
     facet:       'linear-gradient(135deg, rgba(255,215,0,0.10) 0%, transparent 48%, rgba(0,0,0,0.22) 100%)',
@@ -159,8 +159,8 @@ function GemTile({ item }: { item: ResourceItem }) {
         overflow: 'hidden',
         position: 'relative',
         background: g.bg,
-        backdropFilter: 'blur(18px)',
-        WebkitBackdropFilter: 'blur(18px)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
         borderTop: '1px solid rgba(255, 255, 255, 0.30)',
         borderLeft: '1px solid rgba(255, 255, 255, 0.20)',
         borderBottom: '1px solid rgba(0, 0, 0, 0.45)',
@@ -327,7 +327,7 @@ export default function SaturnCarousel() {
       </motion.div>
 
       {/* Visual Assistance Layout Guide Anchor */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400 pointer-events-none">
+      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400 pointer-events-none">
         <span>← Drag horizontally to explore →</span>
       </div>
     </div>

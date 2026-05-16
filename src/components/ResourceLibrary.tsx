@@ -12,7 +12,8 @@ import {
   Shield,
   Star,
   Clock,
-  Eye
+  Eye,
+  Search
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
 
@@ -346,10 +347,28 @@ export default function ResourceLibrary() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showCrisisModal, setShowCrisisModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+
+  const toggleFilter = (filter: string) => {
+    setActiveFilters(prev => 
+      prev.includes(filter) 
+        ? prev.filter(f => f !== filter)
+        : [...prev, filter]
+    );
+  };
 
   const filteredResources = resources.filter(resource => {
-    return selectedCategory === 'all' || resource.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
+    const matchesSearch = searchQuery === '' || 
+      resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesFilters = activeFilters.length === 0 || activeFilters.includes(resource.category);
+    return matchesCategory && matchesSearch && matchesFilters;
   });
+
+  const activeResourceCount = filteredResources.length;
 
   const featuredResources = filteredResources.filter(r => r.featured);
   const regularResources = filteredResources.filter(r => !r.featured);
@@ -379,29 +398,90 @@ export default function ResourceLibrary() {
         {/* 3D Saturn Carousel */}
         <SaturnCarousel />
 
-        {/* Need More Support CTA */}
+        {/* Command Platform — Resource Control Station */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-gold-400 to-gold-500 rounded-3xl p-8 md:p-12 text-center text-black"
+          className="mt-12 bg-[#080b12]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl"
         >
-          <h3 className="text-3xl font-bold mb-4 text-black">Need More Support?</h3>
-          <p className="text-xl mb-8 text-black/80">
-            These resources are here to help, but sometimes you need to talk to someone. We&apos;re here for you.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Platform Header */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-1">Resource Command Platform</h3>
+              <p className="text-sm text-gray-400">Search, filter, and navigate our ecosystem</p>
+            </div>
+            {/* Live Resource Counter */}
+            <div className="flex items-center gap-2 px-4 py-2 bg-[#4B306A]/40 border border-[#4B306A]/60 rounded-full">
+              <div className="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse" />
+              <span className="text-sm font-medium text-gray-200">
+                <span className="text-[#FFD700] font-bold">{activeResourceCount}</span> resources indexed
+              </span>
+            </div>
+          </div>
+
+          {/* Search Console */}
+          <div className="relative mb-6">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="w-5 h-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search resources by name, topic, or keyword..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-4 bg-[#01514C]/30 border border-[#01514C]/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all"
+            />
+          </div>
+
+          {/* Genre Toggle Matrices */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {[
+              { id: 'trauma-support', label: 'Trauma Support', color: '#4B306A' },
+              { id: 'life-skills', label: 'Life Skills', color: '#01514C' },
+              { id: 'academic', label: 'Academic', color: '#4B306A' },
+              { id: 'legal', label: 'Legal Guidance', color: '#01514C' },
+            ].map((filter) => {
+              const isActive = activeFilters.includes(filter.id);
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => toggleFilter(filter.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                    isActive
+                      ? 'bg-[#FFD700] text-black border-[#FFD700] shadow-lg shadow-[#FFD700]/20'
+                      : 'bg-[#080b12]/80 text-gray-300 border-white/20 hover:border-[#FFD700]/50 hover:text-white'
+                  }`}
+                >
+                  {filter.label}
+                </button>
+              );
+            })}
+            {activeFilters.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setActiveFilters([])}
+                className="px-4 py-2 rounded-full text-sm font-medium text-gray-400 hover:text-white transition-all"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
+
+          {/* Support Action Row */}
+          <div className="flex flex-wrap justify-center gap-4 pt-6 border-t border-white/10">
             <button
               type="button"
               onClick={() => setShowConnectModal(true)}
-              className="px-8 py-4 bg-black text-gold-400 rounded-full font-semibold hover:bg-gray-900 transition-all transform hover:scale-105"
+              className="px-6 py-3 bg-[#4B306A] text-white rounded-full font-semibold hover:bg-[#4B306A]/80 transition-all border border-[#4B306A]/50 hover:border-[#FFD700]/50"
             >
               Connect with a Mentor
             </button>
             <button
               type="button"
               onClick={() => setShowCrisisModal(true)}
-              className="px-8 py-4 bg-white/20 backdrop-blur-sm border-2 border-black text-black rounded-full font-semibold hover:bg-white/30 transition-all"
+              className="px-6 py-3 bg-[#01514C] text-white rounded-full font-semibold hover:bg-[#01514C]/80 transition-all border border-[#01514C]/50 hover:border-[#FFD700]/50"
             >
               Crisis Resources
             </button>
