@@ -1,5 +1,14 @@
+import dynamic from 'next/dynamic';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
+
+const AtmosphericLights = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
+  {
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
+  }
+);
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import type { CommunityPhoto } from '@/types/media';
 import { communityPhotos } from '@/data/mediaAssets';
@@ -50,11 +59,12 @@ export default function CommunityMosaic() {
     <>
       <motion.section
         ref={sectionRef}
-        className="relative bg-[#4B306A] pt-36 md:pt-40 pb-20"
+        className="relative overflow-hidden bg-[#4B306A] pt-36 md:pt-40 pb-20"
       >
+        <AtmosphericLights theme="green" />
         {/* ── Section header ── */}
         <motion.div
-          className="max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
+          className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
           variants={headerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -85,7 +95,7 @@ export default function CommunityMosaic() {
 
         {/* ── Masonry photo wall ── */}
         <motion.div
-          className="max-w-[90rem] mx-auto px-4 sm:px-8"
+          className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8"
           role="list"
           aria-label="Community photo gallery"
           variants={galleryVariants}
@@ -112,7 +122,7 @@ export default function CommunityMosaic() {
         </motion.div>
 
         {/* ── Standalone CTA banner (isolated from masonry) ── */}
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
+        <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
           <motion.div
             className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl"
             style={{

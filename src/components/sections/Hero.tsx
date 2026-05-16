@@ -1,5 +1,14 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+
+const AtmosphericLights = dynamic(
+  () => import('@/components/ui/AtmosphericLights'),
+  {
+    ssr: false,
+    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
+  }
+);
 import Image from 'next/image';
 import {
   GlassCard,
@@ -49,8 +58,9 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="home" className="min-h-screen section-padding">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="home" className="relative overflow-hidden min-h-screen section-padding">
+      <AtmosphericLights theme="purple" />
+      <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center"
           variants={containerVariants}
