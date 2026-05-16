@@ -48,6 +48,9 @@ lerna-debug.log*
 
 # Stripe keys and secrets - NEVER commit these!
 .env.stripe
+
+# IDE and local settings - may contain sensitive info
+.claude/
 .stripe/
 **/STRIPE_SECRET_KEY*
 **/STRIPE_WEBHOOK_SECRET*

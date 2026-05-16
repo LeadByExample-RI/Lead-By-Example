@@ -9,7 +9,6 @@
       "Bash(grep -v \"=$\")",
       "Bash(winget install *)",
       "Bash(npx prisma *)",
-      "Bash(DATABASE_URL=\"postgresql://neondb_owner:REDACTED@ep-dark-term-apolg57n.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma migrate dev --name init)",
       "Bash(stripe config *)",
       "Bash(stripe listen *)",
       "Bash(jobs -l)",
@@ -22,7 +21,9 @@
       "Bash(Remove-Item -Recurse -Force \"C:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\Lead-By-Example\")",
       "Bash(taskkill /PID 26012 /F)",
       "PowerShell(Stop-Process -Id 26012 -Force -ErrorAction SilentlyContinue)",
-      "Bash(echo \"Dev server starting on PID $!\")"
+      "Bash(echo \"Dev server starting on PID $!\")",
+      "PowerShell(Get-Process | Where-Object { $_.Name -match 'stripe' } -ErrorAction SilentlyContinue; Write-Host \"---\"; netstat -an | findstr \":3000\")",
+      "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)"
     ],
     "deny": [],
     "ask": []
