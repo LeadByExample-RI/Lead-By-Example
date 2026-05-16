@@ -7,7 +7,19 @@
       "Bash(node -e \"const crypto = require\\('crypto'\\); console.log\\(crypto.randomBytes\\(32\\).toString\\('base64'\\)\\);\")",
       "Bash(stripe --version)",
       "Bash(grep -v \"=$\")",
-      "Bash(winget install *)"
+      "Bash(winget install *)",
+      "Bash(npx prisma *)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:REDACTED@ep-dark-term-apolg57n.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma migrate dev --name init)",
+      "Bash(stripe config *)",
+      "Bash(stripe listen *)",
+      "Bash(jobs -l)",
+      "Bash(kill %1)",
+      "Bash(npm run *)",
+      "Bash(echo \"Dev server starting \\(PID $!\\)\")",
+      "Bash(curl -s http://localhost:3000/api/health)",
+      "Bash(cat /tmp/nextdev.log 2>&1 | tail -30)",
+      "Read(//tmp/**)",
+      "Bash(Remove-Item -Recurse -Force \"C:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\Lead-By-Example\")"
     ],
     "deny": [],
     "ask": []

@@ -33,11 +33,19 @@ async function sendEmail(options: SendEmailOptions) {
       return { success: false, error: 'Email service not configured' };
     }
 
+    // In development, redirect all outgoing mail to the developer inbox
+    const isDev = process.env.NODE_ENV === 'development';
+    const devEmail = process.env.DEVELOPER_EMAIL;
+    const to = isDev && devEmail ? devEmail : options.to;
+    const subject = isDev && devEmail
+      ? `[DEV → ${options.to}] ${options.subject}`
+      : options.subject;
+
     // Send email
     const response = await resend.emails.send({
       from: process.env.NEXT_PUBLIC_EMAIL_FROM || 'noreply@leadbyexample.org',
-      to: options.to,
-      subject: options.subject,
+      to,
+      subject,
       html: options.html,
       reply_to: options.replyTo || process.env.NEXT_PUBLIC_CONTACT_EMAIL,
     });
@@ -47,7 +55,7 @@ async function sendEmail(options: SendEmailOptions) {
       return { success: false, error: response.error };
     }
 
-    // Log email send
+    // Log email send (always record the intended recipient, not the dev redirect)
     await logEmailSend({
       recipient: options.to,
       subject: options.subject,
