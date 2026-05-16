@@ -98,7 +98,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Get in Touch */}
-            <GlassCard variant="dark" hover={false} className="p-8 space-y-5">
+            <GlassCard variant="dark" hover={false} className="p-8 space-y-5 lighthouse-active">
               <Heading level={3} className="text-white">
                 Get in Touch
               </Heading>
@@ -218,7 +218,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <GlassButton
                       variant="outline"
                       size="lg"
-                      className="w-full lighthouse-active"
+                      className="w-1/2"
                       onClick={() => {
                         window.location.href =
                           'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
