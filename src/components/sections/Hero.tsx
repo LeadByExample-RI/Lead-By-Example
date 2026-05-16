@@ -50,15 +50,15 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section id="home" className="min-h-screen section-padding">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* ── Left column: Mission + Stats + Contact ── */}
-          <motion.div className="order-2 lg:order-1 flex flex-col gap-8" variants={colVariants}>
+          <motion.div className="order-2 lg:order-1 col-span-1 lg:col-span-5 flex flex-col gap-8" variants={colVariants}>
             {/* Mission text */}
             <div className="space-y-5">
               {subtitle && (
@@ -142,8 +142,14 @@ export const Hero: React.FC<HeroProps> = ({
           </motion.div>
 
           {/* ── Right column: Cookout card (bento grid, no absolute positioning) ── */}
-          <motion.div className="order-1 lg:order-2" variants={colVariants}>
-            <div className="w-full bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/15">
+          <motion.div className="order-1 lg:order-2 col-span-1 lg:col-span-6 lg:col-start-7" variants={colVariants}>
+            <motion.div
+              className="w-full bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/15"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              whileHover={{ y: -8, scale: 1.01, boxShadow: '0 24px 64px rgba(75, 48, 106, 0.45)' }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* Row 1: Badge + Title + Date — full width */}
@@ -188,25 +194,31 @@ export const Hero: React.FC<HeroProps> = ({
                   ))}
                 </div>
 
-                {/* Row 2 right: Flyer — negative top margin breaks above its cell */}
+                {/* Row 2 right: Flyer — hover straightens and lifts */}
                 <div className="col-span-1">
-                  <Image
-                    src="/images/network.jpeg"
-                    alt="New England Street Worker Conference — Your Network is Your Net Worth"
-                    width={300}
-                    height={400}
-                    className="w-full h-auto rounded-xl shadow-2xl rotate-3 -mt-20"
-                    priority
-                  />
+                  <motion.div
+                    style={{ rotate: 3 }}
+                    whileHover={{ rotate: 0, scale: 1.05, zIndex: 10 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  >
+                    <Image
+                      src="/images/network.jpeg"
+                      alt="New England Street Worker Conference — Your Network is Your Net Worth"
+                      width={300}
+                      height={400}
+                      className="w-full h-auto rounded-xl shadow-2xl -mt-20"
+                      priority
+                    />
+                  </motion.div>
                 </div>
 
-                {/* Row 3: CTA — full width */}
+                {/* Row 3: CTA — full width, lighthouse sweep */}
                 {secondaryAction && (
                   <div className="col-span-1 md:col-span-2 mt-4">
                     <GlassButton
                       variant="outline"
                       size="lg"
-                      className="w-full"
+                      className="w-full lighthouse-active"
                       onClick={() => {
                         window.location.href =
                           'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
@@ -218,7 +230,7 @@ export const Hero: React.FC<HeroProps> = ({
                 )}
 
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
