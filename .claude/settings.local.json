@@ -34,7 +34,8 @@
       "Bash(grep -rn \"\\\\$[0-9]\" src/components/VideoHero.tsx src/components/CommunityMosaic.tsx src/components/CookoutLegacy.tsx)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
       "Bash(sed -n '39,50p' src/data/fundraisers.ts)",
-      "Bash(sed -n '258,275p' src/styles/globals.css)"
+      "Bash(sed -n '258,275p' src/styles/globals.css)",
+      "Bash(Test-Path \"c:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\src\\\\components\\\\ui\\\\SaturnCarousel.tsx\")"
     ],
     "deny": [],
     "ask": []

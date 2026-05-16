@@ -171,7 +171,7 @@ export function SaturnCarousel() {
           return (
             <motion.div
               key={resource.id}
-              className="absolute top-1/2 left-1/2 w-[300px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing"
+              className="absolute top-1/2 left-1/2 w-[300px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing backface-hidden"
               style={{
                 transform: `rotateY(${rotation}deg) translateZ(${radius}px)`,
                 transformStyle: 'preserve-3d',
@@ -184,7 +184,7 @@ export function SaturnCarousel() {
               <div 
                 className={`
                   w-full h-full p-6 flex flex-col
-                  ${isJade ? 'bg-[#01514C]/25' : 'bg-[#4B306A]/25'}
+                  ${isJade ? 'bg-[#01514C]/80' : 'bg-[#4B306A]/80'}
                   backdrop-blur-xl
                   border-t border-l border-b border-r
                   border-t-white/30 border-l-white/20 
@@ -218,7 +218,7 @@ export function SaturnCarousel() {
                     <div 
                       className={`
                         inline-flex items-center justify-center w-16 h-16 rounded-xl
-                        ${isJade ? 'bg-[#01514C]/40' : 'bg-[#4B306A]/40'}
+                        ${isJade ? 'bg-[#01514C]/80' : 'bg-[#4B306A]/80'}
                         border border-white/20
                         shadow-lg
                         ${isJade ? 'text-gold-300' : 'text-gold-300'}
