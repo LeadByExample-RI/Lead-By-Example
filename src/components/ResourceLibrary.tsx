@@ -13,7 +13,9 @@ import {
   Star,
   Clock,
   Eye,
-  Search
+  Search,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
 
@@ -343,6 +345,90 @@ function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+// Master carousel data — 8 core resources
+const carouselItems = [
+  {
+    id: 1,
+    title: 'Understanding Your Emotions',
+    category: 'Trauma Support',
+    description: 'Practical tools for emotional regulation and resilience designed for youth facing systemic challenges.',
+    icon: <Heart className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.8★',
+    views: '1,247 views',
+  },
+  {
+    id: 2,
+    title: 'From Streets to Success',
+    category: 'Inspiration',
+    description: 'Real transformation stories from people who walked your path and found their way forward.',
+    icon: <Video className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.9★',
+    views: '3,420 views',
+  },
+  {
+    id: 3,
+    title: 'Building Healthy Relationships',
+    category: 'Life Skills',
+    description: 'Navigate trust, boundaries, and authentic communication with lasting confidence.',
+    icon: <Users className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.7★',
+    views: '892 views',
+  },
+  {
+    id: 4,
+    title: 'Know Your Legal Rights',
+    category: 'Legal Guide',
+    description: 'A youth-focused guide to protecting yourself when interacting with law enforcement and the justice system.',
+    icon: <Shield className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.9★',
+    views: '2,156 views',
+  },
+  {
+    id: 5,
+    title: 'Study Skills That Work',
+    category: 'Academic',
+    description: 'Evidence-based strategies for improving grades, focus, and academic self-confidence.',
+    icon: <BookOpen className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.6★',
+    views: '1,634 views',
+  },
+  {
+    id: 6,
+    title: 'Mindfulness for Tough Times',
+    category: 'Mental Health',
+    description: 'Breathing exercises and guided meditation practices that work when life feels overwhelming.',
+    icon: <Brain className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.8★',
+    views: '2,891 views',
+  },
+  {
+    id: 7,
+    title: 'Financial Literacy Basics',
+    category: 'Life Skills',
+    description: "Money management, budgeting, and credit — the skills they don't teach in school.",
+    icon: <Star className="w-9 h-9" />,
+    theme: 'amethyst' as const,
+    rating: '4.8★',
+    views: '2,045 views',
+  },
+  {
+    id: 8,
+    title: 'Healing from Trauma',
+    category: 'Trauma Support',
+    description: 'A compassionate, specialist-informed guide to understanding and recovering from trauma.',
+    icon: <Clock className="w-9 h-9" />,
+    theme: 'jade' as const,
+    rating: '4.9★',
+    views: '1,789 views',
+  },
+];
+
 export default function ResourceLibrary() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showConnectModal, setShowConnectModal] = useState(false);
@@ -358,6 +444,7 @@ export default function ResourceLibrary() {
     );
   };
 
+  // Filter logic for legacy resource cards
   const filteredResources = resources.filter(resource => {
     const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
     const matchesSearch = searchQuery === '' || 
@@ -368,7 +455,18 @@ export default function ResourceLibrary() {
     return matchesCategory && matchesSearch && matchesFilters;
   });
 
-  const activeResourceCount = filteredResources.length;
+  // Filter logic for carousel items — searches title, description, and category
+  const filteredCarouselItems = carouselItems.filter(item => {
+    const matchesSearch = searchQuery === '' || 
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilters = activeFilters.length === 0 || 
+      activeFilters.some(filter => item.category.toLowerCase().includes(filter.toLowerCase()));
+    return matchesSearch && matchesFilters;
+  });
+
+  const activeResourceCount = filteredCarouselItems.length;
 
   const featuredResources = filteredResources.filter(r => r.featured);
   const regularResources = filteredResources.filter(r => !r.featured);
@@ -396,7 +494,7 @@ export default function ResourceLibrary() {
         </motion.div>
 
         {/* 3D Saturn Carousel */}
-        <SaturnCarousel />
+        <SaturnCarousel items={filteredCarouselItems} />
 
         {/* Command Platform — Resource Control Station */}
         <motion.div
@@ -411,12 +509,20 @@ export default function ResourceLibrary() {
               <h3 className="text-2xl font-bold text-white mb-1">Resource Command Platform</h3>
               <p className="text-sm text-gray-400">Search, filter, and navigate our ecosystem</p>
             </div>
-            {/* Live Resource Counter */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-[#4B306A]/40 border border-[#4B306A]/60 rounded-full">
-              <div className="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse" />
-              <span className="text-sm font-medium text-gray-200">
-                <span className="text-[#FFD700] font-bold">{activeResourceCount}</span> resources indexed
-              </span>
+            <div className="flex items-center gap-3">
+              {/* Drag hint badge — relocated from carousel */}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+                <ArrowLeft className="w-3 h-3" />
+                <span>Drag to explore</span>
+                <ArrowRight className="w-3 h-3" />
+              </div>
+              {/* Live Resource Counter */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-[#4B306A]/40 border border-[#4B306A]/60 rounded-full">
+                <div className="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse" />
+                <span className="text-sm font-medium text-gray-200">
+                  <span className="text-[#FFD700] font-bold">{activeResourceCount}</span> resources indexed
+                </span>
+              </div>
             </div>
           </div>
 

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { Heart, Brain, BookOpen, Shield, Video, Star, Users, Clock } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -19,96 +18,9 @@ interface ResourceItem {
   views: string;
 }
 
-// ─── Dummy Data ───────────────────────────────────────────────────────────────
-
-const DUMMY_ITEMS: ResourceItem[] = [
-  {
-    id: 1,
-    title: 'Understanding Your Emotions',
-    category: 'Trauma Support',
-    description: 'Practical tools for emotional regulation and resilience designed for youth facing systemic challenges.',
-    icon: <Heart className="w-9 h-9" />,
-    theme: 'amethyst',
-    rating: '4.8★',
-    views: '1,247 views',
-  },
-  {
-    id: 2,
-    title: 'From Streets to Success',
-    category: 'Inspiration',
-    description: 'Real transformation stories from people who walked your path and found their way forward.',
-    icon: <Video className="w-9 h-9" />,
-    theme: 'jade',
-    rating: '4.9★',
-    views: '3,420 views',
-  },
-  {
-    id: 3,
-    title: 'Building Healthy Relationships',
-    category: 'Life Skills',
-    description: 'Navigate trust, boundaries, and authentic communication with lasting confidence.',
-    icon: <Users className="w-9 h-9" />,
-    theme: 'amethyst',
-    rating: '4.7★',
-    views: '892 views',
-  },
-  {
-    id: 4,
-    title: 'Know Your Legal Rights',
-    category: 'Legal Guide',
-    description: 'A youth-focused guide to protecting yourself when interacting with law enforcement and the justice system.',
-    icon: <Shield className="w-9 h-9" />,
-    theme: 'jade',
-    rating: '4.9★',
-    views: '2,156 views',
-  },
-  {
-    id: 5,
-    title: 'Study Skills That Work',
-    category: 'Academic',
-    description: 'Evidence-based strategies for improving grades, focus, and academic self-confidence.',
-    icon: <BookOpen className="w-9 h-9" />,
-    theme: 'amethyst',
-    rating: '4.6★',
-    views: '1,634 views',
-  },
-  {
-    id: 6,
-    title: 'Mindfulness for Tough Times',
-    category: 'Mental Health',
-    description: 'Breathing exercises and guided meditation practices that work when life feels overwhelming.',
-    icon: <Brain className="w-9 h-9" />,
-    theme: 'jade',
-    rating: '4.8★',
-    views: '2,891 views',
-  },
-  {
-    id: 7,
-    title: 'Financial Literacy Basics',
-    category: 'Life Skills',
-    description: "Money management, budgeting, and credit — the skills they don't teach in school.",
-    icon: <Star className="w-9 h-9" />,
-    theme: 'amethyst',
-    rating: '4.8★',
-    views: '2,045 views',
-  },
-  {
-    id: 8,
-    title: 'Healing from Trauma',
-    category: 'Trauma Support',
-    description: 'A compassionate, specialist-informed guide to understanding and recovering from trauma.',
-    icon: <Clock className="w-9 h-9" />,
-    theme: 'jade',
-    rating: '4.9★',
-    views: '1,789 views',
-  },
-];
-
 // ─── Ring Physics Constants ───────────────────────────────────────────────────
 
-const ITEM_COUNT = DUMMY_ITEMS.length;
 const RADIUS     = 550;
-const ANGLE_STEP = 360 / ITEM_COUNT;
 const TILE_W     = 240;
 const TILE_H     = 350;
 
@@ -286,13 +198,26 @@ function GemTile({ item }: { item: ResourceItem }) {
 
 // ─── Main SaturnCarousel Component ────────────────────────────────────────────
 
-export default function SaturnCarousel() {
+export default function SaturnCarousel({ items }: { items: ResourceItem[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
   const dragStartRef = useRef(0);
+  const prevLengthRef = useRef(items.length);
   const axleControls = useAnimation();
 
-  const targetRotationY = currentIndex * -ANGLE_STEP;
+  // Dynamic geometry based on incoming items
+  const itemCount = items.length || 1;
+  const angleStep = 360 / itemCount;
+
+  const targetRotationY = currentIndex * -angleStep;
+
+  // Reset index when items change (e.g., filtering) — using ref comparison to avoid direct setState in render phase
+  useEffect(() => {
+    if (items.length !== prevLengthRef.current) {
+      setCurrentIndex(0);
+      prevLengthRef.current = items.length;
+    }
+  }, [items.length]);
 
   // High-responsiveness spring — 140/26 removes sluggish feel, retains snap weight
   useEffect(() => {
@@ -359,8 +284,8 @@ export default function SaturnCarousel() {
         }}
       >
         {/* Radial tile ring */}
-        {DUMMY_ITEMS.map((item, index) => {
-          const itemRotationY = index * ANGLE_STEP;
+        {items.map((item, index) => {
+          const itemRotationY = index * angleStep;
 
           return (
             <div
@@ -380,10 +305,16 @@ export default function SaturnCarousel() {
         })}
       </motion.div>
 
-      {/* Drag hint */}
-      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400 pointer-events-none">
-        <span>← Drag horizontally to explore →</span>
-      </div>
+      {/* Empty state */}
+      {items.length === 0 && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-[#080b12]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center max-w-sm">
+            <div className="text-4xl mb-4">🔍</div>
+            <h4 className="text-xl font-bold text-white mb-2">No resources match</h4>
+            <p className="text-gray-400">Try adjusting your search or filters to find what you&apos;re looking for.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
