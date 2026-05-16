@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { SessionProvider } from 'next-auth/react';
 import DonationModal from '@/components/DonationModal';
 import CookoutDonationModal from '@/components/CookoutDonationModal';
 
@@ -18,7 +19,7 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showCookoutDonationModal, setShowCookoutDonationModal] = useState(false);
 
@@ -74,21 +75,23 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://js.stripe.com" />
       </Head>
 
-      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
-        <Component {...pageProps} />
-      </div>
+      <SessionProvider session={session}>
+        <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+          <Component {...pageProps} />
+        </div>
 
-      {/* Donation Modals — each manages its own Stripe Elements context */}
-      <DonationModal
-        isOpen={showDonationModal}
-        onClose={() => setShowDonationModal(false)}
-        initialAmount={50}
-      />
-      <CookoutDonationModal
-        isOpen={showCookoutDonationModal}
-        onClose={() => setShowCookoutDonationModal(false)}
-        initialAmount={50}
-      />
+        {/* Donation Modals — each manages its own Stripe Elements context */}
+        <DonationModal
+          isOpen={showDonationModal}
+          onClose={() => setShowDonationModal(false)}
+          initialAmount={50}
+        />
+        <CookoutDonationModal
+          isOpen={showCookoutDonationModal}
+          onClose={() => setShowCookoutDonationModal(false)}
+          initialAmount={50}
+        />
+      </SessionProvider>
     </>
   );
 }
