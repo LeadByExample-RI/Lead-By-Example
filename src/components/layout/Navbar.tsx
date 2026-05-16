@@ -1,41 +1,50 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  Home, 
-  Users, 
+import {
+  Menu,
+  X,
+  Home,
+  Users,
   Target,
   FileText,
   TrendingUp,
   Award,
   Handshake,
-  Mail
+  Mail,
+  Calendar,
+  MessageSquare,
+  LayoutDashboard,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { Tooltip } from '@/components/ui/Tooltip';
 
 export function Navbar() {
   const router = useRouter();
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as any)?.role === 'admin';
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
 
-  // Navigation links configuration
-  const navLinks = [
+  const baseNavLinks = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/mentors', label: 'Mentors', icon: Users },
     { href: '/resources', label: 'Resources', icon: FileText },
+    { href: '/events', label: 'Events', icon: Calendar },
+    { href: '/contact', label: 'Contact', icon: MessageSquare },
     { href: '/#mission', label: 'Mission', icon: Target },
     { href: '/#journey', label: 'Transformation', icon: TrendingUp },
     { href: '/#success-stories', label: 'Success Stories', icon: Award },
-    { href: '/#impact', label: 'Archive', icon: FileText },
     { href: '/#partners', label: 'Partners', icon: Handshake },
-    { href: '/#footer', label: 'Footer', icon: Mail },
   ];
+
+  const navLinks = isAdmin
+    ? [...baseNavLinks, { href: '/admin', label: 'Admin', icon: LayoutDashboard }]
+    : baseNavLinks;
 
   // Smooth scroll handler
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
