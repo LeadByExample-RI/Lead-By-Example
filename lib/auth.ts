@@ -63,9 +63,7 @@ export const authConfig: NextAuthConfig = {
         }
 
         try {
-          // Check if this is a sign-up request
           if (credentials.isSignUp === 'true') {
-            // Validate sign-up data
             const result = signUpSchema.safeParse({
               name: credentials.name,
               email: credentials.email,
@@ -76,7 +74,6 @@ export const authConfig: NextAuthConfig = {
               throw new Error(result.error.errors[0].message);
             }
 
-            // Check if user already exists
             const existingUser = await db.user.findUnique({
               where: { email: result.data.email },
             });
@@ -85,7 +82,6 @@ export const authConfig: NextAuthConfig = {
               throw new Error('Email already registered');
             }
 
-            // Hash password and create user
             const hashedPassword = await hashPassword(result.data.password);
 
             const user = await db.user.create({
@@ -96,14 +92,8 @@ export const authConfig: NextAuthConfig = {
               },
             });
 
-            return {
-              id: user.id,
-              email: user.email,
-              name: user.name,
-              image: user.image,
-            };
+            return { id: user.id, email: user.email, name: user.name, image: user.image, role: user.role };
           } else {
-            // Sign-in flow
             const result = signInSchema.safeParse({
               email: credentials.email,
               password: credentials.password,
@@ -113,7 +103,6 @@ export const authConfig: NextAuthConfig = {
               throw new Error(result.error.errors[0].message);
             }
 
-            // Find user
             const user = await db.user.findUnique({
               where: { email: result.data.email },
             });
@@ -122,19 +111,13 @@ export const authConfig: NextAuthConfig = {
               throw new Error('Invalid email or password');
             }
 
-            // Verify password
             const passwordMatches = await verifyPassword(result.data.password, user.password);
 
             if (!passwordMatches) {
               throw new Error('Invalid email or password');
             }
 
-            return {
-              id: user.id,
-              email: user.email,
-              name: user.name,
-              image: user.image,
-            };
+            return { id: user.id, email: user.email, name: user.name, image: user.image, role: user.role };
           }
         } catch (error: any) {
           throw new Error(error.message || 'Authentication failed');
@@ -170,6 +153,7 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.role = (user as any).role ?? 'donor';
       }
       return token;
     },
@@ -177,6 +161,7 @@ export const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        (session.user as any).role = token.role as string;
       }
       return session;
     },

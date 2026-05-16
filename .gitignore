@@ -59,6 +59,35 @@ lerna-debug.log*
 .vercel
 .vercel.json.local
 
+# Build artifacts and TypeScript
+*.tsbuildinfo
+dist/
+build/
+
+# Editor and IDE
+.vscode/settings.json
+.claude/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git artifacts
+.git-filter-repo/
+*.patch
+*.diff
+
+# Backup and temporary files
+*.bak
+*.backup
+*.tmp
+*.temp
+
+# Stray files (orphaned/test files)
+on
+test-file*
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

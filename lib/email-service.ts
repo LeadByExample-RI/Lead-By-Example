@@ -25,7 +25,7 @@ interface SendEmailOptions {
 /**
  * Send email via Resend
  */
-async function sendEmail(options: SendEmailOptions) {
+export async function sendEmail(options: SendEmailOptions) {
   try {
     // Validate email configuration
     if (!process.env.RESEND_API_KEY) {
