@@ -433,6 +433,36 @@
   height: 4px;
 }
 
+/* Lighthouse sweep shimmer — hero "Learn More" button */
+@keyframes lighthouse-beam {
+  0%   { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(340%) skewX(-18deg); opacity: 0; }
+}
+
+.lighthouse-active {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.lighthouse-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.55) 50%,
+    transparent 100%
+  );
+  transform: translateX(-160%) skewX(-18deg);
+  animation: lighthouse-beam 1.9s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* CommunityMosaic responsive bento grid */
 .community-bento {
   display: grid;

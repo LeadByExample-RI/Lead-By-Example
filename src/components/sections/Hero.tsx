@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   GlassCard,
@@ -77,11 +77,13 @@ export const Hero: React.FC<HeroProps> = ({
     })
   };
 
+  const [isGetInTouchHovered, setIsGetInTouchHovered] = useState(false);
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center section-padding">
       <div className="container-custom">
         <motion.div
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="grid lg:grid-cols-[2fr_3fr] gap-8 items-start"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -145,7 +147,13 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Organization Info */}
-            <GlassCard variant="dark" hover={false} className="p-6 space-y-4">
+            <GlassCard
+              variant="dark"
+              hover={false}
+              className="p-6 space-y-4"
+              onMouseEnter={() => setIsGetInTouchHovered(true)}
+              onMouseLeave={() => setIsGetInTouchHovered(false)}
+            >
               <Heading level={3} className="text-white">
                 Get in Touch
               </Heading>
@@ -202,7 +210,16 @@ export const Hero: React.FC<HeroProps> = ({
             className="lg:order-last order-first"
             variants={rightColumnVariants}
           >
-            <GlassCard className="space-y-6 p-8">
+            <GlassCard
+              className="p-8 flex flex-col gap-6 min-h-[520px]"
+              style={{
+                background: 'rgba(255, 255, 255, 0.22)',
+                backdropFilter: 'blur(32px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(32px) saturate(180%)',
+                boxShadow: '0 12px 56px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.20)',
+                border: '1px solid rgba(255, 255, 255, 0.30)',
+              }}
+            >
               <div className="text-center space-y-2">
                 <Heading level={2} className="gradient-text">
                   {currentFundraiser.title}
@@ -240,8 +257,8 @@ export const Hero: React.FC<HeroProps> = ({
                       <motion.div
                         className="flex items-center space-x-2 text-white/80"
                         initial={{ opacity: 0, x: -20 }}
-                        animate={{ 
-                          opacity: 1, 
+                        animate={{
+                          opacity: 1,
                           x: 0,
                           transition: { delay: 0.8 + index * 0.1 }
                         }}
@@ -254,31 +271,33 @@ export const Hero: React.FC<HeroProps> = ({
                 </ul>
               </div>
 
-              {/* CTA Buttons */}
-               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                 {primaryAction && (
-                   <GlassButton
-                     variant="primary"
-                     size="lg"
-                     className="flex-1"
-                     onClick={primaryAction.onClick || (primaryAction.href ? () => window.open(primaryAction.href, '_self') : undefined)}
-                   >
-                     {primaryAction.label}
-                   </GlassButton>
-                 )}
-                 {secondaryAction && (
-                   <GlassButton
-                     variant="outline"
-                     size="lg"
-                     className="flex-1"
-                     onClick={() => {
-                       window.location.href = 'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
-                     }}
-                   >
-                     {secondaryAction.label}
-                   </GlassButton>
-                 )}
-               </div>
+              {/* Learn More — fills the full row, slides left; strobes gold on Get In Touch hover */}
+              {secondaryAction && (
+                <GlassButton
+                  variant="outline"
+                  size="lg"
+                  className={`w-full relative overflow-hidden${isGetInTouchHovered ? ' lighthouse-active' : ''}`}
+                  onClick={() => {
+                    window.location.href = 'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
+                  }}
+                >
+                  {secondaryAction.label}
+                </GlassButton>
+              )}
+
+              {/* Donate Now — pinned to bottom center */}
+              {primaryAction && (
+                <div className="mt-auto flex justify-center pt-2">
+                  <GlassButton
+                    variant="primary"
+                    size="lg"
+                    className="px-14"
+                    onClick={primaryAction.onClick || (primaryAction.href ? () => window.open(primaryAction.href, '_self') : undefined)}
+                  >
+                    {primaryAction.label}
+                  </GlassButton>
+                </div>
+              )}
             </GlassCard>
           </motion.div>
         </motion.div>
