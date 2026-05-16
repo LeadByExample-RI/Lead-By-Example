@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Music2 } from 'lucide-react';
+import { Volume2, Volume1, VolumeX, Play, Pause } from 'lucide-react';
 
 interface VideoHeroProps {
   className?: string;
@@ -10,13 +10,12 @@ interface VideoHeroProps {
 
 export default function VideoHero({ className }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // Lazy initializer reads sessionStorage only in the browser (component is ssr:false)
-  const [isAudioOn, setIsAudioOn] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return sessionStorage.getItem('lbe-audio-pref') === 'on';
-  });
+  const [isPlaying, setIsPlaying] = useState(true);
+  // Starts muted — browsers require muted for autoplay. First unmute click unlocks audio.
+  const [isMuted, setIsMuted] = useState(true);
+  const [volume, setVolume] = useState(0.8);
+  const lastVolume = useRef(0.8);
 
-  // Play/pause video based on viewport visibility
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -24,11 +23,10 @@ export default function VideoHero({ className }: VideoHeroProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {
-            // Autoplay blocked — browser will show controls if needed
-          });
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
         } else {
           video.pause();
+          setIsPlaying(false);
         }
       },
       { threshold: 0.3 }
@@ -38,59 +36,151 @@ export default function VideoHero({ className }: VideoHeroProps) {
     return () => observer.disconnect();
   }, []);
 
-  const toggleAudio = () => {
-    const next = !isAudioOn;
-    setIsAudioOn(next);
-    sessionStorage.setItem('lbe-audio-pref', next ? 'on' : 'off');
-    // Video itself is always muted — this toggle controls a separate ambient track
-    // if one is added. The state is wired and ready.
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
   };
 
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isMuted) {
+      const restore = lastVolume.current || 0.8;
+      video.muted = false;
+      video.volume = restore;
+      setVolume(restore);
+      setIsMuted(false);
+    } else {
+      lastVolume.current = video.volume;
+      video.muted = true;
+      setIsMuted(true);
+    }
+  };
+
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const val = parseFloat(e.target.value);
+    video.volume = val;
+    video.muted = val === 0;
+    setVolume(val);
+    setIsMuted(val === 0);
+    if (val > 0) lastVolume.current = val;
+  };
+
+  const displayVol = isMuted ? 0 : volume;
+  const VolumeIcon = displayVol === 0 ? VolumeX : displayVol < 0.5 ? Volume1 : Volume2;
+
   return (
-    <div
-      className={`relative overflow-hidden h-screen bg-[#0a0a0a] ${className ?? ''}`}
-    >
-      {/* Background video */}
-      <video
-        ref={videoRef}
-        src="/video/roy-hero.mp4"
-        poster="/images/community/cookout-pavilion.png"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-label="Annual Lead By Example All Sides of Town cookout community video"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+    // Outer: no overflow-hidden so the panel can escape below the section boundary
+    <section className={`relative overflow-visible bg-[#0a0a0a] ${className ?? ''}`}>
 
-      {/* Gradient overlay — keeps text legible over any frame */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)',
-        }}
-      />
+      {/* Inner: clips video to viewport height */}
+      <div className="relative overflow-hidden h-screen min-h-[500px]">
+        <video
+          ref={videoRef}
+          src="/video/roy-hero.mp4"
+          poster="/images/community/cookout-pavilion.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="Annual Lead By Example All Sides of Town cookout community video"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-      {/* Audio toggle — top right */}
-      <button
-        onClick={toggleAudio}
-        aria-pressed={isAudioOn}
-        aria-label="Toggle ambient music"
-        className="absolute top-4 right-4 z-20 rounded-full bg-black/40 border border-white/20 p-2 text-white/60 hover:text-white hover:bg-black/60 transition-all"
-      >
-        <Music2 size={18} />
-      </button>
+        {/* Gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.35) 100%)',
+          }}
+        />
 
-      {/* Glassmorphic event info overlay — bottom left */}
+        {/* ── Glassmorphic control dashboard — top right ── */}
+        <div
+          className="absolute top-4 right-4 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl"
+          role="group"
+          aria-label="Video controls"
+          style={{
+            background: 'rgba(8, 6, 18, 0.68)',
+            backdropFilter: 'blur(28px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(200%)',
+            border: '1px solid rgba(255, 255, 255, 0.13)',
+            boxShadow:
+              '0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 0 1px rgba(0,0,0,0.3)',
+          }}
+        >
+          {/* Play / Pause */}
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+            className="
+              w-11 h-11 flex items-center justify-center rounded-xl
+              bg-white/8 hover:bg-white/16 active:bg-white/24
+              text-white border border-white/10 hover:border-white/20
+              transition-all duration-150
+            "
+          >
+            {isPlaying ? <Pause size={20} strokeWidth={1.75} /> : <Play size={20} strokeWidth={1.75} />}
+          </button>
+
+          {/* Separator */}
+          <div className="w-px h-7 bg-white/12 flex-shrink-0" />
+
+          {/* Volume icon — click to toggle mute */}
+          <button
+            onClick={toggleMute}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            className="
+              w-11 h-11 flex items-center justify-center rounded-xl
+              bg-white/8 hover:bg-white/16 active:bg-white/24
+              text-white border border-white/10 hover:border-white/20
+              transition-all duration-150 flex-shrink-0
+            "
+          >
+            <VolumeIcon size={20} strokeWidth={1.75} />
+          </button>
+
+          {/* Volume slider */}
+          <div className="flex items-center px-1">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={displayVol}
+              onChange={handleVolume}
+              aria-label="Volume"
+              className="video-vol-slider w-28 sm:w-36"
+              style={
+                {
+                  '--vol-pct': `${displayVol * 100}%`,
+                } as React.CSSProperties
+              }
+            />
+          </div>
+        </div>
+      </div>
+      {/* ↑ end inner clip div — video is clipped here */}
+
+      {/* ── Event info panel — lives outside the clip div, straddles section boundary ── */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-        className="absolute bottom-0 left-0 m-6 md:m-10 z-10 max-w-sm"
+        className="absolute bottom-0 left-8 md:left-14 z-20 w-[300px] md:w-[340px]"
         style={{
-          background: 'rgba(10, 8, 20, 0.72)',
+          transform: 'translateY(50%)',
+          background: 'rgba(10, 8, 20, 0.75)',
           backdropFilter: 'blur(20px) saturate(160%)',
           WebkitBackdropFilter: 'blur(20px) saturate(160%)',
           border: '1px solid rgba(255, 215, 0, 0.22)',
@@ -98,22 +188,18 @@ export default function VideoHero({ className }: VideoHeroProps) {
           padding: '1.25rem',
         }}
       >
-        {/* Badge */}
-        <span className="text-xs font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-3">
+        <span className="text-[11px] font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
           ✦ 6th Annual · All Sides of Town
         </span>
 
-        {/* Event title */}
-        <h2 className="text-xl md:text-2xl font-medium text-white mb-1">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
           All Sides of Town Cookout
         </h2>
 
-        {/* Date & location */}
-        <p className="text-sm text-white/60 mb-3">
+        <p className="text-xs sm:text-sm text-white/60 mb-3">
           July 18, 2026 · Lincoln Woods, Providence RI
         </p>
 
-        {/* Feature grid */}
         <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-4">
           {[
             'Free food for everyone',
@@ -121,29 +207,23 @@ export default function VideoHero({ className }: VideoHeroProps) {
             'Free backpack giveaway',
             'Games & activities for all',
           ].map((feature) => (
-            <span key={feature} className="text-xs text-white/55 flex items-center gap-1">
+            <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
               <span className="w-1 h-1 rounded-full bg-lbe-gold/60 flex-shrink-0" />
               {feature}
             </span>
           ))}
         </div>
 
-        {/* CTAs */}
-        <div className="flex gap-3">
-          <a
-            href="#details"
-            className="bg-lbe-gold text-black text-sm font-medium px-4 py-2 rounded-lg hover:bg-lbe-gold-dark transition-colors"
-          >
-            See Event Details
-          </a>
+        <div className="flex justify-center pt-1">
           <a
             href="mailto:contact@leadbyexample.org"
-            className="border border-lbe-gold/50 text-lbe-gold text-sm px-4 py-2 rounded-lg hover:bg-lbe-gold/10 transition-colors"
+            className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
           >
-            Support Our Work
+            Contact Founders
           </a>
         </div>
       </motion.div>
-    </div>
+
+    </section>
   );
 }

@@ -120,7 +120,7 @@ export default function CommunityMosaic() {
   return (
     <motion.section
       ref={sectionRef}
-      className="bg-[#0a0a0a] py-20"
+      className="bg-[#0a0a0a] pt-36 md:pt-40 pb-20"
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       variants={containerVariants}
