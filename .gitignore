@@ -138,7 +138,6 @@ temp-claude/
 stripe_install/
 
 # Other assets and large files
-/assets
 *.zip
 *.pdf
 *.psd
