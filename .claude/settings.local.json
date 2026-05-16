@@ -23,7 +23,8 @@
       "PowerShell(Stop-Process -Id 26012 -Force -ErrorAction SilentlyContinue)",
       "Bash(echo \"Dev server starting on PID $!\")",
       "PowerShell(Get-Process | Where-Object { $_.Name -match 'stripe' } -ErrorAction SilentlyContinue; Write-Host \"---\"; netstat -an | findstr \":3000\")",
-      "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)"
+      "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)",
+      "PowerShell(netstat -ano)"
     ],
     "deny": [],
     "ask": []
