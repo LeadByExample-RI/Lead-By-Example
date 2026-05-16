@@ -48,13 +48,7 @@ export default function CommunityMosaic() {
         >
           <motion.p
             variants={headerItemVariants}
-            className="text-xs font-black uppercase tracking-[0.28em] mb-4"
-            style={{
-              background: 'linear-gradient(90deg, #4B306A 0%, #8B5CF6 50%, #C4965A 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+            className="text-xs font-bold uppercase tracking-widest mb-4 text-yellow-400"
           >
             Our Community in Motion
           </motion.p>
@@ -106,7 +100,7 @@ export default function CommunityMosaic() {
         {/* ── Standalone CTA banner (isolated from masonry) ── */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
           <motion.div
-            className="flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl"
+            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl"
             style={{
               background: 'rgba(75, 48, 106, 0.82)',
               backdropFilter: 'blur(24px)',
@@ -207,7 +201,7 @@ function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
             width: '100%',
             height: 'auto',
             display: 'block',
-            filter: photo.isMonochrome && !hovered ? 'grayscale(1)' : 'grayscale(0)',
+            filter: !hovered ? 'grayscale(1)' : 'grayscale(0)',
             transform: hovered ? 'scale(1.04)' : 'scale(1)',
             transition: 'filter 0.4s ease, transform 0.35s ease',
           }}
