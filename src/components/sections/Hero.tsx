@@ -59,7 +59,6 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section id="home" className="relative overflow-hidden min-h-screen section-padding">
-      <AtmosphericLights theme="purple" />
       <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center"
@@ -244,6 +243,7 @@ export const Hero: React.FC<HeroProps> = ({
           </motion.div>
         </motion.div>
       </div>
+      <AtmosphericLights theme="purple" />
     </section>
   );
 };

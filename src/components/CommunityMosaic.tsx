@@ -61,7 +61,6 @@ export default function CommunityMosaic() {
         ref={sectionRef}
         className="relative overflow-hidden bg-[#4B306A] pt-36 md:pt-40 pb-20"
       >
-        <AtmosphericLights theme="green" />
         {/* ── Section header ── */}
         <motion.div
           className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
@@ -163,6 +162,7 @@ export default function CommunityMosaic() {
             </div>
           </motion.div>
         </div>
+        <AtmosphericLights theme="green" />
       </motion.section>
 
       {/* Modal — sibling of section so z-50 fixed positioning isn't clipped */}
