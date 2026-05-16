@@ -26,6 +26,19 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
+// ─── Grid layout config ──────────────────────────────────────────────────────
+
+const GRID_CONFIG = [
+  { spans: 'col-span-1 md:col-span-6 lg:col-span-8 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 66vw' },
+  { spans: 'col-span-1 md:col-span-2 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 25vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-6 row-span-2', sizes: '(max-width: 768px) 100vw, 50vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
+];
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function CommunityMosaic() {
@@ -41,7 +54,7 @@ export default function CommunityMosaic() {
       >
         {/* ── Section header ── */}
         <motion.div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"
+          className="max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
           variants={headerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -72,7 +85,7 @@ export default function CommunityMosaic() {
 
         {/* ── Masonry photo wall ── */}
         <motion.div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          className="max-w-[90rem] mx-auto px-4 sm:px-8"
           role="list"
           aria-label="Community photo gallery"
           variants={galleryVariants}
@@ -85,11 +98,12 @@ export default function CommunityMosaic() {
             - gap-4 sets column-gap between the columns
             - Each item gets mb-4 + break-inside-avoid to prevent column breaks through cards
           */}
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
-            {communityPhotos.map((photo) => (
+          <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 md:gap-8 auto-rows-[200px]">
+            {communityPhotos.map((photo, index) => (
               <GalleryCard
                 key={photo.src}
                 photo={photo}
+                index={index}
                 isSelected={selected?.src === photo.src}
                 onSelect={() => setSelected(photo)}
               />
@@ -98,7 +112,7 @@ export default function CommunityMosaic() {
         </motion.div>
 
         {/* ── Standalone CTA banner (isolated from masonry) ── */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
           <motion.div
             className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl"
             style={{
@@ -155,52 +169,41 @@ export default function CommunityMosaic() {
 
 interface GalleryCardProps {
   photo: CommunityPhoto;
+  index: number;
   isSelected: boolean;
   onSelect: () => void;
 }
 
-function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
+function GalleryCard({ photo, index, isSelected, onSelect }: GalleryCardProps) {
   const [hovered, setHovered] = useState(false);
+  const { spans, sizes } = GRID_CONFIG[index] ?? GRID_CONFIG[GRID_CONFIG.length - 1];
 
   return (
-    /*
-      break-inside-avoid prevents the card from splitting across columns.
-      mb-4 provides the row gap between cards within a column.
-      The outer motion.div drives the stagger fade-in entry animation.
-      The inner motion.div is the layoutId anchor for the shared element transition.
-    */
     <motion.div
       role="listitem"
       variants={itemVariants}
-      className="break-inside-avoid mb-4"
+      className={spans}
     >
       <motion.div
         layoutId={`card-${photo.src}`}
         onClick={onSelect}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative overflow-hidden rounded-xl cursor-pointer"
+        className="relative w-full h-full overflow-hidden rounded-xl cursor-pointer"
         animate={{ opacity: isSelected ? 0 : 1 }}
         transition={{
           opacity: { duration: 0.15 },
           layout: { duration: 0.42, ease: [0.25, 0.46, 0.45, 0.94] },
         }}
       >
-        {/*
-          width={0} height={0} + style={{ width:'100%', height:'auto' }} is the
-          Next.js pattern for responsive images at their natural aspect ratio.
-          CSS columns masonry requires natural heights to create the stagger effect.
-        */}
         <Image
           src={photo.src}
           alt={photo.alt}
-          width={0}
-          height={0}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          fill
+          sizes={sizes}
           style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
+            objectFit: 'cover',
+            objectPosition: photo.objectPosition ?? 'center',
             filter: !hovered ? 'grayscale(1)' : 'grayscale(0)',
             transform: hovered ? 'scale(1.04)' : 'scale(1)',
             transition: 'filter 0.4s ease, transform 0.35s ease',
@@ -209,7 +212,6 @@ function GalleryCard({ photo, isSelected, onSelect }: GalleryCardProps) {
           loading={photo.src.includes('cookout-pavilion') ? undefined : 'lazy'}
         />
 
-        {/* Hover overlay: hidden by default, "Click to expand" revealed on hover */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           animate={{ opacity: hovered ? 1 : 0 }}
