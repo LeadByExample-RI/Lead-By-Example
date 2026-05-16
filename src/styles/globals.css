@@ -376,3 +376,35 @@
     animation-play-state: running;
   }
 }
+
+/* CommunityMosaic responsive bento grid */
+.community-bento {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: 1fr;
+}
+
+.community-bento > * {
+  min-height: 200px;
+}
+
+@media (min-width: 640px) {
+  .community-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .community-bento {
+    grid-template-areas:
+      "hero  b1    b2   "
+      "hero  wide  wide "
+      "sq1   sq2   panel";
+    grid-template-columns: 2fr 1.5fr 1.5fr;
+    grid-template-rows: 180px 180px 180px;
+  }
+
+  .community-bento > * {
+    min-height: 0;
+  }
+}
