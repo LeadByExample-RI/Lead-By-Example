@@ -298,7 +298,7 @@ export default function SaturnCarousel() {
   useEffect(() => {
     axleControls.start({
       rotateY: targetRotationY,
-      transition: { type: 'spring', stiffness: 140, damping: 26 },
+      transition: { type: 'spring', stiffness: 140, damping: 26, mass: 1.2 },
     });
   }, [currentIndex, targetRotationY, axleControls]);
 
@@ -353,7 +353,7 @@ export default function SaturnCarousel() {
             // Minor adjustment — snap back with stiffer spring for crisp return
             axleControls.start({
               rotateY: targetRotationY,
-              transition: { type: 'spring', stiffness: 180, damping: 30 },
+              transition: { type: 'spring', stiffness: 180, damping: 30, mass: 1.2 },
             });
           }
         }}

@@ -1,14 +1,5 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-
-const AtmosphericLights = dynamic(
-  () => import('@/components/ui/AtmosphericLights'),
-  {
-    ssr: false,
-    loading: () => <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true" />,
-  }
-);
 import Image from 'next/image';
 import {
   GlassCard,
@@ -38,6 +29,8 @@ export const Hero: React.FC<HeroProps> = ({
   className: _className,
   ..._props
 }) => {
+  const [isBentoHovered, setIsBentoHovered] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 0.2 } },
@@ -150,14 +143,15 @@ export const Hero: React.FC<HeroProps> = ({
             </GlassCard>
           </motion.div>
 
-          {/* ── Right column: Cookout card (bento grid, no absolute positioning) ── */}
-          <motion.div className="order-1 lg:order-2 col-span-1 lg:col-span-6 lg:col-start-7" variants={colVariants}>
-            <motion.div
+          {/* ── Right column: Bento Zone — unified hover canvas ── */}
+          <motion.div
+            className="order-1 lg:order-2 col-span-1 lg:col-span-6 lg:col-start-7"
+            variants={colVariants}
+            onMouseEnter={() => setIsBentoHovered(true)}
+            onMouseLeave={() => setIsBentoHovered(false)}
+          >
+            <div
               className="w-full bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/15"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              whileHover={{ y: -8, scale: 1.01, boxShadow: '0 24px 64px rgba(75, 48, 106, 0.45)' }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -203,12 +197,10 @@ export const Hero: React.FC<HeroProps> = ({
                   ))}
                 </div>
 
-                {/* Row 2 right: Flyer — hover straightens and lifts */}
+                {/* Row 2 right: Flyer */}
                 <div className="col-span-1">
-                  <motion.div
-                    style={{ rotate: 3 }}
-                    whileHover={{ rotate: 0, scale: 1.05, zIndex: 10 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  <div
+                    style={{ transform: 'rotate(3deg)' }}
                   >
                     <Image
                       src="/images/network.jpeg"
@@ -218,7 +210,7 @@ export const Hero: React.FC<HeroProps> = ({
                       className="w-full h-auto rounded-xl shadow-2xl -mt-20"
                       priority
                     />
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Row 3: CTA — full width, lighthouse sweep */}
@@ -239,11 +231,33 @@ export const Hero: React.FC<HeroProps> = ({
                 )}
 
               </div>
-            </motion.div>
+            </div>
+
+            {/* Unified Lighthouse Glow Layer — reacts to parent hover state */}
+            <motion.div
+              className="absolute inset-0 -z-10 rounded-3xl pointer-events-none"
+              initial={{ opacity: 0.2, scale: 1 }}
+              animate={{
+                opacity: isBentoHovered ? 0.45 : 0.2,
+                scale: isBentoHovered ? 1.15 : 1.0,
+              }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              style={{
+                background: 'radial-gradient(ellipse at 50% 50%, rgba(75, 48, 106, 0.6) 0%, rgba(75, 48, 106, 0.2) 40%, transparent 70%)',
+                filter: 'blur(60px)',
+              }}
+            />
           </motion.div>
         </motion.div>
       </div>
-      <AtmosphericLights theme="purple" />
+
+      {/* Ambient background glow — simplified static accent */}
+      <div
+        className="absolute inset-0 pointer-events-none -z-20"
+        style={{
+          background: 'radial-gradient(ellipse at 70% 30%, rgba(75, 48, 106, 0.15) 0%, transparent 50%)',
+        }}
+      />
     </section>
   );
 };
