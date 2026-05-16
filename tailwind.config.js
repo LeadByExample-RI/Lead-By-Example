@@ -39,6 +39,18 @@ module.exports = {
         'coral-accent': '#FF6F61',
         'copper-accent': '#B87333',
 
+        // Media sprint aliases
+        'lbe-gold': {
+          DEFAULT: '#FFD700',
+          dark: '#E5C100',
+          light: '#FFE44D',
+        },
+        'lbe-purple': {
+          DEFAULT: '#4B306A',
+          deep: '#421B5A',
+          light: '#6b4a8a',
+        },
+
         // Cape Verdean inspired palette (New components use this)
         verdean: {
           50: '#e6f5f4',
@@ -130,6 +142,9 @@ module.exports = {
         shimmer: 'shimmer 2s infinite',
         float: 'float 3s ease-in-out infinite',
         glow: 'glow 2s ease-in-out infinite',
+        'pulse-gold': 'pulseGold 2s ease-in-out infinite',
+        'border-glow': 'borderGlow 2s ease-in-out infinite',
+        'fade-up': 'fadeUp 0.6s ease-out both',
       },
       keyframes: {
         fadeIn: {
@@ -163,6 +178,18 @@ module.exports = {
         glow: {
           '0%, 100%': { boxShadow: '0 0 20px rgba(1, 81, 76, 0.5)' },
           '50%': { boxShadow: '0 0 40px rgba(1, 81, 76, 0.8), 0 0 60px rgba(1, 81, 76, 0.6)' },
+        },
+        pulseGold: {
+          '0%, 100%': { boxShadow: '0 0 8px rgba(255,215,0,0.3)' },
+          '50%': { boxShadow: '0 0 24px rgba(255,215,0,0.75)' },
+        },
+        borderGlow: {
+          '0%, 100%': { borderColor: 'rgba(255,215,0,0.2)' },
+          '50%': { borderColor: 'rgba(255,215,0,0.85)' },
+        },
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       spacing: {
