@@ -4,6 +4,68 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, Volume1, VolumeX, Play, Pause } from 'lucide-react';
 
+// ── Magnetic heading: characters cluster toward the mouse like iron filings ──
+// Uses direct DOM refs + RAF — zero React state updates during mouse moves.
+function MagneticHeading({ text, className }: { text: string; className?: string }) {
+  const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const rafId = useRef<number | null>(null);
+  const chars = Array.from(text);
+
+  const applyMagnet = (mx: number, my: number) => {
+    charRefs.current.forEach((el) => {
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = mx - cx;
+      const dy = my - cy;
+      const dist = Math.hypot(dx, dy);
+      const falloff = 200;   // influence radius in px
+      const maxPull = 56;    // max displacement in px
+      const mag = Math.max(0, (1 - dist / falloff) * maxPull);
+      const nx = dist > 0 ? dx / dist : 0;
+      const ny = dist > 0 ? dy / dist : 0;
+      el.style.transition = 'none';
+      el.style.transform = `translate(${nx * mag}px, ${ny * mag}px)`;
+    });
+  };
+
+  const resetMagnet = () => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    charRefs.current.forEach((el) => {
+      if (!el) return;
+      el.style.transition = 'transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      el.style.transform = 'translate(0, 0)';
+    });
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    const { clientX, clientY } = e;
+    rafId.current = requestAnimationFrame(() => applyMagnet(clientX, clientY));
+  };
+
+  useEffect(() => () => { if (rafId.current) cancelAnimationFrame(rafId.current); }, []);
+
+  return (
+    <div
+      onMouseMove={onMouseMove}
+      onMouseLeave={resetMagnet}
+      className={`cursor-default select-none ${className ?? ''}`}
+    >
+      {chars.map((ch, i) => (
+        <span
+          key={i}
+          ref={(el) => { charRefs.current[i] = el; }}
+          className="inline-block"
+        >
+          {ch === ' ' ? ' ' : ch}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 interface VideoHeroProps {
   className?: string;
 }
@@ -78,11 +140,11 @@ export default function VideoHero({ className }: VideoHeroProps) {
   const VolumeIcon = displayVol === 0 ? VolumeX : displayVol < 0.5 ? Volume1 : Volume2;
 
   return (
-    // Outer: no overflow-hidden so the panel can escape below the section boundary
+    // Outer: overflow-visible so the panel can escape below the section boundary
     <section className={`relative overflow-visible bg-[#0a0a0a] ${className ?? ''}`}>
 
-      {/* Inner: clips video to viewport height */}
-      <div className="relative overflow-hidden h-screen min-h-[500px]">
+      {/* Inner: clips the video; slightly under full viewport so the page edge shows */}
+      <div className="relative overflow-hidden h-[93vh] min-h-[500px]">
         <video
           ref={videoRef}
           src="/video/roy-hero.mp4"
@@ -101,11 +163,19 @@ export default function VideoHero({ className }: VideoHeroProps) {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.35) 100%)',
+              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.42) 100%)',
           }}
         />
 
-        {/* ── Glassmorphic control dashboard — top right ── */}
+        {/* ── "Our Community in Motion" — atmospheric magnetic heading in upper video area ── */}
+        <div className="absolute top-10 sm:top-14 md:top-16 left-0 right-0 z-10 text-center px-6 pointer-events-auto">
+          <MagneticHeading
+            text="OUR COMMUNITY IN MOTION"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.22em] text-white/40 uppercase"
+          />
+        </div>
+
+        {/* ── Glassmorphic control dashboard — bottom right ── */}
         <div
           className="absolute bottom-6 right-8 sm:right-10 md:right-14 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl"
           role="group"
@@ -119,7 +189,6 @@ export default function VideoHero({ className }: VideoHeroProps) {
               '0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 0 1px rgba(0,0,0,0.3)',
           }}
         >
-          {/* Play / Pause */}
           <button
             onClick={togglePlay}
             aria-label={isPlaying ? 'Pause video' : 'Play video'}
@@ -133,10 +202,8 @@ export default function VideoHero({ className }: VideoHeroProps) {
             {isPlaying ? <Pause size={20} strokeWidth={1.75} /> : <Play size={20} strokeWidth={1.75} />}
           </button>
 
-          {/* Separator */}
           <div className="w-px h-7 bg-white/12 flex-shrink-0" />
 
-          {/* Volume icon — click to toggle mute */}
           <button
             onClick={toggleMute}
             aria-label={isMuted ? 'Unmute' : 'Mute'}
@@ -150,7 +217,6 @@ export default function VideoHero({ className }: VideoHeroProps) {
             <VolumeIcon size={20} strokeWidth={1.75} />
           </button>
 
-          {/* Volume slider */}
           <div className="flex items-center px-1">
             <input
               type="range"
@@ -161,68 +227,68 @@ export default function VideoHero({ className }: VideoHeroProps) {
               onChange={handleVolume}
               aria-label="Volume"
               className="video-vol-slider w-28 sm:w-36"
-              style={
-                {
-                  '--vol-pct': `${displayVol * 100}%`,
-                } as React.CSSProperties
-              }
+              style={{ '--vol-pct': `${displayVol * 100}%` } as React.CSSProperties}
             />
           </div>
         </div>
       </div>
-      {/* ↑ end inner clip div — video is clipped here */}
+      {/* ↑ end inner clip div */}
 
-      {/* ── Event info panel — lives outside the clip div, straddles section boundary ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+      {/* ── Event info panel — straddles section boundary ── */}
+      {/* Static wrapper owns translateY; Framer Motion animates only opacity+y inside */}
+      <div
         className="absolute bottom-0 left-8 md:left-14 z-20 w-[300px] md:w-[340px]"
-        style={{
-          transform: 'translateY(50%)',
-          background: 'rgba(10, 8, 20, 0.75)',
-          backdropFilter: 'blur(20px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(160%)',
-          border: '1px solid rgba(255, 215, 0, 0.22)',
-          borderRadius: '16px',
-          padding: '1.25rem',
-        }}
+        style={{ transform: 'translateY(33%)' }}
       >
-        <span className="text-[11px] font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
-          ✦ 6th Annual · All Sides of Town
-        </span>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+          style={{
+            background: 'rgba(10, 8, 20, 0.75)',
+            backdropFilter: 'blur(20px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(160%)',
+            border: '1px solid rgba(255, 215, 0, 0.22)',
+            borderRadius: '16px',
+            padding: '1.25rem',
+          }}
+        >
+          <span className="text-[11px] font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
+            ✦ 6th Annual · All Sides of Town
+          </span>
 
-        <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
-          All Sides of Town Cookout
-        </h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
+            All Sides of Town Cookout
+          </h2>
 
-        <p className="text-xs sm:text-sm text-white/60 mb-3">
-          July 18, 2026 · Lincoln Woods, Providence RI
-        </p>
+          <p className="text-xs sm:text-sm text-white/60 mb-3">
+            July 18, 2026 · Lincoln Woods, Providence RI
+          </p>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-4">
-          {[
-            'Free food for everyone',
-            'Free haircuts',
-            'Free backpack giveaway',
-            'Games & activities for all',
-          ].map((feature) => (
-            <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-lbe-gold/60 flex-shrink-0" />
-              {feature}
-            </span>
-          ))}
-        </div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-4">
+            {[
+              'Free food for everyone',
+              'Free haircuts',
+              'Free backpack giveaway',
+              'Games & activities for all',
+            ].map((feature) => (
+              <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-lbe-gold/60 flex-shrink-0" />
+                {feature}
+              </span>
+            ))}
+          </div>
 
-        <div className="flex justify-center pt-1">
-          <a
-            href="mailto:contact@leadbyexample.org"
-            className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
-          >
-            Contact Founders
-          </a>
-        </div>
-      </motion.div>
+          <div className="flex justify-center pt-1">
+            <a
+              href="mailto:contact@leadbyexample.org"
+              className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
+            >
+              Contact Founders
+            </a>
+          </div>
+        </motion.div>
+      </div>
 
     </section>
   );

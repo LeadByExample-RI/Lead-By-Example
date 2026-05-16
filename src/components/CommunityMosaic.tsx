@@ -120,16 +120,13 @@ export default function CommunityMosaic() {
   return (
     <motion.section
       ref={sectionRef}
-      className="bg-[#0a0a0a] pt-36 md:pt-40 pb-20"
+      className="relative bg-[#0a0a0a] pt-36 md:pt-40 pb-20"
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       variants={containerVariants}
     >
       {/* Section header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        <p className="text-xs font-medium tracking-widest text-lbe-gold mb-3 uppercase">
-          Our Community in Motion
-        </p>
         <h2 className="text-3xl md:text-4xl font-medium text-white">
           Every gathering, a step forward.
         </h2>

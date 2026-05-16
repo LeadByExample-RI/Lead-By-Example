@@ -123,11 +123,6 @@ export default function Home() {
           <VideoHero />
         </section>
 
-        {/* Community in motion photo gallery */}
-        <section id="community" aria-label="Community in motion photo gallery">
-          <CommunityMosaic />
-        </section>
-
         {/* Evolution Journey - Visual Storytelling of Transformation */}
         <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
           <EvolutionJourney />
@@ -135,6 +130,11 @@ export default function Home() {
 
         {/* Mission Section - Our Purpose */}
         <Mission />
+
+        {/* Community in motion photo gallery */}
+        <section id="community" aria-label="Community in motion photo gallery">
+          <CommunityMosaic />
+        </section>
 
         {/* Testimonials Section - Success Stories Carousel */}
         <Testimonials />
