@@ -5,6 +5,7 @@
 
 export { GlassButton } from './GlassButton';
 export { GlassCard } from './GlassCard';
+export { Button } from './Button';
 export { ProgressBar } from './ProgressBar';
 export { Heading, Text } from './Typography';
 export { Input } from './Input';

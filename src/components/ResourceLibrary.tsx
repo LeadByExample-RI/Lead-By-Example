@@ -19,6 +19,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
+import { Button } from '@/components/ui';
 
 interface Resource {
   id: string;
@@ -272,10 +273,10 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
         className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#080b12]/90 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}>
         {submitted ? (
-          <div className="text-center py-8">
+            <div className="text-center py-8">
             <div className="text-5xl mb-4">✅</div>
             <h3 className="text-white text-xl font-bold mb-4">Your request has been submitted! We&apos;ll connect you with a mentor soon.</h3>
-            <button type="button" onClick={onClose} className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all">Close</button>
+            <Button type="button" onClick={onClose} variant="gold" className="px-8 py-3">Close</Button>
           </div>
         ) : (
           <>
@@ -289,7 +290,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
               <div><textarea placeholder="Tell us why you're looking for a mentor..." rows={4} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={inputClass} />{errors.reason && <p className="text-red-400 text-sm mt-1">{errors.reason}</p>}</div>
               <div><input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
               <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
-              <button type="submit" className="w-fit py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2">Submit</button>
+              <Button type="submit" variant="gold" className="w-fit py-3 mt-2">Submit</Button>
             </form>
           </>
         )}

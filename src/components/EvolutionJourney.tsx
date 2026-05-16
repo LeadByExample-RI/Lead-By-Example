@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
+import { GlassCard, Button } from '@/components/ui';
 import {
   AlertTriangle,
   Award,
@@ -79,13 +80,7 @@ function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalPr
         {submitted ? (
           <div className="text-center py-6">
             <p className="text-white text-lg mb-6">Thank you! We&apos;ll be in touch soon.</p>
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-2 bg-gold-500 text-black font-semibold rounded-lg hover:bg-gold-600 transition-colors"
-            >
-              Close
-            </button>
+            <Button type="button" onClick={onClose} variant="gold" className="px-6 py-2 rounded-lg">Close</Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -131,12 +126,7 @@ function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalPr
               />
               {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
             </div>
-            <button
-              type="submit"
-              className="w-full bg-gold-500 text-black font-semibold py-3 rounded-lg hover:bg-gold-600 transition-colors"
-            >
-              Submit
-            </button>
+            <Button type="submit" variant="gold" className="w-fit py-3 rounded-lg">Submit</Button>
           </form>
         )}
       </motion.div>
@@ -440,9 +430,9 @@ export default function EvolutionJourney() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className={`rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]} ${currentStage.id === 1 || currentStage.id === 2 ? 'translate-y-4 md:translate-y-4' : ''}`}
-          >
-            <div className="grid gap-12 md:grid-cols-2">
+              >
+              <GlassCard className={`rounded-3xl md:p-12 p-8 ${stageGradientClasses[currentStage.id]} ${currentStage.id === 1 || currentStage.id === 2 ? 'translate-y-4 md:translate-y-4' : ''}`}>
+                <div className="grid gap-12 md:grid-cols-2">
               {/* Left Column - Description */}
               <div>
                 <motion.div
@@ -577,6 +567,7 @@ export default function EvolutionJourney() {
                 )}
               </div>
             </div>
+          </GlassCard>
           </motion.div>
         </AnimatePresence>
 

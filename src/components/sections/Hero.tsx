@@ -8,6 +8,7 @@ import {
   Heading,
   Text,
 } from '@/components/ui';
+import { Button } from '@/components/ui';
 
 const AtmosphericLightsLoader = dynamic(
   () => import('@/components/ui/AtmosphericLights'),
@@ -225,7 +226,7 @@ export const Hero: React.FC<HeroProps> = ({
                 {/* Row 3: CTA — full width, lighthouse sweep */}
                 {secondaryAction && (
                   <div className="col-span-1 md:col-span-2 mt-4">
-                    <GlassButton
+                    <Button
                       variant="outline"
                       size="lg"
                       className="w-1/2"
@@ -235,7 +236,7 @@ export const Hero: React.FC<HeroProps> = ({
                       }}
                     >
                       {secondaryAction.label}
-                    </GlassButton>
+                    </Button>
                   </div>
                 )}
 

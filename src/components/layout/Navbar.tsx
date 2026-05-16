@@ -10,7 +10,6 @@ import {
   FileText,
   TrendingUp,
   Handshake,
-  Mail,
   Calendar,
   MessageSquare,
   LayoutDashboard,

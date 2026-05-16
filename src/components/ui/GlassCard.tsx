@@ -18,9 +18,9 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     };
 
     const variantClasses = {
-      default: 'bg-white/15 border-white/25 shadow-glass',
-      dark: 'bg-black/30 border-white/20 shadow-glass-dark',
-      light: 'bg-white/20 border-white/30 shadow-glass',
+      default: 'glass-effect',
+      dark: 'glass-effect-dark',
+      light: 'glass-effect-strong',
     };
 
     const baseClasses = cn(
@@ -28,7 +28,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       blurClasses[blur],
       variantClasses[variant],
       hover && 'hover-lift cursor-pointer',
-      'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/10 before:to-transparent before:pointer-events-none',
+      'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/8 before:to-transparent before:pointer-events-none',
       className
     );
 
