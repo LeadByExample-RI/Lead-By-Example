@@ -10,7 +10,11 @@ interface VideoHeroProps {
 
 export default function VideoHero({ className }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isAudioOn, setIsAudioOn] = useState(false);
+  // Lazy initializer reads sessionStorage only in the browser (component is ssr:false)
+  const [isAudioOn, setIsAudioOn] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return sessionStorage.getItem('lbe-audio-pref') === 'on';
+  });
 
   // Play/pause video based on viewport visibility
   useEffect(() => {
@@ -32,12 +36,6 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
-
-  // Restore audio preference from session
-  useEffect(() => {
-    const saved = sessionStorage.getItem('lbe-audio-pref');
-    if (saved === 'on') setIsAudioOn(true);
   }, []);
 
   const toggleAudio = () => {
