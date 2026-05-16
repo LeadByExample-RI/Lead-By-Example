@@ -101,67 +101,78 @@ export default function Home() {
         <Navbar />
 
         {/* Hero Section with Current Fundraiser */}
-        <Hero
-          title="Breaking the School-to-Prison Pipeline"
-          description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
-          primaryAction={{
-            label: 'Donate Now',
-            href: '#donate',
-            onClick: () => {
-              // Dispatch event to open cookout-specific modal
-              window.dispatchEvent(new Event('open-cookout-donation-modal'));
-            },
-          }}
-          secondaryAction={{
-            label: 'Learn More',
-            href: '#about',
-          }}
-        />
+        <section data-section-theme="dark">
+          <Hero
+            title="Breaking the School-to-Prison Pipeline"
+            description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
+            primaryAction={{
+              label: 'Help Make It Happen',
+              href: '#donate',
+              onClick: () => {
+                window.dispatchEvent(new Event('open-cookout-donation-modal'));
+              },
+            }}
+            secondaryAction={{
+              label: 'Learn More',
+              href: '#about',
+            }}
+          />
+        </section>
 
         {/* Community cookout video */}
-        <section id="cookout-video" aria-label="Community cookout video">
+        <section id="cookout-video" aria-label="Community cookout video" data-section-theme="dark">
           <VideoHero />
         </section>
 
         {/* Evolution Journey - Visual Storytelling of Transformation */}
-        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+        <section id="journey" className="bg-gradient-to-b from-white to-gray-50" data-section-theme="light">
           <EvolutionJourney />
         </section>
 
         {/* Mission Section - Our Purpose */}
-        <Mission />
+        <section data-section-theme="dark">
+          <Mission />
+        </section>
 
         {/* Community in motion photo gallery */}
-        <section id="community" aria-label="Community in motion photo gallery">
+        <section id="community" aria-label="Community in motion photo gallery" data-section-theme="dark">
           <CommunityMosaic />
         </section>
 
         {/* Testimonials Section - Success Stories Carousel */}
-        <Testimonials />
+        <section data-section-theme="dark">
+          <Testimonials />
+        </section>
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="bg-white">
+        <section id="mentors" className="bg-white" data-section-theme="light">
           <MentorMatching />
         </section>
 
         {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
+        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white" data-section-theme="light">
           <ResourceLibrary />
         </section>
 
         {/* Archive Section - Past Achievements */}
-        <Archive />
+        <section data-section-theme="dark">
+          <Archive />
+        </section>
 
         {/* Cookout history and year six invitation */}
-        <section id="legacy" aria-label="Cookout history and year six invitation">
+        <section id="legacy" aria-label="Cookout history and year six invitation" data-section-theme="dark">
           <CookoutLegacy />
         </section>
 
         {/* Partners Section - Community Organizations */}
-        <Partners />
+        <section data-section-theme="dark">
+          <Partners />
+        </section>
 
         {/* Footer - Contact Info & Links */}
-        <Footer />
+        <section data-section-theme="dark">
+          <Footer />
+        </section>
 
         {/* Map Placeholder Modal - Renders on main page */}
         <MapPlaceholder

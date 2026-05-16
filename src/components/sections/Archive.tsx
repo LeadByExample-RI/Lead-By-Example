@@ -216,7 +216,7 @@ export function Archive() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.dispatchEvent(new Event('open-cookout-donation-modal'))}
               >
-                Donate Today
+                Help Make It Happen
               </motion.button>
               <motion.button
                 type="button"

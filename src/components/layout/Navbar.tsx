@@ -26,7 +26,7 @@ export function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
   const isAdmin = (session?.user as any)?.role === 'admin';
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [navVariant, setNavVariant] = useState<'transparent' | 'solid'>('transparent');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
 
@@ -74,42 +74,55 @@ export function Navbar() {
     // For regular page navigation (/, /mentors, /resources, /events), Next.js Link handles it
   };
 
-  // Scroll detection for enhanced glassmorphism and active section
+  // IntersectionObserver: switches navbar between transparent (dark sections)
+  // and solid (light sections) as the user scrolls through the page.
   useEffect(() => {
-    const sections = [
-      '#home',
-      '#mission',
-      '#success-stories',
-      '#impact',
-      '#partners',
-      '#footer',
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const theme = entry.target.getAttribute('data-section-theme');
+          setNavVariant(theme === 'light' ? 'solid' : 'transparent');
+        });
+      },
+      // Detection zone: just below the navbar, covers the top ~30% of viewport
+      { rootMargin: '-79px 0px -65% 0px' }
+    );
+
+    document.querySelectorAll('[data-section-theme]').forEach((el) =>
+      sectionObserver.observe(el)
+    );
+
+    // Separate passive scroll listener only for active-link highlighting
+    const activeSections = [
+      '#home', '#mission', '#success-stories', '#impact', '#partners', '#footer',
     ];
-
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      for (const section of sections) {
-        const element = document.querySelector(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
+      for (const id of activeSections) {
+        const el = document.querySelector(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
           if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
+            setActiveSection(id);
             break;
           }
         }
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      sectionObserver.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
 
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+        navVariant === 'solid'
           ? 'glass-effect-strong shadow-glass-dark navbar-glass-scrolled'
           : 'glass-effect-dark navbar-glass'
       }`}
@@ -167,7 +180,7 @@ export function Navbar() {
 
                     {/* Content wrapper */}
                     <span className="relative z-10 flex items-center gap-2 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                      <IconComponent className={`h-6 w-6 transition-colors duration-300 group-hover:text-[#FFD700] ${isScrolled ? 'text-[#FFD700]' : ''}`} />
+                      <IconComponent className={`h-6 w-6 transition-colors duration-300 group-hover:text-[#FFD700] ${navVariant === 'solid' ? 'text-[#FFD700]' : ''}`} />
                     </span>
 
                   {/* Floating particle effects (5 particles in circle pattern) */}
@@ -200,44 +213,22 @@ export function Navbar() {
             })}
           </div>
 
-          {/* CTA Button - Desktop with enhanced hover effects */}
+          {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative"
+            <motion.button
+              onClick={() => window.dispatchEvent(new Event('open-donation-modal'))}
+              className="relative overflow-hidden rounded-full bg-[#FFD700] px-6 py-2.5 font-bold text-gray-900 shadow-lg transition-all duration-300 hover:bg-yellow-300"
+              whileHover={{ scale: 1.06, y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <button 
-                onClick={() => {
-                  // Dispatch event to open modal at app root level
-                  window.dispatchEvent(new Event('open-donation-modal'));
-                }}
-                className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300"
-              >
-                {/* Animated border glow */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-gold/0"
-                  whileHover={{ borderColor: 'rgba(255, 215, 0, 0.8)' }}
-                  transition={{ duration: 0.3 }}
-                />
-
-                {/* Background pulse */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gold/20"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-
-                <span className="relative z-10">Donate Now</span>
-              </button>
-            </motion.div>
+              {/* Subtle ripple pulse to draw the eye */}
+              <motion.span
+                className="pointer-events-none absolute inset-0 rounded-full bg-white/40"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="relative z-10">Help Make It Happen</span>
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -293,7 +284,7 @@ export function Navbar() {
 
                       {/* Link text */}
                       <span className="relative z-10 flex items-center gap-3 font-medium text-off-white/90 transition-colors duration-200 group-hover:text-gold">
-                        <IconComponent className={`h-6 w-6 shrink-0 transition-colors duration-300 group-hover:text-[#FFD700] ${isScrolled ? 'text-[#FFD700]' : ''}`} />
+                        <IconComponent className={`h-6 w-6 shrink-0 transition-colors duration-300 group-hover:text-[#FFD700] ${navVariant === 'solid' ? 'text-[#FFD700]' : ''}`} />
                         {link.label}
                       </span>
 
@@ -327,38 +318,21 @@ export function Navbar() {
               })}
 
               {/* Mobile CTA Button */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative mt-4"
+              <motion.button
+                onClick={() => window.dispatchEvent(new Event('open-donation-modal'))}
+                className="relative mt-4 w-full overflow-hidden rounded-full bg-[#FFD700] py-3 font-bold text-gray-900 shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <button 
-                  onClick={() => {
-                    // Dispatch event to open modal at app root level
-                    window.dispatchEvent(new Event('open-donation-modal'));
-                  }}
-                  className="glass-button relative w-full overflow-hidden rounded-full py-3 font-semibold text-off-white transition-all duration-300"
-                >
-                  {/* Background pulse */}
-                  <motion.div
-                    className="absolute inset-0 rounded-full bg-gold/20"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-
-                  <span className="relative z-10">Donate Now</span>
-                </button>
-              </motion.div>
+                <motion.span
+                  className="pointer-events-none absolute inset-0 rounded-full bg-white/40"
+                  animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <span className="relative z-10">Help Make It Happen</span>
+              </motion.button>
             </div>
           </motion.div>
         )}
