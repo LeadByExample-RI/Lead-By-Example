@@ -6,6 +6,7 @@ This file defines short, focused instructions for specialized AI coding agents t
 - Backend agent: `.github/agents/backend-instructions.md` — Prisma, migrations, API, and safety rules.
 - Infra agent: `.github/agents/infra-instructions.md` — deployment and infra guidance.
 - UI generation rules: `.github/agents/ui-generation-instructions.md` — enforced selectors, asset-check rules, and glassmorphism primitives.
+- Custom UI architect agent: `.github/agents/cortana.agent.md` — sandboxed premium UI/UX execution with hardcoded StrayDog constraints.
 
 Links in this file point to persona instruction files under `.github/agents/` which contain concise, non-duplicative guidance and reference links to existing documentation.
 
