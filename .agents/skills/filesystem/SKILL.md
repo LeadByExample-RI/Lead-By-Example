@@ -20,8 +20,16 @@ Produce a completed change set that:
 ## Workflow
 
 1. Define scope
-- Identify files being modified (`src/**`, `emails/**`, `public/**`, or other UI-related paths).
-- Record the final list of modified source files before completion checks.
+- Identify files being modified.
+- Restrict validation to:
+  - `src/**/*.{ts,tsx,css}`
+  - `emails/**/*.{ts,tsx,css}`
+- Exclude from validation:
+  - `*.md`
+  - `*.json`
+  - `tailwind.config.*`
+  - `node_modules/`
+- Record the final list of modified source files in-scope before completion checks.
 
 2. Validate asset paths using filesystem inspection
 - If the change references images/media/icons, inspect actual directories first.
@@ -38,7 +46,9 @@ npx tsc --noEmit
 - If compilation fails, stop and fix errors before continuing.
 
 4. Run forbidden-pattern validation on modified files only
-- Validate each modified source file for forbidden patterns:
+- Validate each modified source file for forbidden patterns.
+- Apply this validation only to files matching `TARGET_PATHS` and not matching `EXCLUDE_PATHS`.
+- Forbidden patterns:
   - `text-transparent`
   - `bg-clip-text`
   - `from-*`
