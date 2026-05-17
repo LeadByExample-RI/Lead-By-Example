@@ -14,7 +14,6 @@
 
 import NextAuth, { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import { db } from '@/lib/db';
 import { z } from 'zod';
 import bcryptjs from 'bcryptjs';
@@ -125,9 +124,6 @@ export const authConfig: NextAuthConfig = {
       },
     }),
   ],
-
-  // Use Prisma adapter for session management
-  adapter: PrismaAdapter(db),
 
   // Configure session
   session: {

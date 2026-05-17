@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // 10 subscribe attempts per IP per hour
   const fwd = req.headers['x-forwarded-for'];
-  const ip = (Array.isArray(fwd) ? fwd[0] : fwd?.split(',')[0])?.trim() ?? 'unknown';
+  const ip = (Array.isArray(fwd) ? fwd[0] : fwd?.split(',')[0])?.trim() ?? req.socket.remoteAddress ?? 'unknown';
   if (!rateLimit(`newsletter:${ip}`, 10, 60 * 60 * 1000)) {
     return res.status(429).json({ error: 'Too many requests. Please try again later.' });
   }

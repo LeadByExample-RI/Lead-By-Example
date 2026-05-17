@@ -27,6 +27,12 @@ const store = new Map<string, Entry>();
  */
 export function rateLimit(key: string, limit: number, windowMs: number): boolean {
   const now = Date.now();
+
+  // Evict all expired entries on each call to prevent unbounded Map growth.
+  for (const [k, v] of store) {
+    if (now > v.resetAt) store.delete(k);
+  }
+
   const entry = store.get(key);
 
   if (!entry || now > entry.resetAt) {

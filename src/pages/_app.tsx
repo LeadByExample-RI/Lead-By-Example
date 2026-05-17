@@ -29,20 +29,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     const handleOpenModal = () => setShowDonationModal(true);
     // Listen for cookout donation modal trigger from Hero/Cookout section
     const handleOpenCookoutModal = () => setShowCookoutDonationModal(true);
-    
+
     window.addEventListener('open-donation-modal', handleOpenModal);
     window.addEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
-    
-    // Prevent body scroll when either modal is open
-    if (showDonationModal || showCookoutDonationModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
+
     return () => {
       window.removeEventListener('open-donation-modal', handleOpenModal);
       window.removeEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Prevent body scroll when either modal is open
+    document.body.style.overflow = showDonationModal || showCookoutDonationModal ? 'hidden' : 'unset';
+    return () => {
       document.body.style.overflow = 'unset';
     };
   }, [showDonationModal, showCookoutDonationModal]);
@@ -82,17 +82,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         </div>
 
         {/* Donation Modals — each manages its own Stripe Elements context */}
+        <DonationModal
+          isOpen={showDonationModal}
+          onClose={() => setShowDonationModal(false)}
+          initialAmount={50}
+        />
+        <CookoutDonationModal
+          isOpen={showCookoutDonationModal}
+          onClose={() => setShowCookoutDonationModal(false)}
+          initialAmount={50}
+        />
       </SessionProvider>
-      <DonationModal
-        isOpen={showDonationModal}
-        onClose={() => setShowDonationModal(false)}
-        initialAmount={50}
-      />
-      <CookoutDonationModal
-        isOpen={showCookoutDonationModal}
-        onClose={() => setShowCookoutDonationModal(false)}
-        initialAmount={50}
-      />
     </>
   );
 }
