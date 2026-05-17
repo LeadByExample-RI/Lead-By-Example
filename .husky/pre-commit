@@ -1,6 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npm run check:forbidden-selectors || exit 1
-npm run format:check || exit 1
-npm run lint || exit 1

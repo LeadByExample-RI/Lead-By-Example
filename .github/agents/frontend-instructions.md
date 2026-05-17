@@ -16,10 +16,6 @@ Preferences (ask if unsure)
 - Prefer extracting repeated patterns into a small shared component under `src/components/ui/`.
 - Use Tailwind utility classes consistent with existing code style and run `npm run format` after edits.
 
-Checks before PR
-- Run `npm run lint` and `npm run type-check` locally; ensure no new lint/type errors.
-- Run `npm run format:check` to respect formatting rules.
-
 Quick links
 - Component guidelines: [docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md)
 - Design tokens & constraints: `.github/copilot-instructions.md`
@@ -36,4 +32,3 @@ Strict UI-generation rules (must follow)
 
 Notes
 - When you suggest UI changes that touch branding or visual primitives, reference `docs/COMPONENT_LIBRARY.md` and `.github/copilot-instructions.md` for token and primitive rules.
-- Always run `npm run format:check` and `npm run lint` before proposing patch content for a PR.

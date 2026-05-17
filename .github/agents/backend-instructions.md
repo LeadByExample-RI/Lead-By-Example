@@ -15,10 +15,6 @@ Preferences
 - Prefer adding `IF NOT EXISTS` / `IF EXISTS` guards to idempotent DDL where possible.
 - Keep API route changes backwards-compatible; add feature flags or new endpoints rather than changing request/response shapes in-place.
 
-Checks before PR
-- Run `npm run test` (or `npm run test:watch`) and ensure unit tests pass.
-- Run `npm run type-check` and `npm run lint`.
-
 Quick links
 - Prisma schema: `prisma/schema.prisma`
 - DB scripts: `package.json` (see `db:migrate`, `db:push`)

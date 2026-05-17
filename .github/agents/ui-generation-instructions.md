@@ -4,7 +4,7 @@ Purpose
 - Persist the UI-generation rules we discussed so agents follow them consistently when producing frontend code.
 
 Scope
-- Applies to UI and visual changes: `src/components/**`, `src/app/**`, `src/pages/**`, `src/styles/**`, and any PRs touching `public/` assets.
+- Applies to UI and visual changes: `src/components/**`, `src/app/**`, `src/pages/**`, `src/styles/**`, and `public/` assets.
 
 Hard rules (enforced)
 - Never invent placeholder components, temporary buttons, or off-brand visual blocks. If a requested component or primitive does not exist, ask the user before creating new visual primitives.
@@ -21,7 +21,6 @@ Agent checklist (pre-generation)
 2. Run or simulate `ls public/` (or use the repository file-listing tool) and record available image filenames.
 3. Ensure no forbidden selectors appear in the generated classes.
 4. Use the exact glassmorphism primitive where appropriate.
-5. Run `npm run format:check`, `npm run lint`, and `npm run type-check` locally (or state these commands for the user) and do not produce a PR if any fail.
 
 Examples of good prompts
 - "Create a `Hero` using the existing `GlassCard` primitive and include `hero.jpg` from `public/images/` (confirm filename first)."

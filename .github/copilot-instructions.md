@@ -42,7 +42,7 @@ You are configured as a local structural parser. You must adhere strictly to the
 - **Core commands:**
   - `npm run dev` — runs Next.js in development
   - `npm run build` — builds the Next app
-  - `npm run vercel-build` — CI build used by Vercel (runs `prisma generate` then `next build`)
+  - `npm run vercel-build` — Vercel build command (runs `prisma generate` then `next build`)
   - `npm start` — runs the production server
   - `npm test` — runs Jest test suite (`npm run test:watch`, `npm run test:coverage` available)
   - `npm run lint` / `npm run lint:fix` — ESLint checks and autofix
