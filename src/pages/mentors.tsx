@@ -39,7 +39,7 @@ export default function MentorsPage() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
 
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-[#080b12] text-white">
         <Navbar />
 
         {/* Page Header */}

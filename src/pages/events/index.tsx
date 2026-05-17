@@ -62,14 +62,14 @@ export default function EventsPage() {
         <meta name="description" content="Upcoming events, community gatherings, fundraisers, and mentorship workshops from Lead By Example." />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-verdean-900/30 to-royal-900/30">
+      <div className="min-h-screen bg-[#080b12]">
         <Navbar />
 
         <main className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6">
           {/* Header */}
           <motion.div className="mb-10 text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              Events &amp; <span className="text-gold">Community</span>
+              Events &amp; <span className="text-[#FFD700]">Community</span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/60">
               Join us for community gatherings, fundraisers, mentorship sessions, and workshops that strengthen our mission.

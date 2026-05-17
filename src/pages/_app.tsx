@@ -76,7 +76,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       </Head>
 
       <SessionProvider session={session}>
-        <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+        <div className={`${inter.variable} ${montserrat.variable} font-sans min-h-screen bg-[#080b12] text-white`}>
           <Component {...pageProps} />
         </div>
 
