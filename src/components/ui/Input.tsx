@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/utils/helpers';
 import React from 'react';
 

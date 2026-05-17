@@ -3,8 +3,9 @@ import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import DonationModal from '@/components/DonationModal';
-import CookoutDonationModal from '@/components/CookoutDonationModal';
+import dynamic from 'next/dynamic';
+const DonationModal = dynamic(() => import('@/components/DonationModal'), { ssr: false });
+const CookoutDonationModal = dynamic(() => import('@/components/CookoutDonationModal'), { ssr: false });
 import { SessionProvider } from 'next-auth/react';
 
 const inter = Inter({

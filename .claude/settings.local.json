@@ -28,7 +28,8 @@
       "Bash(npx tsc *)",
       "Bash(git fetch *)",
       "Bash(cat src/middleware.ts)",
-      "Bash(cat middleware.ts)"
+      "Bash(cat middleware.ts)",
+      "Bash(npm uninstall *)"
     ],
     "deny": [],
     "ask": []

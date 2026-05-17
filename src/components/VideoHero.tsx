@@ -96,13 +96,13 @@ export default function VideoHero({ className }: VideoHeroProps) {
       </div>
 
       {/* ── BOTTOM LETTERBOX ── */}
-      <div className="h-[15vh] w-full bg-[#01514C] flex items-center justify-between px-8 relative z-30">
+      <div className="h-[15vh] w-full bg-[#01514C] flex items-end justify-between px-8 relative z-30 pb-4">
         {/* Cookout Info Card - Left side */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-          className="relative z-40 w-[300px] md:w-[340px]"
+          className="relative z-40 w-[300px] md:w-[340px] mb-2"
           style={{
             background: 'rgba(10, 8, 20, 0.75)',
             backdropFilter: 'blur(20px) saturate(160%)',

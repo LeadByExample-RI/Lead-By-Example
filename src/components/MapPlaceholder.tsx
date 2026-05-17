@@ -3,7 +3,11 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
-import { GoogleMapEmbed } from '@/components/GoogleMapEmbed'
+import dynamic from 'next/dynamic';
+const GoogleMapEmbed = dynamic(
+  () => import('@/components/GoogleMapEmbed').then((m) => ({ default: m.GoogleMapEmbed })),
+  { ssr: false, loading: () => <div className="w-full h-full bg-gradient-to-br from-verdean-900 to-verdean-800 animate-pulse rounded-lg" /> }
+);
 
 interface MapPlaceholderProps {
   isOpen: boolean

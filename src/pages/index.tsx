@@ -3,7 +3,15 @@ import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
-import SaturnCarousel from '@/components/ui/SaturnCarousel';
+import dynamic from 'next/dynamic';
+const SaturnCarousel = dynamic(() => import('@/components/ui/SaturnCarousel'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[500px] mt-8 flex items-center justify-center">
+      <div className="w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin" />
+    </div>
+  ),
+});
 import VideoHero from '@/components/VideoHero';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';

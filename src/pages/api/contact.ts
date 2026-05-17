@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 import { sendEmail } from '@/lib/email-service';
 import { parseAndValidate } from '@/lib/api-utils';
-
+import { rateLimit } from '@/lib/rate-limit';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -14,6 +14,14 @@ const contactSchema = z.object({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // 5 submissions per IP per 10 minutes — shields Resend email quota
+  const fwd = req.headers['x-forwarded-for'];
+  const ip = (Array.isArray(fwd) ? fwd[0] : fwd?.split(',')[0])?.trim() ?? 'unknown';
+  if (!rateLimit(`contact:${ip}`, 5, 10 * 60 * 1000)) {
+    return res.status(429).json({ error: 'Too many requests. Please wait before submitting again.' });
+  }
+
   const data = parseAndValidate(req, res, contactSchema);
   if (!data) return; // parseAndValidate already sent a response
 

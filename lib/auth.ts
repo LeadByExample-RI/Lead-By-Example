@@ -177,12 +177,10 @@ export const authConfig: NextAuthConfig = {
 
   // Events
   events: {
-    async signIn({ user }) {
-      console.log(`User signed in: ${user.email}`);
+    async signIn() {
+      // intentionally silent — avoid writing PII to stdout/server logs
     },
-    async signOut() {
-      console.log('User signed out');
-    },
+    async signOut() {},
   },
 
   // Enable debug in development

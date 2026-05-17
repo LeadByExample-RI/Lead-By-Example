@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 const flyer3rd = '/images/community/panelists.png';
