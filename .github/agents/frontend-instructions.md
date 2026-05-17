@@ -27,3 +27,13 @@ Quick links
 Example prompts to test this persona
 - "Create a `Hero` component using existing `GlassCard` and brand tokens; add a unit test scaffold." 
 - "Refactor `src/components/Footer.tsx` to use the `Button` primitive and fix accessibility." 
+
+Strict UI-generation rules (must follow)
+- Never invent placeholder components, temporary buttons, or off-brand visual blocks. If a requested component or asset does not exist, ask the user before creating new visual primitives.
+- If an image asset is required, check the repository `public/` folder first and read actual filenames before generating `src` fields; do not fabricate asset names. Use filesystem tools to list `/public` when preparing code.
+- Forbidden styling selectors: `text-transparent`, `bg-clip-text`, any utility matching `from-*`, `to-*`, `via-*`, and any classes matching `bg-blue-*` or `text-blue-*`.
+- Enforce deep glassmorphism primitives exactly: `bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl` for glass cards and similar surfaces.
+
+Notes
+- When you suggest UI changes that touch branding or visual primitives, reference `docs/COMPONENT_LIBRARY.md` and `.github/copilot-instructions.md` for token and primitive rules.
+- Always run `npm run format:check` and `npm run lint` before proposing patch content for a PR.
