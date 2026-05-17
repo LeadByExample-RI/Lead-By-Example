@@ -7,7 +7,7 @@ This file defines short, focused instructions for specialized AI coding agents t
 - Infra agent: `.github/agents/infra-instructions.md` — deployment and infra guidance.
 - UI generation rules: `.github/agents/ui-generation-instructions.md` — enforced selectors, asset-check rules, and glassmorphism primitives.
 - Custom UI architect agent: `.github/agents/cortana.agent.md` — sandboxed premium UI/UX execution with hardcoded StrayDog constraints.
-
+- Custom backend security agent: `.github/agents/arbiter.agent.md` — hardened API/database architecture with strict serialization, leak prevention, and injection-safe query discipline.
 Links in this file point to persona instruction files under `.github/agents/` which contain concise, non-duplicative guidance and reference links to existing documentation.
 
 If you want an additional persona (tests, data, design), request it and I will add a focused instruction file.

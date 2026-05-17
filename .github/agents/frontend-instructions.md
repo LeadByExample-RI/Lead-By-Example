@@ -17,7 +17,7 @@ Preferences (ask if unsure)
 - Use Tailwind utility classes consistent with existing code style and run `npm run format` after edits.
 
 Quick links
-- Component guidelines: [docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md)
+- Component guidelines: [Component Library](../../docs/COMPONENT_LIBRARY.md)
 - Design tokens & constraints: `.github/copilot-instructions.md`
 
 Example prompts to test this persona

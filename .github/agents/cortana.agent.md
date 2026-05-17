@@ -81,3 +81,15 @@ if ($hits) {
 ## Output Contract
 - Return exact files changed, key UI rationale, and any brand-safety adjustments.
 - If blocked by missing assets or ambiguous design intent, ask for clarification instead of fabricating.
+
+## 📐 Enforced Design System Constraints (Non-Negotiable)
+- **The Brand Matrix:** You must exclusively utilize the designated site color matrix. Base layout backgrounds default to `#080b12`. Core branding tones are locked to `#4B306A` (Amethyst), `#01514C` (Jade), and `#FFD700` (Gold).
+- **No Rainbow Text Gradients:** Absolutely zero typography background-clipping or horizontal multi-color text gradients (`text-transparent`, `bg-clip-text`). Text must remain solid, high-contrast, and highly readable.
+- **Glassmorphism Primitives:** Standard wrappers must map cleanly to `bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl`.
+- **Asset Sanity:** Never hallucinate or invent image paths. You must inspect the `/public` root directory using filesystem tools to confirm physical asset filenames before generating `src` fields.
+
+## ⚡ Cortana's 3-Pass Refactoring Protocol
+When targeted at any messy UI component or presentation view, you must execute your refactoring in three distinct structural sweeps:
+1. **Pass 1: Token Decimation:** Scan the file line-by-line and violently scrub any generic Tailwind colors or text gradients, forcing them back to solid, approved brand hex overrides.
+2. **Pass 2: Structural Geometry Align:** Rebuild loose containers using a strict flex axis or bento-box multi-column grid wrappers (`grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6`).
+3. **Pass 3: Compilation Guard:** Ensure no structural layout classes were lost during cosmetic styling. Run `npm run check:forbidden-selectors` to guarantee the build path is completely green.
