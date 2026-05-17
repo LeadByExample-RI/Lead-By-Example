@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { FOUNDERS_CONTACT_HREF } from '@/data/siteContent';
 
 // ── Magnetic heading: characters cluster toward the mouse like iron filings ──
 // Uses direct DOM refs + RAF — zero React state updates during mouse moves.
@@ -70,10 +71,41 @@ interface VideoHeroProps {
 }
 
 export default function VideoHero({ className }: VideoHeroProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    };
+  }, []);
 
   return (
-    <section className={`h-screen w-full bg-[#080b12] flex flex-col justify-between overflow-hidden ${className ?? ''}`}>
+    <section
+      ref={sectionRef}
+      className={`h-screen w-full bg-[#080b12] flex flex-col justify-between overflow-hidden ${className ?? ''}`}
+    >
       {/* ── TOP LETTERBOX ── */}
       <div className="h-[15vh] w-full bg-[#01514C] flex items-center justify-center relative z-20">
         <MagneticHeading
@@ -83,16 +115,48 @@ export default function VideoHero({ className }: VideoHeroProps) {
       </div>
 
       {/* ── VIDEO LAYER ── */}
-      <div className="relative z-10 flex-grow w-full max-w-[1920px] mx-auto overflow-hidden flex items-center justify-center bg-[#080b12]">
-        {/* Video assets not yet available in public/ - placeholder fallback active */}
-        <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#01514C] to-[#080b12]">
-          <div className="text-center px-8">
-            <p className="text-4xl md:text-5xl font-bold text-[#FFD700] mb-4">🎬</p>
-            <p className="text-lg text-white/70">Community Video Coming Soon</p>
-            <p className="text-sm text-white/40 mt-2">All Sides of Town Cookout 2026</p>
-          </div>
-        </div>
+      <div className="relative z-10 flex-grow w-full max-w-[1920px] mx-auto overflow-hidden">
+        {/*
+          Hardware-accelerated video: translateZ(0) promotes to a GPU compositing
+          layer, eliminating main-thread paint during playback on Chromium/WebKit.
+          opacity fade-in on canplay prevents a single-frame flash on load.
+        */}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onCanPlay={() => setVideoReady(true)}
+          className="absolute inset-0 w-full h-full object-cover will-change-transform"
+          style={{
+            transform: 'translateZ(0)',
+            opacity: videoReady ? 1 : 0,
+            transition: 'opacity 0.6s ease',
+          }}
+          aria-hidden="true"
+        >
+          <source src="/videos/cookout-highlight.mp4" type="video/mp4" />
+          <source src="/videos/cookout-highlight.webm" type="video/webm" />
+        </video>
 
+        {/* Shown until video first plays — matches dark background so no flash */}
+        {!videoReady && (
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-[#01514C]/30 to-[#080b12]"
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Cinematic letterbox vignette — always present over the video */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(8,11,18,0.65) 0%, transparent 40%, rgba(8,11,18,0.2) 100%)',
+          }}
+          aria-hidden="true"
+        />
       </div>
 
       {/* ── BOTTOM LETTERBOX ── */}
@@ -112,7 +176,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
             padding: '1.25rem',
           }}
         >
-          <span className="text-[11px] font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
+          <span className="text-[11px] font-medium text-[#FFD700] border border-[#FFD700]/30 bg-[#FFD700]/10 rounded-full px-3 py-1 inline-block mb-2.5">
             ✦ 6th Annual · All Sides of Town
           </span>
 
@@ -132,7 +196,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
               'Games & activities for all',
             ].map((feature) => (
               <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
-                <span className="w-1 h-1 rounded-full bg-lbe-gold/60 flex-shrink-0" />
+                <span className="w-1 h-1 rounded-full bg-[#FFD700]/60 flex-shrink-0" />
                 {feature}
               </span>
             ))}
@@ -140,8 +204,8 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
           <div className="flex justify-center pt-1">
             <a
-              href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
-              className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
+              href={FOUNDERS_CONTACT_HREF}
+              className="border border-[#FFD700]/55 text-[#FFD700] text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-[#FFD700]/10 transition-colors duration-200 inline-block"
             >
               Contact Founders
             </a>

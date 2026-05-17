@@ -1,5 +1,4 @@
 "use client";
-import DOMPurify from 'isomorphic-dompurify';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -13,6 +12,7 @@ interface Event {
   id: string;
   title: string;
   description: string | null;
+  sanitizedDescription: string;
   slug: string;
   startDate: string;
   endDate: string | null;
@@ -130,9 +130,7 @@ export default function EventDetailClient({ event }: Props) {
 
               <div
                 className="prose max-w-none text-white/80"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(event.description || '')
-                }}
+                dangerouslySetInnerHTML={{ __html: event.sanitizedDescription }}
               />
               <div className="mt-8">
                 {!isPast && !isFull && (

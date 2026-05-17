@@ -29,7 +29,8 @@
       "Bash(git fetch *)",
       "Bash(cat src/middleware.ts)",
       "Bash(cat middleware.ts)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies['isomorphic-dompurify'] || 'NOT FOUND'\\)\")"
     ],
     "deny": [],
     "ask": []

@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next';
 import { db } from '@/lib/db';
+import DOMPurify from 'isomorphic-dompurify';
 import EventDetailClient from '@/components/events/EventDetailClient';
 
 interface Event {
   id: string;
   title: string;
   description: string | null;
+  sanitizedDescription: string;
   slug: string;
   startDate: string;
   endDate: string | null;
@@ -54,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     endDate: rawEvent.endDate ? rawEvent.endDate.toISOString() : null,
     raisedAmount: rawEvent.raisedAmount.toString(),
     goal: rawEvent.goal ? rawEvent.goal.toString() : null,
+    sanitizedDescription: DOMPurify.sanitize(rawEvent.description ?? ''),
   };
 
   return {

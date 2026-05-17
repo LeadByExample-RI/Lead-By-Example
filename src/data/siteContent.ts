@@ -2,6 +2,11 @@ import React, { type ReactNode } from 'react';
 import type { CommunityPhoto, CookoutEdition } from '@/types/media';
 import { BookOpen, Video, Heart, Scale, GraduationCap, Brain, FileText, Users } from 'lucide-react';
 
+// ─── Contact ──────────────────────────────────────────────────────────────────
+// Centralised here so the founders' emails don't live scattered in JSX.
+export const FOUNDERS_CONTACT_HREF =
+  'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
+
 // ─── Resource Hub ─────────────────────────────────────────────────────────────
 
 export interface ResourceItem {
@@ -103,7 +108,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods',
     timeRange: '12:00pm – 7:00pm',
     tagline: 'The day all sides of town found common ground.',
-    gradientClass: 'from-verdean-800 to-verdean-900',
+    gradientClass: 'from-verdean-500 to-verdean-700',
   },
   {
     edition: 2,
@@ -112,7 +117,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods',
     timeRange: '12:00pm – 7:00pm',
     tagline: 'Even the unexpected could not stop this community.',
-    gradientClass: 'from-royal-800 to-royal-900',
+    gradientClass: 'from-royal-500 to-royal-700',
   },
   {
     edition: 3,
@@ -121,7 +126,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods',
     timeRange: '12:00pm – 7:00pm',
     tagline: 'Coming back stronger, together.',
-    gradientClass: 'from-verdean-800 to-verdean-900',
+    gradientClass: 'from-verdean-500 to-verdean-700',
   },
   {
     edition: 4,
@@ -130,7 +135,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods',
     timeRange: '12:30pm – 8:00pm',
     tagline: 'Hundreds of families, one shared table.',
-    gradientClass: 'from-royal-800 to-royal-900',
+    gradientClass: 'from-royal-500 to-royal-700',
   },
   {
     edition: 5,
@@ -139,7 +144,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods',
     timeRange: '12:30pm – 8:00pm',
     tagline: 'Five years of showing up, no matter what.',
-    gradientClass: 'from-royal-800 to-royal-900',
+    gradientClass: 'from-royal-500 to-royal-700',
   },
   {
     edition: 6,
@@ -148,7 +153,7 @@ export const cookoutEditions: CookoutEdition[] = [
     location: 'Lincoln Woods Site A&B',
     timeRange: '12:30pm – 8:00pm',
     tagline: 'This July — everyone welcome.',
-    gradientClass: 'from-gold-800 to-gold-900',
+    gradientClass: 'from-gold-500 to-gold-700',
   },
 ];
 

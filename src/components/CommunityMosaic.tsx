@@ -126,7 +126,7 @@ export default function CommunityMosaic() {
             <div className="sm:ml-auto flex flex-col sm:items-end gap-2">
               <a
                 href="#about"
-                className="border border-lbe-gold/60 text-lbe-gold text-sm px-6 py-2.5 rounded-xl hover:bg-lbe-gold/10 transition-colors whitespace-nowrap font-medium"
+                className="border border-gold/60 text-gold text-sm px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-colors whitespace-nowrap font-medium"
               >
                 Our Story →
               </a>

@@ -45,6 +45,10 @@ async function verifyPassword(password: string, hashedPassword: string): Promise
 }
 
 export const authConfig: NextAuthConfig = {
+  // NextAuth v5 looks for AUTH_SECRET; explicitly pass NEXTAUTH_SECRET so the
+  // existing .env.local value is used without requiring a rename.
+  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
+
   // Configure authentication providers
   providers: [
     // Email & Password provider

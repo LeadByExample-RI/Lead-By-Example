@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/lib/db';
-import { auth } from '@/lib/auth';
+import { getToken } from 'next-auth/jwt';
 import { sendEventRegistrationConfirmation } from '@/lib/email-service';
 import { ensureJsonContentType } from '@/lib/api-utils';
 
@@ -37,14 +37,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Validate Content-Type before processing
     if (!ensureJsonContentType(req, res)) return;
 
-    // Register for event — requires authentication
-    const session = await auth(req as any, res as any);
-    if (!session?.user) return res.status(401).json({ error: 'Sign in to register for events' });
+    // Register for event — requires authentication.
+    // getToken reads the NextAuth JWT cookie directly, which works in the Pages
+    // Router without the App Router auth() wrapper that needs Node adapters.
+    // NextApiRequest doesn't satisfy the v5 getToken signature (expects Web Request);
+    // casting via unknown is the Pages Router compatibility shim.
+    const token = await getToken({ req: req as unknown as Request });
+    if (!token) return res.status(401).json({ error: 'Sign in to register for events' });
 
     const { guestCount = 1, specialRequests } = req.body;
-    const userId = session.user.id!;
+    const userId = (token.id as string) ?? (token.sub as string);
+    const userEmail = token.email as string | undefined;
+    const userName = token.name as string | undefined;
     const slugStr = slug as string;
     const requestedGuests = Number.parseInt(String(guestCount), 10) || 1;
+
+    if (requestedGuests < 1) {
+      return res.status(400).json({ error: 'Guest count must be at least 1' });
+    }
 
     try {
       const registrationResult = await db.$transaction(async (tx) => {
@@ -104,10 +114,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return { newRegistration, event: currentEvent };
       });
 
-      if (session.user.email) {
+      if (userEmail) {
         await sendEventRegistrationConfirmation({
-          email: session.user.email,
-          name: session.user.name ?? undefined,
+          email: userEmail,
+          name: userName ?? undefined,
           eventTitle: registrationResult.event.title,
           eventDate: registrationResult.event.startDate,
           eventLocation: registrationResult.event.location ?? undefined,
