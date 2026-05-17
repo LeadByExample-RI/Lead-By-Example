@@ -100,7 +100,7 @@ export default function Home() {
           title="Breaking the School-to-Prison Pipeline"
           description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
           primaryAction={{
-            label: 'Donate Now',
+            label: 'Help Make It Happen',
             href: '#donate',
             onClick: () => {
               // Dispatch event to open cookout-specific modal

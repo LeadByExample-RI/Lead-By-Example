@@ -28,7 +28,7 @@ export interface KeyStatistics {
 
 export const currentFundraiser: Fundraiser = {
   id: 'all-sides-cookout-2025',
-  title: 'All Sides of Town Cookout — 6th Anniversary 2026',
+  title: 'All Sides of Town Cookout — 5th Anniversary 2026',
   goal: 10000,
   raised: 6250,
   date: 'July 18, 2026',

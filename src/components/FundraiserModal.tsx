@@ -172,7 +172,7 @@ export default function FundraiserModal({ fundraiser, isOpen, closeModal }: Fund
                                      transition-all duration-300 flex items-center justify-center gap-2
                                      focus-visible:ring-4 focus-visible:ring-gold focus-visible:ring-offset-2">
                       <HeartIcon className="w-6 h-6" />
-                      Donate Now
+                      Help Make It Happen
                     </button>
                     
                     <button className="flex-1 bg-royal-purple hover:bg-royal-purple-dark text-off-white font-bold 

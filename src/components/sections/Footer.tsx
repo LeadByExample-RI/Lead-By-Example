@@ -110,7 +110,7 @@ export function Footer() {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Text size="sm">Donate</Text>
+                  <Text size="sm">Help Make It Happen</Text>
                 </motion.button>
               </li>
             </ul>

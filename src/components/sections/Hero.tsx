@@ -131,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({
                   initial="hidden"
                   animate="visible"
                 >
-                  <GlassCard variant="dark" className="text-center p-6">
+                  <GlassCard variant="dark" className="text-center p-6 h-full">
                     <div className="text-3xl mb-2">{stat.icon}</div>
                     <div className="text-2xl font-bold text-accent-500 mb-1">
                       {stat.value}
@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Organization Info */}
-            <GlassCard variant="dark" className="space-y-4">
+            <GlassCard variant="dark" className="space-y-4 p-8 md:p-12">
               <Heading level={3} className="text-white">
                 Get in Touch
               </Heading>
