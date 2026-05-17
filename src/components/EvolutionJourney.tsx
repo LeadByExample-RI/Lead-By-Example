@@ -160,7 +160,7 @@ export default function EvolutionJourney() {
   return (
     <section className="relative overflow-hidden bg-[#4B306A] px-4 py-20">
       {/* Ambient atmospheric lights */}
-      <AtmosphericLightsLoader />
+      <AtmosphericLightsLoader theme="purple" />
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute left-10 top-20 h-64 w-64 rounded-full bg-verdean-500 blur-3xl" />

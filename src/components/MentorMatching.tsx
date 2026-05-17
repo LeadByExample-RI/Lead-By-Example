@@ -11,6 +11,8 @@ import {
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { mentors, type Mentor } from '@/data/siteContent';
+import { MotionGlassCard } from '@/components/ui/MotionGlassCard';
+import { Button } from '@/components/ui';
 
 interface MentorFormData {
   firstName: string;
@@ -119,24 +121,19 @@ function MentorFormModal({
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
       onClick={onClose}
     >
-      <motion.div
+      <MotionGlassCard
+        variant="transparent"
+        className="w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto z-[101]"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}
       >
         {submitted ? (
           <div className="text-center py-8">
             <div className="text-5xl mb-4">✅</div>
             <h3 className="text-white text-2xl font-bold mb-4">{successMessage}</h3>
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all"
-            >
-              Close
-            </button>
+            <Button type="button" onClick={onClose} variant="gold" className="px-8 py-3">Close</Button>
           </div>
         ) : (
           <>
@@ -230,16 +227,11 @@ function MentorFormModal({
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="w-fit py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2"
-              >
-                Submit
-              </button>
+              <Button type="submit" variant="gold" className="w-fit py-3 mt-2">Submit</Button>
             </form>
           </>
         )}
-      </motion.div>
+      </MotionGlassCard>
     </motion.div>
   );
 }
@@ -359,13 +351,14 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              <button
+              <Button
                 type="button"
+                variant="gold"
                 className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-gold-500 to-gold-600 py-2 font-semibold text-black transition-all hover:shadow-lg hover:shadow-gold-500/30"
               >
                 Learn More
                 <ChevronRight className="h-4 w-4" />
-              </button>
+              </Button>
             </motion.div>
           ))}
         </div>
@@ -390,20 +383,22 @@ export default function MentorMatching() {
             Join our community of mentors with lived experience
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button
+            <Button
               type="button"
               onClick={() => setShowBecomeMentorModal(true)}
+              variant="gold"
               className="transform rounded-full bg-gold-400 px-8 py-4 font-semibold text-black transition-all hover:scale-105 hover:bg-gold-300"
             >
               Become a Mentor
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={() => setShowRequestMentorModal(true)}
+              variant="outline"
               className="rounded-full border-2 border-white bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
               Request a Mentor
-            </button>
+            </Button>
           </div>
         </motion.div>
       </div>
@@ -418,11 +413,12 @@ export default function MentorMatching() {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
             onClick={() => setSelectedMentor(null)}
           >
-            <motion.div
+            <MotionGlassCard
+              variant="transparent"
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl p-8"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-6 flex items-start gap-4">
@@ -503,22 +499,24 @@ export default function MentorMatching() {
               </div>
 
               <div className="flex gap-4">
-                <button
+                <Button
                   type="button"
                   onClick={() => { setSelectedMentor(null); setShowRequestMentorModal(true); }}
+                  variant="gold"
                   className="flex-1 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 py-3 font-semibold text-black transition-all hover:shadow-lg hover:shadow-gold-500/30"
                 >
                   Request This Mentor
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
                   onClick={() => setSelectedMentor(null)}
+                  variant="outline"
                   className="rounded-xl bg-white/10 border border-white/20 px-6 py-3 font-semibold text-white transition-all hover:bg-white/20"
                 >
                   Close
-                </button>
+                </Button>
               </div>
-            </motion.div>
+            </MotionGlassCard>
           </motion.div>
         )}
       </AnimatePresence>

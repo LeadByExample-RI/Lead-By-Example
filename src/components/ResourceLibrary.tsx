@@ -11,6 +11,7 @@ import {
   Star,
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
+import { Button, GlassCard } from '@/components/ui';
 import {
   carouselItems,
   crisisResources,
@@ -77,7 +78,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
           <div className="text-center py-8">
             <div className="text-5xl mb-4">✅</div>
             <h3 className="text-white text-xl font-bold mb-4">Your request has been submitted! We&apos;ll connect you with a mentor soon.</h3>
-            <button type="button" onClick={onClose} className="px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-xl hover:opacity-90 transition-all">Close</button>
+            <Button type="button" onClick={onClose} variant="gold" className="px-8 py-3">Close</Button>
           </div>
         ) : (
           <>
@@ -91,7 +92,7 @@ function ConnectMentorModal({ onClose }: { onClose: () => void }) {
               <div><textarea placeholder="Tell us why you're looking for a mentor..." rows={4} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className={inputClass} />{errors.reason && <p className="text-red-400 text-sm mt-1">{errors.reason}</p>}</div>
               <div><input type="tel"   placeholder="Phone Number"  value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />{errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}</div>
               <div><input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
-              <button type="submit" className="w-fit py-3 px-6 bg-[#FFD700] text-black font-semibold rounded-xl hover:opacity-90 transition-all mt-2">Submit</button>
+              <Button type="submit" variant="gold" className="w-fit py-3 px-6 mt-2">Submit</Button>
             </form>
           </>
         )}
@@ -112,7 +113,7 @@ function CrisisResourcesModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-white text-2xl font-bold">Crisis Resources</h3>
-          <button type="button" onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all">✕</button>
+          <Button type="button" onClick={onClose} variant="ghost" className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all">✕</Button>
         </div>
         <div className="space-y-4">
           {crisisResources.map((r, i) => (
@@ -189,11 +190,12 @@ export default function ResourceLibrary() {
         <SaturnCarousel items={filteredCarouselItems} />
 
         {/* Command Platform */}
-        <motion.div
+        <MotionGlassCard
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 bg-[#080b12]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl"
+          variant="dark"
+          className="mt-12 rounded-3xl p-8 shadow-2xl"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div>
@@ -281,7 +283,7 @@ export default function ResourceLibrary() {
               Crisis Resources
             </button>
           </div>
-        </motion.div>
+        </MotionGlassCard>
       </div>
 
       <AnimatePresence>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Users, Calendar } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
+import { MotionGlassCard } from '@/components/ui/MotionGlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 
@@ -72,9 +73,14 @@ function VolunteerModal({ onClose }: { onClose: () => void }) {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
       onClick={onClose}>
-      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
-        onClick={(e) => e.stopPropagation()}>
+      <MotionGlassCard
+        variant="amethyst"
+        className="w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+      >
         {submitted ? (
           <div className="text-center py-8">
             <div className="text-5xl mb-4">✅</div>
@@ -96,7 +102,7 @@ function VolunteerModal({ onClose }: { onClose: () => void }) {
             </form>
           </>
         )}
-      </motion.div>
+      </MotionGlassCard>
     </motion.div>
   );
 }
