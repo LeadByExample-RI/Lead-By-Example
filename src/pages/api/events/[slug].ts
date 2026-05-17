@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { sendEventRegistrationConfirmation } from '@/lib/email-service';
+import { ensureJsonContentType } from '@/lib/api-utils';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { slug } = req.query;
@@ -33,6 +34,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (req.method === 'POST') {
+    // Validate Content-Type before processing
+    if (!ensureJsonContentType(req, res)) return;
+
     // Register for event — requires authentication
     const session = await auth(req as any, res as any);
     if (!session?.user) return res.status(401).json({ error: 'Sign in to register for events' });

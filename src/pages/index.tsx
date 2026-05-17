@@ -1,14 +1,16 @@
+import CommunityMosaic from '@/components/CommunityMosaic';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
-import ResourceLibrary from '@/components/ResourceLibrary';
+import SaturnCarousel from '@/components/ui/SaturnCarousel';
+import VideoHero from '@/components/VideoHero';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
-import { Testimonials } from '@/components/sections/Testimonials';
+import { resources } from '@/data/siteContent';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
@@ -96,67 +98,83 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
 
+      <Navbar />
+
       <main>
-        <Navbar />
+        {/* Hero Section with Current Fundraiser - #home */}
+        <section id="home">
+          <Hero
+            title="Breaking the School-to-Prison Pipeline"
+            description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
+            primaryAction={{
+              label: 'Donate Now',
+              href: '#donate',
+              onClick: () => {
+                // Dispatch event to open cookout-specific modal
+                window.dispatchEvent(new Event('open-cookout-donation-modal'));
+              },
+            }}
+            secondaryAction={{
+              label: 'Learn More',
+              href: '#about',
+            }}
+          />
+        </section>
 
-        {/* Hero Section with Current Fundraiser */}
-        <Hero
-          title="Breaking the School-to-Prison Pipeline"
-          description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
-          primaryAction={{
-            label: 'Donate Now',
-            href: '#donate',
-            onClick: () => {
-              // Dispatch event to open cookout-specific modal
-              window.dispatchEvent(new Event('open-cookout-donation-modal'));
-            },
-          }}
-          secondaryAction={{
-            label: 'Learn More',
-            href: '#about',
-          }}
-        />
+        {/* VideoHero - Cinematic community video */}
+        <VideoHero />
 
-        {/* Evolution Journey - Visual Storytelling of Transformation */}
+        {/* Evolution Journey - Visual Storytelling of Transformation - #journey */}
         <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
           <EvolutionJourney />
         </section>
 
-        {/* Mission Section - Our Purpose */}
-        <Mission />
-
-        {/* Testimonials Section - Success Stories Carousel */}
-        <Testimonials />
-
-        {/* Mentor Matching - Connect with Mentors */}
+        {/* Mentor Matching - Connect with Mentors - #mentors */}
         <section id="mentors" className="bg-white">
           <MentorMatching />
         </section>
 
-        {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
-          <ResourceLibrary />
+        {/* Mission Section - Our Purpose - #mission */}
+        <section id="mission">
+          <Mission />
         </section>
 
-        {/* Archive Section - Past Achievements */}
-        <Archive />
+        {/* SaturnCarousel - 3D Resource Ring - #resources */}
+        <section id="resources" className="bg-[#080b12] py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+              Resource Hub
+            </h2>
+            <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-12">
+              Explore our curated collection of guides, videos, and tools designed to support your journey.
+            </p>
+            <SaturnCarousel items={resources} />
+          </div>
+        </section>
+
+        {/* Archive Section - Past Achievements - #impact */}
+        <section id="impact">
+          <Archive />
+        </section>
+
+        {/* Community Mosaic - Before Partners */}
+        <CommunityMosaic />
 
         {/* Partners Section - Community Organizations */}
         <Partners />
-
-        {/* Footer - Contact Info & Links */}
-        <Footer />
-
-        {/* Map Placeholder Modal - Renders on main page */}
-        <MapPlaceholder
-          isOpen={isMapOpen}
-          onClose={handleMapClose}
-          locationName={mapData.locationName}
-          locationAddress={mapData.locationAddress}
-          locationLat={mapData.locationLat}
-          locationLng={mapData.locationLng}
-        />
       </main>
+
+      <Footer />
+
+      {/* Map Placeholder Modal - Renders outside main flow */}
+      <MapPlaceholder
+        isOpen={isMapOpen}
+        onClose={handleMapClose}
+        locationName={mapData.locationName}
+        locationAddress={mapData.locationAddress}
+        locationLat={mapData.locationLat}
+        locationLng={mapData.locationLng}
+      />
     </>
   );
 }

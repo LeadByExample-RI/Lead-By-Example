@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import type { CommunityPhoto, CookoutEdition } from '@/types/media';
+import { BookOpen, Video, Heart, Scale, GraduationCap, Brain, FileText, Users } from 'lucide-react';
 
 // ─── Resource Hub ─────────────────────────────────────────────────────────────
 
@@ -35,15 +36,6 @@ export const EXTRUSION_DEPTHS = [2, 4, 6, 8] as const;
 // ─── Community Photos ─────────────────────────────────────────────────────────
 
 export const communityPhotos: CommunityPhoto[] = [
-  // ── Celebration ──────────────────────────────────────────────────────────
-  {
-    src: '/images/community/cookout-pavilion.png',
-    alt: 'A large crowd of community members gathered at the Duffy Pavilion during an All Sides of Town cookout',
-    caption: 'The whole community, one table.',
-    category: 'celebration',
-    objectPosition: 'center center',
-  },
-
   // ── Community ─────────────────────────────────────────────────────────────
   {
     src: '/images/community/bowling.jpg',
@@ -157,5 +149,98 @@ export const cookoutEditions: CookoutEdition[] = [
     timeRange: '12:30pm – 8:00pm',
     tagline: 'This July — everyone welcome.',
     gradientClass: 'from-gold-800 to-gold-900',
+  },
+];
+
+// ─── Resource Hub Data ──────────────────────────────────────────────────────
+
+export const resources: ResourceItem[] = [
+  {
+    id: '1',
+    theme: 'amethyst',
+    icon: React.createElement(BookOpen, { size: 24 }),
+    category: 'Trauma Support',
+    title: 'Understanding Your Emotions',
+    description: 'Learn healthy ways to identify, process, and express your emotions. Includes practical exercises and coping strategies.',
+    views: '1.2k',
+    rating: '4.8',
+    url: '#',
+  },
+  {
+    id: '2',
+    theme: 'jade',
+    icon: React.createElement(Video, { size: 24 }),
+    category: 'Mental Health',
+    title: 'From Streets to Success',
+    description: 'Video series featuring young adults who overcame similar challenges. Hear authentic stories of transformation.',
+    views: '3.4k',
+    rating: '4.9',
+    url: '#',
+  },
+  {
+    id: '3',
+    theme: 'amethyst',
+    icon: React.createElement(Heart, { size: 24 }),
+    category: 'Life Skills',
+    title: 'Building Healthy Relationships',
+    description: 'Navigate friendships, family dynamics, and romantic relationships. Learn about boundaries and communication.',
+    views: '892',
+    rating: '4.7',
+    url: '#',
+  },
+  {
+    id: '4',
+    theme: 'jade',
+    icon: React.createElement(Scale, { size: 24 }),
+    category: 'Legal',
+    title: 'Know Your Rights',
+    description: 'Guide to navigating encounters with law enforcement and understanding the juvenile justice system.',
+    views: '2.1k',
+    rating: '4.9',
+    url: '#',
+  },
+  {
+    id: '5',
+    theme: 'amethyst',
+    icon: React.createElement(GraduationCap, { size: 24 }),
+    category: 'Academic',
+    title: 'Study Skills That Work',
+    description: 'Practical strategies for improving grades and staying organized. Time management and test prep techniques.',
+    views: '1.6k',
+    rating: '4.6',
+    url: '#',
+  },
+  {
+    id: '6',
+    theme: 'jade',
+    icon: React.createElement(Brain, { size: 24 }),
+    category: 'Mental Health',
+    title: 'Mindfulness for Tough Times',
+    description: 'Audio meditation and breathing exercises to help manage stress, anxiety, and difficult emotions.',
+    views: '2.8k',
+    rating: '4.8',
+    url: '#',
+  },
+  {
+    id: '7',
+    theme: 'amethyst',
+    icon: React.createElement(FileText, { size: 24 }),
+    category: 'Career',
+    title: 'Resume & Interview Guide',
+    description: 'Build a standout resume and master interview skills. Templates and practice questions included.',
+    views: '1.1k',
+    rating: '4.7',
+    url: '#',
+  },
+  {
+    id: '8',
+    theme: 'jade',
+    icon: React.createElement(Users, { size: 24 }),
+    category: 'Community',
+    title: 'Peer Support Network',
+    description: 'Connect with mentors and peers who understand your journey. Group sessions and one-on-one matching.',
+    views: '2.3k',
+    rating: '4.9',
+    url: '#',
   },
 ];

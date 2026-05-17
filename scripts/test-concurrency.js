@@ -20,7 +20,7 @@
  *   node scripts/test-concurrency.js
  */
 
-const { db } = require('../lib/db.ts');
+const { db } = require('../lib/db');
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 const CONCURRENT_REQUESTS = 3;

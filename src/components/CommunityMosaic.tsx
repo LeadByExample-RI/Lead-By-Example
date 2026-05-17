@@ -66,14 +66,7 @@ export default function CommunityMosaic() {
             className="text-4xl md:text-5xl font-bold tracking-tight text-white"
           >
             Every gathering,{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #C4965A 0%, #FFD700 60%, #a78040 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <span className="text-[#FFD700]">
               a step forward.
             </span>
           </motion.h2>
@@ -123,15 +116,7 @@ export default function CommunityMosaic() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div>
-              <p
-                className="text-6xl font-black leading-none"
-                style={{
-                  background: 'linear-gradient(135deg, #FFD700 0%, #C4965A 100%)',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
+              <p className="text-6xl font-black leading-none text-[#FFD700]">
                 125+
               </p>
               <p className="text-white/70 text-sm mt-1.5 max-w-xs">
