@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
-import { GoogleMapEmbed } from '@/components/GoogleMapEmbed'
 
 interface MapPlaceholderProps {
   isOpen: boolean
@@ -93,12 +92,15 @@ export function MapPlaceholder({
               </div>
 
               {/* Map Content */}
-              <div className="relative bg-[#F6F6F6] flex-1 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex flex-col items-center justify-center">
-                <GoogleMapEmbed
-                  lat={locationLat}
-                  lng={locationLng}
-                  locationName={locationName}
-                />
+              <div className="relative bg-[#F6F6F6] flex-1 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex flex-col items-center justify-center p-4">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🗺️</div>
+                  <p className="text-gray-600 font-medium">{locationName}</p>
+                  {locationAddress && <p className="text-gray-500 text-sm mt-1">{locationAddress}</p>}
+                  <p className="text-gray-400 text-xs mt-2">
+                    Lat: {locationLat?.toFixed(4) || 'N/A'}, Lng: {locationLng?.toFixed(4) || 'N/A'}
+                  </p>
+                </div>
               </div>
 
               {/* Footer with API Integration Note */}

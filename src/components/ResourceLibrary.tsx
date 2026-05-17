@@ -11,7 +11,7 @@ import {
   Star,
 } from 'lucide-react';
 import SaturnCarousel from './ui/SaturnCarousel';
-import { Button, GlassCard } from '@/components/ui';
+import { Button, GlassCard, MotionGlassCard } from '@/components/ui';
 import {
   carouselItems,
   crisisResources,
