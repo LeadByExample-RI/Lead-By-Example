@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Users, Calendar } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Heading, Text } from '@/components/ui/Typography'
+import { Button } from '@/components/ui/Button'
 
 const archiveData = [
   {
