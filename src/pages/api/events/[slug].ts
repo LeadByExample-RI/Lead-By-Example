@@ -40,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { guestCount = 1, specialRequests } = req.body;
     const userId = session.user.id!;
     const slugStr = slug as string;
+    const requestedGuests = Number.parseInt(String(guestCount), 10) || 1;
 
     try {
       const registrationResult = await db.$transaction(async (tx) => {
@@ -59,10 +60,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           throw new Error('Event not found');
         }
 
-        if (currentEvent.maxAttendees && currentEvent.registeredCount >= currentEvent.maxAttendees) {
-          throw new Error('Capacity reached');
-        }
-
         const existing = await tx.eventRegistration.findUnique({
           where: { userId_eventId: { userId, eventId: currentEvent.id } },
         });
@@ -70,18 +67,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           throw new Error('Already registered');
         }
 
+        const capacityLimit =
+          currentEvent.maxAttendees !== null ? currentEvent.maxAttendees - requestedGuests + 1 : null;
+
+        const updateResult = await tx.event.updateMany({
+          where: {
+            id: currentEvent.id,
+            ...(capacityLimit !== null
+              ? {
+                  registeredCount: { lt: capacityLimit },
+                }
+              : {}),
+          },
+          data: {
+            registeredCount: { increment: requestedGuests },
+          },
+        });
+
+        if (updateResult.count === 0) {
+          throw new Error('Capacity reached');
+        }
+
         const newRegistration = await tx.eventRegistration.create({
           data: {
             userId,
             eventId: currentEvent.id,
-            guestCount: parseInt(guestCount) || 1,
+            guestCount: requestedGuests,
             specialRequests: specialRequests?.substring(0, 500),
           },
-        });
-
-        await tx.event.update({
-          where: { id: currentEvent.id },
-          data: { registeredCount: { increment: 1 } },
         });
 
         return { newRegistration, event: currentEvent };

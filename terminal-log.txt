@@ -74,3 +74,7 @@ PS>npx tsx scripts/test-concurrency.js
 
 ]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cEHunt\x5cRepos\x5cProjects\x5cLead-By-ExamplePS C:\Users\EHunt\Repos\Projects\Lead-By-Example> ]633;B
 ]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cEHunt\x5cRepos\x5cProjects\x5cLead-By-ExamplePS C:\Users\EHunt\Repos\Projects\Lead-By-Example> ]633;B
+PS>git branch
+* agents/vercel-build-error-fix
+  main
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cEHunt\x5cRepos\x5cProjects\x5cLead-By-ExamplePS C:\Users\EHunt\Repos\Projects\Lead-By-Example> ]633;B
