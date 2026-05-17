@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="home" className="relative overflow-hidden min-h-screen section-padding">
+    <section id="home" className="relative overflow-hidden min-h-screen section-padding bg-[#080b12]">
       <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center"
@@ -74,14 +74,14 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Mission text */}
             <div className="space-y-5">
               {subtitle && (
-                <Text size="sm" className="text-accent-500 font-medium uppercase tracking-wider">
+                <Text size="sm" className="text-[#FFD700] font-medium uppercase tracking-wider">
                   {subtitle}
                 </Text>
               )}
-              <Heading level={1} className="text-white">
+              <Heading level={1} className="text-[#FFD700]">
                 {title}
               </Heading>
-              <Text size="lg" className="text-white/90">
+              <Text size="lg" className="text-[#FFD700]/85">
                 {description}
               </Text>
             </div>
@@ -100,21 +100,25 @@ export const Hero: React.FC<HeroProps> = ({
                   initial="hidden"
                   animate="visible"
                 >
-                  <GlassCard variant="dark" className="text-center p-8">
+                  <GlassCard variant="dark" className="text-center p-8 bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl">
                     <div className="text-4xl mb-3">{stat.icon}</div>
-                    <div className="text-3xl font-bold text-accent-500 mb-1.5">{stat.value}</div>
-                    <div className="text-base text-white/70">{stat.label}</div>
+                    <div className="text-3xl font-bold text-[#FFD700] mb-1.5">{stat.value}</div>
+                    <div className="text-base text-[#FFD700]/70">{stat.label}</div>
                   </GlassCard>
                 </motion.div>
               ))}
             </div>
 
             {/* Get in Touch */}
-            <GlassCard variant="dark" hover={false} className="p-8 space-y-5 lighthouse-active">
-              <Heading level={3} className="text-white">
+            <GlassCard
+              variant="dark"
+              hover={false}
+              className="p-8 space-y-5 lighthouse-active bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl"
+            >
+              <Heading level={3} className="text-[#FFD700]">
                 Get in Touch
               </Heading>
-              <div className="space-y-3 text-white/90">
+              <div className="space-y-3 text-[#FFD700]/90">
                 <button
                   onClick={() => showMapPlaceholder({
                     locationName: 'Lead By Example - Headquarters',
@@ -127,24 +131,24 @@ export const Hero: React.FC<HeroProps> = ({
                   data-location-lat={organizationInfo.lat}
                   data-location-lng={organizationInfo.lng}
                 >
-                  <span className="text-accent-500 group-hover:scale-110 transition-transform text-lg">📍</span>
-                  <Text size="base" className="text-accent-500 group-hover:underline">
+                  <span className="text-[#FFD700] group-hover:scale-110 transition-transform text-lg">📍</span>
+                  <Text size="base" className="text-[#FFD700] group-hover:underline">
                     {organizationInfo.address}
                   </Text>
                 </button>
                 <div className="flex items-center space-x-3">
-                  <span className="text-accent-500 text-lg">📞</span>
-                  <a href={`tel:${organizationInfo.phone}`} className="hover:text-accent-500 transition-colors">
+                  <span className="text-[#FFD700] text-lg">📞</span>
+                  <a href={`tel:${organizationInfo.phone}`} className="hover:text-[#FFD700] transition-colors">
                     <Text size="base">{organizationInfo.phone}</Text>
                   </a>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-accent-500 mt-0.5 text-lg">✉️</span>
+                  <span className="text-[#FFD700] mt-0.5 text-lg">✉️</span>
                   <div className="flex flex-col space-y-1.5">
-                    <a href="mailto:robertleadbyexample@gmail.com" className="hover:text-accent-500 transition-colors">
+                    <a href="mailto:robertleadbyexample@gmail.com" className="hover:text-[#FFD700] transition-colors">
                       <Text size="sm">robertleadbyexample@gmail.com</Text>
                     </a>
-                    <a href="mailto:ronaldleadbyexample@gmail.com" className="hover:text-accent-500 transition-colors">
+                    <a href="mailto:ronaldleadbyexample@gmail.com" className="hover:text-[#FFD700] transition-colors">
                       <Text size="sm">ronaldleadbyexample@gmail.com</Text>
                     </a>
                   </div>
@@ -160,24 +164,22 @@ export const Hero: React.FC<HeroProps> = ({
             onMouseEnter={() => setIsBentoHovered(true)}
             onMouseLeave={() => setIsBentoHovered(false)}
           >
-            <div
-              className="w-full bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/15"
-            >
+            <div className="w-full rounded-2xl p-8 bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* Row 1: Badge + Title + Date — full width */}
                 <div className="col-span-1 md:col-span-2 space-y-4">
-                  <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-accent-500 bg-accent-500/10 border border-accent-500/30 rounded-full px-3 py-1">
+                  <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-[#FFD700] bg-[#4B306A]/30 border border-[#4B306A]/60 rounded-full px-3 py-1">
                     6th Annual · All Sides of Town
                   </span>
-                  <Heading level={2} className="gradient-text leading-tight">
+                  <Heading level={2} className="text-[#FFD700] leading-tight">
                     {currentFundraiser.title}
                   </Heading>
                   <div className="space-y-1.5">
-                    <Text size="sm" className="text-white/85 font-medium">
+                    <Text size="sm" className="text-[#FFD700]/85 font-medium">
                       {currentFundraiser.date}
                     </Text>
-                    <Text size="xs" className="text-white/55">
+                    <Text size="xs" className="text-[#FFD700]/65">
                       {currentFundraiser.time}
                     </Text>
                     <button
@@ -189,8 +191,8 @@ export const Hero: React.FC<HeroProps> = ({
                       })}
                       className="inline-flex items-center gap-1.5 hover:opacity-80 transition-opacity group"
                     >
-                      <span className="text-accent-500 text-sm group-hover:scale-110 transition-transform">📍</span>
-                      <Text size="xs" className="text-accent-500 font-medium group-hover:underline">
+                      <span className="text-[#FFD700] text-sm group-hover:scale-110 transition-transform">📍</span>
+                      <Text size="xs" className="text-[#FFD700] font-medium group-hover:underline">
                         {currentFundraiser.location}
                       </Text>
                     </button>
@@ -200,8 +202,8 @@ export const Hero: React.FC<HeroProps> = ({
                 {/* Row 2 left: Feature checklist */}
                 <div className="col-span-1 flex flex-col gap-y-2 justify-start">
                   {currentFundraiser.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-1.5 text-white/75">
-                      <span className="text-accent-500 text-xs font-bold shrink-0">✓</span>
+                    <div key={index} className="flex items-center gap-1.5 text-[#FFD700]/80">
+                      <span className="text-[#01514C] text-xs font-bold shrink-0">✓</span>
                       <Text size="xs">{feature}</Text>
                     </div>
                   ))}
@@ -229,7 +231,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <Button
                       variant="outline"
                       size="lg"
-                      className="w-1/2"
+                      className="w-full sm:w-1/2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10"
                       onClick={() => {
                         window.location.href =
                           'mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website';
