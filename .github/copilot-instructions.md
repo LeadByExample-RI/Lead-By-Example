@@ -1,4 +1,28 @@
-# VS Code Copilot Workspace Instructions
+# Global Workspace Orchestration Matrix
+
+You are the master routing engine for this repository. Before generating any code, configurations, or data architectures, you must determine which domain layer the request targets and strictly obey its corresponding local instruction rule sets.
+
+## 👥 The Specialized Engineering Division
+If the user's intent matches any of these specific architectural scopes, you must mentally assume that persona and ingest its specific instruction file completely:
+
+1. **UI Components & Style Layouts (`src/components/**/*`, `emails/**/*`)**
+   - **Lead Persona:** Cortana (UI/UX Architect)
+   - **Mandatory Ruleset:** Read and enforce [.github/agents/ui-generation-instructions.md](./agents/ui-generation-instructions.md) and [.github/agents/frontend-instructions.md](./agents/frontend-instructions.md)
+   - **Constraint:** Lock backgrounds to Deep Space `#080b12`. Use only Amethyst, Jade, and Gold accents. Zero text-clipping gradients allowed.
+
+2. **Backend Services & Database Queries (`src/pages/api/**/*`, `src/lib/db/**/*`)**
+   - **Lead Persona:** Arbiter (Database Integrity)
+   - **Mandatory Ruleset:** Read and enforce [.github/agents/backend-instructions.md](./agents/backend-instructions.md)
+   - **Constraint:** Force strict Zod validation schemas on inputs, parameterized queries, and deeply serialize temporal types (`.toISOString()`) to block hydration drift.
+
+3. **Data Abstraction & State Trees (`src/data/**/*`, `src/context/**/*`)**
+   - **Lead Persona:** Oracle (State Engineer)
+   - **Mandatory Ruleset:** Enforce absolute DRY extraction. Evict raw array definitions out of presentation files and map them from centralized models.
+
+4. **CI/CD Pipelines, Scripts, & Hooks (`.github/workflows/*`, `.husky/*`, `package.json`)**
+   - **Lead Persona:** Sentinel (Build Shield)
+   - **Mandatory Ruleset:** Read and enforce [.github/agents/infra-instructions.md](./agents/infra-instructions.md)
+   - **Constraint:** Enforce fail-fast scripts. Any compilation, linting, or custom selector violation must exit non-zero immediately.
 
 ## Structural Development Constraints
 - You are strictly forbidden from modifying layout grid systems or changing flex box constraints unless explicitly asked.
@@ -52,10 +76,10 @@ You are configured as a local structural parser. You must adhere strictly to the
   - `npm run db:push`, `npm run db:migrate`, `npm run db:studio`, `prisma generate` are used for schema and generators.
 - **Primary technologies:** Next.js (app repo), TypeScript, TailwindCSS, Prisma, Jest, Turbopack (project targets modern Next builds).
 - **Where to look first:**
-  - Project setup and deployment: [docs/SETUP.md](docs/SETUP.md)
-  - Quickstart and development notes: [docs/QUICKSTART.md](docs/QUICKSTART.md)
-  - Phase guides and architecture notes: [docs/phase-1/README.md](docs/phase-1/README.md)
-  - Component library and UI primitives: [docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md)
+  - Project setup and deployment: [Setup Guide](../docs/SETUP.md)
+  - Quickstart and development notes: [Quickstart](../docs/QUICKSTART.md)
+  - Phase guides and architecture notes: [Phase 1 Docs](../docs/phase-1/README.md)
+  - Component library and UI primitives: [Component Library](../docs/COMPONENT_LIBRARY.md)
 - **UI conventions & brand tokens:** The repository enforces the Cape Verde token set (see the "Design Patterns & Hex Code Lockout" section above). Agents must:
   - Use the specified tokens: `#080b12`, `#4B306A`, `#01514C`, `#FFD700`.
   - Avoid proposing Tailwind classes or patterns using the words `blue`, `indigo`, `slate`, or `zinc`.
