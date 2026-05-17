@@ -1,5 +1,5 @@
 "use client";
-
+import DOMPurify from 'isomorphic-dompurify';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -128,8 +128,12 @@ export default function EventDetailClient({ event }: Props) {
                 </div>
               )}
 
-              <div className="prose max-w-none text-white/80" dangerouslySetInnerHTML={{ __html: event.description || '' }} />
-
+              <div
+                className="prose max-w-none text-white/80"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(event.description || '')
+                }}
+              />
               <div className="mt-8">
                 {!isPast && !isFull && (
                   session ? (

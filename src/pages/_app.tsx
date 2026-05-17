@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import DonationModal from '@/components/DonationModal';
 import CookoutDonationModal from '@/components/CookoutDonationModal';
+import { SessionProvider } from 'next-auth/react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -74,11 +75,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://js.stripe.com" />
       </Head>
 
-      <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
-        <Component {...pageProps} />
-      </div>
+      <SessionProvider session={(pageProps as any).session}>
+        <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
+          <Component {...pageProps} />
+        </div>
 
-      {/* Donation Modals — each manages its own Stripe Elements context */}
+        {/* Donation Modals — each manages its own Stripe Elements context */}
+      </SessionProvider>
       <DonationModal
         isOpen={showDonationModal}
         onClose={() => setShowDonationModal(false)}

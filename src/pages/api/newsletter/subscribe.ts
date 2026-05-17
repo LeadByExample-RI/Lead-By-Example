@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 import { newsletterQueries } from '@/lib/db-queries';
+import { parseAndValidate } from '@/lib/api-utils';
 
 const schema = z.object({
   email: z.string().email('Valid email address required'),
@@ -14,12 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const parsed = schema.safeParse(req.body);
-  if (!parsed.success) {
-    return res.status(400).json({ error: parsed.error.errors[0].message });
-  }
+  const data = parseAndValidate(req, res, schema);
+  if (!data) return;
 
-  const { email, interests } = parsed.data;
+  const { email, interests } = data;
 
   try {
     await newsletterQueries.subscribe(email, { interests });

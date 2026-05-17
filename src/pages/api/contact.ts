@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 import { sendEmail } from '@/lib/email-service';
+import { parseAndValidate } from '@/lib/api-utils';
 
 
 const contactSchema = z.object({
@@ -13,13 +14,10 @@ const contactSchema = z.object({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  const data = parseAndValidate(req, res, contactSchema);
+  if (!data) return; // parseAndValidate already sent a response
 
-  const result = contactSchema.safeParse(req.body);
-  if (!result.success) {
-    return res.status(400).json({ error: result.error.errors[0].message });
-  }
-
-  const { name, email, subject, message, type } = result.data;
+  const { name, email, subject, message, type } = data;
 
   const typeLabels: Record<string, string> = {
     general: 'General Inquiry',
