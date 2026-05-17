@@ -86,7 +86,9 @@ export default function VideoHero({ className }: VideoHeroProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().then(() => setIsPlaying(true)).catch(() => {});
+          video.play().then(() => setIsPlaying(true)).catch((err) => {
+            console.warn('Autoplay blocked or failed:', err);
+          });
         } else {
           video.pause();
           setIsPlaying(false);
@@ -96,14 +98,23 @@ export default function VideoHero({ className }: VideoHeroProps) {
     );
 
     observer.observe(video);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      // Abort any pending network load and cancel queued play promises so
+      // the media element doesn't fire events into an unmounted tree.
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    };
   }, []);
 
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      video.play().then(() => setIsPlaying(true)).catch((err) => {
+        console.error('Autoplay blocked or failed:', err);
+      });
     } else {
       video.pause();
       setIsPlaying(false);
@@ -159,6 +170,12 @@ export default function VideoHero({ className }: VideoHeroProps) {
             aria-label="Annual Lead By Example All Sides of Town cookout community video"
             className="absolute inset-0 w-full h-full object-cover"
             onError={() => setVideoFailed(true)}
+            onVolumeChange={(e) => {
+              const v = e.currentTarget.volume;
+              const m = e.currentTarget.muted;
+              setVolume(v);
+              setIsMuted(m || v === 0);
+            }}
           />
         ) : (
           <img

@@ -11,7 +11,7 @@ const AtmosphericLights = dynamic(
 );
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import type { CommunityPhoto } from '@/types/media';
-import { communityPhotos } from '@/data/mediaAssets';
+import { communityPhotos, GRID_CONFIG } from '@/data/siteContent';
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
@@ -34,19 +34,6 @@ const itemVariants = {
   hidden:  { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
-
-// ─── Grid layout config ──────────────────────────────────────────────────────
-
-const GRID_CONFIG = [
-  { spans: 'col-span-1 md:col-span-6 lg:col-span-8 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 66vw' },
-  { spans: 'col-span-1 md:col-span-2 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 25vw, 33vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-6 row-span-2', sizes: '(max-width: 768px) 100vw, 50vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
-  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
-];
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
@@ -108,9 +95,9 @@ export default function CommunityMosaic() {
             - Each item gets mb-4 + break-inside-avoid to prevent column breaks through cards
           */}
           <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 md:gap-8 auto-rows-[200px]">
-            {communityPhotos.map((photo, index) => (
+            {communityPhotos.map((photo: CommunityPhoto, index: number) => (
               <GalleryCard
-                key={photo.src}
+                key={`${photo.src}-${index}`}
                 photo={photo}
                 index={index}
                 isSelected={selected?.src === photo.src}
@@ -162,7 +149,7 @@ export default function CommunityMosaic() {
             </div>
           </motion.div>
         </div>
-        <AtmosphericLights theme="green" />
+        <AtmosphericLights theme="verdean" />
       </motion.section>
 
       {/* Modal — sibling of section so z-50 fixed positioning isn't clipped */}

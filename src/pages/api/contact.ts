@@ -26,17 +26,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     media: 'Media / Press',
     other: 'Other',
   };
+  const safeType = type ?? 'general';
+  const typeLabel = typeLabels[safeType] ?? safeType;
 
-  // Send to org contact email
-  await sendEmail({
-    to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@leadbyexample.org',
-    subject: `[${typeLabels[type]}] ${subject}`,
-    html: `
+  try {
+    // Send to org contact email
+    await sendEmail({
+      to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@leadbyexample.org',
+      subject: `[${typeLabel}] ${subject}`,
+      html: `
       <html><body style="font-family: Arial, sans-serif; line-height: 1.6;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #01514C;">New Contact Form Submission</h2>
           <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
-            <tr><td style="padding: 8px; font-weight: bold; width: 120px;">Type:</td><td style="padding: 8px;">${typeLabels[type]}</td></tr>
+            <tr><td style="padding: 8px; font-weight: bold; width: 120px;">Type:</td><td style="padding: 8px;">${typeLabel}</td></tr>
             <tr style="background:#f9f9f9"><td style="padding: 8px; font-weight: bold;">Name:</td><td style="padding: 8px;">${name}</td></tr>
             <tr><td style="padding: 8px; font-weight: bold;">Email:</td><td style="padding: 8px;"><a href="mailto:${email}">${email}</a></td></tr>
             <tr style="background:#f9f9f9"><td style="padding: 8px; font-weight: bold;">Subject:</td><td style="padding: 8px;">${subject}</td></tr>
@@ -50,14 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         </div>
       </body></html>
     `,
-    replyTo: email,
-  });
+      replyTo: email,
+    });
 
-  // Auto-reply to sender
-  await sendEmail({
-    to: email,
-    subject: 'We received your message — Lead By Example',
-    html: `
+    // Auto-reply to sender
+    await sendEmail({
+      to: email,
+      subject: 'We received your message — Lead By Example',
+      html: `
       <html><body style="font-family: Arial, sans-serif; line-height: 1.6;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #01514C;">Thank you, ${name}!</h2>
@@ -72,7 +75,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         </div>
       </body></html>
     `,
-  });
+    });
+  } catch (err) {
+    console.error('[contact] Failed to send email:', err);
+    return res.status(500).json({ error: 'Failed to send message. Please try again later.' });
+  }
 
   return res.status(200).json({ success: true });
 }

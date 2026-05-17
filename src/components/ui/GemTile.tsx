@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { ResourceItem } from '@/data/siteContent';
+import { EXTRUSION_DEPTHS } from '@/data/siteContent';
 
 // ─── Ring sizing constants ─────────────────────────────────────────────────────
 
@@ -56,8 +57,6 @@ const GEM: Record<GemTheme, GemTokens> = {
     ],
   },
 };
-
-const EXTRUSION_DEPTHS = [2, 4, 6, 8] as const;
 
 // ─── GemTile Component ────────────────────────────────────────────────────────
 

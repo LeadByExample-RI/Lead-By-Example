@@ -66,15 +66,15 @@ export default function SaturnCarousel({ items }: { items: ResourceItem[] }) {
         dragElastic={0.05}
         onDragStart={(e) => {
           setIsInteracting(true);
-          dragStartRef.current = e instanceof MouseEvent
-            ? e.clientX
-            : (e as TouchEvent).touches[0].clientX;
+          dragStartRef.current = 'touches' in e
+            ? (e as TouchEvent).touches[0].clientX
+            : (e as MouseEvent).clientX;
         }}
         onDragEnd={(e, info) => {
           setIsInteracting(false);
-          const currentX = e instanceof MouseEvent
-            ? e.clientX
-            : (e as TouchEvent).changedTouches[0].clientX;
+          const currentX = 'touches' in e
+            ? (e as TouchEvent).changedTouches[0].clientX
+            : (e as MouseEvent).clientX;
           const deltaX = currentX - dragStartRef.current;
           const swipeThreshold = 60;
 
@@ -110,7 +110,7 @@ export default function SaturnCarousel({ items }: { items: ResourceItem[] }) {
       {/* Empty state */}
       {items.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="bg-[#080b12]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center max-w-sm">
+          <div className="bg-[#080b12]/40 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-8 text-center max-w-sm">
             <div className="text-4xl mb-4">🔍</div>
             <h4 className="text-xl font-bold text-white mb-2">No resources match</h4>
             <p className="text-gray-400">Try adjusting your search or filters to find what you&apos;re looking for.</p>
