@@ -354,7 +354,7 @@ export default function ResourceLibrary() {
   const regularResources = filteredResources.filter(r => !r.featured);
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden z-0 bg-gradient-to-b from-primary-950 via-primary-900 to-primary-950">
+    <section className="py-20 px-4 relative overflow-hidden z-0 bg-gradient-to-b from-primary-900 via-primary-950 to-primary-950">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
