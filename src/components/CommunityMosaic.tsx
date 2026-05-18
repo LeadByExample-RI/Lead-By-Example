@@ -46,7 +46,7 @@ export default function CommunityMosaic() {
     <>
       <motion.section
         ref={sectionRef}
-        className="relative overflow-hidden bg-secondary-500 pt-36 md:pt-40 pb-20"
+        className="relative overflow-hidden pt-36 md:pt-40 pb-20 z-0"
       >
         <motion.div
           className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
@@ -56,23 +56,16 @@ export default function CommunityMosaic() {
         >
           <motion.p
             variants={headerItemVariants}
-            className="text-xs font-bold uppercase tracking-widest mb-4 text-gold"
+            className="text-sm sm:text-base font-bold uppercase tracking-[0.25em] mb-4 text-gold drop-shadow-md"
           >
             Our Community in Motion
           </motion.p>
           <motion.h2
             variants={headerItemVariants}
-            className="text-4xl md:text-5xl font-bold tracking-tight text-white"
+            className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white drop-shadow-xl mb-2"
           >
             Every gathering,{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #C4965A 0%, #FFD700 60%, #a78040 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <span className="gradient-text drop-shadow-md">
               a step forward.
             </span>
           </motion.h2>
@@ -101,21 +94,13 @@ export default function CommunityMosaic() {
 
         <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
           <motion.div
-            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl glass-effect-dark"
+            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl glass-effect-dark shadow-glass-dark hover-lift border border-white/10 z-10 relative"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div>
-              <p
-                className="text-6xl font-black leading-none"
-                style={{
-                  background: 'linear-gradient(135deg, #FFD700 0%, #C4965A 100%)',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
+              <p className="text-6xl font-black leading-none gradient-text drop-shadow-md">
                 125+
               </p>
               <p className="text-white/70 text-sm mt-1.5 max-w-xs">
@@ -125,7 +110,7 @@ export default function CommunityMosaic() {
             <div className="sm:ml-auto flex flex-col sm:items-end gap-2">
               <a
                 href="#about"
-                className="border border-gold/60 text-gold text-sm px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-colors whitespace-nowrap font-medium"
+                className="glass-button text-white text-sm px-6 py-2.5 rounded-xl whitespace-nowrap font-medium tracking-wide"
               >
                 Our Story →
               </a>
@@ -162,7 +147,7 @@ function GalleryCard({ photo, index, isSelected, onSelect }: GalleryCardProps) {
         onClick={onSelect}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative w-full h-full overflow-hidden rounded-xl cursor-pointer"
+        className="relative w-full h-full overflow-hidden rounded-xl cursor-pointer hover-lift shadow-glass-dark border border-white/10"
         animate={{ opacity: isSelected ? 0 : 1 }}
         transition={{
           opacity: { duration: 0.15 },
@@ -186,10 +171,9 @@ function GalleryCard({ photo, index, isSelected, onSelect }: GalleryCardProps) {
         />
 
         <motion.div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none glass-effect-dark"
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          style={{ background: 'rgba(0,0,0,0.54)' }}
         >
           <span className="text-white text-[11px] font-semibold tracking-widest uppercase border border-white/50 rounded-full px-4 py-1.5">
             Click to expand
