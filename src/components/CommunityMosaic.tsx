@@ -94,27 +94,27 @@ export default function CommunityMosaic() {
 
         <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
           <motion.div
-            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 px-8 py-7 rounded-2xl glass-effect-dark shadow-glass-dark hover-lift border border-white/10 z-10 relative"
+            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 p-8 md:p-10 rounded-2xl glass-effect-dark shadow-glass-dark hover-lift border border-white/20 shadow-[0_10px_40px_-10px_rgba(255,215,0,0.15)] z-10 relative w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <div>
+            <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
               <p className="text-6xl font-black leading-none gradient-text drop-shadow-md">
                 125+
               </p>
-              <p className="text-white/70 text-sm mt-1.5 max-w-xs">
+              <p className="text-base md:text-lg font-medium text-white/90 max-w-sm pb-1 md:pb-2">
                 youth served in Providence and surrounding communities
               </p>
             </div>
             <div className="sm:ml-auto flex flex-col sm:items-end gap-2">
-              <a
-                href="#about"
-                className="glass-button text-white text-sm px-6 py-2.5 rounded-xl whitespace-nowrap font-medium tracking-wide"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-donation-modal'))}
+                className="glass-button bg-gold/10 text-gold border-gold/50 hover:bg-gold/20 hover:border-gold hover:text-white hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] text-base px-8 py-4 rounded-xl whitespace-nowrap font-bold tracking-wide transition-all duration-300"
               >
-                Our Story →
-              </a>
-              <p className="text-white/35 text-xs">Lead By Example · Providence, RI</p>
+                Help Keep It Happening
+              </button>
+              <p className="text-sm font-medium text-white/50 tracking-wide mt-2">Lead By Example · Providence, RI</p>
             </div>
           </motion.div>
         </div>
