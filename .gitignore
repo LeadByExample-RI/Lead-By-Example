@@ -166,6 +166,7 @@ stripe_install/
 /docs/*/src/
 /docs/*/components/
 /docs/*/pages/
+/docs/*/assets/
 /docs/*/styles/
 /docs/*/public/
 /docs/*/node_modules/
