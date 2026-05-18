@@ -5,7 +5,7 @@ import MentorMatching from '@/components/MentorMatching';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
 import { Footer } from '@/components/sections/Footer';
-import { Hero } from '@/components/sections/Hero';
+import VideoHero from '@/components/VideoHero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -95,23 +95,8 @@ export default function Home() {
       <main>
         <Navbar />
 
-        {/* Hero Section with Current Fundraiser */}
-        <Hero
-          title="Breaking the School-to-Prison Pipeline"
-          description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
-          primaryAction={{
-            label: 'Help Make It Happen',
-            href: '#donate',
-            onClick: () => {
-              // Dispatch event to open cookout-specific modal
-              window.dispatchEvent(new Event('open-cookout-donation-modal'));
-            },
-          }}
-          secondaryAction={{
-            label: 'Learn More',
-            href: '#about',
-          }}
-        />
+        {/* Hero Section */}
+        <VideoHero />
 
         {/* Evolution Journey - Visual Storytelling of Transformation */}
         <section id="journey" className="bg-gradient-to-b from-white to-gray-50">

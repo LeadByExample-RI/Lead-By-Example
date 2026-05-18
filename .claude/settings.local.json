@@ -26,7 +26,9 @@
       "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)",
       "PowerShell(netstat -ano)",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\src\\\\pages\" -Filter \"*.tsx\")",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "Bash(npx tsc *)",
+      "Bash(npm install *)"
     ],
     "deny": [],
     "ask": []
