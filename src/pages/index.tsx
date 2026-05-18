@@ -125,6 +125,9 @@ export default function Home() {
         {/* Mission Section - Our Purpose */}
         <Mission />
 
+        {/* Community photo mosaic */}
+        <CommunityMosaic />
+
         {/* Testimonials Section - Success Stories Carousel */}
         <Testimonials />
 

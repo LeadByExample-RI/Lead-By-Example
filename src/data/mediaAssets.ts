@@ -30,7 +30,7 @@ export const communityPhotos: CommunityPhoto[] = [
     objectPosition: 'center center',
   },
   {
-    src: '/images/bw/cafe-visit.jpg',
+    src: '/images/community/cafe-visit.jpg',
     alt: 'Lead By Example youth and mentors at a community cafe visit',
     caption: 'Conversations that change the course.',
     category: 'community',
@@ -51,7 +51,7 @@ export const communityPhotos: CommunityPhoto[] = [
     objectPosition: 'center top',
   },
   {
-    src: '/images/bw/history-culture.jpg',
+    src: '/images/community/history-culture.jpg',
     alt: 'Lead By Example mentors and youth posing at the National Museum of African American History and Culture in Washington D.C.',
     caption: 'Roots that ground us.',
     category: 'journey',
