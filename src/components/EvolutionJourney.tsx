@@ -541,6 +541,20 @@ export default function EvolutionJourney() {
                       </motion.div>
                     )}
                   </motion.div>
+                ) : currentStage.id === 2 ? (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex h-full flex-col justify-center rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-yellow-500/10 p-8"
+                  >
+                    <h4 className="mb-4 text-xl font-bold text-white">The Critical Turning Point</h4>
+                    <p className="text-gray-300">
+                      Stage 2 is where intervention matters most. This is the pivotal moment to
+                      present teens with real options — showing them a different path forward and
+                      empowering them to make choices that can reshape their future trajectory.
+                    </p>
+                  </motion.div>
                 ) : (
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}

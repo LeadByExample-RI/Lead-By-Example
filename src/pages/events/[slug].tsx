@@ -1,13 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { db } from '@/lib/db';
-import DOMPurify from 'isomorphic-dompurify';
 import EventDetailClient from '@/components/events/EventDetailClient';
 
 interface Event {
   id: string;
   title: string;
   description: string | null;
-  sanitizedDescription: string;
   slug: string;
   startDate: string;
   endDate: string | null;
@@ -21,22 +19,18 @@ interface Event {
   tags: string[];
 }
 
-interface EventDetailPageProps {
+interface Props {
   event: Event;
 }
 
-export default function EventDetail({ event }: EventDetailPageProps) {
+export default function EventDetail({ event }: Props) {
   return <EventDetailClient event={event} />;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const slug = context.params?.slug as string;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const slug = params?.slug as string;
 
-  if (!slug) {
-    return { notFound: true };
-  }
-
-  const rawEvent = await db.event.findUnique({
+  const event = await db.event.findUnique({
     where: { slug },
     select: {
       id: true, title: true, description: true, slug: true,
@@ -46,22 +40,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  if (!rawEvent) {
-    return { notFound: true };
-  }
-
-  const serializedEvent: Event = {
-    ...rawEvent,
-    startDate: rawEvent.startDate.toISOString(),
-    endDate: rawEvent.endDate ? rawEvent.endDate.toISOString() : null,
-    raisedAmount: rawEvent.raisedAmount.toString(),
-    goal: rawEvent.goal ? rawEvent.goal.toString() : null,
-    sanitizedDescription: DOMPurify.sanitize(rawEvent.description ?? ''),
-  };
+  if (!event) return { notFound: true };
 
   return {
     props: {
-      event: serializedEvent,
+      event: JSON.parse(JSON.stringify(event)),
     },
   };
 };

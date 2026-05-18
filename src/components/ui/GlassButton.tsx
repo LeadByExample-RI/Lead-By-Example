@@ -33,9 +33,9 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
 
     const variantClasses = {
       primary:
-        'btn-primary glass-button text-black font-bold',
+        'bg-gradient-to-r from-accent-500 to-accent-600 text-primary-900 font-bold hover:from-accent-600 hover:to-accent-700 shadow-lg shadow-accent-500/30',
       secondary:
-        'btn-secondary glass-button text-white font-semibold',
+        'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white font-semibold hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/30',
       outline:
         'border-2 border-white/30 bg-white/10 text-white hover:bg-white/20 hover:border-white/40',
       ghost: 'text-white hover:bg-white/15 border border-white/10',

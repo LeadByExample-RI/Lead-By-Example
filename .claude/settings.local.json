@@ -25,12 +25,8 @@
       "PowerShell(Get-Process | Where-Object { $_.Name -match 'stripe' } -ErrorAction SilentlyContinue; Write-Host \"---\"; netstat -an | findstr \":3000\")",
       "PowerShell(Get-WmiObject Win32_Process | Where-Object { $_.Name -match 'stripe' } | Select-Object ProcessId, CommandLine)",
       "PowerShell(netstat -ano)",
-      "Bash(npx tsc *)",
-      "Bash(git fetch *)",
-      "Bash(cat src/middleware.ts)",
-      "Bash(cat middleware.ts)",
-      "Bash(npm uninstall *)",
-      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies['isomorphic-dompurify'] || 'NOT FOUND'\\)\")"
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\src\\\\pages\" -Filter \"*.tsx\")",
+      "Bash(Select-Object Name)"
     ],
     "deny": [],
     "ask": []

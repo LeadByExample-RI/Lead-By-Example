@@ -92,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({
             {actions.map((action) => (
               <Button
                 key={action.id}
-                variant={action.variant || 'gold'}
+                variant={action.variant || 'primary'}
                 size="sm"
                 onClick={action.onClick}
                 className="hidden sm:inline-flex"
@@ -170,13 +170,13 @@ const Header: React.FC<HeaderProps> = ({
                 {actions.map((action) => (
                   <Button
                     key={action.id}
-                    variant={action.variant || 'gold'}
+                    variant={action.variant || 'primary'}
                     size="sm"
                     onClick={() => {
                       action.onClick();
                       toggleMobileMenu();
                     }}
-                    className="w-full"
+                    fullWidth
                   >
                     {action.icon && <span className="h-4 w-4">{action.icon}</span>}
                     {action.label}

@@ -212,7 +212,7 @@ export function Navbar() {
                   // Dispatch event to open modal at app root level
                   window.dispatchEvent(new Event('open-donation-modal'));
                 }}
-                className="glass-button relative overflow-hidden rounded-full px-6 py-2 font-semibold text-off-white transition-all duration-300"
+                className="glass-button relative overflow-hidden rounded-full px-8 py-2 font-semibold text-off-white transition-all duration-300"
               >
                 {/* Animated border glow */}
                 <motion.div
@@ -235,7 +235,7 @@ export function Navbar() {
                   }}
                 />
 
-                <span className="relative z-10">Donate Now</span>
+                <span className="relative z-10">Help Make It Happen</span>
               </button>
             </motion.div>
           </div>
@@ -355,7 +355,7 @@ export function Navbar() {
                     }}
                   />
 
-                  <span className="relative z-10">Donate Now</span>
+                  <span className="relative z-10">Help Make It Happen</span>
                 </button>
               </motion.div>
             </div>

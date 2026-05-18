@@ -14,6 +14,7 @@
 
 import NextAuth, { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { db } from '@/lib/db';
 import { z } from 'zod';
 import bcryptjs from 'bcryptjs';
@@ -45,10 +46,6 @@ async function verifyPassword(password: string, hashedPassword: string): Promise
 }
 
 export const authConfig: NextAuthConfig = {
-  // NextAuth v5 looks for AUTH_SECRET; explicitly pass NEXTAUTH_SECRET so the
-  // existing .env.local value is used without requiring a rename.
-  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
-
   // Configure authentication providers
   providers: [
     // Email & Password provider
@@ -129,6 +126,9 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
 
+  // Use Prisma adapter for session management
+  adapter: PrismaAdapter(db),
+
   // Configure session
   session: {
     strategy: 'jwt',
@@ -177,10 +177,12 @@ export const authConfig: NextAuthConfig = {
 
   // Events
   events: {
-    async signIn() {
-      // intentionally silent — avoid writing PII to stdout/server logs
+    async signIn({ user }) {
+      console.log(`User signed in: ${user.email}`);
     },
-    async signOut() {},
+    async signOut() {
+      console.log('User signed out');
+    },
   },
 
   // Enable debug in development

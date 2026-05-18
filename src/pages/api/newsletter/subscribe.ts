@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 import { newsletterQueries } from '@/lib/db-queries';
-import { parseAndValidate } from '@/lib/api-utils';
-import { rateLimit } from '@/lib/rate-limit';
 
 const schema = z.object({
   email: z.string().email('Valid email address required'),
@@ -16,17 +14,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // 10 subscribe attempts per IP per hour
-  const fwd = req.headers['x-forwarded-for'];
-  const ip = (Array.isArray(fwd) ? fwd[0] : fwd?.split(',')[0])?.trim() ?? req.socket.remoteAddress ?? 'unknown';
-  if (!rateLimit(`newsletter:${ip}`, 10, 60 * 60 * 1000)) {
-    return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.errors[0].message });
   }
 
-  const data = parseAndValidate(req, res, schema);
-  if (!data) return;
-
-  const { email, interests } = data;
+  const { email, interests } = parsed.data;
 
   try {
     await newsletterQueries.subscribe(email, { interests });

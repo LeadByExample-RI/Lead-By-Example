@@ -131,8 +131,6 @@ model Donation {
   @@index([donorEmail])
   @@index([createdAt])
   @@index([campaign])
-  @@index([status])
-  @@index([eventId])
 }
 
 // ============================================================================
@@ -175,7 +173,6 @@ model Event {
 
   @@index([slug])
   @@index([startDate])
-  @@index([eventType])
 }
 
 /// Event registration (attendee list)

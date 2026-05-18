@@ -40,8 +40,7 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio",
-    "test:concurrency": "node scripts/test-concurrency.js"
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
@@ -55,14 +54,15 @@
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.0",
     "framer-motion": "^11.5.0",
-    "isomorphic-dompurify": "^3.13.0",
     "lucide-react": "^0.439.0",
     "micro": "^10.0.1",
     "next": "16.2.4",
     "next-auth": "^5.0.0-beta.20",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-email": "^6.0.3",
     "react-hook-form": "^7.53.0",
+    "recharts": "^2.12.0",
     "resend": "^3.0.0",
     "stripe": "^19.3.0",
     "tailwind-merge": "^2.5.0",
@@ -89,7 +89,6 @@
     "prettier-plugin-tailwindcss": "^0.6.0",
     "prisma": "^5.10.0",
     "tailwindcss": "^3.4.0",
-    "tsx": "^4.22.1",
     "typescript": "^5.5.0"
   },
   "engines": {

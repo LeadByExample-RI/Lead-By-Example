@@ -11,6 +11,7 @@
 
 const REQUIRED_ENV_VARS = [
   'DATABASE_URL',
+  'NEXTAUTH_SECRET',
   'NEXTAUTH_URL',
   'STRIPE_SECRET_KEY',
   'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
@@ -19,11 +20,7 @@ const REQUIRED_ENV_VARS = [
 ] as const;
 
 export function validateEnv(): void {
-  const missing: string[] = REQUIRED_ENV_VARS.filter((key) => !process.env[key]);
-
-  // NextAuth v5 uses AUTH_SECRET; v4 used NEXTAUTH_SECRET. Accept either.
-  const hasSecret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
-  if (!hasSecret) missing.push('AUTH_SECRET (or NEXTAUTH_SECRET)');
+  const missing = REQUIRED_ENV_VARS.filter((key) => !process.env[key]);
 
   if (missing.length > 0) {
     throw new Error(

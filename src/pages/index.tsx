@@ -4,18 +4,13 @@ import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
-import { Events } from '@/components/sections/Events';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
+import { Testimonials } from '@/components/sections/Testimonials';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
-
-const VideoHero = dynamic(() => import('@/components/VideoHero'), { ssr: false });
-const CommunityMosaic = dynamic(() => import('@/components/CommunityMosaic'));
-const CookoutLegacy = dynamic(() => import('@/components/CookoutLegacy'));
 
 export default function Home() {
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -101,78 +96,52 @@ export default function Home() {
         <Navbar />
 
         {/* Hero Section with Current Fundraiser */}
-        <section data-section-theme="dark">
-          <Hero
-            title="Breaking the School-to-Prison Pipeline"
-            description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
-            primaryAction={{
-              label: 'Help Make It Happen',
-              href: '#donate',
-              onClick: () => {
-                window.dispatchEvent(new Event('open-cookout-donation-modal'));
-              },
-            }}
-            secondaryAction={{
-              label: 'Learn More',
-              href: '#about',
-            }}
-          />
-        </section>
-
-        {/* Community cookout video */}
-        <section id="cookout-video" aria-label="Community cookout video" data-section-theme="dark">
-          <VideoHero />
-        </section>
+        <Hero
+          title="Breaking the School-to-Prison Pipeline"
+          description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
+          primaryAction={{
+            label: 'Help Make It Happen',
+            href: '#donate',
+            onClick: () => {
+              // Dispatch event to open cookout-specific modal
+              window.dispatchEvent(new Event('open-cookout-donation-modal'));
+            },
+          }}
+          secondaryAction={{
+            label: 'Learn More',
+            href: '#about',
+          }}
+        />
 
         {/* Evolution Journey - Visual Storytelling of Transformation */}
-        <section id="journey" className="bg-[#4B306A]" data-section-theme="dark">
+        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
           <EvolutionJourney />
         </section>
 
         {/* Mission Section - Our Purpose */}
-        <section data-section-theme="dark">
-          <Mission />
-        </section>
+        <Mission />
 
-        {/* Events Section - Annual Community Cookouts */}
-        <section id="events" data-section-theme="dark">
-          <Events />
-        </section>
-
-        {/* Community in motion photo gallery */}
-        <section id="community" aria-label="Community in motion photo gallery" data-section-theme="dark">
-          <CommunityMosaic />
-        </section>
+        {/* Testimonials Section - Success Stories Carousel */}
+        <Testimonials />
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="bg-[#01514C]" data-section-theme="dark">
+        <section id="mentors" className="bg-white">
           <MentorMatching />
         </section>
 
         {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-[#4B306A]" data-section-theme="dark">
+        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
           <ResourceLibrary />
         </section>
 
         {/* Archive Section - Past Achievements */}
-        <section data-section-theme="dark">
-          <Archive />
-        </section>
-
-        {/* Cookout history and year six invitation */}
-        <section id="legacy" aria-label="Cookout history and year six invitation" data-section-theme="dark">
-          <CookoutLegacy />
-        </section>
+        <Archive />
 
         {/* Partners Section - Community Organizations */}
-        <section data-section-theme="dark">
-          <Partners />
-        </section>
+        <Partners />
 
         {/* Footer - Contact Info & Links */}
-        <section data-section-theme="dark">
-          <Footer />
-        </section>
+        <Footer />
 
         {/* Map Placeholder Modal - Renders on main page */}
         <MapPlaceholder

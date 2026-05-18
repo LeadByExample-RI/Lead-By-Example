@@ -14,15 +14,8 @@ import { handlers } from '@/lib/auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function authHandler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    type HandlerFn = (req: NextApiRequest, res: NextApiResponse) => unknown;
-    if (req.method === 'GET') return await (handlers.GET as unknown as HandlerFn)(req, res);
-    if (req.method === 'POST') return await (handlers.POST as unknown as HandlerFn)(req, res);
-    res.status(405).end();
-  } catch (err) {
-    console.error('[auth] Unhandled error in NextAuth handler:', err);
-    if (!res.headersSent) {
-      res.status(500).json({ error: 'Authentication service unavailable. Please try again.' });
-    }
-  }
+  type HandlerFn = (req: NextApiRequest, res: NextApiResponse) => unknown;
+  if (req.method === 'GET') return (handlers.GET as unknown as HandlerFn)(req, res);
+  if (req.method === 'POST') return (handlers.POST as unknown as HandlerFn)(req, res);
+  res.status(405).end();
 }

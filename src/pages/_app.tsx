@@ -3,10 +3,9 @@ import type { AppProps } from 'next/app';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-const DonationModal = dynamic(() => import('@/components/DonationModal'), { ssr: false });
-const CookoutDonationModal = dynamic(() => import('@/components/CookoutDonationModal'), { ssr: false });
 import { SessionProvider } from 'next-auth/react';
+import DonationModal from '@/components/DonationModal';
+import CookoutDonationModal from '@/components/CookoutDonationModal';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,7 +19,7 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showCookoutDonationModal, setShowCookoutDonationModal] = useState(false);
 
@@ -29,20 +28,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     const handleOpenModal = () => setShowDonationModal(true);
     // Listen for cookout donation modal trigger from Hero/Cookout section
     const handleOpenCookoutModal = () => setShowCookoutDonationModal(true);
-
+    
     window.addEventListener('open-donation-modal', handleOpenModal);
     window.addEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
-
+    
+    // Prevent body scroll when either modal is open
+    if (showDonationModal || showCookoutDonationModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
     return () => {
       window.removeEventListener('open-donation-modal', handleOpenModal);
       window.removeEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Prevent body scroll when either modal is open
-    document.body.style.overflow = showDonationModal || showCookoutDonationModal ? 'hidden' : 'unset';
-    return () => {
       document.body.style.overflow = 'unset';
     };
   }, [showDonationModal, showCookoutDonationModal]);
@@ -76,7 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://js.stripe.com" />
       </Head>
 
-      <SessionProvider session={(pageProps as any).session}>
+      <SessionProvider session={session}>
         <div className={`${inter.variable} ${montserrat.variable} font-sans`}>
           <Component {...pageProps} />
         </div>

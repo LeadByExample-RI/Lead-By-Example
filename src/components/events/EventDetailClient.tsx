@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -12,7 +13,6 @@ interface Event {
   id: string;
   title: string;
   description: string | null;
-  sanitizedDescription: string;
   slug: string;
   startDate: string;
   endDate: string | null;
@@ -128,10 +128,8 @@ export default function EventDetailClient({ event }: Props) {
                 </div>
               )}
 
-              <div
-                className="prose max-w-none text-white/80"
-                dangerouslySetInnerHTML={{ __html: event.sanitizedDescription }}
-              />
+              <div className="prose max-w-none text-white/80" dangerouslySetInnerHTML={{ __html: event.description || '' }} />
+
               <div className="mt-8">
                 {!isPast && !isFull && (
                   session ? (
