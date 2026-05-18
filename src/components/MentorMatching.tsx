@@ -143,7 +143,7 @@ function MentorFormModal({
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        className="w-full max-w-lg rounded-2xl glass-effect-dark shadow-glass-dark border border-white/15 p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}
       >
         {submitted ? (
@@ -153,7 +153,7 @@ function MentorFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all"
+              className="px-8 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold-dark transition-all"
             >
               Close
             </button>
@@ -165,7 +165,7 @@ function MentorFormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
+                className="w-9 h-9 flex items-center justify-center rounded-full glass-button border border-white/20 text-white/80 hover:text-white transition-all"
               >
                 ✕
               </button>
@@ -198,7 +198,7 @@ function MentorFormModal({
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-gold-500 text-black font-semibold rounded-xl hover:bg-gold-600 transition-all mt-2"
+                className="w-full py-3 bg-gold text-black font-bold rounded-xl hover:bg-gold-dark transition-all mt-2"
               >
                 Submit
               </button>
@@ -388,7 +388,7 @@ export default function MentorMatching() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-8"
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl glass-effect-dark shadow-glass-dark border border-white/15 p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-6 flex items-start gap-4">
@@ -397,13 +397,13 @@ export default function MentorMatching() {
                 </div>
                 <div className="flex-1">
                   <div className="mb-1 flex items-center gap-2">
-                    <h3 className="text-2xl font-bold text-gray-900">{selectedMentor.name}</h3>
+                    <h3 className="text-2xl font-bold text-white drop-shadow-md">{selectedMentor.name}</h3>
                     {selectedMentor.verified && (
                       <CheckCircle className="h-6 w-6 fill-verdean-100 text-verdean-500" />
                     )}
                   </div>
-                  <p className="mb-2 text-gray-600">{selectedMentor.role}</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <p className="mb-2 text-white/70">{selectedMentor.role}</p>
+                  <div className="flex items-center gap-4 text-sm text-white/55">
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-gold-500 text-gold-500" />
                       {selectedMentor.successRate}% Success
@@ -417,23 +417,23 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-2 font-semibold text-gray-900">About</h4>
-                <p className="leading-relaxed text-gray-700">{selectedMentor.bio}</p>
+                <h4 className="mb-2 font-semibold text-white">About</h4>
+                <p className="leading-relaxed text-white/80">{selectedMentor.bio}</p>
               </div>
 
-              <div className="mb-6 rounded-xl border border-verdean-100 bg-verdean-50 p-4">
-                <h4 className="mb-2 flex items-center gap-2 font-semibold text-verdean-900">
-                  <Heart className="h-5 w-5" />
+              <div className="mb-6 rounded-xl glass-effect border border-white/20 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-semibold text-white">
+                  <Heart className="h-5 w-5 text-gold" />
                   Lived Experience
                 </h4>
-                <p className="text-verdean-800">{selectedMentor.livedExperience}</p>
+                <p className="text-white/80">{selectedMentor.livedExperience}</p>
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-3 font-semibold text-gray-900">Areas of Expertise</h4>
+                <h4 className="mb-3 font-semibold text-white">Areas of Expertise</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedMentor.expertise.map((exp, i) => (
-                    <span key={i} className="rounded-full bg-purple-50 px-4 py-2 font-medium text-purple-700">
+                    <span key={i} className="rounded-full glass-effect border border-white/20 px-4 py-2 font-medium text-white/80">
                       {exp}
                     </span>
                   ))}
@@ -441,10 +441,10 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6">
-                <h4 className="mb-3 font-semibold text-gray-900">Interests & Hobbies</h4>
+                <h4 className="mb-3 font-semibold text-white">Interests & Hobbies</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedMentor.interests.map((interest, i) => (
-                    <span key={i} className="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
+                    <span key={i} className="rounded-full glass-effect-dark border border-white/15 px-4 py-2 text-white/70">
                       {interest}
                     </span>
                   ))}
@@ -452,19 +452,19 @@ export default function MentorMatching() {
               </div>
 
               <div className="mb-6 grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <div className="mb-1 flex items-center gap-2 text-gray-700">
-                    <Clock className="h-5 w-5" />
+                <div className="rounded-xl glass-effect-dark border border-white/15 p-4">
+                  <div className="mb-1 flex items-center gap-2 text-white/80">
+                    <Clock className="h-5 w-5 text-gold" />
                     <span className="font-semibold">Availability</span>
                   </div>
-                  <p className="text-gray-600">{selectedMentor.availability}</p>
+                  <p className="text-white/65">{selectedMentor.availability}</p>
                 </div>
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <div className="mb-1 flex items-center gap-2 text-gray-700">
-                    <MapPin className="h-5 w-5" />
+                <div className="rounded-xl glass-effect-dark border border-white/15 p-4">
+                  <div className="mb-1 flex items-center gap-2 text-white/80">
+                    <MapPin className="h-5 w-5 text-gold" />
                     <span className="font-semibold">Location</span>
                   </div>
-                  <p className="text-gray-600">{selectedMentor.location}</p>
+                  <p className="text-white/65">{selectedMentor.location}</p>
                 </div>
               </div>
 
@@ -472,14 +472,14 @@ export default function MentorMatching() {
                 <button
                   type="button"
                   onClick={() => { setSelectedMentor(null); setShowRequestMentorModal(true); }}
-                  className="flex-1 rounded-xl bg-gradient-to-r from-verdean-500 to-green-600 py-3 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+                  className="flex-1 rounded-xl bg-gradient-to-r from-primary-700 to-primary-600 py-3 font-semibold text-white transition-all hover:shadow-lg hover:shadow-primary-500/30 hover:brightness-110"
                 >
                   Request This Mentor
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedMentor(null)}
-                  className="rounded-xl bg-gray-100 px-6 py-3 font-semibold text-gray-700 transition-all hover:bg-gray-200"
+                  className="rounded-xl glass-button border border-white/20 px-6 py-3 font-semibold text-white/80 hover:text-white transition-all"
                 >
                   Close
                 </button>
