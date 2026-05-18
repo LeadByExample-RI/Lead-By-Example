@@ -104,7 +104,7 @@ export default function CommunityMosaic() {
                 125+
               </p>
               <p className="text-base md:text-lg font-medium text-white/90 max-w-sm pb-1 md:pb-2">
-                youth served in Providence and surrounding communities
+                youth served in our communities
               </p>
             </div>
             <div className="sm:ml-auto flex flex-col sm:items-end gap-2">

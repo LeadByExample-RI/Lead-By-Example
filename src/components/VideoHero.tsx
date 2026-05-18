@@ -154,14 +154,22 @@ export default function VideoHero({ className }: VideoHeroProps) {
             playsInline
             preload="auto"
             aria-label="Annual Lead By Example All Sides of Town cookout community video"
-            className="absolute inset-0 w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
+            }}
             onError={() => setVideoFailed(true)}
           />
         ) : (
           <img
-            src="/images/community/cookout-pavilion.svg"
+            src="/images/community/cookout-pavilion.png"
             alt="Community cookout poster"
-            className="absolute inset-0 w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
+            }}
           />
         )}
 
@@ -185,7 +193,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
         <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-10 text-center px-6 pointer-events-none">
           <MagneticHeading
             text="OUR COMMUNITY IN MOTION"
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.22em] text-white/50 uppercase pointer-events-auto"
+            className="text-xs sm:text-sm md:text-base font-bold tracking-[0.35em] text-white/90 uppercase drop-shadow-[0_0_15px_rgba(255,215,0,0.3)] pointer-events-auto"
           />
         </div>
 
