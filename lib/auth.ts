@@ -46,6 +46,9 @@ async function verifyPassword(password: string, hashedPassword: string): Promise
 }
 
 export const authConfig: NextAuthConfig = {
+  // Secret for signing tokens (use AUTH_SECRET or fall back to NEXTAUTH_SECRET for v4 compat)
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+
   // Configure authentication providers
   providers: [
     // Email & Password provider
@@ -187,6 +190,9 @@ export const authConfig: NextAuthConfig = {
 
   // Enable debug in development
   debug: process.env.NODE_ENV === 'development',
+
+  // Trust localhost for development (required for NextAuth v5 on localhost)
+  trustHost: true,
 };
 
 // Initialize NextAuth and export helpers.
