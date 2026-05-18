@@ -1,26 +1,21 @@
-import CommunityMosaic from '@/components/CommunityMosaic';
 import EvolutionJourney from '@/components/EvolutionJourney';
 import { Navbar } from '@/components/layout/Navbar';
 import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
-import dynamic from 'next/dynamic';
-const SaturnCarousel = dynamic(() => import('@/components/ui/SaturnCarousel'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[500px] mt-8 flex items-center justify-center">
-      <div className="w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin" />
-    </div>
-  ),
-});
-import VideoHero from '@/components/VideoHero';
+import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
+import { Events } from '@/components/sections/Events';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
-import { resources } from '@/data/siteContent';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+
+const VideoHero = dynamic(() => import('@/components/VideoHero'), { ssr: false });
+const CommunityMosaic = dynamic(() => import('@/components/CommunityMosaic'));
+const CookoutLegacy = dynamic(() => import('@/components/CookoutLegacy'));
 
 export default function Home() {
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -96,29 +91,24 @@ export default function Home() {
         />
         <meta property="twitter:image" content="/twitter-image.jpg" />
 
-        {/* Favicon - Removed until icon files are created */}
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-        {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> */}
-        {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> */}
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
 
-      <Navbar />
-
       <main>
-        {/* Hero Section with Current Fundraiser - #home */}
-        <section id="home">
+        <Navbar />
+
+        {/* Hero Section with Current Fundraiser */}
+        <section data-section-theme="dark">
           <Hero
             title="Breaking the School-to-Prison Pipeline"
             description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
             primaryAction={{
-              label: 'Donate Now',
+              label: 'Help Make It Happen',
               href: '#donate',
               onClick: () => {
-                // Dispatch event to open cookout-specific modal
                 window.dispatchEvent(new Event('open-cookout-donation-modal'));
               },
             }}
@@ -129,60 +119,71 @@ export default function Home() {
           />
         </section>
 
-        {/* VideoHero - Cinematic community video */}
-        <VideoHero />
+        {/* Community cookout video */}
+        <section id="cookout-video" aria-label="Community cookout video" data-section-theme="dark">
+          <VideoHero />
+        </section>
 
-        {/* Evolution Journey - Visual Storytelling of Transformation - #journey */}
-        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+        {/* Evolution Journey - Visual Storytelling of Transformation */}
+        <section id="journey" className="bg-[#4B306A]" data-section-theme="dark">
           <EvolutionJourney />
         </section>
 
-        {/* Mentor Matching - Connect with Mentors - #mentors */}
-        <section id="mentors" className="bg-white">
-          <MentorMatching />
-        </section>
-
-        {/* Mission Section - Our Purpose - #mission */}
-        <section id="mission">
+        {/* Mission Section - Our Purpose */}
+        <section data-section-theme="dark">
           <Mission />
         </section>
 
-        {/* SaturnCarousel - 3D Resource Ring - #resources */}
-        <section id="resources" className="bg-[#080b12] py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
-              Resource Hub
-            </h2>
-            <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-12">
-              Explore our curated collection of guides, videos, and tools designed to support your journey.
-            </p>
-            <SaturnCarousel items={resources} />
-          </div>
+        {/* Events Section - Annual Community Cookouts */}
+        <section id="events" data-section-theme="dark">
+          <Events />
         </section>
 
-        {/* Archive Section - Past Achievements - #impact */}
-        <section id="impact">
+        {/* Community in motion photo gallery */}
+        <section id="community" aria-label="Community in motion photo gallery" data-section-theme="dark">
+          <CommunityMosaic />
+        </section>
+
+        {/* Mentor Matching - Connect with Mentors */}
+        <section id="mentors" className="bg-[#01514C]" data-section-theme="dark">
+          <MentorMatching />
+        </section>
+
+        {/* Resource Library - Educational Content */}
+        <section id="resources" className="bg-[#4B306A]" data-section-theme="dark">
+          <ResourceLibrary />
+        </section>
+
+        {/* Archive Section - Past Achievements */}
+        <section data-section-theme="dark">
           <Archive />
         </section>
 
-        {/* Community Mosaic - Before Partners */}
-        <CommunityMosaic />
+        {/* Cookout history and year six invitation */}
+        <section id="legacy" aria-label="Cookout history and year six invitation" data-section-theme="dark">
+          <CookoutLegacy />
+        </section>
 
         {/* Partners Section - Community Organizations */}
-        <Partners />
+        <section data-section-theme="dark">
+          <Partners />
+        </section>
+
+        {/* Footer - Contact Info & Links */}
+        <section data-section-theme="dark">
+          <Footer />
+        </section>
+
+        {/* Map Placeholder Modal - Renders on main page */}
+        <MapPlaceholder
+          isOpen={isMapOpen}
+          onClose={handleMapClose}
+          locationName={mapData.locationName}
+          locationAddress={mapData.locationAddress}
+          locationLat={mapData.locationLat}
+          locationLng={mapData.locationLng}
+        />
       </main>
-
-      <Footer />
-
-      {/* Map Placeholder Modal - Renders outside main flow */}
-      <MapPlaceholder
-        isOpen={isMapOpen}
-        onClose={handleMapClose}
-        locationName={mapData.locationName}
-        locationAddress={mapData.locationAddress}
-        locationLat={mapData.locationLat}
-        locationLng={mapData.locationLng}
-      />
     </>
   );
 }

@@ -11,7 +11,7 @@ const AtmosphericLights = dynamic(
 );
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import type { CommunityPhoto } from '@/types/media';
-import { communityPhotos, GRID_CONFIG } from '@/data/siteContent';
+import { communityPhotos } from '@/data/mediaAssets';
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
@@ -34,6 +34,19 @@ const itemVariants = {
   hidden:  { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
+
+// ─── Grid layout config ──────────────────────────────────────────────────────
+
+const GRID_CONFIG = [
+  { spans: 'col-span-1 md:col-span-6 lg:col-span-8 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 66vw' },
+  { spans: 'col-span-1 md:col-span-2 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, (max-width: 1280px) 25vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-4 row-span-2', sizes: '(max-width: 768px) 100vw, 33vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-6 row-span-2', sizes: '(max-width: 768px) 100vw, 50vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
+  { spans: 'col-span-1 md:col-span-4 lg:col-span-3 row-span-2', sizes: '(max-width: 768px) 100vw, 25vw' },
+];
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
@@ -66,7 +79,14 @@ export default function CommunityMosaic() {
             className="text-4xl md:text-5xl font-bold tracking-tight text-white"
           >
             Every gathering,{' '}
-            <span className="text-[#FFD700]">
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #C4965A 0%, #FFD700 60%, #a78040 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               a step forward.
             </span>
           </motion.h2>
@@ -88,9 +108,9 @@ export default function CommunityMosaic() {
             - Each item gets mb-4 + break-inside-avoid to prevent column breaks through cards
           */}
           <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 md:gap-8 auto-rows-[200px]">
-            {communityPhotos.map((photo: CommunityPhoto, index: number) => (
+            {communityPhotos.map((photo, index) => (
               <GalleryCard
-                key={`${photo.src}-${index}`}
+                key={photo.src}
                 photo={photo}
                 index={index}
                 isSelected={selected?.src === photo.src}
@@ -116,7 +136,15 @@ export default function CommunityMosaic() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div>
-              <p className="text-6xl font-black leading-none text-[#FFD700]">
+              <p
+                className="text-6xl font-black leading-none"
+                style={{
+                  background: 'linear-gradient(135deg, #FFD700 0%, #C4965A 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
                 125+
               </p>
               <p className="text-white/70 text-sm mt-1.5 max-w-xs">
@@ -126,7 +154,7 @@ export default function CommunityMosaic() {
             <div className="sm:ml-auto flex flex-col sm:items-end gap-2">
               <a
                 href="#about"
-                className="border border-gold/60 text-gold text-sm px-6 py-2.5 rounded-xl hover:bg-gold/10 transition-colors whitespace-nowrap font-medium"
+                className="border border-lbe-gold/60 text-lbe-gold text-sm px-6 py-2.5 rounded-xl hover:bg-lbe-gold/10 transition-colors whitespace-nowrap font-medium"
               >
                 Our Story →
               </a>
@@ -134,7 +162,7 @@ export default function CommunityMosaic() {
             </div>
           </motion.div>
         </div>
-        <AtmosphericLights theme="verdean" />
+        <AtmosphericLights theme="green" />
       </motion.section>
 
       {/* Modal — sibling of section so z-50 fixed positioning isn't clipped */}

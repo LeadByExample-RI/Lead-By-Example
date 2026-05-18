@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export type AtmosphericTheme = 'verdean' | 'gold' | 'royal';
+export type AtmosphericTheme = 'purple' | 'green';
 
 interface OrbConfig {
   top?: string;
@@ -15,22 +15,17 @@ interface OrbConfig {
   duration: number;
 }
 
-// Cape Verde palette: verdean = Jade-first, royal = Amethyst-first, gold = Gold-first
+// Use strict Cape Verde palette (Jade, Amethyst, Gold) for ambient spotlights
 const PALETTES: Record<AtmosphericTheme, [string, string, string]> = {
-  verdean: [
-    'rgba(1,81,76,0.36)',    // Jade — primary
-    'rgba(75,48,106,0.32)', // Amethyst
-    'rgba(255,215,0,0.22)', // Gold
-  ],
-  royal: [
-    'rgba(75,48,106,0.36)', // Amethyst — primary
+  purple: [
+    'rgba(75,48,106,0.36)', // Amethyst
     'rgba(1,81,76,0.32)',   // Jade
     'rgba(255,215,0,0.22)', // Gold
   ],
-  gold: [
-    'rgba(255,215,0,0.32)', // Gold — primary
-    'rgba(1,81,76,0.28)',   // Jade
-    'rgba(75,48,106,0.28)', // Amethyst
+  green: [
+    'rgba(1,81,76,0.36)',   // Jade
+    'rgba(75,48,106,0.32)', // Amethyst
+    'rgba(255,215,0,0.22)', // Gold
   ],
 };
 

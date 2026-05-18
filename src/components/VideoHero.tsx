@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FOUNDERS_CONTACT_HREF } from '@/data/siteContent';
+import { Volume2, Volume1, VolumeX, Play, Pause } from 'lucide-react';
 
 // ── Magnetic heading: characters cluster toward the mouse like iron filings ──
 // Uses direct DOM refs + RAF — zero React state updates during mouse moves.
@@ -72,101 +72,188 @@ interface VideoHeroProps {
 
 export default function VideoHero({ className }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [videoFailed, setVideoFailed] = useState(false);
+  // Starts muted — browsers require muted for autoplay. First unmute click unlocks audio.
+  const [isMuted, setIsMuted] = useState(true);
+  const [volume, setVolume] = useState(0.8);
+  const lastVolume = useRef(0.8);
 
   useEffect(() => {
     const video = videoRef.current;
-    const section = sectionRef.current;
-    if (!video || !section) return;
+    if (!video) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
         } else {
           video.pause();
+          setIsPlaying(false);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      video.pause();
-      video.removeAttribute('src');
-      video.load();
-    };
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isMuted) {
+      const restore = lastVolume.current || 0.8;
+      video.muted = false;
+      video.volume = restore;
+      setVolume(restore);
+      setIsMuted(false);
+    } else {
+      lastVolume.current = video.volume;
+      video.muted = true;
+      setIsMuted(true);
+    }
+  };
+
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const val = parseFloat(e.target.value);
+    video.volume = val;
+    video.muted = val === 0;
+    setVolume(val);
+    setIsMuted(val === 0);
+    if (val > 0) lastVolume.current = val;
+  };
+
+  const displayVol = isMuted ? 0 : volume;
+  const VolumeIcon = displayVol === 0 ? VolumeX : displayVol < 0.5 ? Volume1 : Volume2;
+
   return (
-    <section
-      ref={sectionRef}
-      className={`h-screen w-full bg-[#080b12] flex flex-col justify-between overflow-hidden ${className ?? ''}`}
-    >
-      {/* ── TOP LETTERBOX ── */}
-      <div className="h-[15vh] w-full bg-[#01514C] flex items-center justify-center relative z-20">
-        <MagneticHeading
-          text="OUR COMMUNITY IN MOTION"
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-[0.2em] text-[#FFD700] uppercase relative z-50 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
-        />
-      </div>
+    // Outer: overflow-visible so the panel can escape below the section boundary
+    <section className={`relative overflow-visible bg-[#01514C] ${className ?? ''}`}>
 
-      {/* ── VIDEO LAYER ── */}
-      <div className="relative z-10 flex-grow w-full max-w-[1920px] mx-auto overflow-hidden">
-        {/*
-          Hardware-accelerated video: translateZ(0) promotes to a GPU compositing
-          layer, eliminating main-thread paint during playback on Chromium/WebKit.
-          opacity fade-in on canplay prevents a single-frame flash on load.
-        */}
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          onCanPlay={() => setVideoReady(true)}
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          style={{
-            transform: 'translateZ(0)',
-            opacity: videoReady ? 1 : 0,
-            transition: 'opacity 0.6s ease',
-          }}
-          aria-hidden="true"
-        >
-          <source src="/videos/cookout-highlight.mp4" type="video/mp4" />
-          <source src="/videos/cookout-highlight.webm" type="video/webm" />
-        </video>
-
-        {/* Shown until video first plays — matches dark background so no flash */}
-        {!videoReady && (
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-[#01514C]/30 to-[#080b12]"
-            aria-hidden="true"
+      {/* Inner: clips the video; slightly under full viewport so the page edge shows */}
+      <div className="relative overflow-hidden h-[93vh] min-h-[500px]">
+        {!videoFailed ? (
+          <video
+            ref={videoRef}
+            src="/video/roy-hero.mp4"
+            poster="/images/community/cookout-pavilion.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Annual Lead By Example All Sides of Town cookout community video"
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => setVideoFailed(true)}
+          />
+        ) : (
+          <img
+            src="/images/community/cookout-pavilion.png"
+            alt="Community cookout poster"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         )}
 
-        {/* Cinematic letterbox vignette — always present over the video */}
+        {/* Gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, rgba(8,11,18,0.65) 0%, transparent 40%, rgba(8,11,18,0.2) 100%)',
+              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.42) 100%)',
           }}
-          aria-hidden="true"
         />
-      </div>
 
-      {/* ── BOTTOM LETTERBOX ── */}
-      <div className="h-[15vh] w-full bg-[#01514C] flex items-end justify-between px-8 relative z-30 pb-4">
-        {/* Cookout Info Card - Left side */}
+        {/* ── "Our Community in Motion" — atmospheric magnetic heading in upper video area ── */}
+        <div className="absolute top-10 sm:top-14 md:top-16 left-0 right-0 z-10 text-center px-6 pointer-events-auto">
+          <MagneticHeading
+            text="OUR COMMUNITY IN MOTION"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.22em] text-white/40 uppercase"
+          />
+        </div>
+
+        {/* ── Glassmorphic control dashboard — bottom right ── */}
+        <div
+          className="absolute bottom-6 right-8 sm:right-10 md:right-14 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl"
+          role="group"
+          aria-label="Video controls"
+          style={{
+            background: 'rgba(8, 6, 18, 0.68)',
+            backdropFilter: 'blur(28px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(200%)',
+            border: '1px solid rgba(255, 255, 255, 0.13)',
+            boxShadow:
+              '0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 0 1px rgba(0,0,0,0.3)',
+          }}
+        >
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+            className="
+              w-11 h-11 flex items-center justify-center rounded-xl
+              bg-white/8 hover:bg-white/16 active:bg-white/24
+              text-white border border-white/10 hover:border-white/20
+              transition-all duration-150
+            "
+          >
+            {isPlaying ? <Pause size={20} strokeWidth={1.75} /> : <Play size={20} strokeWidth={1.75} />}
+          </button>
+
+          <div className="w-px h-7 bg-white/12 flex-shrink-0" />
+
+          <button
+            onClick={toggleMute}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            className="
+              w-11 h-11 flex items-center justify-center rounded-xl
+              bg-white/8 hover:bg-white/16 active:bg-white/24
+              text-white border border-white/10 hover:border-white/20
+              transition-all duration-150 flex-shrink-0
+            "
+          >
+            <VolumeIcon size={20} strokeWidth={1.75} />
+          </button>
+
+          <div className="flex items-center px-1">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={displayVol}
+              onChange={handleVolume}
+              aria-label="Volume"
+              className="video-vol-slider w-28 sm:w-36"
+              style={{ '--vol-pct': `${displayVol * 100}%` } as React.CSSProperties}
+            />
+          </div>
+        </div>
+      </div>
+      {/* ↑ end inner clip div */}
+
+      {/* ── Event info panel — straddles section boundary ── */}
+      {/* Static wrapper owns translateY; Framer Motion animates only opacity+y inside */}
+      <div
+        className="absolute bottom-0 left-8 md:left-14 z-20 w-[300px] md:w-[340px]"
+        style={{ transform: 'translateY(33%)' }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-          className="relative z-40 w-[300px] md:w-[340px] mb-2"
           style={{
             background: 'rgba(10, 8, 20, 0.75)',
             backdropFilter: 'blur(20px) saturate(160%)',
@@ -176,11 +263,11 @@ export default function VideoHero({ className }: VideoHeroProps) {
             padding: '1.25rem',
           }}
         >
-          <span className="text-[11px] font-medium text-[#FFD700] border border-[#FFD700]/30 bg-[#FFD700]/10 rounded-full px-3 py-1 inline-block mb-2.5">
+          <span className="text-[11px] font-medium text-lbe-gold border border-lbe-gold/30 bg-lbe-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
             ✦ 6th Annual · All Sides of Town
           </span>
 
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#FFD700] mb-1">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
             All Sides of Town Cookout
           </h2>
 
@@ -196,7 +283,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
               'Games & activities for all',
             ].map((feature) => (
               <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
-                <span className="w-1 h-1 rounded-full bg-[#FFD700]/60 flex-shrink-0" />
+                <span className="w-1 h-1 rounded-full bg-lbe-gold/60 flex-shrink-0" />
                 {feature}
               </span>
             ))}
@@ -204,15 +291,15 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
           <div className="flex justify-center pt-1">
             <a
-              href={FOUNDERS_CONTACT_HREF}
-              className="border border-[#FFD700]/55 text-[#FFD700] text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-[#FFD700]/10 transition-colors duration-200 inline-block"
+              href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
+              className="border border-lbe-gold/55 text-lbe-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-lbe-gold/10 transition-colors duration-200 inline-block"
             >
               Contact Founders
             </a>
           </div>
         </motion.div>
-
       </div>
+
     </section>
   );
 }
