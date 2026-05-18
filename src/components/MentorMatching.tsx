@@ -143,7 +143,7 @@ function MentorFormModal({
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="w-full max-w-lg rounded-2xl glass-effect-dark shadow-glass-dark border border-white/15 p-8 max-h-[90vh] overflow-y-auto z-[101]"
+        className="w-full max-w-lg rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8 max-h-[90vh] overflow-y-auto z-[101]"
         onClick={(e) => e.stopPropagation()}
       >
         {submitted ? (
@@ -153,7 +153,7 @@ function MentorFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-8 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold-dark transition-all"
+              className="px-8 py-3 bg-gold-500 text-black font-semibold rounded-lg hover:bg-gold-600 transition-colors"
             >
               Close
             </button>
@@ -165,7 +165,7 @@ function MentorFormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-9 h-9 flex items-center justify-center rounded-full glass-button border border-white/20 text-white/80 hover:text-white transition-all"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
               >
                 ✕
               </button>
@@ -198,7 +198,7 @@ function MentorFormModal({
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-gold text-black font-bold rounded-xl hover:bg-gold-dark transition-all mt-2"
+                className="w-full py-3 bg-gold-500 text-black font-semibold rounded-lg hover:bg-gold-600 transition-colors mt-2"
               >
                 Submit
               </button>
@@ -388,7 +388,7 @@ export default function MentorMatching() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl glass-effect-dark shadow-glass-dark border border-white/15 p-8"
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/20 bg-[#4B306A]/95 backdrop-blur-xl p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-6 flex items-start gap-4">
@@ -479,7 +479,7 @@ export default function MentorMatching() {
                 <button
                   type="button"
                   onClick={() => setSelectedMentor(null)}
-                  className="rounded-xl glass-button border border-white/20 px-6 py-3 font-semibold text-white/80 hover:text-white transition-all"
+                  className="rounded-xl bg-white/20 px-6 py-3 font-semibold text-white transition-all hover:bg-white/30"
                 >
                   Close
                 </button>
