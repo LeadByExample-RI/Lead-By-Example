@@ -132,7 +132,7 @@ export default function Home() {
         <Testimonials />
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="relative z-0 bg-[#01514C]">
+        <section id="mentors" className="relative z-0">
           <MentorMatching />
         </section>
 

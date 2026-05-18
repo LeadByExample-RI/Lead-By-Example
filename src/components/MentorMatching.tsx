@@ -216,7 +216,7 @@ export default function MentorMatching() {
   const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
 
   return (
-    <section className="bg-gradient-to-b from-[#01514C] via-secondary-900 to-secondary-900 relative z-0 overflow-hidden px-4 py-20">
+    <section className="bg-gradient-to-b from-black via-secondary-950 to-black relative z-0 overflow-hidden px-4 py-20">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
