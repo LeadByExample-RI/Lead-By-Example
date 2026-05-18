@@ -216,7 +216,7 @@ export default function MentorMatching() {
   const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
 
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20">
+    <section className="bg-gradient-to-b from-black via-secondary-950 to-black relative z-0 overflow-hidden px-4 py-20">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
@@ -225,8 +225,8 @@ export default function MentorMatching() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Meet Our Mentors</h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-gold-500">
+          <h2 className="mb-4 text-4xl font-bold text-white drop-shadow-md md:text-5xl">Meet Our Mentors</h2>
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-white/80">
             Our dedicated mentors have lived experience and understand the journey. They&apos;re
             here to guide, support, and inspire the next generation.
           </p>
@@ -245,11 +245,11 @@ export default function MentorMatching() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="rounded-xl bg-white p-4 shadow-md"
+                className="rounded-xl glass-effect-dark p-4"
               >
-                <div className="mb-2 flex justify-center text-verdean-500">{stat.icon}</div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="mb-2 flex justify-center text-gold-400">{stat.icon}</div>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-sm text-white/60">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -264,7 +264,7 @@ export default function MentorMatching() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`transform cursor-pointer rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl ${
+              className={`transform cursor-pointer rounded-2xl p-6 glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300 ${
                 mentor.featured ? 'ring-2 ring-gold-500' : ''
               }`}
               onClick={() => setSelectedMentor(mentor)}
@@ -272,7 +272,7 @@ export default function MentorMatching() {
               {mentor.featured && (
                 <div className="mb-3 flex items-center gap-2">
                   <Star className="h-4 w-4 fill-gold-500 text-gold-500" />
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gold-700">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-gold">
                     Featured Mentor
                   </span>
                 </div>
@@ -284,37 +284,37 @@ export default function MentorMatching() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold text-gray-900">{mentor.name}</h3>
+                    <h3 className="text-xl font-bold text-white drop-shadow-md">{mentor.name}</h3>
                     {mentor.verified && (
                       <CheckCircle className="h-5 w-5 fill-verdean-100 text-verdean-500" />
                     )}
                   </div>
-                  <p className="text-sm text-gray-600">{mentor.role}</p>
+                  <p className="text-sm text-white/80">{mentor.role}</p>
                 </div>
               </div>
 
               <div className="mb-4 flex flex-wrap gap-2">
                 {mentor.expertise.slice(0, 3).map((exp, i) => (
-                  <span key={i} className="rounded-full bg-verdean-50 px-3 py-1 text-xs font-medium text-verdean-700">
+                  <span key={i} className="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70">
                     {exp}
                   </span>
                 ))}
               </div>
 
-              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-gray-100 pt-4">
+              <div className="mb-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4">
                 <div>
-                  <div className="text-sm text-gray-500">Matches</div>
-                  <div className="text-lg font-bold text-gray-900">{mentor.matchesCompleted}</div>
+                  <div className="text-sm text-white/60">Matches</div>
+                  <div className="text-lg font-bold text-white">{mentor.matchesCompleted}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-gray-500">Success Rate</div>
-                  <div className="text-lg font-bold text-green-600">{mentor.successRate}%</div>
+                  <div className="text-sm text-white/60">Success Rate</div>
+                  <div className="text-lg font-bold text-gold">{mentor.successRate}%</div>
                 </div>
               </div>
 
-              <p className="mb-4 line-clamp-3 text-sm text-gray-600">{mentor.bio}</p>
+              <p className="mb-4 line-clamp-3 text-sm text-white/80">{mentor.bio}</p>
 
-              <div className="space-y-2 text-sm text-gray-500">
+              <div className="space-y-2 text-sm text-white/60">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
                   {mentor.location}
@@ -327,7 +327,7 @@ export default function MentorMatching() {
 
               <button
                 type="button"
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-verdean-500 to-green-600 py-2 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg glass-button text-white border border-white/20 hover:bg-white/10 py-2 font-semibold transition-all"
               >
                 Learn More
                 <ChevronRight className="h-4 w-4" />
@@ -349,7 +349,7 @@ export default function MentorMatching() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-3xl bg-gradient-to-r from-purple-600 to-verdean-600 p-8 text-center text-white md:p-12"
+          className="rounded-3xl p-8 text-center md:p-12 relative z-0 overflow-hidden"
         >
           <h3 className="mb-4 text-3xl font-bold">Ready to Make a Difference?</h3>
           <p className="mb-8 text-xl opacity-90">
@@ -359,14 +359,14 @@ export default function MentorMatching() {
             <button
               type="button"
               onClick={() => setShowBecomeMentorModal(true)}
-              className="transform rounded-full bg-white px-8 py-4 font-semibold text-purple-600 transition-all hover:scale-105 hover:bg-gray-100"
+              className="transform rounded-full glass-button px-8 py-4 font-semibold text-white border border-white/20 transition-all hover:scale-105 hover:bg-white/10"
             >
               Become a Mentor
             </button>
             <button
               type="button"
               onClick={() => setShowRequestMentorModal(true)}
-              className="rounded-full border-2 border-white bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              className="rounded-full glass-button px-8 py-4 font-semibold text-white border border-white/20 transition-all hover:bg-white/10"
             >
               Request a Mentor
             </button>
