@@ -376,3 +376,31 @@
     animation-play-state: running;
   }
 }
+
+/* Premium Video Hero Controls */
+.video-vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  background-image: linear-gradient(#FFD700, #FFD700);
+  background-size: var(--vol-pct, 0%) 100%;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.video-vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  transition: transform 0.1s;
+}
+
+.video-vol-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
