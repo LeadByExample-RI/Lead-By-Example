@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, Volume1, VolumeX, Play, Pause } from 'lucide-react';
 
-// ── Magnetic heading ──
 function MagneticHeading({ text, className }: { text: string; className?: string }) {
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const rafId = useRef<number | null>(null);
@@ -58,7 +57,7 @@ function MagneticHeading({ text, className }: { text: string; className?: string
           ref={(el) => { charRefs.current[i] = el; }}
           className="inline-block"
         >
-          {ch === ' ' ? ' ' : ch}
+          {ch === ' ' ? ' ' : ch}
         </span>
       ))}
     </div>
@@ -71,7 +70,6 @@ interface VideoHeroProps {
 
 export default function VideoHero({ className }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // Start with video paused
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -84,7 +82,6 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Only auto-pause when scrolling out of view. Do NOT auto-play.
         if (!entry.isIntersecting && !video.paused) {
           video.pause();
           setIsPlaying(false);
@@ -108,7 +105,8 @@ export default function VideoHero({ className }: VideoHeroProps) {
     }
   };
 
-  const toggleMute = () => {
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
     if (isMuted) {
@@ -125,6 +123,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
   };
 
   const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
     const val = parseFloat(e.target.value);
@@ -139,142 +138,140 @@ export default function VideoHero({ className }: VideoHeroProps) {
   const VolumeIcon = displayVol === 0 ? VolumeX : displayVol < 0.5 ? Volume1 : Volume2;
 
   return (
-    <section className={`relative overflow-visible bg-primary-500 py-12 md:py-20 ${className ?? ''}`}>
-      {/* Constrained container for laptop sizing */}
-      <div className="relative mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Cinematic bounded video wrapper */}
-        <div className="relative overflow-hidden rounded-2xl bg-black aspect-video shadow-glass-dark group">
-          {!videoFailed ? (
-            <video
-              ref={videoRef}
-              src="/video/roy-hero.mp4"
-              poster="/images/community/cookout-pavilion.png"
-              muted // Still required for proper loading policies
-              loop
-              playsInline
-              preload="auto"
-              aria-label="Annual Lead By Example All Sides of Town cookout community video"
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={() => setVideoFailed(true)}
-            />
-          ) : (
-            <img
-              src="/images/community/cookout-pavilion.png"
-              alt="Community cookout poster"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          )}
-
-          {/* Gradient overlay - now acts as a clickable play/pause area */}
-          <div
-            onClick={togglePlay}
-            className="absolute inset-0 cursor-pointer"
-            style={{
-              background:
-                'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.42) 100%)',
-            }}
+    <section className={`relative overflow-visible bg-primary-500 ${className ?? ''}`}>
+      <div className="relative overflow-hidden h-[93vh] min-h-[500px] w-full bg-black flex flex-col justify-center">
+        {!videoFailed ? (
+          <video
+            ref={videoRef}
+            src="/video/HeroVideo.mp4"
+            poster="/images/community/cookout-pavilion.svg"
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Annual Lead By Example All Sides of Town cookout community video"
+            className="absolute inset-0 w-full h-full object-contain"
+            onError={() => setVideoFailed(true)}
           />
+        ) : (
+          <img
+            src="/images/community/cookout-pavilion.svg"
+            alt="Community cookout poster"
+            className="absolute inset-0 w-full h-full object-contain"
+          />
+        )}
 
-          {/* Large central play button (fades out when playing) */}
-          <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
+        {/* Clickable gradient overlay — toggles play/pause */}
+        <div
+          onClick={togglePlay}
+          className="absolute inset-0 cursor-pointer pointer-events-auto flex items-center justify-center"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
+          }}
+        >
+          <div className={`transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
             <div className="flex h-20 w-20 items-center justify-center rounded-full glass-effect-strong text-white/80">
               <Play size={40} className="ml-2" />
             </div>
           </div>
+        </div>
 
-          <div className="absolute top-10 sm:top-14 md:top-16 left-0 right-0 z-10 text-center px-6 pointer-events-none">
-            <MagneticHeading
-              text="OUR COMMUNITY IN MOTION"
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.22em] text-white/40 uppercase pointer-events-auto"
+        {/* Heading — top letterbox zone */}
+        <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-10 text-center px-6 pointer-events-none">
+          <MagneticHeading
+            text="OUR COMMUNITY IN MOTION"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.22em] text-white/50 uppercase pointer-events-auto"
+          />
+        </div>
+
+        {/* Controls — bottom letterbox zone */}
+        <div
+          className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 md:right-14 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl glass-effect-dark"
+          role="group"
+          aria-label="Video controls"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+            className="w-11 h-11 flex items-center justify-center rounded-xl text-white glass-button"
+          >
+            {isPlaying ? <Pause size={20} strokeWidth={1.75} /> : <Play size={20} strokeWidth={1.75} />}
+          </button>
+
+          <div className="w-px h-7 bg-white/12 flex-shrink-0" />
+
+          <button
+            onClick={toggleMute}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            className="w-11 h-11 flex items-center justify-center rounded-xl text-white glass-button flex-shrink-0"
+          >
+            <VolumeIcon size={20} strokeWidth={1.75} />
+          </button>
+
+          <div className="flex items-center px-1">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={displayVol}
+              onChange={handleVolume}
+              aria-label="Volume"
+              className="video-vol-slider w-28 sm:w-36"
+              style={{ '--vol-pct': `${displayVol * 100}%` } as React.CSSProperties}
             />
           </div>
-
-          <div
-            className="absolute bottom-6 right-6 sm:right-8 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl glass-effect-dark"
-            role="group"
-            aria-label="Video controls"
-          >
-            <button
-              onClick={togglePlay}
-              aria-label={isPlaying ? 'Pause video' : 'Play video'}
-              className="w-11 h-11 flex items-center justify-center rounded-xl text-white glass-button"
-            >
-              {isPlaying ? <Pause size={20} strokeWidth={1.75} /> : <Play size={20} strokeWidth={1.75} />}
-            </button>
-
-            <div className="w-px h-7 bg-white/12 flex-shrink-0" />
-
-            <button
-              onClick={toggleMute}
-              aria-label={isMuted ? 'Unmute' : 'Mute'}
-              className="w-11 h-11 flex items-center justify-center rounded-xl text-white glass-button flex-shrink-0"
-            >
-              <VolumeIcon size={20} strokeWidth={1.75} />
-            </button>
-
-            <div className="flex items-center px-1">
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={displayVol}
-                onChange={handleVolume}
-                aria-label="Volume"
-                className="video-vol-slider w-28 sm:w-36"
-                style={{ '--vol-pct': `${displayVol * 100}%` } as React.CSSProperties}
-              />
-            </div>
-          </div>
         </div>
+      </div>
 
-        <div
-          className="absolute bottom-0 left-8 sm:left-12 md:left-16 z-20 w-[300px] md:w-[340px]"
-          style={{ transform: 'translateY(33%)' }}
+      {/* Event info card — straddles the bottom edge */}
+      <div
+        className="absolute bottom-0 left-8 md:left-14 z-20 w-[300px] md:w-[340px] pointer-events-auto"
+        style={{ transform: 'translateY(33%)' }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+          className="glass-effect-dark p-5 rounded-2xl border-gold/20 border shadow-2xl"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-            className="glass-effect-dark p-5 rounded-2xl border-gold/20 border"
-          >
-            <span className="text-[11px] font-medium text-gold border border-gold/30 bg-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
-              ✦ 6th Annual · All Sides of Town
-            </span>
+          <span className="text-[11px] font-medium text-gold border border-gold/30 bg-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
+            ✦ 6th Annual · All Sides of Town
+          </span>
 
-            <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
-              All Sides of Town Cookout
-            </h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">
+            All Sides of Town Cookout
+          </h2>
 
-            <p className="text-xs sm:text-sm text-white/60 mb-3">
-              July 18, 2026 · Lincoln Woods, Providence RI
-            </p>
+          <p className="text-xs sm:text-sm text-white/60 mb-3">
+            July 18, 2026 · Lincoln Woods, Providence RI
+          </p>
 
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-4">
-              {[
-                'Free food for everyone',
-                'Free haircuts',
-                'Free backpack giveaway',
-                'Games & activities for all',
-              ].map((feature) => (
-                <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
-                  <span className="w-1 h-1 rounded-full bg-gold/60 flex-shrink-0" />
-                  {feature}
-                </span>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-4">
+            {[
+              'Free food for everyone',
+              'Free haircuts',
+              'Free backpack giveaway',
+              'Games & activities for all',
+            ].map((feature) => (
+              <span key={feature} className="text-[11px] text-white/55 flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-gold/60 flex-shrink-0" />
+                {feature}
+              </span>
+            ))}
+          </div>
 
-            <div className="flex justify-center pt-1">
-              <a
-                href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
-                className="border border-gold/50 text-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-gold/10 transition-colors duration-200 inline-block"
-              >
-                Contact Founders
-              </a>
-            </div>
-          </motion.div>
-        </div>
+          <div className="flex justify-center pt-1">
+            <a
+              href="mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=Inquiry%20from%20Lead%20By%20Example%20Website"
+              className="border border-gold/50 text-gold text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-gold/10 transition-colors duration-200 inline-block"
+            >
+              Contact Founders
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
