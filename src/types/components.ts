@@ -85,7 +85,7 @@ export interface HeaderAction {
   label: string;
   icon?: React.ReactNode;
   onClick: () => void;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'gold' | 'secondary' | 'ghost';
 }
 
 export interface HeaderProps extends BaseComponentProps {
