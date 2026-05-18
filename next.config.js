@@ -4,6 +4,9 @@ module.exports = {
     root: __dirname,
   },
 
+  // NextAuth/Auth.js needs to be bundled so Next can resolve its Next.js-specific imports.
+  transpilePackages: ['next-auth', '@auth/core', '@auth/prisma-adapter'],
+
   // Image optimization
   images: {
     remotePatterns: [

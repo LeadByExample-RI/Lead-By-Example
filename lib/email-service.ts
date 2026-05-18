@@ -63,7 +63,9 @@ export async function sendEmail(options: SendEmailOptions) {
       emailType: 'transactional',
     });
 
-    console.log('✅ Email sent:', { to: options.to, subject: options.subject });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ Email sent:', { to: options.to, subject: options.subject });
+    }
     return { success: true, messageId: response.data?.id };
   } catch (error: any) {
     console.error('❌ Email send error:', error);
@@ -281,7 +283,9 @@ export async function sendNewsletter(data: {
       );
     }
 
-    console.log(`📧 Sending newsletter to ${subscribers.length} subscribers`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`📧 Sending newsletter to ${subscribers.length} subscribers`);
+    }
 
     // Send emails (in batches to avoid rate limiting)
     const batchSize = 50;
@@ -312,7 +316,9 @@ export async function sendNewsletter(data: {
       }
     }
 
-    console.log(`✅ Newsletter sent: ${successCount} success, ${failureCount} failures`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ Newsletter sent: ${successCount} success, ${failureCount} failures`);
+    }
 
     return {
       success: failureCount === 0,

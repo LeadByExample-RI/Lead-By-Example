@@ -3,45 +3,50 @@ import { withAdminAuth, AdminHandler } from '@/lib/admin-auth';
 import { db } from '@/lib/db';
 
 const handler: AdminHandler = async (_req, res: NextApiResponse) => {
-  const [donations, subscribers, events, users] = await Promise.all([
-    db.donation.findMany({ where: { status: 'completed' } }),
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  const [donationStats, recentStats, subscribers, events, users, topCampaigns] = await Promise.all([
+    db.donation.aggregate({
+      where: { status: 'completed' },
+      _sum: { amount: true },
+      _avg: { amount: true },
+      _count: { _all: true },
+    }),
+    db.donation.aggregate({
+      where: { status: 'completed', createdAt: { gte: thirtyDaysAgo } },
+      _sum: { amount: true },
+      _count: { _all: true },
+    }),
     db.newsletter.count({ where: { subscribed: true } }),
     db.event.findMany({ orderBy: { startDate: 'asc' } }),
     db.user.count(),
+    db.donation.groupBy({
+      by: ['campaign'],
+      where: { status: 'completed', campaign: { not: null } },
+      _sum: { amount: true },
+      orderBy: { _sum: { amount: 'desc' } },
+      take: 5,
+    }),
   ]);
-
-  const totalRaised = donations.reduce((sum, d) => sum + Number(d.amount), 0);
-  const totalDonations = donations.length;
-  const avgDonation = totalDonations > 0 ? totalRaised / totalDonations : 0;
-
-  const now = new Date();
-  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-  const recentDonations = donations.filter((d) => new Date(d.createdAt) >= thirtyDaysAgo);
-  const recentRaised = recentDonations.reduce((sum, d) => sum + Number(d.amount), 0);
 
   const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now);
   const pastEvents = events.filter((e) => new Date(e.startDate) < now);
 
-  const campaignMap: Record<string, number> = {};
-  donations.forEach((d) => {
-    if (d.campaign) campaignMap[d.campaign] = (campaignMap[d.campaign] || 0) + Number(d.amount);
-  });
-  const topCampaigns = Object.entries(campaignMap)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 5)
-    .map(([name, amount]) => ({ name, amount }));
-
   return res.status(200).json({
-    totalRaised,
-    totalDonations,
-    avgDonation,
-    recentRaised,
-    recentDonations: recentDonations.length,
+    totalRaised: Number(donationStats._sum.amount || 0),
+    totalDonations: donationStats._count._all,
+    avgDonation: Number(donationStats._avg.amount || 0),
+    recentRaised: Number(recentStats._sum.amount || 0),
+    recentDonations: recentStats._count._all,
     subscribers,
     totalUsers: users,
     upcomingEvents: upcomingEvents.length,
     pastEvents: pastEvents.length,
-    topCampaigns,
+    topCampaigns: topCampaigns.map((campaign) => ({
+      name: campaign.campaign!,
+      amount: Number(campaign._sum.amount || 0),
+    })),
   });
 };
 

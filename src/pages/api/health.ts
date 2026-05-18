@@ -44,7 +44,7 @@ export default async function handler(
   checks.resend = process.env.RESEND_API_KEY ? 'ok' : 'error';
 
   // Auth — secret presence
-  checks.auth = process.env.NEXTAUTH_SECRET ? 'ok' : 'error';
+  checks.auth = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET ? 'ok' : 'error';
 
   const allOk = Object.values(checks).every((v) => v === 'ok');
 

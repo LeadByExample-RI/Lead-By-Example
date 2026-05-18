@@ -242,7 +242,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
           className="glass-effect-dark p-5 rounded-2xl border-gold/20 border shadow-2xl"
         >
           <span className="text-[11px] font-medium text-gold border border-gold/30 bg-gold/10 rounded-full px-3 py-1 inline-block mb-2.5">
-            ✦ 6th Annual · All Sides of Town
+            ✦ 5th Anniversary · All Sides of Town
           </span>
 
           <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-1">

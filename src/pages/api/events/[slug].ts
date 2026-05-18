@@ -1,7 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { z } from 'zod';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { sendEventRegistrationConfirmation } from '@/lib/email-service';
+
+const registrationSchema = z.object({
+  guestCount: z.coerce.number().int().min(0).max(10).default(1),
+  specialRequests: z.string().trim().max(1000).optional().or(z.literal('')),
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { slug } = req.query;
@@ -40,29 +46,46 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const event = await db.event.findUnique({ where: { slug: slug as string } });
     if (!event) return res.status(404).json({ error: 'Event not found' });
 
-    if (event.maxAttendees && event.registeredCount >= event.maxAttendees) {
-      return res.status(409).json({ error: 'Event is at capacity' });
+    const parsed = registrationSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: parsed.error.errors[0].message });
     }
 
-    const existing = await db.eventRegistration.findUnique({
-      where: { userId_eventId: { userId: session.user.id!, eventId: event.id } },
-    });
-    if (existing) return res.status(409).json({ error: 'Already registered for this event' });
+    const registration = await db.$transaction(async (tx) => {
+      const existing = await tx.eventRegistration.findUnique({
+        where: { userId_eventId: { userId: session.user.id!, eventId: event.id } },
+      });
+      if (existing) {
+        throw new Error('Already registered for this event');
+      }
 
-    const { guestCount = 1, specialRequests } = req.body;
+      if (event.maxAttendees !== null) {
+        const updated = await tx.event.updateMany({
+          where: {
+            id: event.id,
+            registeredCount: { lt: event.maxAttendees },
+          },
+          data: { registeredCount: { increment: 1 } },
+        });
 
-    const registration = await db.eventRegistration.create({
-      data: {
-        userId: session.user.id!,
-        eventId: event.id,
-        guestCount: parseInt(guestCount),
-        specialRequests,
-      },
-    });
+        if (updated.count === 0) {
+          throw new Error('Event is at capacity');
+        }
+      } else {
+        await tx.event.update({
+          where: { id: event.id },
+          data: { registeredCount: { increment: 1 } },
+        });
+      }
 
-    await db.event.update({
-      where: { id: event.id },
-      data: { registeredCount: { increment: 1 } },
+      return tx.eventRegistration.create({
+        data: {
+          userId: session.user.id!,
+          eventId: event.id,
+          guestCount: parsed.data.guestCount,
+          specialRequests: parsed.data.specialRequests || null,
+        },
+      });
     });
 
     if (session.user.email) {

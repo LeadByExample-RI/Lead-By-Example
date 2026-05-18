@@ -181,10 +181,14 @@ export const authConfig: NextAuthConfig = {
   // Events
   events: {
     async signIn({ user }) {
-      console.log(`User signed in: ${user.email}`);
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`User signed in: ${user.email}`);
+      }
     },
     async signOut() {
-      console.log('User signed out');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('User signed out');
+      }
     },
   },
 
@@ -192,9 +196,9 @@ export const authConfig: NextAuthConfig = {
   debug: process.env.NODE_ENV === 'development',
 
   // Trust localhost for development (required for NextAuth v5 on localhost)
-  trustHost: true,
+  trustHost: process.env.NODE_ENV !== 'production',
 };
 
 // Initialize NextAuth and export helpers.
 // Import { auth } from '@/lib/auth' in any API route to check the session.
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth(authConfig);
