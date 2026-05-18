@@ -354,7 +354,7 @@ export default function ResourceLibrary() {
   const regularResources = filteredResources.filter(r => !r.featured);
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-20 px-4 relative overflow-hidden z-0">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -363,13 +363,13 @@ export default function ResourceLibrary() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-md mb-4 gradient-text">
             Resource Library
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-6">
             Trauma-informed resources designed to support your journey. All content created with care, understanding, and respect for your experiences.
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-verdean-100 text-verdean-800 rounded-full text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-4 py-2 glass-button text-white border border-white/20 rounded-full text-sm font-medium">
             <Heart className="w-4 h-4 fill-verdean-600" />
             Many resources are trauma-informed and culturally responsive
           </div>
@@ -387,8 +387,8 @@ export default function ResourceLibrary() {
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${
                   selectedCategory === category.id
-                    ? 'bg-verdean-500 text-white shadow-lg shadow-verdean-500/30'
-                    : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
+                            ? 'glass-button text-white shadow-lg shadow-verdean-500/30'
+                            : 'glass-button text-white/80 bg-white/5 hover:bg-white/10 shadow-md'
                 }`}
               >
                 {category.icon}
@@ -401,7 +401,7 @@ export default function ResourceLibrary() {
         {/* Featured Resources */}
         {featuredResources.length > 0 && (
           <div className="mb-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <h3 className="text-2xl font-bold text-white drop-shadow-md mb-6 flex items-center gap-2">
               <Star className="w-6 h-6 text-gold-500 fill-gold-500" />
               Featured Resources
             </h3>
@@ -416,7 +416,7 @@ export default function ResourceLibrary() {
         {/* All Resources */}
         {regularResources.length > 0 && (
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <h3 className="text-2xl font-bold text-white drop-shadow-md mb-6">
               {selectedCategory === 'all' ? 'All Resources' : categories.find(c => c.id === selectedCategory)?.name}
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -429,13 +429,13 @@ export default function ResourceLibrary() {
 
         {filteredResources.length === 0 && (
           <div className="text-center py-16">
-            <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">No resources found</h3>
-            <p className="text-gray-500 mb-6">Try selecting a different category</p>
+            <BookOpen className="w-16 h-16 text-white/40 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-white/80 mb-2">No resources found</h3>
+            <p className="text-white/60 mb-6">Try selecting a different category</p>
             <button
               type="button"
               onClick={() => setSelectedCategory('all')}
-              className="px-6 py-3 bg-verdean-500 text-white rounded-full font-semibold hover:bg-verdean-600 transition-all"
+              className="px-6 py-3 glass-button text-white rounded-full font-semibold hover:bg-white/10 transition-all"
             >
               View All
             </button>
@@ -447,7 +447,7 @@ export default function ResourceLibrary() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-center text-white"
+          className="mt-16 relative overflow-hidden z-0 rounded-3xl p-8 md:p-12 text-center"
         >
           <h3 className="text-3xl font-bold mb-4">Need More Support?</h3>
           <p className="text-xl mb-8 opacity-90">
@@ -457,14 +457,14 @@ export default function ResourceLibrary() {
             <button
               type="button"
               onClick={() => setShowConnectModal(true)}
-              className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105"
+              className="px-8 py-4 glass-button text-white border border-white/20 rounded-full font-semibold hover:bg-white/10 transition-all transform hover:scale-105"
             >
               Connect with a Mentor
             </button>
             <button
               type="button"
               onClick={() => setShowCrisisModal(true)}
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-full font-semibold hover:bg-white/20 transition-all"
+              className="px-8 py-4 glass-button text-white border border-white/20 rounded-full font-semibold hover:bg-white/10 transition-all"
             >
               Crisis Resources
             </button>
@@ -489,17 +489,17 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all group cursor-pointer ${featured ? 'ring-2 ring-gold-500' : ''}`}
+      className={`rounded-2xl p-6 glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300 group cursor-pointer ${featured ? 'ring-2 ring-gold-500' : ''}`}
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-verdean-500 to-purple-500 flex items-center justify-center text-white">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#4B306A] to-[#01514C] flex items-center justify-center text-white">
             {typeIcons[resource.type]}
           </div>
           <div>
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{resource.type}</div>
+            <div className="text-xs font-semibold text-white/60 uppercase tracking-wide">{resource.type}</div>
             {resource.traumaInformed && (
-              <div className="flex items-center gap-1 text-xs text-verdean-600 font-medium">
+              <div className="flex items-center gap-1 text-xs text-white/70 font-medium">
                 <Heart className="w-3 h-3 fill-verdean-500" />
                 Trauma-Informed
               </div>
@@ -509,16 +509,16 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
         {featured && <Star className="w-5 h-5 text-gold-500 fill-gold-500" />}
       </div>
 
-      <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-verdean-600 transition-colors">{resource.title}</h4>
-      <p className="text-sm text-gray-600 mb-4 line-clamp-3">{resource.description}</p>
+      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-gold-400 transition-colors">{resource.title}</h4>
+      <p className="text-sm text-white/80 mb-4 line-clamp-3">{resource.description}</p>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {resource.tags.slice(0, 3).map((tag, i) => (
-          <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">{tag}</span>
+          <span key={i} className="px-3 py-1 bg-white/5 text-white/70 text-xs rounded-full">{tag}</span>
         ))}
       </div>
 
-      <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 pb-4 border-b border-gray-100">
+      <div className="flex items-center gap-4 text-sm text-white/60 mb-4 pb-4 border-b border-white/10">
         {resource.duration && (
           <div className="flex items-center gap-1"><Clock className="w-4 h-4" />{resource.duration}</div>
         )}
@@ -527,8 +527,8 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
       </div>
 
       <div className="mb-4">
-        <span className="text-xs text-gray-500">Age Group:</span>
-        <span className="ml-2 text-sm font-medium text-gray-700">{resource.ageGroup}</span>
+        <span className="text-xs text-white/60">Age Group:</span>
+        <span className="ml-2 text-sm font-medium text-white/80">{resource.ageGroup}</span>
       </div>
 
     </motion.div>

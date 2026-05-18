@@ -118,7 +118,7 @@ export default function Home() {
         <VideoHero />
 
         {/* Evolution Journey - Visual Storytelling of Transformation */}
-        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+        <section id="journey" className="relative z-0">
           <EvolutionJourney />
         </section>
 
@@ -132,12 +132,12 @@ export default function Home() {
         <Testimonials />
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="bg-white">
+        <section id="mentors" className="relative z-0">
           <MentorMatching />
         </section>
 
         {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
+        <section id="resources" className="relative z-0">
           <ResourceLibrary />
         </section>
 
