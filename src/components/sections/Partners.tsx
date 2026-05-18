@@ -113,7 +113,7 @@ export function Partners() {
   const [showContactModal, setShowContactModal] = useState(false);
 
   return (
-    <section id="partners" className="bg-gradient-to-b from-neutral-900 to-primary-900 py-20">
+    <section id="partners" className="bg-gradient-to-b from-secondary-900 via-secondary-950 to-secondary-950 py-20">
       <div className="container mx-auto px-6">
         <motion.div
           className="mb-16 text-center"

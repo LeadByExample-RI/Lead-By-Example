@@ -31,15 +31,15 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState('#home');
 
   const baseNavLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/mentors', label: 'Mentors', icon: Users },
-    { href: '/resources', label: 'Resources', icon: FileText },
-    { href: '/events', label: 'Events', icon: Calendar },
-    { href: '/contact', label: 'Contact', icon: MessageSquare },
+    { href: '/#home', label: 'Home', icon: Home },
     { href: '/#mission', label: 'Mission', icon: Target },
     { href: '/#journey', label: 'Transformation', icon: TrendingUp },
+    { href: '/#mentors', label: 'Mentors', icon: Users },
+    { href: '/#resources', label: 'Resources', icon: FileText },
     { href: '/#success-stories', label: 'Success Stories', icon: Award },
+    { href: '/#impact', label: 'Events', icon: Calendar },
     { href: '/#partners', label: 'Partners', icon: Handshake },
+    { href: '/#footer', label: 'Contact', icon: MessageSquare },
   ];
 
   const navLinks = isAdmin
@@ -79,6 +79,9 @@ export function Navbar() {
     const sections = [
       '#home',
       '#mission',
+      '#journey',
+      '#mentors',
+      '#resources',
       '#success-stories',
       '#impact',
       '#partners',
@@ -139,7 +142,7 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden items-center space-x-1 md:flex">
             {navLinks.map((link, index) => {
-              const isActive = activeSection === link.href;
+              const isActive = activeSection === link.href.replace(/^\//, '');
               const IconComponent = link.icon;
 
               return (
@@ -263,7 +266,7 @@ export function Navbar() {
           >
             <div className="space-y-3 px-4 py-6">
               {navLinks.map((link, index) => {
-                const isActive = activeSection === link.href;
+                const isActive = activeSection === link.href.replace(/^\//, '');
                 const IconComponent = link.icon;
 
                 return (

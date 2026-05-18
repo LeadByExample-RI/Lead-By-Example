@@ -28,20 +28,20 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     const handleOpenModal = () => setShowDonationModal(true);
     // Listen for cookout donation modal trigger from Hero/Cookout section
     const handleOpenCookoutModal = () => setShowCookoutDonationModal(true);
-    
+
     window.addEventListener('open-donation-modal', handleOpenModal);
     window.addEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
-    
-    // Prevent body scroll when either modal is open
-    if (showDonationModal || showCookoutDonationModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
+
     return () => {
       window.removeEventListener('open-donation-modal', handleOpenModal);
       window.removeEventListener('open-cookout-donation-modal', handleOpenCookoutModal);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = showDonationModal || showCookoutDonationModal ? 'hidden' : 'unset';
+
+    return () => {
       document.body.style.overflow = 'unset';
     };
   }, [showDonationModal, showCookoutDonationModal]);

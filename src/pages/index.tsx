@@ -4,8 +4,10 @@ import { MapPlaceholder } from '@/components/MapPlaceholder';
 import MentorMatching from '@/components/MentorMatching';
 import ResourceLibrary from '@/components/ResourceLibrary';
 import { Archive } from '@/components/sections/Archive';
+import CommunityMosaic from '@/components/CommunityMosaic';
 import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
+import VideoHero from '@/components/VideoHero';
 import { Mission } from '@/components/sections/Mission';
 import { Partners } from '@/components/sections/Partners';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -95,7 +97,7 @@ export default function Home() {
       <main>
         <Navbar />
 
-        {/* Hero Section with Current Fundraiser */}
+        {/* Primary landing section */}
         <Hero
           title="Breaking the School-to-Prison Pipeline"
           description="Providing mentorship, education, and support to at-risk youth, creating pathways to success instead of incarceration. Together, we're building stronger communities through opportunity and empowerment."
@@ -103,7 +105,6 @@ export default function Home() {
             label: 'Help Make It Happen',
             href: '#donate',
             onClick: () => {
-              // Dispatch event to open cookout-specific modal
               window.dispatchEvent(new Event('open-cookout-donation-modal'));
             },
           }}
@@ -113,24 +114,30 @@ export default function Home() {
           }}
         />
 
+        {/* VideoHero - community video reel */}
+        <VideoHero />
+
         {/* Evolution Journey - Visual Storytelling of Transformation */}
-        <section id="journey" className="bg-gradient-to-b from-white to-gray-50">
+        <section id="journey" className="relative z-0">
           <EvolutionJourney />
         </section>
 
         {/* Mission Section - Our Purpose */}
         <Mission />
 
+        {/* Community photo mosaic */}
+        <CommunityMosaic />
+
         {/* Testimonials Section - Success Stories Carousel */}
         <Testimonials />
 
         {/* Mentor Matching - Connect with Mentors */}
-        <section id="mentors" className="bg-white">
+        <section id="mentors" className="relative z-0">
           <MentorMatching />
         </section>
 
         {/* Resource Library - Educational Content */}
-        <section id="resources" className="bg-gradient-to-b from-gray-50 to-white">
+        <section id="resources" className="relative z-0">
           <ResourceLibrary />
         </section>
 

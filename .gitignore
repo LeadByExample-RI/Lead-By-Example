@@ -145,15 +145,15 @@ stripe_install/
 *.sketch
 *.fig
 
-# Large media files
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
-*.mp3
-*.wav
-*.flac
+# # Large media files
+# *.mp4
+# *.mov
+# *.avi
+# *.mkv
+# *.webm
+# *.mp3
+# *.wav
+# *.flac
 
 # Documentation drafts and archives
 /docs/drafts
@@ -166,6 +166,7 @@ stripe_install/
 /docs/*/src/
 /docs/*/components/
 /docs/*/pages/
+/docs/*/assets/
 /docs/*/styles/
 /docs/*/public/
 /docs/*/node_modules/

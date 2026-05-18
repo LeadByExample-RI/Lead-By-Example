@@ -292,7 +292,7 @@ export const Testimonials: React.FC = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section id="success-stories" className="section-padding bg-gradient-to-b from-royal-900 to-royal-800">
+    <section id="success-stories" className="section-padding bg-gradient-to-b from-secondary-950 via-secondary-900 to-secondary-950">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"

@@ -26,8 +26,8 @@ type SignInFormData = z.infer<typeof signInSchema>;
 export default function SignInPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
-  const error = searchParams.get('error');
+  const callbackUrl = searchParams?.get('callbackUrl') || '/';
+  const error = searchParams?.get('error');
 
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);

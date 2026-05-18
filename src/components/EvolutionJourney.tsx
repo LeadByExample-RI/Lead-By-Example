@@ -323,7 +323,7 @@ export default function EvolutionJourney() {
   const currentStage = journeyStages.find((s) => s.id === selectedStage) || journeyStages[2];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20">
+    <section className="relative overflow-hidden bg-gradient-to-b from-primary-950 via-primary-900 to-primary-900 px-4 py-20">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute left-10 top-20 h-64 w-64 rounded-full bg-verdean-500 blur-3xl" />

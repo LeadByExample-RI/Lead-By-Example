@@ -46,6 +46,9 @@ async function verifyPassword(password: string, hashedPassword: string): Promise
 }
 
 export const authConfig: NextAuthConfig = {
+  // Secret for signing tokens (use AUTH_SECRET or fall back to NEXTAUTH_SECRET for v4 compat)
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+
   // Configure authentication providers
   providers: [
     // Email & Password provider
@@ -178,17 +181,24 @@ export const authConfig: NextAuthConfig = {
   // Events
   events: {
     async signIn({ user }) {
-      console.log(`User signed in: ${user.email}`);
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`User signed in: ${user.email}`);
+      }
     },
     async signOut() {
-      console.log('User signed out');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('User signed out');
+      }
     },
   },
 
   // Enable debug in development
   debug: process.env.NODE_ENV === 'development',
+
+  // Trust localhost for development (required for NextAuth v5 on localhost)
+  trustHost: process.env.NODE_ENV !== 'production',
 };
 
 // Initialize NextAuth and export helpers.
 // Import { auth } from '@/lib/auth' in any API route to check the session.
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth(authConfig);

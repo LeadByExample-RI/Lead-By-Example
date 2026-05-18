@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0f17;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="800" fill="url(#bgGradient)"/>
+  
+  <!-- Pavilion structure -->
+  <rect x="200" y="300" width="800" height="400" fill="#4B306A" opacity="0.6" rx="10"/>
+  
+  <!-- Roof -->
+  <polygon points="200,300 600,150 1000,300" fill="#01514C" opacity="0.8"/>
+  
+  <!-- Support posts -->
+  <rect x="300" y="400" width="40" height="300" fill="#FFD700" opacity="0.7"/>
+  <rect x="860" y="400" width="40" height="300" fill="#FFD700" opacity="0.7"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="300" cy="250" r="20" fill="#FFD700" opacity="0.5"/>
+  <circle cx="900" cy="250" r="20" fill="#FFD700" opacity="0.5"/>
+  
+  <!-- Text overlay -->
+  <text x="600" y="500" font-size="48" font-weight="bold" fill="#FFD700" text-anchor="middle" opacity="0.8">
+    Community Cookout
+  </text>
+  <text x="600" y="560" font-size="24" fill="#F6F6F6" text-anchor="middle" opacity="0.6">
+    Lead By Example - All Sides of Town
+  </text>
+</svg>
