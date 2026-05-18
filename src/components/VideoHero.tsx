@@ -143,7 +143,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
         {!videoFailed ? (
           <video
             ref={videoRef}
-            src="/video/roy-hero.mp4"
+            src="/video/HeroVideo.mp4"
             poster="/images/community/cookout-pavilion.png"
             autoPlay
             muted

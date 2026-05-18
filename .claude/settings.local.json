@@ -28,7 +28,9 @@
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Petro\\\\repos\\\\Lead-By-Example\\\\src\\\\pages\" -Filter \"*.tsx\")",
       "Bash(Select-Object Name)",
       "Bash(npx tsc *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\EHunt\\\\Repos\\\\Projects\\\\Lead-By-Example\\\\public\\\\video\")",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\EHunt\\\\Repos\\\\Projects\\\\Lead-By-Example\\\\assets\\\\video\\\\HeroVideo.mp4\" \"c:\\\\Users\\\\EHunt\\\\Repos\\\\Projects\\\\Lead-By-Example\\\\public\\\\video\\\\HeroVideo.mp4\")"
     ],
     "deny": [],
     "ask": []
