@@ -104,7 +104,7 @@ export function Archive() {
   const [showVolunteerModal, setShowVolunteerModal] = useState(false);
 
   return (
-    <section id="impact" className="py-20 bg-gradient-to-b from-neutral-900 to-neutral-800">
+    <section id="impact" className="bg-gradient-to-b from-black via-secondary-950 to-black relative z-0 overflow-hidden py-20">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -113,7 +113,7 @@ export function Archive() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Heading level={2} className="text-white mb-6" gradient>
+          <Heading level={2} className="text-white drop-shadow-md mb-6">
             Our Impact Archive
           </Heading>
           <Text size="lg" className="text-white/80 max-w-3xl mx-auto">
@@ -130,16 +130,16 @@ export function Archive() {
           viewport={{ once: true }}
         >
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <GlassCard className="p-6 text-center" variant="dark">
-              <Users className="w-12 h-12 text-primary-400 mx-auto mb-4" />
+            <GlassCard className="rounded-2xl p-6 glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300 text-center" variant="dark">
+              <Users className="w-12 h-12 text-gold mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">125+</div>
               <Text size="sm" className="text-white/70">Youth Impacted</Text>
             </GlassCard>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-            <GlassCard className="p-6 text-center" variant="dark">
-              <Calendar className="w-12 h-12 text-secondary-400 mx-auto mb-4" />
+            <GlassCard className="rounded-2xl p-6 glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300 text-center" variant="dark">
+              <Calendar className="w-12 h-12 text-gold mx-auto mb-4" />
               <div className="text-3xl font-bold text-white mb-2">28+</div>
               <Text size="sm" className="text-white/70">Successful Events</Text>
             </GlassCard>
@@ -162,11 +162,11 @@ export function Archive() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
             >
-              <GlassCard className="p-6 h-full" variant="default">
+              <GlassCard className="rounded-2xl p-6 h-full glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300" variant="default">
                 <div className={`h-2 w-full bg-gradient-to-r ${event.color} rounded-full mb-6`} />
 
                 <div className="flex items-center gap-2 mb-4">
-                  <Calendar className="w-5 h-5 text-accent-400" />
+                  <Calendar className="w-5 h-5 text-gold" />
                   <Text size="sm" className="text-white/70">{event.date}</Text>
                 </div>
 
@@ -176,14 +176,14 @@ export function Archive() {
 
                 {/* Youth Served */}
                 <div className="mb-6">
-                  <div className="text-center p-3 bg-white/5 rounded-lg">
-                    <div className="text-xl font-bold text-primary-400">125+</div>
+                  <div className="text-center p-3 rounded-lg glass-effect-dark border border-white/10">
+                    <div className="text-xl font-bold text-white">125+</div>
                     <Text size="sm" className="text-white/60">Youth Served</Text>
                   </div>
                 </div>
 
                 {/* Impact Statement */}
-                <div className="p-4 bg-gradient-to-r from-white/5 to-white/10 rounded-lg border border-white/10">
+                <div className="p-4 rounded-lg border border-white/10 glass-effect-dark">
                   <Text size="sm" className="text-white/90 font-medium">
                     Impact: {event.impact}
                   </Text>
@@ -201,8 +201,8 @@ export function Archive() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <GlassCard className="p-8 max-w-2xl mx-auto" variant="dark">
-            <Heading level={3} className="text-white mb-4">
+          <GlassCard className="rounded-2xl p-8 max-w-2xl mx-auto glass-effect-dark shadow-glass-dark hover-lift border border-white/10 transition-all duration-300" variant="dark">
+            <Heading level={3} className="text-white drop-shadow-md mb-4">
               Be Part of Our Next Success Story
             </Heading>
             <Text className="text-white/80 mb-6">
@@ -211,7 +211,7 @@ export function Archive() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 type="button"
-                className="px-8 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-accent-600 transition-all duration-300"
+                className="px-8 py-3 glass-button text-white border border-white/20 font-semibold rounded-xl transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.dispatchEvent(new Event('open-cookout-donation-modal'))}
@@ -220,7 +220,7 @@ export function Archive() {
               </motion.button>
               <motion.button
                 type="button"
-                className="px-8 py-3 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="px-8 py-3 glass-button text-white border border-white/20 font-semibold rounded-xl transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowVolunteerModal(true)}
