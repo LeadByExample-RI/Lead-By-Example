@@ -28,7 +28,7 @@ const missionPoints = [
 
 export function Mission() {
   return (
-    <section id="mission" className="section-padding bg-gradient-to-b from-black via-secondary-950 to-black">
+    <section id="mission" className="section-padding bg-gradient-to-b from-primary-950 via-secondary-900 to-secondary-950">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"

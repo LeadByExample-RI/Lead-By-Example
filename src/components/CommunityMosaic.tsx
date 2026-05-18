@@ -46,7 +46,7 @@ export default function CommunityMosaic() {
     <>
       <motion.section
         ref={sectionRef}
-        className="relative overflow-hidden bg-gradient-to-b from-black via-secondary-950 to-black pt-36 md:pt-40 pb-20 z-0"
+        className="relative overflow-hidden bg-gradient-to-b from-secondary-950 via-secondary-900 to-secondary-950 pt-36 md:pt-40 pb-20 z-0"
       >
         <motion.div
           className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mb-12"
