@@ -98,6 +98,11 @@ export default function VideoHero({ className }: VideoHeroProps) {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
+      video.muted = false;
+      const restoreVol = lastVolume.current || 0.8;
+      video.volume = restoreVol;
+      setIsMuted(false);
+      setVolume(restoreVol);
       video.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
       video.pause();
@@ -144,7 +149,6 @@ export default function VideoHero({ className }: VideoHeroProps) {
           <video
             ref={videoRef}
             src="/video/HeroVideo.mp4"
-            poster="/images/community/cookout-pavilion.svg"
             muted
             loop
             playsInline
