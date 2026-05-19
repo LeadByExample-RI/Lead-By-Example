@@ -144,7 +144,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
   return (
     <section className={`relative overflow-visible bg-primary-500 ${className ?? ''}`}>
-      <div className="relative overflow-hidden h-[93vh] min-h-[500px] w-full bg-black flex flex-col justify-center">
+      <div className="relative overflow-hidden w-full bg-black flex flex-col justify-center h-[40vh] sm:h-[55vh] md:h-[75vh] lg:h-[93vh] min-h-[300px] sm:min-h-[500px]">
         {!videoFailed ? (
           <video
             ref={videoRef}
@@ -187,19 +187,20 @@ export default function VideoHero({ className }: VideoHeroProps) {
               <Play size={40} className="ml-2" />
             </div>
           </div>
-        </div>
 
-        {/* Heading — top letterbox zone */}
-        <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-10 text-center px-6 pointer-events-none">
-          <MagneticHeading
-            text="OUR COMMUNITY IN MOTION"
-            className="text-xs sm:text-sm md:text-base font-bold tracking-[0.35em] text-white/90 uppercase drop-shadow-[0_0_15px_rgba(255,215,0,0.3)] pointer-events-auto"
-          />
+          {/* Heading — top letterbox zone */}
+          <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-10 text-center px-6 pointer-events-none">
+            <MagneticHeading
+              text="OUR COMMUNITY IN MOTION"
+              className="text-xs sm:text-sm md:text-base font-bold tracking-[0.35em] text-white/90 uppercase drop-shadow-[0_0_15px_rgba(255,215,0,0.3)] pointer-events-auto"
+            />
+          </div>
+
         </div>
 
         {/* Controls — bottom letterbox zone */}
         <div
-          className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 md:right-14 z-20 flex items-center gap-2.5 px-3 py-2.5 rounded-2xl glass-effect-dark"
+          className="absolute bottom-4 sm:bottom-6 left-4 right-4 sm:left-auto sm:right-10 md:right-14 z-20 flex items-center justify-center sm:justify-start gap-2.5 px-3 py-2.5 rounded-2xl glass-effect-dark"
           role="group"
           aria-label="Video controls"
           onClick={(e) => e.stopPropagation()}
@@ -239,11 +240,9 @@ export default function VideoHero({ className }: VideoHeroProps) {
       </div>
 
       {/* Event info card — straddles the bottom edge */}
-      <div
-        className="absolute bottom-0 left-8 md:left-14 z-20 w-[300px] md:w-[340px] pointer-events-auto"
-        style={{ transform: 'translateY(33%)' }}
-      >
-        <motion.div
+      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-auto">
+        <div className="mx-auto md:mx-0 md:ml-8 lg:ml-14 w-[260px] sm:w-[300px] md:w-[340px]" style={{ transform: 'translateY(33%)' }}>
+          <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
@@ -284,6 +283,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
             </a>
           </div>
         </motion.div>
+        </div>
       </div>
     </section>
   );
