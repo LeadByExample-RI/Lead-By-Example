@@ -64,7 +64,7 @@ export default function Home() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://leadbyexample.org/" />
+        <meta property="og:url" content="https://www.leadbyexample-ri.org/" />
         <meta
           property="og:title"
           content="Lead By Example | Breaking the School-to-Prison Pipeline"
@@ -77,7 +77,7 @@ export default function Home() {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://leadbyexample.org/" />
+        <meta property="twitter:url" content="https://www.leadbyexample-ri.org/" />
         <meta
           property="twitter:title"
           content="Lead By Example | Breaking the School-to-Prison Pipeline"

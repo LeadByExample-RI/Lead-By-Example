@@ -16,7 +16,7 @@ export default function MentorsPage() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://leadbyexample.org/mentors" />
+        <meta property="og:url" content="https://www.leadbyexample-ri.org/mentors" />
         <meta property="og:title" content="Our Mentors | Lead By Example" />
         <meta
           property="og:description"
@@ -26,7 +26,7 @@ export default function MentorsPage() {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://leadbyexample.org/mentors" />
+        <meta property="twitter:url" content="https://www.leadbyexample-ri.org/mentors" />
         <meta property="twitter:title" content="Our Mentors | Lead By Example" />
         <meta
           property="twitter:description"
