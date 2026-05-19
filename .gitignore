@@ -187,3 +187,5 @@ stripe_install/
 .env.vercel
 
 Lead-By-Example/
+
+*.bak
