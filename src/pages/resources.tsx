@@ -16,7 +16,7 @@ export default function ResourcesPage() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://leadbyexample.org/resources" />
+        <meta property="og:url" content="https://www.leadbyexample-ri.org/resources" />
         <meta property="og:title" content="Resource Library | Lead By Example" />
         <meta
           property="og:description"
@@ -26,7 +26,7 @@ export default function ResourcesPage() {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://leadbyexample.org/resources" />
+        <meta property="twitter:url" content="https://www.leadbyexample-ri.org/resources" />
         <meta property="twitter:title" content="Resource Library | Lead By Example" />
         <meta
           property="twitter:description"

@@ -16,7 +16,7 @@ export default function EventsPage() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://leadbyexample.org/events" />
+        <meta property="og:url" content="https://www.leadbyexample-ri.org/events" />
         <meta property="og:title" content="Community Events | Lead By Example" />
         <meta
           property="og:description"
@@ -26,7 +26,7 @@ export default function EventsPage() {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://leadbyexample.org/events" />
+        <meta property="twitter:url" content="https://www.leadbyexample-ri.org/events" />
         <meta property="twitter:title" content="Community Events | Lead By Example" />
         <meta
           property="twitter:description"
@@ -61,6 +61,4 @@ export default function EventsPage() {
         {/* Footer */}
         <Footer />
       </main>
-    </>
-  );
-}
+ 
