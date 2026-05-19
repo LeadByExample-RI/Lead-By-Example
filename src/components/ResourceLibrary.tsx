@@ -12,7 +12,8 @@ import {
   Shield,
   Star,
   Clock,
-  Eye
+  Eye,
+  ChevronRight
 } from 'lucide-react';
 
 interface Resource {
@@ -28,6 +29,7 @@ interface Resource {
   rating: number;
   featured: boolean;
   tags: string[];
+  url: string;
   link?: string;
   downloadable: boolean;
 }
@@ -46,6 +48,7 @@ const resources: Resource[] = [
     rating: 4.8,
     featured: true,
     tags: ['Self-awareness', 'Coping skills', 'Emotional regulation'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -61,6 +64,7 @@ const resources: Resource[] = [
     rating: 4.9,
     featured: true,
     tags: ['Inspiration', 'Real stories', 'Peer support'],
+    url: 'PLACEHOLDER_URL',
     link: '#',
     downloadable: false
   },
@@ -77,6 +81,7 @@ const resources: Resource[] = [
     rating: 4.7,
     featured: false,
     tags: ['Relationships', 'Boundaries', 'Communication'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -92,6 +97,7 @@ const resources: Resource[] = [
     rating: 4.9,
     featured: true,
     tags: ['Rights', 'Legal system', 'Self-advocacy'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -107,6 +113,7 @@ const resources: Resource[] = [
     rating: 4.6,
     featured: false,
     tags: ['Study skills', 'Organization', 'Academic success'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -122,6 +129,7 @@ const resources: Resource[] = [
     rating: 4.8,
     featured: true,
     tags: ['Mindfulness', 'Stress management', 'Self-care'],
+    url: 'PLACEHOLDER_URL',
     link: '#',
     downloadable: false
   },
@@ -138,6 +146,7 @@ const resources: Resource[] = [
     rating: 4.8,
     featured: true,
     tags: ['Money management', 'Budgeting', 'Financial planning'],
+    url: 'PLACEHOLDER_URL',
     link: '#',
     downloadable: false
   },
@@ -154,6 +163,7 @@ const resources: Resource[] = [
     rating: 4.9,
     featured: true,
     tags: ['Trauma recovery', 'Healing', 'Professional support'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -169,6 +179,7 @@ const resources: Resource[] = [
     rating: 4.7,
     featured: false,
     tags: ['College prep', 'Financial aid', 'First-generation'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   },
   {
@@ -184,6 +195,7 @@ const resources: Resource[] = [
     rating: 4.6,
     featured: false,
     tags: ['Conflict resolution', 'De-escalation', 'Communication'],
+    url: 'PLACEHOLDER_URL',
     link: '#',
     downloadable: false
   },
@@ -200,6 +212,7 @@ const resources: Resource[] = [
     rating: 4.8,
     featured: false,
     tags: ['Support network', 'Asking for help', 'Community'],
+    url: 'PLACEHOLDER_URL',
     downloadable: true
   }
 ];
@@ -530,6 +543,16 @@ function ResourceCard({ resource, index, featured = false }: { resource: Resourc
         <span className="text-xs text-gray-500">Age Group:</span>
         <span className="ml-2 text-sm font-medium text-gray-700">{resource.ageGroup}</span>
       </div>
+
+      <a
+        href={resource.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-verdean-500 to-green-600 py-2 font-semibold text-white transition-all hover:shadow-lg hover:shadow-verdean-500/30"
+      >
+        Learn More
+        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      </a>
 
     </motion.div>
   );
