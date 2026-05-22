@@ -48,7 +48,7 @@ const resources: Resource[] = [
     rating: 4.8,
     featured: true,
     tags: ['Self-awareness', 'Coping skills', 'Emotional regulation'],
-    url: 'PLACEHOLDER_URL',
+    url: 'https://kidshealth.org/en/teens/your-mind/',
     downloadable: true
   },
   {
