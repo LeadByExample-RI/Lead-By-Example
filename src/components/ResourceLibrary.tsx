@@ -354,7 +354,7 @@ export default function ResourceLibrary() {
   const regularResources = filteredResources.filter(r => !r.featured);
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden z-0 bg-gradient-to-b from-primary-900 via-primary-950 to-primary-950">
+    <section className="py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden z-0 bg-gradient-to-b from-primary-900 via-primary-950 to-primary-950">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -363,7 +363,7 @@ export default function ResourceLibrary() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-md mb-4 gradient-text">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md mb-4 gradient-text">
             Resource Library
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-6">
@@ -385,7 +385,7 @@ export default function ResourceLibrary() {
                 onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full font-medium transition-all flex items-center gap-2 ${
                   selectedCategory === category.id
                             ? 'glass-button text-white shadow-lg shadow-verdean-500/30'
                             : 'glass-button text-white/80 bg-white/5 hover:bg-white/10 shadow-md'
@@ -449,7 +449,7 @@ export default function ResourceLibrary() {
           viewport={{ once: true }}
           className="mt-16 relative overflow-hidden z-0 rounded-3xl p-8 md:p-12 text-center"
         >
-          <h3 className="text-3xl font-bold mb-4">Need More Support?</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4">Need More Support?</h3>
           <p className="text-xl mb-8 opacity-90">
             These resources are here to help, but sometimes you need to talk to someone. We&apos;re here for you.
           </p>

@@ -78,10 +78,10 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center section-padding bg-gradient-to-b from-primary-900 to-primary-950">
+    <section id="home" className="min-h-screen flex items-center justify-center py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-primary-900 to-primary-950">
       <div className="container-custom">
         <motion.div
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Organization Info */}
-            <GlassCard variant="dark" className="space-y-4 p-8 md:p-12">
+            <GlassCard variant="dark" className="space-y-4 p-5 sm:p-8 md:p-10">
               <Heading level={3} className="text-white">
                 Get in Touch
               </Heading>

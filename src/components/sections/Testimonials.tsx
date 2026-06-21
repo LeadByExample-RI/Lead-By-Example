@@ -309,8 +309,8 @@ export const Testimonials: React.FC = () => {
         </motion.div>
 
         {/* 3D Carousel */}
-        <div className="relative max-w-4xl mx-auto mb-16">
-          <div className="relative h-96 flex items-center justify-center [perspective:2000px]">
+        <div className="relative max-w-4xl mx-auto mb-16 px-10 sm:px-0">
+          <div className="relative min-h-[20rem] sm:min-h-[24rem] flex items-center justify-center [perspective:2000px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -321,7 +321,7 @@ export const Testimonials: React.FC = () => {
                 exit="exit"
                 className="absolute w-full max-w-2xl"
               >
-                <GlassCard variant="dark" className="p-8 h-full flex flex-col justify-between">
+                <GlassCard variant="dark" className="p-5 sm:p-8 h-full flex flex-col justify-between">
                   <div className="flex items-start space-x-4 mb-6">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                       {currentTestimonial.initials}
@@ -351,7 +351,7 @@ export const Testimonials: React.FC = () => {
           <button
             type="button"
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass-dark flex items-center justify-center text-white hover:scale-110 transition-transform focus-ring"
+            className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-dark flex items-center justify-center text-white hover:scale-110 transition-transform focus-ring"
             aria-label="Previous testimonial"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -362,7 +362,7 @@ export const Testimonials: React.FC = () => {
           <button
             type="button"
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass-dark flex items-center justify-center text-white hover:scale-110 transition-transform focus-ring"
+            className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-dark flex items-center justify-center text-white hover:scale-110 transition-transform focus-ring"
             aria-label="Next testimonial"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -389,7 +389,7 @@ export const Testimonials: React.FC = () => {
 
         {/* Impact Statistics */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}

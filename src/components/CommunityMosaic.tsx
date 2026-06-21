@@ -62,7 +62,7 @@ export default function CommunityMosaic() {
           </motion.p>
           <motion.h2
             variants={headerItemVariants}
-            className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white drop-shadow-xl mb-2"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-white drop-shadow-xl mb-2"
           >
             Every gathering,{' '}
             <span className="gradient-text drop-shadow-md">
@@ -94,13 +94,13 @@ export default function CommunityMosaic() {
 
         <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-8 mt-12">
           <motion.div
-            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-6 p-8 md:p-10 rounded-2xl glass-effect-dark shadow-glass-dark hover-lift border border-white/20 shadow-[0_10px_40px_-10px_rgba(255,215,0,0.15)] z-10 relative w-full"
+            className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-5 sm:gap-6 p-6 sm:p-8 md:p-10 rounded-2xl glass-effect-dark shadow-glass-dark hover-lift border border-white/20 shadow-[0_10px_40px_-10px_rgba(255,215,0,0.15)] z-10 relative w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
-              <p className="text-6xl font-black leading-none gradient-text drop-shadow-md">
+              <p className="text-5xl sm:text-6xl font-black leading-none gradient-text drop-shadow-md">
                 125+
               </p>
               <p className="text-base md:text-lg font-medium text-white/90 max-w-sm pb-1 md:pb-2">

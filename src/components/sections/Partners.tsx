@@ -146,8 +146,8 @@ export function Partners() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <GlassCard className="h-full p-8" variant="dark">
-                <div className="mb-6 flex items-start gap-6">
+              <GlassCard className="h-full p-5 sm:p-8" variant="dark">
+                <div className="mb-6 flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
                   <Image
                     src={partner.logo}
                     alt={`${partner.name} logo`}
@@ -156,8 +156,8 @@ export function Partners() {
                     className="h-16 w-16 rounded-lg border border-white/20 object-cover"
                     unoptimized
                   />
-                  <div className="flex-1">
-                    <div className="mb-2 flex items-center gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="mb-2 flex items-center gap-3 flex-wrap">
                       <Heading level={3} className="text-white">{partner.name}</Heading>
                       <motion.a
                         href={partner.website}

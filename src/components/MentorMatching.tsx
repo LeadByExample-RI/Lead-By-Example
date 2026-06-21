@@ -216,7 +216,7 @@ export default function MentorMatching() {
   const [showRequestMentorModal, setShowRequestMentorModal] = useState(false);
 
   return (
-    <section className="bg-gradient-to-b from-secondary-950 via-secondary-900 to-primary-900 relative z-0 overflow-hidden px-4 py-20">
+    <section className="bg-gradient-to-b from-secondary-950 via-secondary-900 to-primary-900 relative z-0 overflow-hidden px-4 py-12 sm:py-16 md:py-20">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
@@ -225,7 +225,7 @@ export default function MentorMatching() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-4xl font-bold text-white drop-shadow-md md:text-5xl">Meet Our Mentors</h2>
+          <h2 className="mb-4 text-2xl font-bold text-white drop-shadow-md sm:text-3xl md:text-4xl lg:text-5xl">Meet Our Mentors</h2>
           <p className="mx-auto mb-8 max-w-3xl text-xl text-white/80">
             Our dedicated mentors have lived experience and understand the journey. They&apos;re
             here to guide, support, and inspire the next generation.
@@ -351,8 +351,8 @@ export default function MentorMatching() {
           viewport={{ once: true }}
           className="rounded-3xl p-8 text-center md:p-12 relative z-0 overflow-hidden"
         >
-          <h3 className="mb-4 text-3xl font-bold">Ready to Make a Difference?</h3>
-          <p className="mb-8 text-xl opacity-90">
+          <h3 className="mb-4 text-2xl font-bold sm:text-3xl">Ready to Make a Difference?</h3>
+          <p className="mb-8 text-base sm:text-xl opacity-90">
             Join our community of mentors with lived experience
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -451,7 +451,7 @@ export default function MentorMatching() {
                 </div>
               </div>
 
-              <div className="mb-6 grid gap-4 md:grid-cols-2">
+              <div className="mb-6 grid gap-4 grid-cols-1 sm:grid-cols-2">
                 <div className="rounded-xl glass-effect-dark border border-white/15 p-4">
                   <div className="mb-1 flex items-center gap-2 text-white/80">
                     <Clock className="h-5 w-5 text-gold" />

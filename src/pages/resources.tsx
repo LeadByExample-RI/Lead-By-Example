@@ -43,11 +43,11 @@ export default function ResourcesPage() {
         <Navbar />
 
         {/* Page Header */}
-        <section className="relative mt-16 bg-gradient-to-r from-royal-600 to-royal-500 py-20 text-white">
+        <section className="relative mt-16 bg-gradient-to-r from-royal-600 to-royal-500 py-12 sm:py-16 md:py-20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">Resource Library</h1>
-              <p className="mx-auto max-w-3xl text-xl text-royal-50 md:text-2xl">
+              <h1 className="mb-4 sm:mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">Resource Library</h1>
+              <p className="mx-auto max-w-3xl text-base sm:text-lg md:text-xl text-royal-50">
                 Trauma-informed resources and educational materials to support your journey to
                 success
               </p>

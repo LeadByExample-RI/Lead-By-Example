@@ -26,9 +26,9 @@ export function Footer() {
 
   return (
     <footer id="footer" className="relative bg-gradient-to-b from-secondary-950 to-secondary-900">
-      <div className="container mx-auto px-6 py-16">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <motion.div
-          className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, staggerChildren: 0.1 }}

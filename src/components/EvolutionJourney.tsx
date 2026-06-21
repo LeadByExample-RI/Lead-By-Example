@@ -338,10 +338,10 @@ export default function EvolutionJourney() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-6 text-5xl font-bold text-white md:text-6xl">
+          <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl lg:text-6xl">
             The Journey of Transformation
           </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-gray-300">
+          <p className="mx-auto mb-8 max-w-3xl text-base sm:text-lg md:text-xl text-gray-300">
             From at-risk to achievement: How Lead By Example interrupts the school-to-prison
             pipeline
           </p>
@@ -350,7 +350,7 @@ export default function EvolutionJourney() {
 
         {/* Evolution Timeline */}
         <div className="mb-16">
-          <div className="relative flex items-center justify-between">
+          <div className="relative flex items-start sm:items-center justify-between gap-1 sm:gap-0">
             {/* Progress Line */}
             <div className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 bg-white/10" />
             <motion.div
@@ -373,7 +373,7 @@ export default function EvolutionJourney() {
               >
                 {/* Icon Circle */}
                 <motion.div
-                  className={`flex h-16 w-16 items-center justify-center rounded-full border-2 backdrop-blur-md transition-all duration-300 md:h-20 md:w-20 ${
+                  className={`flex h-10 w-10 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 items-center justify-center rounded-full border-2 backdrop-blur-md transition-all duration-300 ${
                     selectedStage === stage.id
                       ? `border-white shadow-lg shadow-white/50 ${stageBadgeClasses[stage.id]}`
                       : 'border-white/30 bg-white/5 hover:bg-white/10'
@@ -386,14 +386,14 @@ export default function EvolutionJourney() {
                     duration: 2,
                   }}
                 >
-                  <div className={selectedStage === stage.id ? stageAccentClasses[stage.id] : 'text-white'}>
+                  <div className={`scale-50 sm:scale-75 md:scale-100 ${selectedStage === stage.id ? stageAccentClasses[stage.id] : 'text-white'}`}>
                     {stage.icon}
                   </div>
                 </motion.div>
 
                 {/* Stage Number */}
                 <span
-                  className={`mt-3 text-sm font-bold ${
+                  className={`mt-2 text-[10px] sm:text-xs md:text-sm font-bold ${
                     selectedStage === stage.id ? 'text-white' : 'text-gray-400'
                   }`}
                 >
@@ -421,9 +421,9 @@ export default function EvolutionJourney() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-              className={`rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]}`}
+              className={`rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-8 shadow-2xl backdrop-blur-xl md:p-12 ${stageGradientClasses[currentStage.id]}`}
           >
-            <div className="grid gap-12 md:grid-cols-2">
+            <div className="grid gap-6 sm:gap-8 md:gap-12 md:grid-cols-2">
               {/* Left Column - Description */}
               <div>
                 <motion.div
@@ -431,14 +431,14 @@ export default function EvolutionJourney() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <div className="mb-6 flex items-center gap-4">
+                  <div className="mb-6 flex items-center gap-3 sm:gap-4">
                     <div
-                        className={`flex h-16 w-16 items-center justify-center rounded-2xl ${stageBadgeClasses[currentStage.id]}`}
+                        className={`flex h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-2xl ${stageBadgeClasses[currentStage.id]}`}
                     >
                       {currentStage.icon}
                     </div>
                     <div>
-                      <h3 className="text-3xl font-bold text-white">{currentStage.title}</h3>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{currentStage.title}</h3>
                       <p className="text-lg text-gray-300">{currentStage.subtitle}</p>
                     </div>
                   </div>
@@ -472,7 +472,7 @@ export default function EvolutionJourney() {
 
                   {/* Stats */}
                   {currentStage.stats && currentStage.stats.length > 0 && (
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                       {currentStage.stats.map((stat, index) => (
                         <motion.div
                           key={index}
@@ -482,7 +482,7 @@ export default function EvolutionJourney() {
                           className="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm"
                         >
                           <div
-                            className={`mb-1 text-3xl font-bold ${stageAccentClasses[currentStage.id]}`}
+                            className={`mb-1 text-2xl sm:text-3xl font-bold ${stageAccentClasses[currentStage.id]}`}
                           >
                             {stat.value}
                           </div>
@@ -582,10 +582,10 @@ export default function EvolutionJourney() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <h3 className="mb-6 text-2xl font-bold text-white md:text-3xl">
+          <h3 className="mb-6 text-xl font-bold text-white sm:text-2xl md:text-3xl">
             Be Part of the Transformation
           </h3>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={() => setShowMentorModal(true)}

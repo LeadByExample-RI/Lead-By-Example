@@ -200,7 +200,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
         {/* Controls — bottom letterbox zone */}
         <div
-          className="absolute bottom-4 sm:bottom-6 left-4 right-4 sm:left-auto sm:right-10 md:right-14 z-20 flex items-center justify-center sm:justify-start gap-2.5 px-3 py-2.5 rounded-2xl glass-effect-dark"
+          className="absolute bottom-4 sm:bottom-6 left-4 right-4 sm:left-auto sm:right-10 md:right-14 z-20 flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5 px-3 py-2 sm:py-2.5 rounded-2xl glass-effect-dark"
           role="group"
           aria-label="Video controls"
           onClick={(e) => e.stopPropagation()}
@@ -223,7 +223,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
             <VolumeIcon size={20} strokeWidth={1.75} />
           </button>
 
-          <div className="flex items-center px-1">
+          <div className="hidden sm:flex items-center px-1">
             <input
               type="range"
               min="0"
@@ -232,7 +232,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
               value={displayVol}
               onChange={handleVolume}
               aria-label="Volume"
-              className="video-vol-slider w-28 sm:w-36"
+              className="video-vol-slider w-20 sm:w-28 md:w-36"
               style={{ '--vol-pct': `${displayVol * 100}%` } as React.CSSProperties}
             />
           </div>
@@ -241,7 +241,7 @@ export default function VideoHero({ className }: VideoHeroProps) {
 
       {/* Event info card — straddles the bottom edge */}
       <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-auto">
-        <div className="mx-auto md:mx-0 md:ml-8 lg:ml-14 w-[260px] sm:w-[300px] md:w-[340px]" style={{ transform: 'translateY(33%)' }}>
+        <div className="mx-auto w-[260px] sm:w-[300px] md:mx-0 md:ml-8 md:w-[340px] lg:ml-14" style={{ transform: 'translateY(33%)' }}>
           <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

@@ -104,8 +104,8 @@ export function Archive() {
   const [showVolunteerModal, setShowVolunteerModal] = useState(false);
 
   return (
-    <section id="impact" className="bg-gradient-to-b from-primary-950 via-primary-900 to-secondary-900 relative z-0 overflow-hidden py-20">
-      <div className="container mx-auto px-6">
+    <section id="impact" className="bg-gradient-to-b from-primary-950 via-primary-900 to-secondary-900 relative z-0 overflow-hidden py-12 sm:py-16 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -148,7 +148,7 @@ export function Archive() {
 
         {/* Archive Cards */}
         <motion.div
-          className="grid lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, staggerChildren: 0.1 }}

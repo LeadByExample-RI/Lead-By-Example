@@ -46,15 +46,16 @@ export default function ContactPage() {
       <Head>
         <title>Contact Us — Lead By Example</title>
         <meta name="description" content="Get in touch with Lead By Example. Volunteer, apply to mentor, or ask us anything about our mission to break the school-to-prison pipeline." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-gray-950 via-verdean-900/30 to-royal-900/30">
         <Navbar />
 
-        <main className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6">
+        <main className="mx-auto max-w-6xl px-4 pb-16 sm:pb-20 pt-24 sm:pt-28 sm:px-6">
           {/* Header */}
           <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="font-heading text-4xl font-bold text-white sm:text-5xl">
+            <h1 className="font-heading text-3xl font-bold text-white sm:text-4xl md:text-5xl">
               Get <span className="text-gold">Involved</span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/60">
