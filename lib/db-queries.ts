@@ -25,7 +25,9 @@ export const donationQueries = {
     campaign?: string;
     eventId?: string;
     metadata?: Record<string, any>;
+    status?: string;
   }): Promise<Donation> {
+    const status = data.status ?? 'completed';
     return db.donation.upsert({
       where: { stripePaymentIntentId: data.stripePaymentIntentId },
       create: {
@@ -38,10 +40,10 @@ export const donationQueries = {
         campaign: data.campaign,
         eventId: data.eventId,
         metadata: data.metadata,
-        status: 'completed',
+        status,
       },
       update: {
-        status: 'completed',
+        status,
         updatedAt: new Date(),
       },
     });

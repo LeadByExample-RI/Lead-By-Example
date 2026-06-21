@@ -8,48 +8,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
 });
 
-// Rate limiting helper (optional but recommended)
-const requestCounts = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 10; // requests per minute
-const RATE_WINDOW = 60000; // 1 minute in ms
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = requestCounts.get(ip);
-
-  if (!record || now > record.resetTime) {
-    requestCounts.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
-    return true;
-  }
-
-  if (record.count >= RATE_LIMIT) {
-    return false;
-  }
-
-  record.count++;
-  return true;
-}
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({
       error: 'Method not allowed',
       message: 'This endpoint only accepts POST requests',
-    });
-  }
-
-  // Get client IP for rate limiting
-  const clientIp =
-    (req.headers['x-forwarded-for'] as string)?.split(',')[0] ||
-    req.socket.remoteAddress ||
-    'unknown';
-
-  // Check rate limit
-  if (!checkRateLimit(clientIp)) {
-    return res.status(429).json({
-      error: 'Too many requests',
-      message: 'Please wait a moment before trying again',
     });
   }
 

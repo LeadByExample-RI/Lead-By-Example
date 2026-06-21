@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const safeType = escapeHtml(typeLabels[type]);
 
     const recipientResult = await sendEmail({
-      to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@leadbyexample.org',
+      to: process.env.CONTACT_EMAIL || 'contact@leadbyexample.org',
       subject: `[${typeLabels[type]}] ${subject}`,
       html: `
         <html><body style="font-family: Arial, sans-serif; line-height: 1.6;">

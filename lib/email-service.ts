@@ -265,18 +265,15 @@ export async function sendNewsletter(data: {
   };
 }) {
   try {
-    // Get active subscribers
+    // Get active subscribers, pushing scalar filters into the DB query
     let subscribers = await db.newsletter.findMany({
       where: {
         subscribed: true,
+        ...(data.filters?.frequency ? { frequency: data.filters.frequency } : {}),
       },
     });
 
-    // Apply filters if provided
-    if (data.filters?.frequency) {
-      subscribers = subscribers.filter((sub) => sub.frequency === data.filters?.frequency);
-    }
-
+    // Apply in-memory filters that cannot be expressed in the Prisma where clause
     if (data.filters?.interests && data.filters.interests.length > 0) {
       subscribers = subscribers.filter((sub) =>
         data.filters?.interests?.some((interest) => sub.interests.includes(interest)),

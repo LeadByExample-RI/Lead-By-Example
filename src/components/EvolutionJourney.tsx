@@ -36,7 +36,7 @@ function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalPr
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    const body = `Name: ${form.firstName} ${form.lastName}%0APhone: ${form.phone}%0AEmail: ${form.email}`;
+    const body = `Name: ${encodeURIComponent(`${form.firstName} ${form.lastName}`)}%0APhone: ${encodeURIComponent(form.phone)}%0AEmail: ${encodeURIComponent(form.email)}`;
     window.location.href = `mailto:robertleadbyexample@gmail.com,ronaldleadbyexample@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${body}`;
     setSubmitted(true);
   };

@@ -89,13 +89,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (session.user.email) {
-      await sendEventRegistrationConfirmation({
-        email: session.user.email,
-        name: session.user.name ?? undefined,
-        eventTitle: event.title,
-        eventDate: event.startDate,
-        eventLocation: event.location ?? undefined,
-      });
+      try {
+        await sendEventRegistrationConfirmation({
+          email: session.user.email,
+          name: session.user.name ?? undefined,
+          eventTitle: event.title,
+          eventDate: event.startDate,
+          eventLocation: event.location ?? undefined,
+        });
+      } catch (emailErr) {
+        console.error('Event confirmation email failed (registration succeeded):', emailErr);
+      }
     }
 
     return res.status(201).json({ registration });
