@@ -27,6 +27,9 @@ function JourneyFormModal({ heading, emailSubject, onClose }: JourneyFormModalPr
     if (!form.firstName.trim()) e.firstName = 'Required';
     if (!form.lastName.trim()) e.lastName = 'Required';
     if (!form.phone.trim()) e.phone = 'Required';
+    else if (!/^[\d\s\-\+\(\)]+$/.test(form.phone) || form.phone.replace(/\D/g, '').length < 10) {
+      e.phone = 'Please enter a valid phone number';
+    }
     if (!form.email.trim()) e.email = 'Required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email';
     return e;

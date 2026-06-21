@@ -47,7 +47,7 @@ export async function sendEmail(options: SendEmailOptions) {
       to,
       subject,
       html: options.html,
-      reply_to: options.replyTo || process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+      reply_to: options.replyTo || process.env.CONTACT_EMAIL,
     });
 
     if (response.error) {
@@ -213,7 +213,7 @@ export async function sendEventRegistrationConfirmation(data: {
             </div>
             
             <p>We look forward to seeing you there!</p>
-            <p>If you have any questions, please contact us at ${process.env.NEXT_PUBLIC_CONTACT_EMAIL}.</p>
+            <p>If you have any questions, please contact us at ${process.env.CONTACT_EMAIL}.</p>
             
             <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;">
             <p style="font-size: 12px; color: #666;">
